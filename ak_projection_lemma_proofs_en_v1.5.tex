@@ -1,0 +1,80 @@
+% ===============================
+% AK High-Dimensional Projection Structural Theory v1.5
+% Evolution with Functorial and Categorical Extension
+% ===============================
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref}
+\geometry{margin=1in}
+
+\title{AK High-Dimensional Projection Structural Theory (v1.5)\\
+Functorial and Categorical Expansion of MECE Projection Framework}
+\author{A. Kobayashi}
+\date{June 2025}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document presents Version 1.5 of the AK High-Dimensional Projection Structural Theory (AK-HDPST), an abstract mathematical framework for decomposing complex problems into high-dimensional MECE (mutually exclusive and collectively exhaustive) structures. Building on version 1.4, this version introduces a categorical refinement using the language of category theory and functorial mappings. The primary contribution of v1.5 is the formalization of projection and recovery processes as functors, and the modeling of MECE decompositions as fibered structures.
+\end{abstract}
+
+\section{Introduction and Motivation}
+
+The AK High-Dimensional Projection Structural Theory aims to recast difficult mathematical problems in a higher-dimensional framework, allowing for structural decomposition and stability analysis. In version 1.4, this theory was articulated through geometric and topological language, involving projection maps \( \Phi \), MECE groupings \( \{G_i\} \), and stability functions \( S(G_i, t) \).
+
+In version 1.5, we deepen the foundational structure by reformulating these components within category theory. Categories allow us to generalize spaces and maps to structured objects and morphisms, which are amenable to diagrammatic reasoning, functorial transformations, and compositional logic. This move not only increases the rigor of the framework but also opens new possibilities for interfacing with modern mathematics including homotopy theory, topos theory, and diagrammatic proof systems.
+
+\section{Category and Functorial Reformulation}
+
+\begin{definition}[Structured Category]
+Let \( \mathsf{Struct} \) denote a category whose objects are structured mathematical spaces (such as manifolds, topological spaces, or function spaces), and whose morphisms preserve structural properties (such as continuity, differentiability, or geometric embedding).
+\end{definition}
+
+\begin{definition}[Projection Functor \( \Phi \)]
+Let \( \mathcal{X}, \mathcal{P} \in \mathsf{Struct} \). A projection functor \( \Phi: \mathcal{X} \to \mathcal{P} \) assigns to each object \( x \in \mathcal{X} \) a projected object \( \Phi(x) \in \mathcal{P} \), and to each morphism \( f: x \to x' \) in \( \mathcal{X} \), a morphism \( \Phi(f): \Phi(x) \to \Phi(x') \) in \( \mathcal{P} \), such that \( \Phi(\text{id}_x) = \text{id}_{\Phi(x)} \) and \( \Phi(f \circ g) = \Phi(f) \circ \Phi(g) \).
+\end{definition}
+
+\begin{definition}[Fibered MECE Covering]
+The MECE decomposition \( \{G_i\} \) of \( \mathcal{P} \) is modeled as a family of subobjects (fibers) \( \mathcal{F}_i \), such that the union of the \( \mathcal{F}_i \) recovers \( \mathcal{P} \) disjointly. Each fiber \( \mathcal{F}_i \) corresponds to a structurally coherent group and possesses morphisms inherited from \( \mathcal{P} \), ensuring compatibility with the projection \( \Phi \).
+\end{definition}
+
+\section{Refined Axioms (v1.5)}
+
+\textbf{A1'. Functorial Projectability:} \( \Phi: \mathcal{X} \to \mathcal{P} \) is a functor in \( \mathsf{Struct} \), preserving structural relations.
+
+\textbf{A2'. Fibered MECE Decomposability:} \( \mathcal{P} = \bigcup_i G_i \), where each \( G_i \) is associated with a fiber \( \mathcal{F}_i \subset \mathcal{P} \) such that the covering is MECE and morphism-preserving.
+
+\textbf{A3'. Stability Diagram Convergence:} For each \( G_i \), define a stability diagram \( D_i(t) \) representing persistent features or bounded invariants (e.g., topological barcodes, norm decay). These diagrams commute over time and converge.
+
+\textbf{A4'. Pseudoinverse Functorial Recoverability:} A partial inverse functor \( \Psi: \mathcal{P}_{\text{stable}} \to \mathcal{X} \) exists over stable subregions, ensuring smooth reconstruction of structure.
+
+\section{Main Theorem (v1.5)}
+
+\begin{theorem}[Global Categorical Smoothness]
+Let \( \mathcal{X}, \mathcal{P} \in \mathsf{Struct} \) and let \( \Phi \) satisfy axioms A1' through A4'. Then the evolution of \( \mathcal{X} \) under projection and recovery is globally smooth and admits no singularities over time. That is, structural discontinuities cannot emerge from within the projected image \( \mathcal{P} \) if all fibers converge.
+\end{theorem}
+
+\begin{corollary}[Singularity Prevention]
+Under the conditions of the theorem, any potential singularity in \( \mathcal{X} \) is either precluded or absorbed via converging diagrams within \( \mathcal{P} \). Hence, persistent smoothness is a functorially conserved property.
+\end{corollary}
+
+\section{Discussion and Outlook}
+
+This refinement establishes AK-HDPST as a flexible and abstract framework that leverages the power of category theory. Immediate next steps include:
+
+\begin{itemize}
+  \item Modeling singularities as natural transformations that fail to commute.
+  \item Introducing enriched categories to accommodate metric or probabilistic structures.
+  \item Constructing explicit diagrammatic examples over fluid dynamics, number theory, or algebraic logic.
+\end{itemize}
+
+This evolution transforms AK-HDPST from a heuristic framework to a candidate for rigorous mathematical generalization across domains.
+
+\end{document}

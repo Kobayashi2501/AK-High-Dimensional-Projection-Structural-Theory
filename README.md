@@ -1,81 +1,51 @@
-# AK High-Dimensional Projection Structural Theory
+# AK High-Dimensional Projection Structural Theory (v1.5)
 
-**Author:** A. Kobayashi  
-**Version:** v1.4  
-**Last Updated:** May 2025
+## Overview
 
----
+This repository contains the formalized theory and LaTeX source of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)**, version 1.5. This version introduces a categorical and functorial extension to the MECE projection framework originally defined in version 1.4.
 
-## 🔷 Overview
+## Motivation
 
-This repository introduces a new mathematical framework named **AK High-Dimensional Projection Structural Theory (AK-HDPST)**.  
-It aims to approach complex mathematical problems by projecting them into higher-dimensional structured spaces, decomposing them into MECE (Mutually Exclusive, Collectively Exhaustive) structural groups, and analyzing their stability to prove global smoothness and prevent singularities.
+AK-HDPST was conceived to reframe difficult mathematical problems in a higher-dimensional space where structural decomposition becomes possible. The theory assumes that such problems can be projected into mutually exclusive and collectively exhaustive (MECE) groups whose behavior can be independently analyzed and recombined. 
 
----
+Version 1.5 advances this framework by formalizing the projection and reconstruction processes as *functors* between structured categories and modeling MECE groupings as *fibered structures*.
 
-## 🧠 Core Idea
+## Key Concepts
 
-> **"Difficult problems in low-dimensional form often become tractable when projected into structured high-dimensional group spaces."**
+- **Structured Categories**: Spaces and transformations preserving topological or differential properties.
+- **Projection Functor (Φ)**: A functor between categories that maps objects and morphisms while preserving structure.
+- **Fibered MECE Covering**: A decomposition of the projected space into disjoint and complete fibers, each representing a MECE group.
+- **Stability Diagrams**: Time-evolving diagrams (e.g., persistent homology) attached to each group, which must converge.
+- **Pseudoinverse Functor (Ψ)**: A partial inverse for Φ allowing reconstruction in stable regions.
 
-AK-HDPST combines topological persistence, geometric continuity, and group-theoretic decomposition to yield proof strategies applicable across fields (e.g., fluid dynamics, number theory, logic systems).
+## Axioms (v1.5)
 
----
+1. **Functorial Projectability**: Φ is a functor in a structured category.
+2. **Fibered MECE Decomposability**: Projected space can be expressed as the union of MECE fibers.
+3. **Stability Diagram Convergence**: Persistent features of each fiber converge over time.
+4. **Functorial Recoverability**: A partial inverse Ψ allows smooth recovery of original structure.
 
-## 🧩 Framework Components
+## Main Theorem
 
-| Component | Description |
-|----------|-------------|
-| **Projection Space** \(\mathcal{P}_n\) | Higher-dimensional space derived from original domain \(\mathcal{X}\) using structure-preserving map \(\Phi\). |
-| **MECE Group Decomposition** \(\{G_i\}\) | Disjoint and exhaustive partition of \(\mathcal{P}_n\) reflecting structural clusters. |
-| **Stability Function** \(S(G_i, t)\) | Time-dependent measure (e.g., PH distance, energy decay) for each group \(G_i\). |
-| **Inverse Projection** \(\Phi^{-1}\) | Recovers smooth structure in \(\mathcal{X}\) from stable structure in \(\mathcal{P}_n\). |
+> If axioms A1'–A4' hold, then the evolution of the original space under projection Φ and recovery Ψ is globally smooth. No singularities can emerge if each fiber diagram converges.
 
----
+## Files
 
-## 📜 Axioms (v1.4)
+- `ak_theory_v1_5.tex`: Full LaTeX source of the theory (v1.5)
+- `README.md`: This documentation
+- (optional) `structure_diagram.png`: Diagrammatic illustration (to be added)
 
-- **A1. Projectability:** There exists a continuous structure-preserving map \(\Phi: \mathcal{X} \to \mathcal{P}\).
-- **A2. MECE Decomposability:** \(\mathcal{P}\) can be partitioned into closed, disjoint, exhaustive groups \(\{G_i\}\).
-- **A3. Local Stability:** Each group admits a convergent structural stability function \(S_i(t)\).
-- **A4. Recoverability:** Smooth inverse mapping \(\Phi^{-1}\) exists on each group domain.
+## Future Directions
 
----
+- Introduce enriched categorical structures (e.g., metric-enriched, probabilistic)
+- Develop diagrammatic proof systems
+- Apply AK-HDPST to Navier–Stokes, number theory, and beyond
 
-## 🔍 Lemmas and Theorem
+## Author
 
-- ✅ **Lemma 1:** If groups are connected and adjacent, \(\mathcal{P}\) is globally connected.
-- ✅ **Lemma 2:** Convergence of \(S_i(t)\) implies smoothness of \(\Phi^{-1}|_{G_i}\).
-- ✅ **Lemma 3:** Local smoothness and continuity on groups yield global continuity of \(\Phi^{-1}\).
-- ✅ **Main Theorem:** If all axioms and lemma conditions are met, the original space \(\mathcal{X}(t)\) is globally smooth.
-- 🔒 **Corollary:** No singularities (e.g. blow-up) arise in \(\mathcal{X}(t)\).
+**A. Kobayashi**  
+With mathematical support by **ChatGPT Research Partner**
 
 ---
 
-## 📂 Files
-
-| File | Description |
-|------|-------------|
-| `ak_projection_lemma_proofs_en_v1.4.tex` | Full LaTeX source with formal definitions, axioms, lemmas, and theorem proofs. |
-| `ak_projection_axiom_formal_v1.1.tex` | Base axiomatic structure with category-theoretic formalism. |
-| `README.md` | You are here. |
-
----
-
-## 🌐 Future Extensions
-
-- Apply AK-HDPST to specific domains:
-  - ✅ Navier–Stokes Equations (global regularity)
-  - 📈 Riemann Hypothesis (zero-structure PH analysis)
-  - 🔄 Logical proposition flow (syntactic projection)
-- Introduce categorical diagrams and functor-based projections
-- ArXiv submission & community peer review
-
----
-
-## 📬 Contact
-
-If you are a researcher interested in contributing or collaborating, feel free to contact the author or open an issue in this repository.
-
----
-
-© 2025 A. Kobayashi. All rights reserved.
+Feel free to fork, adapt, or extend this theory under appropriate attribution.

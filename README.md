@@ -1,51 +1,55 @@
-# AK High-Dimensional Projection Structural Theory (v1.5)
+# AK High-Dimensional Projection Structural Theory (v1.6)
 
 ## Overview
-
-This repository contains the formalized theory and LaTeX source of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)**, version 1.5. This version introduces a categorical and functorial extension to the MECE projection framework originally defined in version 1.4.
+This repository contains the formalized theory and LaTeX source of the AK High-Dimensional Projection Structural Theory (AK-HDPST), version 1.6. This version unifies the topological, algebraic, and numerical insights of the AK projection framework, with explicit application to fluid dynamics (Navier–Stokes) and theoretical extensibility to logic, number theory, and geometry.
 
 ## Motivation
+AK-HDPST was originally conceived to reframe difficult mathematical problems in a higher-dimensional space where structural decomposition becomes possible. The central assumption is:
 
-AK-HDPST was conceived to reframe difficult mathematical problems in a higher-dimensional space where structural decomposition becomes possible. The theory assumes that such problems can be projected into mutually exclusive and collectively exhaustive (MECE) groups whose behavior can be independently analyzed and recombined. 
+> "Unsolvable problems may simply lack sufficient dimension."
 
-Version 1.5 advances this framework by formalizing the projection and reconstruction processes as *functors* between structured categories and modeling MECE groupings as *fibered structures*.
+In this version (v1.6), the framework incorporates persistent homology, cluster-wise Lyapunov control, and degeneration via tropical and Hodge-theoretic mechanisms, forming a closed feedback loop:
+
+```
+Topological Simplification ⇄ Orbit Compression ⇄ Proof Tractability
+```
+
+## New in Version 1.6
+- Fully formalized LaTeX documentation (`ak_projection_theory_v1.6.tex`)
+- Numerical realization tools for orbit projection, PH computation, and spectral decay
+- Persistent collapse linked to regularity via VMHS + tropical degeneration
+- Application to 3D incompressible Navier–Stokes global regularity (v3.2)
+- Advanced section on higher-dimensional PH, moduli boundary structure, and visual diagnostics
 
 ## Key Concepts
-
-- **Structured Categories**: Spaces and transformations preserving topological or differential properties.
-- **Projection Functor (Φ)**: A functor between categories that maps objects and morphisms while preserving structure.
-- **Fibered MECE Covering**: A decomposition of the projected space into disjoint and complete fibers, each representing a MECE group.
-- **Stability Diagrams**: Time-evolving diagrams (e.g., persistent homology) attached to each group, which must converge.
-- **Pseudoinverse Functor (Ψ)**: A partial inverse for Φ allowing reconstruction in stable regions.
-
-## Axioms (v1.5)
-
-1. **Functorial Projectability**: Φ is a functor in a structured category.
-2. **Fibered MECE Decomposability**: Projected space can be expressed as the union of MECE fibers.
-3. **Stability Diagram Convergence**: Persistent features of each fiber converge over time.
-4. **Functorial Recoverability**: A partial inverse Ψ allows smooth recovery of original structure.
+- **AK Projection Space**: High-dimensional embedding where group or topological simplification becomes tractable
+- **MECE Cluster Structure**: Mutually exclusive, collectively exhaustive decomposition into analyzable units
+- **Persistent Lyapunov Energy**: $C(t) = \sum \mathrm{persist}(h)^2$ acting as topological energy
+- **VMHS Degeneration**: Barcode evolution modeled via mixed Hodge structure collapse
+- **Tropical Stability**: Piecewise-linear convergence of persistent signatures
 
 ## Main Theorem
+If the projected structure $\pi(X)$ admits a MECE decomposition with decaying persistent complexity and VMHS degeneration, then the original space $X$ is globally regular. That is:
 
-> If axioms A1'–A4' hold, then the evolution of the original space under projection Φ and recovery Ψ is globally smooth. No singularities can emerge if each fiber diagram converges.
+> No singularity can emerge when each cluster collapses persistently.
 
 ## Files
-
-- `ak_theory_v1_5.tex`: Full LaTeX source of the theory (v1.5)
+- `ak_projection_theory_v1.6.tex`: Full LaTeX source of AK-HDPST v1.6
+- `ak_projection_theory_v1.6_ja.tex`: Japanese translated commentary version
+- `ph_isomap.py`: Orbit projection and PH computation module
+- `fourier_decay.py`: Dyadic shell energy analysis
+- `pseudo_spectral_sim.py`: Simplified NSE pseudo-spectral simulator
 - `README.md`: This documentation
-- (optional) `structure_diagram.png`: Diagrammatic illustration (to be added)
 
 ## Future Directions
-
-- Introduce enriched categorical structures (e.g., metric-enriched, probabilistic)
-- Develop diagrammatic proof systems
-- Apply AK-HDPST to Navier–Stokes, number theory, and beyond
+- Extend to probabilistic and enriched categorical settings
+- Apply to proof theory, prime structure, and moduli problems
+- Formalize PH-based diagnostic tools for nonlinear PDEs and ensemble systems
+- Integrate with Coq/Lean for proof-oriented structural decomposition
 
 ## Author
-
 **A. Kobayashi**  
-With mathematical support by **ChatGPT Research Partner**
+With mathematical support by ChatGPT Research Partner
 
 ---
-
-Feel free to fork, adapt, or extend this theory under appropriate attribution.
+For correspondence or collaboration: GitHub Issues or kobayashi.research✶example.com

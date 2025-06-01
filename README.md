@@ -1,55 +1,69 @@
-# AK High-Dimensional Projection Structural Theory (v1.6)
+# AK High-Dimensional Projection Structural Theory (v4.2)
 
 ## Overview
-This repository contains the formalized theory and LaTeX source of the AK High-Dimensional Projection Structural Theory (AK-HDPST), version 1.6. This version unifies the topological, algebraic, and numerical insights of the AK projection framework, with explicit application to fluid dynamics (Navier–Stokes) and theoretical extensibility to logic, number theory, and geometry.
+This repository contains the complete formalization of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)**, version 4.2. This version presents a categorical, topological, and geometric framework for decomposing complex mathematical structures via high-dimensional projections, with applications ranging from fluid dynamics (Navier–Stokes) to logic and geometry.
 
 ## Motivation
-AK-HDPST was originally conceived to reframe difficult mathematical problems in a higher-dimensional space where structural decomposition becomes possible. The central assumption is:
+AK-HDPST was originally conceived with the insight:
 
-> "Unsolvable problems may simply lack sufficient dimension."
+> “Unsolvable problems may simply lack sufficient dimension.”
 
-In this version (v1.6), the framework incorporates persistent homology, cluster-wise Lyapunov control, and degeneration via tropical and Hodge-theoretic mechanisms, forming a closed feedback loop:
+By projecting difficult problems into structured higher-dimensional spaces, the theory enables decomposition into MECE (Mutually Exclusive, Collectively Exhaustive) clusters governed by topological and algebraic regularities.
 
-```
-Topological Simplification ⇄ Orbit Compression ⇄ Proof Tractability
-```
+Version 4.2 integrates:
+- Persistent Homology collapse and Lyapunov-type functionals
+- Categorical MECE decomposition using fibered categories
+- Degeneration mechanisms via VMHS and tropical geometry
+- Concrete application to the global regularity of 3D Navier–Stokes (v3.2)
 
-## New in Version 1.6
-- Fully formalized LaTeX documentation (`ak_projection_theory_v1.6.tex`)
-- Numerical realization tools for orbit projection, PH computation, and spectral decay
-- Persistent collapse linked to regularity via VMHS + tropical degeneration
-- Application to 3D incompressible Navier–Stokes global regularity (v3.2)
-- Advanced section on higher-dimensional PH, moduli boundary structure, and visual diagnostics
+## What's New in Version 4.2
+- **Categorical Formalization**: Functorial MECE clustering and structural fiber categories
+- **PH-Based Lyapunov Functionals**: Topological energy $C(t) = \sum \mathrm{persist}(h)^2$
+- **Degeneration Mechanisms**: Variation of Mixed Hodge Structures (VMHS) + Tropical contraction
+- **Mirror Symmetry Integration**: SYZ tropical degeneration for structural duality
+- **Expanded Applications**: Application to Navier–Stokes (v3.2), MHD, and active scalar models
+- **Critical Space Extension**: Besov and BMO$^{-1}$ compatibility via wavelet-based PH
 
-## Key Concepts
-- **AK Projection Space**: High-dimensional embedding where group or topological simplification becomes tractable
-- **MECE Cluster Structure**: Mutually exclusive, collectively exhaustive decomposition into analyzable units
-- **Persistent Lyapunov Energy**: $C(t) = \sum \mathrm{persist}(h)^2$ acting as topological energy
-- **VMHS Degeneration**: Barcode evolution modeled via mixed Hodge structure collapse
-- **Tropical Stability**: Piecewise-linear convergence of persistent signatures
+## Core Concepts
+- **AK Projection Space**: A high-dimensional structured category where analysis and simplification become tractable
+- **MECE Cluster Structure**: A functorial decomposition into disjoint analyzable fibers
+- **Persistent Topological Energy**: $C(t)$ as a Lyapunov-type measure of topological complexity
+- **VMHS Collapse**: Barcode degeneration modeled via Hodge-theoretic variation
+- **Tropical Stability**: Piecewise-linear contraction of barcode paths in moduli space
+- **Mirror Categorical Duality**: Topological–algebraic–geometric duality via SYZ-type mirror symmetry
 
-## Main Theorem
-If the projected structure $\pi(X)$ admits a MECE decomposition with decaying persistent complexity and VMHS degeneration, then the original space $X$ is globally regular. That is:
+## Main Theorem (Simplified Form)
+If a high-dimensional projection $\pi: X \to \mathcal{C}$ admits:
+1. A MECE decomposition into fibered clusters,
+2. Persistent homology energy decay $C(t) \to 0$,
+3. VMHS and tropical degeneration of barcode structures,
 
-> No singularity can emerge when each cluster collapses persistently.
+then the original system $X$ is **globally regular**—no singularities or pathologies can persist within such a structure.
+
+> **Structural regularity arises when every cluster collapses persistently and algebraically.**
 
 ## Files
-- `ak_projection_theory_v1.6.tex`: Full LaTeX source of AK-HDPST v1.6
-- `ak_projection_theory_v1.6_ja.tex`: Japanese translated commentary version
-- `ph_isomap.py`: Orbit projection and PH computation module
-- `fourier_decay.py`: Dyadic shell energy analysis
-- `pseudo_spectral_sim.py`: Simplified NSE pseudo-spectral simulator
-- `README.md`: This documentation
+- `ak_projection_theory_v4.2.tex` – Full LaTeX source of AK-HDPST v4.2
+- `ak_projection_theory_v4.2_ja.tex` – Japanese translation and commentary version
+- `navier_stokes_global_v3.2.pdf` – Application to 3D incompressible Navier–Stokes global regularity
+- `pseudo_spectral_sim.py` – Spectral simulation for 3D NSE
+- `fourier_decay.py` – Dyadic shell energy analysis and spectral slope estimation
+- `ph_isomap.py` – Orbit projection and PH₁ computation using Isomap and ripser
+- `README.md` – This documentation
 
 ## Future Directions
-- Extend to probabilistic and enriched categorical settings
-- Apply to proof theory, prime structure, and moduli problems
-- Formalize PH-based diagnostic tools for nonlinear PDEs and ensemble systems
-- Integrate with Coq/Lean for proof-oriented structural decomposition
+- Extend AK theory to **derived categorical structures** and **proof theory**
+- Develop **wavelet-based multiscale PH** tools for critical function spaces
+- Integrate with **Lean/Coq** for verifiable structural decomposition
+- Apply to **prime number clustering**, **moduli compactification**, and **higher symplectic geometry**
+- Use PH-based topological indicators as diagnostics in ensemble PDE simulations
 
 ## Author
 **A. Kobayashi**  
-With mathematical support by ChatGPT Research Partner
+Mathematical Structuring by ChatGPT Research Partner
+
+For correspondence, suggestions, or collaboration:  
+📧 **dollops2501@icloud.com**
 
 ---
-For correspondence or collaboration: GitHub Issues or kobayashi.research✶example.com
+*“Structure emerges when viewed from the right dimension.”*

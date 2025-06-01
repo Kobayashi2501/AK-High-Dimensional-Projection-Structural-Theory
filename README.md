@@ -1,69 +1,74 @@
 # AK High-Dimensional Projection Structural Theory (v4.2)
 
 ## Overview
-This repository contains the complete formalization of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)**, version 4.2. This version presents a categorical, topological, and geometric framework for decomposing complex mathematical structures via high-dimensional projections, with applications ranging from fluid dynamics (Navier–Stokes) to logic and geometry.
+This repository presents the complete formalization of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)**, version 4.2. AK-HDPST provides a categorical, topological, and geometric framework to solve complex mathematical problems by projecting them into structured higher-dimensional spaces. Applications include fluid dynamics (e.g., Navier–Stokes), nonlinear PDEs, geometry, and information topology.
 
 ## Motivation
-AK-HDPST was originally conceived with the insight:
+The theory is grounded in the insight:
 
 > “Unsolvable problems may simply lack sufficient dimension.”
 
-By projecting difficult problems into structured higher-dimensional spaces, the theory enables decomposition into MECE (Mutually Exclusive, Collectively Exhaustive) clusters governed by topological and algebraic regularities.
-
-Version 4.2 integrates:
-- Persistent Homology collapse and Lyapunov-type functionals
-- Categorical MECE decomposition using fibered categories
-- Degeneration mechanisms via VMHS and tropical geometry
-- Concrete application to the global regularity of 3D Navier–Stokes (v3.2)
+By lifting complex systems into high-dimensional spaces equipped with categorical structure and topological tracking, AK-HDPST enables decomposition into **MECE** (Mutually Exclusive and Collectively Exhaustive) clusters governed by persistent dynamics and energetic collapse.
 
 ## What's New in Version 4.2
-- **Categorical Formalization**: Functorial MECE clustering and structural fiber categories
-- **PH-Based Lyapunov Functionals**: Topological energy $C(t) = \sum \mathrm{persist}(h)^2$
-- **Degeneration Mechanisms**: Variation of Mixed Hodge Structures (VMHS) + Tropical contraction
-- **Mirror Symmetry Integration**: SYZ tropical degeneration for structural duality
-- **Expanded Applications**: Application to Navier–Stokes (v3.2), MHD, and active scalar models
-- **Critical Space Extension**: Besov and BMO$^{-1}$ compatibility via wavelet-based PH
+- **7-Step Structural Program** covering lifting, stability, degeneration, and geometrization
+- **Persistent Topological Energies**: $C(t) = \sum_i \text{pers}_i^2$ and entropy $H(t)$
+- **Geometric Orbit Injectivity** and exclusion of chaotic trajectories
+- **Degeneration via VMHS and Tropical Geometry**
+- **SYZ Mirror Interpretation** of persistent structure duality
+- **Derived Category Formulation** for future persistent homology generalization
+- **Full application to 3D Navier–Stokes global regularity (via AK framework)**
 
 ## Core Concepts
-- **AK Projection Space**: A high-dimensional structured category where analysis and simplification become tractable
-- **MECE Cluster Structure**: A functorial decomposition into disjoint analyzable fibers
-- **Persistent Topological Energy**: $C(t)$ as a Lyapunov-type measure of topological complexity
-- **VMHS Collapse**: Barcode degeneration modeled via Hodge-theoretic variation
-- **Tropical Stability**: Piecewise-linear contraction of barcode paths in moduli space
-- **Mirror Categorical Duality**: Topological–algebraic–geometric duality via SYZ-type mirror symmetry
+- **Step 0–7 Architecture**: Each phase encodes a transformation from chaotic to regular structure
+- **Topological Stability (Step 1)**: Persistent barcodes under dynamics
+- **Energetic Collapse (Step 2)**: Lyapunov functional $C(t)$ bounds gradient norms
+- **Geometric Orbit Regularity (Step 3)**: Injectivity and finiteness of projected orbits
+- **Algebraic Degeneration (Step 4–5)**: Barcode collapse via Hodge theory and tropical limits
+- **Dyadic Fourier Decay (Step 6)**: Energy suppression of high-frequency modes
+- **Categorical Projection (Step 7)**: Fibered decomposition of total dynamics
 
-## Main Theorem (Simplified Form)
-If a high-dimensional projection $\pi: X \to \mathcal{C}$ admits:
-1. A MECE decomposition into fibered clusters,
-2. Persistent homology energy decay $C(t) \to 0$,
-3. VMHS and tropical degeneration of barcode structures,
+## Applications
+The theory is applied concretely to:
 
-then the original system $X$ is **globally regular**—no singularities or pathologies can persist within such a structure.
+- **Global Regularity of 3D Incompressible Navier–Stokes**
+  - Exclusion of finite-time singularities (Type I–III)
+  - Topological and spectral control of evolution
+- **MHD, SQG, Euler Equations** (outlook)
+- **Data topology and neural manifold dynamics** (future work)
 
-> **Structural regularity arises when every cluster collapses persistently and algebraically.**
+## Main Theorem (Informal)
+If a system admits:
+1. A MECE decomposition via projection $\pi: X \to \mathcal{C}$,
+2. Persistent homology energy $C(t) \to 0$ and entropy $H(t) \to 0$,
+3. Barcode collapse via VMHS and tropical degeneration,
+
+then the system $X$ is **globally regular**—all complex behavior collapses in structured space.
+
+> “Structure becomes regular when all fibers collapse topologically and categorically.”
 
 ## Files
-- `ak_projection_theory_v4.2.tex` – Full LaTeX source of AK-HDPST v4.2
-- `ak_projection_theory_v4.2_ja.tex` – Japanese translation and commentary version
-- `navier_stokes_global_v3.2.pdf` – Application to 3D incompressible Navier–Stokes global regularity
-- `pseudo_spectral_sim.py` – Spectral simulation for 3D NSE
-- `fourier_decay.py` – Dyadic shell energy analysis and spectral slope estimation
-- `ph_isomap.py` – Orbit projection and PH₁ computation using Isomap and ripser
+- `ak_projection_theory_v4.2.tex` – Full LaTeX source of AK-HDPST (v4.2)
+- `ak_projection_theory_v4.2.pdf` – Compiled document
+- `navier_stokes_global_v4.0.pdf` – Concrete application to NSE global regularity
+- `pseudo_spectral_sim.py` – 3D pseudo-spectral solver for velocity field evolution
+- `fourier_decay.py` – Dyadic shell energy spectrum analysis
+- `ph_isomap.py` – Orbit projection + persistent homology via Isomap and Ripser
 - `README.md` – This documentation
 
 ## Future Directions
-- Extend AK theory to **derived categorical structures** and **proof theory**
-- Develop **wavelet-based multiscale PH** tools for critical function spaces
-- Integrate with **Lean/Coq** for verifiable structural decomposition
-- Apply to **prime number clustering**, **moduli compactification**, and **higher symplectic geometry**
-- Use PH-based topological indicators as diagnostics in ensemble PDE simulations
+- Persistent Homology in **Derived and Triangulated Categories**
+- **SYZ-type Mirror Reformulations** of persistence structures
+- **Wavelet-based PH** for Besov and BMO$^{-1}$ settings
+- Integration with **Lean/Coq** for formal verification
+- Extensions to **prime structure clustering**, **moduli degeneration**, and **quantum geometry**
 
 ## Author
 **A. Kobayashi**  
-Mathematical Structuring by ChatGPT Research Partner
+Theory structured and co-authored with ChatGPT Research Partner
 
-For correspondence, suggestions, or collaboration:  
-📧 **dollops2501@icloud.com**
+📧 For correspondence: **dollops2501@icloud.com**
 
 ---
+
 *“Structure emerges when viewed from the right dimension.”*

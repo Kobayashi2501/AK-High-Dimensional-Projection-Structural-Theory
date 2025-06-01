@@ -1,111 +1,125 @@
-% ================================================
-% AK High-Dimensional Projection Structural Theory (v1.6)
-% ================================================
+% ===========================
+% AK High-Dimensional Projection Structural Theory (v4.0 Extended Edition)
+% ===========================
 
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref,listings,graphicx,mathtools,tikz-cd}
 \geometry{margin=1in}
-
-\title{AK High-Dimensional Projection Structural Theory\thanks{Version 1.6 -- June 2025}}
+\title{AK High-Dimensional Projection Structural Theory (AK-HDPST) v4.0 \\ Unified Formalization with Entropic Geometry, MECE Categorical Clustering, and Applied Projections}
 \author{A. Kobayashi \\ ChatGPT Research Partner}
-\date{}
+\date{June 2025}
 
-\newtheorem{definition}{Definition}[section]
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{proposition}[definition]{Proposition}
-\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
 
 \begin{document}
-
 \maketitle
 
-\section*{Introduction}
+\section{Motivation and High-Dimensional Projection Philosophy}
 
-This paper proposes the \textbf{AK High-Dimensional Projection Structural Theory} (AK理論), a general mathematical framework designed to structurally decompose complex problems by projecting them into higher-dimensional MECE-aligned cluster structures. The guiding principle is simple:
+\textbf{"What cannot be solved may simply lack dimensional resolution."}
 
-\begin{quote}
-\textit{``Unsolvable problems may simply lack sufficient dimension.''}
-\end{quote}
+AK-HDPST is built upon the hypothesis that complex problems—such as dynamic PDEs or topological obstruction spaces—may reveal solvable structures when projected into a higher-dimensional configuration space. These projections induce MECE (Mutually Exclusive, Collectively Exhaustive) decompositions, where each fiber or cluster becomes analytically tractable. The categorical formulation captures the logical flow of this philosophy through topological energy and functorial degeneration.
 
-By identifying latent group-like or topologically trivial structures in a projected space, AK theory aims to make globally difficult problems locally tractable. This theory generalizes the approach used in the Navier--Stokes v3.2 framework and abstracts its mechanism for broader applicability.
+\section{Categorical Framework and Collapse Mechanism}
 
-\section{Core Definitions}
+\begin{definition}[Trajectory Category \( \mathcal{T} \)]
+Let \( \mathcal{T} \) be a category whose objects are state trajectories \( u(t) \) in a Hilbert or Banach space \( X \), and morphisms represent temporal evolution.\end{definition}
 
-\begin{definition}[AK Projection Space]
-Let $X$ be a mathematical structure (e.g., trajectory, orbit, equation class). An \textbf{AK projection} is a map $\pi : X \to \mathbb{R}^n$ such that group or topological structures become analyzable in $\pi(X)$.
+\begin{definition}[Persistent Barcode Category \( \mathcal{B} \)]
+Let \( \mathcal{B} \) be the category of persistence diagrams with morphisms induced by bottleneck-stable matchings. Define \( \Phi: \mathcal{T} \to \mathcal{B} \) mapping \( u(t) \mapsto \mathrm{PH}_1(u(t)) \).
 \end{definition}
 
-\begin{definition}[MECE Cluster Structure]
-A decomposition $\{C_i\}$ of $\pi(X)$ is \textbf{MECE} (Mutually Exclusive and Collectively Exhaustive) if each $C_i$ is disjoint and jointly covers $\pi(X)$, and each is analyzable via uniform criteria (e.g., topological class, spectral regime).
+\begin{definition}[Degeneration and Tropical Collapse Functor]
+Let \( \mathcal{H} \) denote a category of filtered Hodge structures and \( \mathcal{Trop} \) the category of tropical semimodules. We define:
+\[ F := \mathrm{Trop} \circ \mathrm{Deg} : \mathcal{B} \to \mathcal{H} \to \mathcal{Trop} \]
+where \( \mathrm{Deg} \) models degeneration of barcodes and \( \mathrm{Trop} \) projects to tropical space.
 \end{definition}
 
-\begin{definition}[AK Group Structure]
-If each cluster $C_i$ admits a binary operation $*_i$ making $(C_i, *_i)$ a group or semi-group, then $\{(C_i, *_i)\}$ forms an \textbf{AK group structure}.
+\begin{theorem}[Equivalence between Collapse and Regularity]
+If \( F \circ \Phi: \mathcal{T} \to \mathcal{Trop} \) is full, faithful, and barcode images converge to a terminal object, then:
+\[ \mathrm{PH}_1(u(t)) = 0 \Leftrightarrow u(t) \in C^{\beta}_t X \quad (\beta > 0) \]
+\end{theorem}
+
+\begin{center}
+\begin{tikzcd}[column sep=huge, row sep=large]
+\mathcal{T} \arrow[r, "\Phi"] \arrow[rrr, bend right=35, "F \circ \Phi"'] & \mathcal{B} \arrow[r, "\mathrm{Deg}"] & \mathcal{H} \arrow[r, "\mathrm{Trop}"] & \mathcal{Trop}
+\end{tikzcd}
+\end{center}
+
+\section{Topological Energy Functional and Lyapunov Structure}
+
+\begin{definition}[Topological Energy \( C(t) \)]
+\[ C(t) := \sum_{h \in \mathrm{PH}_1(t)} (\text{persist}(h))^2 \]
 \end{definition}
 
-\section{Structural Lemmas and Propositions}
-
-\begin{lemma}[Projection Preserves Structure]
-If $\pi$ is continuous and topology-preserving (e.g., via persistent homology), complexity metrics over $X$ can be translated into $\pi(X)$.
+\begin{lemma}
+If \( \mathrm{PH}_1 \) is bottleneck-stable in time, then \( C(t) \) is Lipschitz-continuous and almost everywhere differentiable.
 \end{lemma}
 
-\begin{proposition}[Proof Reduction via Clusters]
-If a problem $P$ decomposes into cluster-level propositions $P_i$ over $C_i$, and each $P_i$ is provable independently, then $P$ holds globally.
+\begin{proposition}
+There exists \( \gamma > 0 \) such that:
+\[ \frac{d}{dt} C(t) \leq -\gamma \cdot \| \nabla u(t) \|^2 + \varepsilon \]
 \end{proposition}
 
-\section{Main Theorems}
+\section{Topological Entropy Functional and Complexity Collapse}
 
-\begin{theorem}[Topological Collapse Implies Regularity]
-If persistent homology $\mathrm{PH}_1(C_i(t)) \to 0$ for all $i$, then the original structure $X$ exhibits regularity (e.g., Sobolev continuity).
-\end{theorem}
-
-\begin{theorem}[AK Resolution of Intractability]
-If intractability localizes to cluster $C_j$, AK projection isolates $C_j$ for direct analysis or degeneration.
-\end{theorem}
-
-\begin{theorem}[Degeneration via Moduli Structure]
-If the cluster structure degenerates (e.g., via VHS or tropical collapse), then proof conditions can be formulated on the boundary of a moduli space.
-\end{theorem}
-
-\section{Feedback Loop}
-
-AK theory postulates the following equivalence:
-\[
-\text{Topological Simplification} \Longleftrightarrow \text{Orbit Compression} \Longleftrightarrow \text{Proof Tractability}.
-\]
-
-\section{Application: Navier--Stokes Global Regularity}
-
-As a concrete application of AK theory, we present its use in the 3D incompressible Navier--Stokes problem. The solution orbit $\mathcal{O} = \{u(t) : t \geq 0\} \subset H^1$ was projected into a low-dimensional manifold via Isomap, and persistent homology showed $\mathrm{PH}_1(\mathcal{O}) = 0$. Cluster-level Lyapunov functions $C(t) = \sum \mathrm{persist}(h)^2$ decayed, implying orbit flattening. A degeneration structure was formulated using VMHS and tropical geometry.
-
-\textbf{Conclusion:} All known blow-up types (I--III) were excluded. This validates the AK framework as a tool for converting analytic regularity into topological and algebraic terms.
-
-\section{Advanced Structures: Higher PH and Degeneration Geometry}
-
-\begin{definition}[Higher-Dimensional Persistent Projection]
-For $k \geq 2$, the persistent homology group $\mathrm{PH}_k(X)$ tracks voids, chambers, and high-dimensional structure. These can be projected onto moduli-type coordinates for degeneration tracking.
+\begin{definition}[Topological Entropy \( H(t) \)]
+\[ H(t) := - \sum_{h \in \mathrm{PH}_1(t)} p_h(t) \log p_h(t), \quad p_h(t) := \frac{\text{persist}(h)^2}{C(t)} \]
 \end{definition}
 
-\begin{theorem}[High-PH Collapse Implies Structural Simplicity]
-If $\mathrm{PH}_k(C_i(t)) \to 0$ for $k=1,2,...,m$, then $X$ is homotopically trivial in projection. This implies combinatorial compressibility and algorithmic tractability.
-\end{theorem}
+\begin{proposition}
+If \( C(t) \to 0 \) and \( H(t) \) differentiable, then:
+\[ \frac{d}{dt} H(t) \leq -\eta H(t) + \delta \]
+for \( \eta > 0 \). Hence, \( H(t) \to 0 \Rightarrow \) entropy decay and dynamical predictability.
+\end{proposition}
 
-\section{Visualization and Numeric Implementation}
+\section{MECE Decomposition via Fibered Categorical Structures}
 
-AK projections can be numerically validated through the following tools:
+\begin{definition}[MECE Functorial Projection]
+Let \( \Phi: \mathcal{X} \to \coprod_i \mathcal{F}_i \) with fibers \( \mathcal{F}_i \to \mathcal{B} \). Each fiber captures a cluster-wise subproblem.
+\end{definition}
+
+\begin{proposition}
+If each \( \mathcal{F}_i \) is contractible or \( \mathrm{PH}_1 = 0 \), global structure is solvable iff \( \mathcal{B} \) is manageable.
+\end{proposition}
+
+\section{Applications to Physical Systems: MHD and Active Scalars}
+
 \begin{itemize}
-  \item \texttt{ph\_isomap.py} --- for Isomap + persistent homology of orbit structures.
-  \item \texttt{fourier\_decay.py} --- spectral energy decay and shell slope estimation.
-  \item Cech/Vietoris filtration modules for barcode simplification.
+  \item \textbf{MHD}: Project magnetic field \( B \) and derive \( \mathrm{PH}_1(B) = 0 \Rightarrow \mathrm{PH}_1(u) = 0 \).
+  \item \textbf{SQG}: Apply filtration to \( |\nabla \theta| \) and use feedback from \( C(t), H(t) \) for regularity.
 \end{itemize}
 
-Diagrams showing barcode shortening, orbit flattening, and PH decay can illustrate the degeneration process central to AK collapse.
+\section{Mirror Symmetry Interpretation with SYZ-Tropical Diagram}
 
-\section*{Acknowledgements}
-We acknowledge that this theory emerged as a generalization of empirical observations from the Navier--Stokes global regularity project (v3.2).
+\begin{figure}[h!]
+\centering
+\begin{tikzcd}[column sep=huge, row sep=huge]
+\textbf{Complex Space} \arrow[dr, dashed, "SYZ Mirror"] & & \textbf{Tropical Limit} \\
+& \textbf{Hodge Degeneration} \arrow[ur, "\text{Tropicalization}"] &
+\end{tikzcd}
+\caption{Mirror interpretation of persistent homology collapse via SYZ conjecture and tropical geometry}
+\end{figure}
 
-\section*{Note on Japanese Translation}
-A separate document provides the Japanese translation and interpretation of this theory. See: \texttt{ak\_projection\_theory\_v1.6\_ja.tex}
+\section{Interactive Visualization Toolkit (Appendix G+)}
+
+\begin{itemize}
+  \item Slider over snapshots \( u(t) \)
+  \item Live persistent diagrams with birth/death
+  \item Overlay plots of \( C(t), H(t) \)
+\end{itemize}
+
+\section{CLI Tools for Automated Analysis (Appendix J++)}
+
+\begin{itemize}
+  \item \texttt{analyze\_decay.py}: compute decay slopes
+  \item \texttt{detect\_collapse.py}: threshold detection in PH
+  \item \texttt{plot\_interactive.py}: orbit and barcode viewer
+\end{itemize}
 
 \end{document}

@@ -74,7 +74,7 @@ AK-HDPSTは、非可逆な複雑系を**圏論的・トポロジー的・スペ�
 |----------|------|
 | `ak_hdpst_v4_5.tex` | 本理論のLaTeX完全版（v4.5） |
 | `ak_hdpst_v4_5.pdf` | コンパイル済みPDF文書 |
-| `navier_stokes_global_v5.0.pdf` | Navier–Stokes正則性への応用証明 |
+| [Navier–Stokes正則性 v5.0 (GitHubリンク)](https://github.com/Kobayashi2501/Navier-Stokes-Global-Regularity) | Navier–Stokes正則性への応用（v5.0） |
 | `pseudo_spectral_sim.py` | 速度場進化の3D疑似スペクトル法 |
 | `fourier_decay.py` | ダイアディック殻エネルギー減衰解析 |
 | `ph_isomap.py` | Isomap＋RipserによるPH₁軌道解析 |

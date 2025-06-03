@@ -109,4 +109,8 @@ We believe it serves both as a proof-level structure and as a prototype for gene
 
 *“Structure emerges when viewed from the right dimension.”*
 
-> 📄 日本語版はこちら → [Japanese version (日本語版)](./README_ja.md)
+---
+
+## 🌏 Other Languages
+
+- 📄 [Japanese version (日本語版)](./README_ja.md) — 全文日本語訳

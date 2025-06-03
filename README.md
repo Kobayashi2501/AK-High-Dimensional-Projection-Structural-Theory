@@ -72,7 +72,7 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 |------|-------------|
 | `ak_hdpst_v4_5.tex` | Full LaTeX source of AK-HDPST v4.5 |
 | `ak_hdpst_v4_5.pdf` | Compiled final document |
-| `navier_stokes_global_v5.0.pdf` | Application to NSE regularity proof |
+| [Navier–Stokes Global Regularity v5.0 (GitHub)](https://github.com/Kobayashi2501/Navier-Stokes-Global-Regularity) | Application to NSE regularity proof |
 | `pseudo_spectral_sim.py` | 3D pseudo-spectral velocity solver |
 | `fourier_decay.py` | Dyadic shell energy decay analyzer |
 | `ph_isomap.py` | Persistent homology on embedded orbits |

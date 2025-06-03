@@ -225,4 +225,68 @@ This implies topological rigidity and categorical finality.
     \item Extension to non-archimedean analytic spaces and p-adic Hodge theory.
 \end{itemize}
 
+
+
+% Appendix E: References
+\section*{Appendix E: Selected References}
+\addcontentsline{toc}{section}{Appendix E: Selected References}
+
+\begin{thebibliography}{9}
+
+\bibitem{CohenSteiner2007}
+David Cohen-Steiner, Herbert Edelsbrunner, and John Harer.\\
+\textit{Stability of persistence diagrams}.\\
+Discrete \& Computational Geometry, 37(1):103--120, 2007.
+
+\bibitem{Beilinson1982}
+A. A. Beilinson, J. Bernstein, and P. Deligne.\\
+\textit{Faisceaux pervers}.\\
+Astérisque, 100:5–171, 1982.
+
+\bibitem{Strominger1996}
+A. Strominger, S.T. Yau, and E. Zaslow.\\
+\textit{Mirror symmetry is T-duality}.\\
+Nuclear Physics B, 479(1-2):243–259, 1996.
+
+\bibitem{Kontsevich1994}
+M. Kontsevich.\\
+\textit{Homological algebra of mirror symmetry}.\\
+In Proceedings of the International Congress of Mathematicians, 1994.
+
+\bibitem{Katzarkov2014}
+L. Katzarkov, M. Kontsevich, T. Pantev.\\
+\textit{Bogomolov–Tian–Todorov theorems for Landau–Ginzburg models}.\\
+J. Differential Geometry 105 (1), 55–117, 2017.
+
+\bibitem{Ghrist2008}
+Robert Ghrist.\\
+\textit{Barcodes: The persistent topology of data}.\\
+Bulletin of the American Mathematical Society, 45(1):61--75, 2008.
+
+\end{thebibliography}
+
+% Appendix F: Universal Structural Lemmas
+\section*{Appendix F: Universal Structural Lemmas}
+\addcontentsline{toc}{section}{Appendix F: Universal Structural Lemmas}
+
+\begin{lemma}[PH$_1$ Triviality Implies Topological Simplicity]
+Let $\{X_t\}$ be a family of topological spaces with persistent homology $\mathrm{PH}_1(X_t) \to 0$ as $t \to 0$.  
+Then the limit object $X_0$ is contractible in homological degree 1.
+\end{lemma}
+
+\begin{proof}[Proof Sketch]
+Persistent triviality implies all 1-cycles die below a fixed scale $\epsilon$.  
+Thus, the Čech or Vietoris complex at scale $\epsilon$ is acyclic in $H_1$, and $X_0$ admits a deformation retraction to a tree-like structure.
+\end{proof}
+
+\begin{lemma}[Ext$^1$ Collapse as Derived Finality]
+Let $\mathcal{F}_t \in D^b(\mathcal{AK})$ be a degenerating derived object with $\mathrm{Ext}^1(\mathcal{F}_t, -) \to 0$.  
+Then $\mathcal{F}_0 := \colim_{t \to 0} \mathcal{F}_t$ is a derived-final object.
+\end{lemma}
+
+\begin{proof}[Proof Sketch]
+Ext$^1 = 0$ implies the vanishing of obstructions to extensions.  
+The colimit thus inherits uniqueness and completeness in its morphism class, consistent with a derived finality property in triangulated structure.
+\end{proof}
+
 \end{document}

@@ -113,4 +113,4 @@ We believe it serves both as a proof-level structure and as a prototype for gene
 
 ## 🌏 Other Languages
 
-- 📄 [Japanese version (日本語版)](./README_ja.md) — 全文日本語訳
+- 📄 [Japanese version (日本語版)](./README_jp.md) — 全文日本語訳

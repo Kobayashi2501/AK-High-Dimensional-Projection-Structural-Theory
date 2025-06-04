@@ -7,6 +7,8 @@ AK-HDPST is a universal, categorical–topological framework for resolving compl
 v5.0 introduces Langlands-type functorial degeneration, motivic Ext-collapse, and AI-assisted persistent classification.  
 It integrates the complete proof strategy for **global regularity of the 3D incompressible Navier–Stokes equations** and expands to arithmetic, noncommutative, and mirror symmetry settings.
 
+> 📌 **Update**: AK-HDPST now also structurally reconstructs the known solution to **Hilbert’s 12th Problem for imaginary quadratic fields** (via Ext and PH collapse), validating its applicability to classical number-theoretic conjectures.
+
 ## 📌 Motivation
 > “Unsolvable problems may simply lack sufficient dimension.”
 
@@ -48,6 +50,9 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 
 - **🌊 Euler, SQG, MHD Equations**  
 - **🔢 Langlands Degeneration and Motive Collapse**  
+- **🔷 Hilbert’s 12th Problem (Imaginary Quadratic Case)**  
+  - Reconstructs \( K^{\mathrm{ab}} \) via PH collapse and Ext-finality  
+  - Includes `Hilbert12_AK.tex` and `Hilbert12_AK.pdf` in this repo
 - **🧬 Topological Learning in Neural Manifolds**  
 - **📊 Spectral Collapse in Information Dynamics**
 
@@ -57,7 +62,7 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 
 > If a system admits:
 > 1. Projection into MECE fiber structure,
-> 2. Topological decay: \( C(t) 	o 0, H(t) 	o 0 \),
+> 2. Topological decay: \( C(t) \to 0, H(t) \to 0 \),
 > 3. PH collapse in derived category (Extⁱ = 0),
 
 > then the system exhibits **global regularity and categorical resolution**.
@@ -72,6 +77,8 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 | `ak_projection_lemma_proofs_en_v5.0.pdf` | Compiled final document |
 | `ak_chapter_7_8_revised.tex` | Langlands + Motive + revised conclusion |
 | `ak_appendix_C_ai.tex` | Appendix C: AI persistent structure recognition |
+| `Hilbert12_AK.tex` | Structural proof of Hilbert’s 12th Problem (Imaginary Quadratic) |
+| `Hilbert12_AK.pdf` | Compiled document for Hilbert’s 12th via AK-HDPST |
 | [Navier–Stokes Global Regularity v5.0 (GitHub)](https://github.com/Kobayashi2501/Navier-Stokes-Global-Regularity) | Application to NSE regularity proof |
 | `pseudo_spectral_sim.py` | 3D pseudo-spectral velocity solver |
 | `fourier_decay.py` | Dyadic shell energy decay analyzer |
@@ -85,7 +92,7 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 - Persistent Homology in **Motivic and Langlands Categories**
 - Formal verification via **Lean/Coq**
 - Integration with **Topos Theory** and **Quantum Geometry**
-- Application to **Economic Topologies**, **Moduli Spaces**, and **Hilbert's 12th Problem**
+- Application to **Economic Topologies**, **Moduli Spaces**, and **Hilbert's 12th Problem (General Case)**
 - Neural encoders for **Ext-class Spectral Collapse Recognition**
 
 ---
@@ -114,4 +121,5 @@ We believe it serves both as a proof-level structure and as a universal prototyp
 
 ## 🌏 Other Languages
 
-- 📄 [Japanese version (日本語版)](./README_jp.md) — 全文日本語訳
+- 📄 [Japanese version (日本語版)](./README_jp.md) — 全文日本語訳 + 虚二次体のヒルベルト第12問題へのAK構成的証明も含む
+

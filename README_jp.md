@@ -101,7 +101,7 @@ AK-HDPSTでは、力学系や幾何的対象を圏論的・トポロジー的・
 
 ## 📨 著者・連絡先
 
-**小林 敦志（A. Kobayashi）**  
+**小林 篤史（A. Kobayashi）**  
 _ChatGPT Research Partnerと協働で理論構築_  
 📧 dollops2501@icloud.com
 

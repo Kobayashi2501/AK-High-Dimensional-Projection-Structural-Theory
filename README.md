@@ -56,8 +56,6 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 |------|-------------|
 | `ak_projection_lemma_proofs_en_v6.0.tex` | Full LaTeX source of AK-HDPST v6.0 |
 | `ak_projection_lemma_proofs_en_v6.0.pdf` | Compiled final document |
-| `ak_chapter_7_8_revised.tex` | Langlands + Motive + revised conclusion |
-| `ak_appendix_C_ai.tex` | Appendix C: AI persistent structure recognition |
 | `Reversing_Grothendieck_AK_Nakai.tex` | Proof of Nakai Conjecture via AK-HDPST |
 | `Reversing_Grothendieck_AK_Nakai.pdf` | Full compiled document |
 | `pseudo_spectral_sim.py` | 3D pseudo-spectral velocity solver |

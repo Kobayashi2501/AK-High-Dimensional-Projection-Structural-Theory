@@ -1,15 +1,12 @@
-# 🌐 AK High-Dimensional Projection Structural Theory (v5.0)
+# 🌐 AK High-Dimensional Projection Structural Theory (v6.0)
 
 ## ✨ Overview
 
-This repository presents **Version 5.0** of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)**.  
-AK-HDPST is a universal, categorical–topological framework for resolving complex mathematical structures by **lifting problems into structured high-dimensional spaces**.
+This repository presents the latest version of the **AK High-Dimensional Projection Structural Theory (AK-HDPST)** — a universal, categorical–topological framework for resolving complex mathematical structures by **lifting problems into structured high-dimensional spaces**.
 
-Version 5.0 integrates Langlands-type functorial degeneration, motivic Ext-collapse, and AI-assisted persistent classification.  
-It structurally resolves the global regularity of the 3D incompressible Navier–Stokes equations, reconstructs Hilbert’s 12th Problem (imaginary quadratic case), and now proves the Nakai Conjecture through categorical collapse.
+Version 6.0 expands the scope of v5.0 by refining categorical collapse techniques and integrating advanced degeneration theory. Most notably, it enables a complete structural resolution of **Hilbert’s 12th Problem**, including the previously unsolved **real quadratic case**, and **proves the Nakai Conjecture**.
 
-> 📌 **New**: AK-HDPST v5.0 structurally proves the **Nakai Conjecture**, reversing Grothendieck’s implication:  
-> **Finitely generated ring of differential operators ⇒ geometric smoothness**.
+> 📌 **New**: AK-HDPST v6.0 provides a structural, category-theoretic proof of the **Hilbert 12th Problem (imaginary and real quadratic cases)**.
 
 ---
 
@@ -38,14 +35,16 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 
 ## 🧪 Applications
 
-- **🌀 Navier–Stokes Global Regularity (v5.0)**  
+- **🌀 Navier–Stokes Global Regularity (v6.0)**  
 - **🌊 Euler, SQG, MHD Equations**  
 - **🔢 Langlands Degeneration and Motive Collapse**  
-- **🔷 Hilbert’s 12th Problem (Imaginary Quadratic Case)**  
-- **📐 Nakai Conjecture (New in v5.0)**  
+- **🔷 [Hilbert’s 12th Problem (Full Structural Proof)](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)**  
+  - Imaginary case proven via AK-sheaf degeneration  
+  - Real case proven via categorical Ext-collapse and PH-decay  
+  - No explicit modular function required — special functions are internally realized  
+- **📐 Nakai Conjecture (Extended)**  
   - Reverses Grothendieck’s implication  
   - Proven via Ext-finality and PH₁ triviality  
-  - See: `Reversing_Grothendieck_AK_Nakai.tex` + `.pdf`  
 - **🧬 Topological Learning in Neural Manifolds**  
 - **📊 Spectral Collapse in Information Dynamics**
 
@@ -55,14 +54,12 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 
 | File | Description |
 |------|-------------|
-| `ak_projection_lemma_proofs_en_v5.0.tex` | Full LaTeX source of AK-HDPST v5.0 |
-| `ak_projection_lemma_proofs_en_v5.0.pdf` | Compiled final document |
+| `ak_projection_lemma_proofs_en_v6.0.tex` | Full LaTeX source of AK-HDPST v6.0 |
+| `ak_projection_lemma_proofs_en_v6.0.pdf` | Compiled final document |
 | `ak_chapter_7_8_revised.tex` | Langlands + Motive + revised conclusion |
 | `ak_appendix_C_ai.tex` | Appendix C: AI persistent structure recognition |
 | `Reversing_Grothendieck_AK_Nakai.tex` | Proof of Nakai Conjecture via AK-HDPST |
 | `Reversing_Grothendieck_AK_Nakai.pdf` | Full compiled document |
-| `Hilbert12_AK.tex` | Structural proof of Hilbert’s 12th Problem |
-| `Hilbert12_AK.pdf` | Compiled Hilbert 12th document |
 | `pseudo_spectral_sim.py` | 3D pseudo-spectral velocity solver |
 | `fourier_decay.py` | Dyadic shell energy decay analyzer |
 | `ph_isomap.py` | Persistent homology on embedded orbits |
@@ -72,11 +69,11 @@ By projecting dynamics into categorical, topological, and spectral spaces, AK-HD
 
 ## 📝 arXiv Submission Statement
 
-AK-HDPST v5.0 unifies derived categories, algebraic topology, motivic degeneration, PDE regularity, and Ext-class collapse.  
-It proves the global regularity of 3D Navier–Stokes, reconstructs Hilbert’s 12th Problem, and structurally resolves the Nakai Conjecture, establishing it as a universal categorical resolution framework.
+AK-HDPST v6.0 unifies derived categories, algebraic topology, motivic degeneration, PDE regularity, and Ext-class collapse.  
+It proves the global regularity of 3D Navier–Stokes, structurally resolves the Hilbert 12th Problem (both imaginary and real quadratic cases), and proves the Nakai Conjecture, establishing it as a universal categorical resolution framework.
 
 > We submit this theory to arXiv under **math.CT**, **math.AG**, and **math.AP**.  
-> We believe it offers a new paradigm for structural resolution of classical conjectures.
+> We welcome collaboration and critical evaluation.
 
 ---
 
@@ -95,4 +92,3 @@ _Theory developed in collaboration with ChatGPT Research Partner_
 ## 🌏 Other Languages
 
 - 📄 [日本語版はこちら](./README_jp.md)
-

@@ -47,15 +47,18 @@ All steps are structurally verified in Appendix Z.
 
 ## 🧪 Applications
 
-- **🌀 [Navier–Stokes Global Regularity (v6.0)](https://github.com/Kobayashi2501/navier-stokes-global-regularity)**  
+- **🌀 [Navier–Stokes Global Regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)**  
   - Derived–PH collapse proves smoothness: Ext$^1$ = 0 ⇔ PH₁ = 0 ⇔ \( u(t) \in C^\infty \)  
+
 - **🔷 [Hilbert’s 12th Problem (Structural Proof)](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)**  
   - Imaginary case: AK-sheaf degeneration via modular unit orbit  
   - Real case: Ext-collapse induces internal abelianization  
   - No external modular functions needed — special functions are categorically realized  
+
 - **📐 Nakai Conjecture**  
   - Reverses Grothendieck’s implication: finite generation of D(V) ⇒ V is smooth  
   - Proven via Ext-finality and PH₁ collapse in AK-derived category  
+
 - **🔢 Langlands–Mirror–Trop Geometry**  
 - **📊 Persistent Homology for Learning Geometry in Neural Flows**  
 - **🌐 Categorical Collapse of Arithmetic and Motives**
@@ -69,7 +72,7 @@ All steps are structurally verified in Appendix Z.
 | `ak_projection_lemma_proofs_en_v7.0.tex` | LaTeX source of AK-HDPST v7.0 (main theory) |
 | `ak_projection_lemma_proofs_en_v7.0.pdf` | Compiled v7.0 document |
 | `Structural-Proof-of-Hilbert-12-AK-HDPST.pdf` | Hilbert 12th problem (full proof, v6.0) |
-| `Reversing_Grothendieck_Nakai_AK-HDPST.pdf` | Nakai Conjecture proof (Ext–PH framework) |
+| `Reversing_Grothendieck_Nakai_AK-HDPST.pdf` | Nakai Conjecture proof (Ext–PH framework, v5.0) |
 | `pseudo_spectral_sim.py` | 3D pseudo-spectral Navier–Stokes solver |
 | `fourier_decay.py` | Dyadic shell decay analyzer for energy collapse |
 | `ph_isomap.py` | Isomap + PH₁ analyzer for orbit embeddings |
@@ -91,26 +94,18 @@ All steps are structurally verified in Appendix Z.
 
 ---
 
-## 📝 arXiv Submission Statement
+## 📝 arXiv Submission Status
 
-AK-HDPST v7.0 unifies derived category theory, topological persistence, Ext collapse, and tropical degeneration into a single structural proof framework.
+AK-HDPST v7.0 has not yet been submitted to arXiv. We are currently seeking academic recommendation and peer commentary.
 
-It provides:
+We aim to submit under the following categories:
 
-- A 7-step analytic–topological–categorical collapse logic
-- Resolution of 3D Navier–Stokes global regularity  
-  → [GitHub Link](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
-- Full structural proof of Hilbert’s 12th problem (imaginary & real cases)  
-  → [GitHub Link](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
-- Proof of Nakai Conjecture by reversing Grothendieck’s implication
-- Extensions toward arithmetic motives, mirror symmetry, and neural geometry
+- **math.CT** (Category Theory)
+- **math.AG** (Algebraic Geometry)
+- **math.AP** (Analysis of PDEs)
+- **math.NT** (Number Theory)
 
-> We submit this theory to arXiv under **math.CT**, **math.AG**, **math.AP**, and **math.NT**.  
-> We invite peer commentary, verification, and application.
-
----
-
-*“Structure emerges when viewed from the right dimension.”*
+> If you are an expert in any of these areas and willing to provide feedback or support for submission, please contact us.
 
 ---
 
@@ -125,3 +120,7 @@ _Theory developed in collaboration with ChatGPT Research Partner_
 ## 🌏 Other Languages
 
 - 📄 [日本語版はこちら](./README_jp.md)
+
+---
+
+> *“Structure emerges when viewed from the right dimension.”*

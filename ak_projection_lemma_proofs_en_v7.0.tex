@@ -1570,160 +1570,107 @@ ICM 1994.
 % Appendix H: Ext Collapse and Internal Motive Semantics (Fully Reinforced)
 % ===========================
 
-% ===========================
-% Appendix H: Ext Collapse and Internal Motive Semantics (H⁺)
-% ===========================
+\section*{Appendix H: Ext Collapse and Internal Motive Semantics}
+\addcontentsline{toc}{section}{Appendix H: Ext Collapse and Internal Motive Semantics}
 
-\section*{Appendix H: Ext Collapse and Internal Motive Semantics (H⁺)}
-\addcontentsline{toc}{section}{Appendix H: Ext Collapse and Internal Motive Semantics (H⁺)}
+\subsection*{H.1 Purpose and Background}
 
-This appendix provides the semantic and motivic foundation of the AK Collapse framework.  
-Where earlier appendices focused on geometric and topological structures, here we explain:
+This appendix provides the \textbf{semantic foundation} of AK collapse theory.  
+Where earlier appendices focus on geometric and topological structures, here we investigate:
 
 \begin{center}
-\textit{Why does Ext$^1 = 0$ imply structural regularity, abelianization, and motive triviality?}
+\textit{Why does Ext$^1 = 0$ imply structural regularity?}  
 \end{center}
 
-We unify perspectives from derived categories, obstruction theory, motives, and higher topos theory.
+Our answer proceeds via obstruction theory, motive purity, and derived category trivialization.
 
 ---
 
-\subsection*{H.1 Ext as Obstruction Measure}
+\subsection*{H.2 Ext as Obstruction Measure}
 
-Let $\mathcal{F}^\bullet \in \mathcal{D}(\mathcal{X})$ be a derived object. Then:
+Let $\mathcal{F}^\bullet$ be an object in a derived category $\mathcal{D}(\mathcal{X})$.  
+Then:
+
 \[
-\mathrm{Ext}^1(Q, \mathcal{F}^\bullet) \neq 0 
-\quad \Rightarrow \quad \text{nontrivial extension class} 
-\quad \Rightarrow \quad \text{structural instability}.
+\mathrm{Ext}^1(Q, \mathcal{F}^\bullet) \neq 0 \quad \Leftrightarrow \quad 
+\text{nontrivial extension class} \Rightarrow \text{structural instability}.
 \]
 
-Thus, Ext$^1 = 0$ encodes analytic and categorical smoothness.
+Hence, Ext$^1 = 0$ serves as a proxy for smoothness.
 
 ---
 
-\subsection*{H.2 Higher Ext and Obstruction Triviality}
+\subsection*{H.3 Ext$^2$ and Higher Obstruction Vanishing}
 
 \begin{definition}[Obstruction Class in Ext$^2$]
-Obstructions to lifting quasi-isomorphisms are classified by:
+The obstruction to lifting a homotopy trivialization of $\mathcal{F}^\bullet$ to an actual quasi-isomorphism lies in:
 \[
 \mathrm{Ext}^2(Q, \mathcal{F}^\bullet).
 \]
 \end{definition}
 
-Full collapse requires:
+Thus, full structural triviality requires:
 \[
-\mathrm{Ext}^i(Q, \mathcal{F}^\bullet) = 0 \quad \forall i>0.
+\mathrm{Ext}^i(Q, \mathcal{F}^\bullet) = 0, \quad \forall i > 0.
 \]
 
 ---
 
-\subsection*{H.3 dg-Enhancement and Homotopic Collapse}
+\subsection*{H.4 dg-Enhancement and Homotopic Purity}
 
 Let $\mathcal{D}_{dg}(\mathcal{X})$ denote the dg-enhanced derived category.  
-Then Ext-groups represent homotopy classes in this enhancement:
-
+Then Ext$^i$ groups correspond to homotopy classes in this dg setting.  
+Trivialization:
 \[
-\mathcal{F}^\bullet \simeq Q \text{ in } \mathcal{D}_{dg} 
-\quad \Leftrightarrow \quad \mathrm{Ext}^i = 0 \quad \forall i > 0.
+\mathcal{F}^\bullet \simeq Q
+\quad \text{in } \mathcal{D}_{dg} \Longleftrightarrow \mathrm{Ext}^i = 0, \forall i>0.
 \]
+
+This embeds the semantic collapse within a homotopy-invariant framework.
 
 ---
 
-\subsection*{H.4 Semantic Collapse Equivalence}
+\subsection*{H.5 Internal vs. External Collapse}
 
-\begin{definition}[Semantic Collapse]
-We say $\mathcal{F}^\bullet$ is \emph{semantically collapsed} if:
+- \textbf{External Collapse}: PH$_k = 0$ (topological barcode vanishing),
+- \textbf{Internal Collapse}: Ext$^1 = 0$, Ext$^2 = 0$ (derived triviality).
+
+\begin{definition}[Semantic Collapse Equivalence]
+An object $\mathcal{F}^\bullet$ is \emph{semantically collapsed} if:
 \[
-\mathcal{F}^\bullet \simeq Q \quad \text{and} \quad 
-\mathrm{Ext}^i(Q, \mathcal{F}^\bullet) = 0 \quad \forall i>0.
+\mathcal{F}^\bullet \simeq Q \quad \text{and} \quad \mathrm{Ext}^i(Q, \mathcal{F}^\bullet) = 0 \quad \forall i>0.
 \]
 \end{definition}
 
 ---
 
-\subsection*{H.5 Motivic Interpretation and Purity Collapse}
+\subsection*{H.6 Motivic Interpretation and Purity Collapse}
 
-In motivic cohomology, a pure motive $M$ satisfies:
+In motivic cohomology, a pure motive $M$ corresponds to:
 \[
-\mathrm{Ext}^i(M, M') = 0 \quad (i>0) \text{ if weights differ}.
+\mathrm{Ext}^i(M, M') = 0 \quad \text{for } i>0,
 \]
+when $M'$ is of strictly different weight. Thus purity implies semantically atomic structure.
 
-Degeneration $M(X_t) \to M(\mathrm{pt})$ implies:
 \[
-\mathrm{Ext}^1 = 0 \quad \Rightarrow \quad M \text{ becomes trivial.}
+M(X_t) \to M(\mathrm{pt}) \quad \text{(under degeneration)} \quad \Rightarrow \quad \mathrm{Ext}^1 = 0.
 \]
 
 ---
 
-\subsection*{H.6 ∞-Topos and Homotopical Triviality}
+\subsection*{H.7 ∞-Topos and Internal Semantics}
 
-Ext$^1$ vanishing implies internal contractibility:
+Collapse equivalence can be extended to $\infty$-topos via:
 
 \[
-\mathrm{Ext}^1 = 0 
-\quad \Rightarrow \quad 
-\text{terminal object in stable } \infty\text{-topos}.
+\text{Ext}^1 = 0 \quad \Rightarrow \quad \text{contractibility in internal homotopy type}.
 \]
 
-Thus collapse is equivalent to homotopical trivialization in internal logic.
+The collapsed object becomes the terminal object in a stable ∞-topos.
 
 ---
 
-\subsection*{H.7 Real Field Case: Internal Abelianization}
-
-In the real field case, no external modular functions exist.  
-We construct abelian extensions via internal Ext collapse.
-
-\begin{definition}[Internal Abelian Sheaf Collapse]
-Let $\mathcal{F}$ be a real-analytic sheaf on $X_\mathbb{R}$. Define:
-\[
-\mathcal{C}_\mathrm{ab} : 
-\mathrm{Ext}^1_{\mathcal{D}(X_\mathbb{R})}(\mathbb{Q}, \mathcal{F}) 
-\longrightarrow 0.
-\]
-\end{definition}
-
-\begin{theorem}[Internal Real Abelianization]
-If $\mathrm{Ext}^1 = 0$ under functorial degeneration of loop structures, then:
-\[
-K^\mathrm{ab}_\mathbb{R} \subseteq \widehat{\mathcal{F}}^{\mathrm{triv}},
-\]
-where $\widehat{\mathcal{F}}^{\mathrm{triv}}$ is the collapsed real-periodic category.
-\end{theorem}
-
----
-
-\subsection*{H.8 Loop Collapse and Periodic Topology}
-
-\begin{definition}[Real Loop Collapse Functor]
-Let $\Omega(X_\mathbb{R})$ be the based loop space.  
-We define:
-\[
-\mathcal{F}_\mathrm{loop} : 
-\pi_1(\Omega(X_\mathbb{R})) \to 
-\mathrm{Ext}^1(\mathbb{Q}, \mathcal{F}).
-\]
-\end{definition}
-
-\begin{theorem}[Loop Collapse Implies Abelianity]
-If $\pi_1(\Omega)$ degenerates, then:
-\[
-\mathcal{F} \to \widehat{\mathcal{F}}^{\mathrm{triv}} \Rightarrow 
-K_\mathbb{R}^\mathrm{ab} \text{ is internally realized.}
-\]
-\end{theorem}
-
----
-
-\subsection*{H.9 Motivic Self-Equivalence and Collapse Flow}
-
-\begin{remark}[Self-Equivalence Collapse]
-If $\phi : \mathcal{F} \to \mathcal{F}$ is periodic (motivic Frobenius),  
-then Ext$^1 = 0$ implies:
-\[
-\phi_* \Rightarrow \mathrm{id}_{\widehat{\mathcal{F}}^{\mathrm{triv}}}.
-\]
-\end{remark}
+\subsection*{H.8 Semantic Collapse Flow}
 
 \begin{center}
 \begin{tikzcd}[column sep=large, row sep=large]
@@ -1732,37 +1679,24 @@ PH_k = 0 \arrow[r] &
 \mathrm{Ext}^1 = 0 \arrow[r] &
 \mathcal{F}^\bullet \simeq Q \arrow[r] &
 M(\mathcal{F}) \simeq M(\mathrm{pt}) \arrow[r] &
-\text{Terminal in } \infty\text{-Topos}
+\text{Trivial Object in } \infty\text{-Topos}
 \end{tikzcd}
 \end{center}
 
 ---
 
-\subsection*{H.10 Connection to Mirror–Langlands–Trop (Appendix K)}
+\subsection*{H.9 Implications for AK Collapse}
 
-\begin{remark}[Mirror–Langlands Bridge]
-Real-field collapse corresponds to a restricted case of  
-the Mirror–Langlands–Trop diagram. Thus:
-\[
-\mathcal{C}_\mathrm{ab} \subset \mathcal{D}_{\mathrm{Lang}}.
-\]
-\end{remark}
+Ext-vanishing encodes collapse not just geometrically, but also:
+- categorically (via derived triviality),
+- motivically (via purity),
+- homotopically (via ∞-topos structure).
 
----
-
-\subsection*{H.11 Summary}
-
-Ext-vanishing encodes collapse at multiple semantic layers:
-- Categorically (derived triviality)
-- Motivically (purity collapse)
-- Topologically (loop degeneration)
-- Homotopically (∞-topos finality)
-
-Hence, in AK theory, **Collapse means the semantic termination of structure**.
+Hence, Collapse is semantically the \textbf{end of complexity}.
 
 ---
 
-\subsection*{H.12 References}
+\subsection*{H.10 References}
 
 \begin{thebibliography}{9}
 

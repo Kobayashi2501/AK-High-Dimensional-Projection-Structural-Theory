@@ -1,133 +1,129 @@
-# 🌐 AK 高次元射影構造理論（AK-HDPST v7.0）
+# 🌐 AK 高次元射影構造理論（AK-HDPST）v7.0
 
 ## ✨ 概要
 
-本リポジトリは、**AK 高次元射影構造理論（AK-HDPST）Version 7.0** を収録しています。  
-本理論は、複雑な数理構造を **構造化された高次元空間に射影** することで解決を図る、**普遍的かつ圏論的・トポロジー的フレームワーク**です。
+本リポジトリは、複雑な数学的構造を**構造化された高次元空間へ射影することにより解決する**ための普遍的・圏論的・トポロジカル枠組みである  
+**AK 高次元射影構造理論（AK High-Dimensional Projection Structural Theory, AK-HDPST）v7.0** を公開しています。
 
-Version 7.0 では、v6.0 に比べて以下を強化しました：
+v7.0 では、Ext–PH–Trop崩壊同値の完成、VMHS退化の導入、導来幾何・トポロジー退化・モチーフ対応を網羅する7段階のアペンディックス設計を実現しました。
 
-- **Ext–PH–Trop の崩壊同値原理の完全定式化**  
-- **VMHS退化とLanglands–Mirror–Tropical 統合の補強**  
-- **7段階アペンディクス補強ロードマップ**の導入（構造補強と応用拡張）
-
-> 📌 **アップデート**：v7.0 により、ヒルベルト第12問題（虚数・実2次体）と中井予想の完全構造的証明が完了しました。
+> 📌 **更新情報**：Ext–PH–滑らかさ の崩壊ループが完全に形式化され、特殊関数の内部実現が可能となったことで、**ヒルベルト第12問題**と**中井予想**の構造的証明が完結しました。
 
 ---
 
-## 📌 モチベーション
+## 📌 動機
 
-> 「解けない問題とは、単に“次元”が足りていないだけかもしれない。」
+> “解けない問題は、単に次元が足りないのかもしれない。”
 
-AK-HDPSTは、解析的・代数的・幾何的な複雑性を、**圏論的／スペクトル的な高次元構造**に射影します。  
-これにより、現象は**MECE**分解（漏れなくダブりなく）され、PHの崩壊やExt群の消滅、トロピカル退化によって構造が明瞭化され、証明可能性へと接続されます。
+AK-HDPSTは、カオス的または閉塞的な力学系を高次元の圏的・スペクトル的空間に射影し、**MECE**なクラスターに分解します。  
+これらのクラスターは、持続的ホモロジー・Ext群の消滅・トロピカル退化を通じて崩壊し、解析的・幾何学的な制御が可能になります。
 
 ---
 
-## 🧠 Collapse 構造（7ステップ）
+## 🧠 証明アーキテクチャ（7ステップ構造）
 
-| ステップ | 機能 |
+| ステップ | 役割 |
 |----------|------|
-| 0 | モチベーション射影とバーコード構造の導入 |
-| 1 | PH₁の安定性とSobolev連続性 |
-| 2 | Lyapunov型エネルギー関数 \( C(t) \) による崩壊 |
-| 3 | 神経簡約とホモトピー単純性 |
-| 4 | Ext–PH双対構造と崩壊図式の構成 |
-| 5 | VMHSによるトポロジー退化の追跡 |
-| 6 | フーリエ空間でのdyadicスペクトル減衰 |
-| 7 | Ext$^1$ ⇔ PH₁ ⇔ 正則性 による圏的崩壊の証明 |
+| 0 | 動機付けとバーコード定義 |
+| 1 | Sobolev連続性によるPH₁安定性 |
+| 2 | トポロジー汎関数 \( C(t) \) によるエネルギー崩壊 |
+| 3 | 神経定理的単純化と写像の単射性 |
+| 4 | Ext–PH対応（崩壊図式） |
+| 5 | VMHS退化によるトポロジー単純化 |
+| 6 | フーリエ殻減衰によるスペクトルエネルギー崩壊 |
+| 7 | Ext$^1$ ⇔ PH₁ ⇔ 滑らかさ の圏論的崩壊構造の実現 |
 
-すべてのステップは Appendix Z にて構造的に検証済みです。
-
----
-
-## 🔩 アペンディクス構成（v7.0強化）
-
-| 区分 | 内容 | 該当アペンディクス |
-|------|------|---------------------|
-| 🧱 証明の骨格 | Collapse原理・図式・公理体系 | A, B, C, G, J, Z, Final |
-| 🔧 補強要素 | VMHS・Langlands–Trop・幾何的意味論 | E, H, I, I+, S, V, W, Y |
-| 🌱 拡張提案 | トロピカル分類・周期対応・AI応用 | D, F, K, L, M, N, O–U, Q, X |
+※ 全構造は Appendix Z にて検証・一覧化されています。
 
 ---
 
-## 🧪 応用例
+## 🔩 アペンディックス整理（v7.0 拡張構成）
 
-- **🌀 [ナビエ–ストークス方程式の全球正則性 (v6.0)](https://github.com/Kobayashi2501/navier-stokes-global-regularity)**  
-  - Collapse原理による正則性導出：Ext$^1$ = 0 ⇔ PH₁ = 0 ⇔ \( u(t) \in C^\infty \)  
+| カテゴリ | 内容 | 該当アペンディックス |
+|----------|------|--------------------|
+| 🧱 証明の骨格 | 公理、Ext–PH–滑らかさの論理構造、図式 | A, B, C, G, J, Z, Final |
+| 🔧 補強パート | VMHS・Langlands–Mirror–Tropの幾何統合 | E, H, I, I+, S, V, W, Y |
+| 🌱 拡張パート | Trop分類、周期構造、AI分類補助 | D, F, K, L, M, N, O–U, Q, X |
+
+---
+
+## 🧪 適用領域
+
+- **🌀 [Navier–Stokes 方程式の全球正則性](https://github.com/Kobayashi2501/navier-stokes-global-regularity)**  
+  - Ext$^1$ = 0 ⇔ PH₁ = 0 ⇔ \( u(t) \in C^\infty \) の崩壊論理により滑らかさを証明  
+
 - **🔷 [ヒルベルト第12問題（構造的証明）](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)**  
-  - 虚数体：AK-sheafの退化でGalois構造回収  
-  - 実2次体：Extの消滅によりアーベル化構造を内部実現  
-  - モジュラー関数は外部に要らず、**特殊関数は内在的に出現**  
-- **📐 中井予想（Grothendieckの逆）**  
-  - D(V)有限生成 ⇒ Ext$^1$ = 0 ⇒ PH₁ = 0 ⇒ 幾何的滑らかさ  
-- **🔢 Langlands–Mirror–Trop 幾何構造**  
-- **📊 神経幾何における持続的ホモロジー学習**  
-- **🌐 動機と数論幾何の圏的Collapse**
+  - 虚二次体：AKシーフの軌道によるアーベル拡大の再構成  
+  - 実二次体：Ext崩壊とPH消滅によるアーベル化  
+  - 特殊関数は外部導入不要。AK内部構造で機能的に内包  
+
+- **📐 中井予想の証明**  
+  - Grothendieckの逆命題（微分作用素環の有限生成 ⇒ 多様体の滑らかさ）を  
+    Ext消滅 + PH₁消滅により構造的に証明  
+
+- **🔢 Langlands–Mirror–Trop 幾何統合**  
+- **📊 神経ネットワーク力学における幾何学学習とPH₁分類**  
+- **🌐 算術的モチーフの圏的崩壊と分類**
 
 ---
 
-## 📁 リポジトリ構成
+## 📁 ファイル構成
 
-| ファイル | 説明 |
-|----------|------|
-| `ak_projection_lemma_proofs_en_v7.0.tex` | AK-HDPST v7.0 のLaTeXソース |
-| `ak_projection_lemma_proofs_en_v7.0.pdf` | コンパイル済みv7.0理論文書 |
+| ファイル名 | 内容 |
+|------------|------|
+| `ak_projection_lemma_proofs_en_v7.0.tex` | AK-HDPST v7.0 本文（LaTeX） |
+| `ak_projection_lemma_proofs_en_v7.0.pdf` | AK-HDPST v7.0 本文PDF |
 | `Structural-Proof-of-Hilbert-12-AK-HDPST.pdf` | ヒルベルト第12問題の証明（v6.0） |
-| `Reversing_Grothendieck_Nakai_AK-HDPST.pdf` | 中井予想の証明文書 |
-| `pseudo_spectral_sim.py` | ナビエ–ストークス用の擬スペクトル解法コード |
-| `fourier_decay.py` | フーリエ空間でのエネルギー崩壊解析 |
-| `ph_isomap.py` | Isomap + PH₁ による軌道構造解析 |
-| `README.md` | 英語版 ReadMe |
-| `README_jp.md` | 本ドキュメント（日本語版） |
+| `Reversing_Grothendieck_Nakai_AK-HDPST.pdf` | 中井予想の構造的証明（v5.0） |
+| `pseudo_spectral_sim.py` | 3次元非圧縮Navier–Stokes解法（疑似スペクトル法） |
+| `fourier_decay.py` | フーリエ殻エネルギー崩壊解析 |
+| `ph_isomap.py` | Isomap + PH₁解析による軌道埋め込み |
+| `README.md` | 英語版README |
 
 ---
 
-## 📜 Collapse原理（Appendix Z.1 抜粋）
+## 📜 Appendix Z.1：AK公理と崩壊原理
 
 | 公理 | 内容 |
 |------|------|
-| A1 | 高次元射影によりMECE分解が保存される |
-| A2 | PH₁ の崩壊 ⇒ Sobolev局所正則性の確保 |
-| A3 | Ext$^1$ = 0 ⇔ 導出障害の消滅（滑らかさ） |
-| A4 | 圏的退化の関手性がバーコード崩壊を安定化 |
-| A5 | トポロジーエネルギーとExt構造の相互可逆性 |
-| A6 | Langlands–Mirror–Trop 構造はExt完備 |
+| A1 | 高次元射影はMECE分解を保存する |
+| A2 | PH₁の崩壊は局所的Sobolev正則性を意味する |
+| A3 | Ext$^1$の消滅は障害類の消失を意味する |
+| A4 | 関手的退化はバーコードの安定性を保つ |
+| A5 | トポロジーエネルギーとExtは相互に復元可能 |
+| A6 | Langlands–Mirror–Trop崩壊はExt完全性を保証 |
+| C1–C3 | AK崩壊に関する構造的単純化公理群 |
 
 ---
 
-## 📝 arXiv 投稿に向けた声明
+## 📝 arXiv投稿状況
 
-AK-HDPST v7.0 は、導来圏・トポロジー・Ext崩壊・トロピカル退化を統合し、  
-**構造的証明の普遍的フレームワーク**を提供します。
+本理論は **arXiv未投稿** です。  
+現在、査読前の段階として **専門家の推薦・コメントを募集中** です。
 
-主な成果：
+今後の投稿予定分野：
 
-- Collapse論理（解析×トポロジー×圏論）の7ステップ構造
-- Navier–Stokes方程式の全球正則性の構造的証明  
-  → [GitHubリンク](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
-- ヒルベルト第12問題（虚数体＋実2次体）の完全証明  
-  → [GitHubリンク](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
-- 中井予想の証明（Grothendieckの逆を実現）
-- 動機・Langlands対応・AI分類支援・神経空間学習への応用
+- **math.CT**（圏論）
+- **math.AG**（代数幾何）
+- **math.AP**（偏微分方程式）
+- **math.NT**（数論）
 
-> 投稿予定：**math.CT**, **math.AG**, **math.AP**, **math.NT**  
-> コメント・検証・理論応用を広く歓迎します。
+> 推薦・コメント・共同研究にご関心のある方は、ぜひご連絡ください。
 
 ---
 
-> **「構造とは、正しい次元から眺めたときに現れる」**
-
----
-
-## 📨 著者連絡先
+## 📨 著者と連絡先
 
 **A. Kobayashi**  
-（ChatGPT Research Partner との協同による理論開発）  
+_ChatGPT Research Partnerとの共著により構築_  
 📧 dollops2501@icloud.com
 
 ---
 
-## 🌐 他言語版
+## 🌐 他言語
 
-- 📄 [English README here](./README.md)
+- 📄 [English version here](./README.md)
+
+---
+
+> *「次元を変えれば、構造が見える。」*

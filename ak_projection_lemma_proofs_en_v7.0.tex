@@ -886,44 +886,63 @@ Energy dissipation implies collapse of critical sublevel structures, which cause
 Hence the total barcode mass $C(t)$ decays exponentially.
 \end{proof}
 
-\subsection*{C.2 Ext Interpretation and Dual Collapse Structure}
+\subsection*{C.2 Ext Interpretation and Persistent Collapse Dynamics}
 
-Let $F^\bullet_i$ denote the filtered persistence module associated with the $i$-th barcode in $PH_k(t)$.  
-We now reinterpret barcodes categorically.
+Let \( F^\bullet_i \) denote the filtered persistence module associated with the \( i \)-th barcode interval \( [b_i, d_i] \) in \( PH_k(t) \).  
+We now reinterpret persistence barcodes categorically via Ext groups.
 
 \begin{definition}[Ext Group of a Barcode Module]
-Let $\mathcal{D}^b$ denote the bounded derived category of filtered sheaves on $X$.  
+Let \( \mathcal{D}^b \) denote the bounded derived category of filtered sheaves on \( X \).  
 Then:
 \[
-[b_i, d_i] \in PH_k(t) \quad \Longleftrightarrow \quad \mathrm{Ext}^1_{\mathcal{D}^b}(Q, F^\bullet_i) \neq 0,
+[b_i, d_i] \in PH_k(t) 
+\quad \Longleftrightarrow \quad 
+\mathrm{Ext}^1_{\mathcal{D}^b}(Q, F^\bullet_i) \neq 0,
 \]
-where $Q$ is the categorical unit.
+where \( Q \) denotes the categorical unit object.
 \end{definition}
 
 \begin{remark}
-This correspondence arises from interpreting persistent modules as chain complexes with filtration, and mapping exactness failure to derived Ext-classes.
+This correspondence arises from interpreting persistence modules as filtered chain complexes,  
+with the failure of exactness along the filtration inducing nontrivial extension classes.
 \end{remark}
 
-\begin{theorem}[Collapse Duality: Energy, PH, and Ext]
-Let $u(t) \in H^1$, with $C(t)$, $PH_k(t)$, and associated modules $F^\bullet_i$.  
-Then the following are equivalent:
+---
+
+\paragraph{Persistent Energy and Collapse.}
+
+The topological energy of the flow is quantified by the persistent energy functional:
 \[
-C(t) = 0
-\quad \Longleftrightarrow \quad
-PH_k(t) = 0
-\quad \Longleftrightarrow \quad
+C(t) := \sum_{i} \mathrm{pers}_i(t)^2,
+\]
+where \( \mathrm{pers}_i(t) := d_i - b_i \) is the lifespan of the \( i \)-th barcode generator in \( PH_k(t) \).  
+This serves as a global topological invariant reflecting loop-like structures or voids in the fluid at time \( t \).
+
+\begin{theorem}[Collapse Duality: Energy, PH, and Ext]
+Let \( u(t) \in H^1(\mathbb{R}^3) \) with associated barcode modules \( F^\bullet_i \). Then the following are equivalent:
+\[
+C(t) = 0 
+\quad \Longleftrightarrow \quad 
+PH_k(t) = 0 
+\quad \Longleftrightarrow \quad 
 \forall i,\; \mathrm{Ext}^1(Q, F^\bullet_i) = 0.
 \]
 \end{theorem}
 
-\begin{corollary}[Collapse Implies Regularity]
-Under the AK framework, if $C(t) \to 0$, then:
+\begin{corollary}[Topological Collapse Implies Smoothness]
+Under the AK framework, if \( C(t) \to 0 \) as \( t \to \infty \), then:
 \[
-\text{All local Ext obstructions vanish} \;\Rightarrow\; \text{Categorical structure is trivial} \;\Rightarrow\; u(t) \in C^\infty.
+\text{All local Ext obstructions vanish} 
+\;\Rightarrow\; 
+\text{Categorical structure is trivial} 
+\;\Rightarrow\; 
+u(t) \in C^\infty(\mathbb{R}^3).
 \]
 \end{corollary}
 
-\subsection*{C.3 Collapse Flow Diagram}
+---
+
+\paragraph{Diagrammatic View: Persistent Collapse Flow}
 
 \begin{center}
 \begin{tikzcd}[row sep=large, column sep=huge]
@@ -931,25 +950,108 @@ u(t) \in H^1 \arrow[r, "|\cdot|"] \arrow[d, "\nabla \times u" left] &
 f(x,t) := |u(x,t)| \arrow[r, "Sublevel Sets"] &
 X_r(t) \arrow[r, "PH_k"] \arrow[dr, dashed, "F^\bullet_i"] &
 PH_k(t) \arrow[d, "\text{pers}_i(t)"] \\
-\text{Vorticity} \; \omega \arrow[rrr, swap, "C(t) = \sum_i \text{pers}_i"] &&
+\text{Vorticity} \; \omega \arrow[rrr, swap, "C(t) = \sum_i \text{pers}_i^2(t)"] &&
 & \mathrm{Ext}^1(Q, F^\bullet_i)
 \end{tikzcd}
 \end{center}
 
-\paragraph{Note on Spectral Collapse (A7)}
-The energy contained in dyadic shells \( E_j(t) := \sum_{|k| \sim 2^j} |\widehat{u}(k,t)|^2 \)  
-quantifies the distribution of energy across scales.  
-The collapse of \( E_j(t) \to 0 \) as \( j \to \infty \) indicates the disappearance of high-frequency structures,  
-reflecting topological simplification in the flow.  
+\paragraph{Interpretation.}
+This diagram reveals the structural flow from analytic function spaces to categorical obstructions:  
+topological patterns in the fluid induce barcodes; barcodes carry energy \( \text{pers}^2 \);  
+these represent Ext-classes in the derived category, whose collapse signals analytic smoothness.
 
-Under the AK framework, this spectral decay signals the elimination of internal obstruction classes  
-within the derived barcode sheaf \( \mathcal{F}_t \).  
-Formally, this gives:
+---
+
+\paragraph{Supplementary Note: Spectral Collapse and Ext Triviality}
+
+If the dyadic shell energies \( E_j(t) := \sum_{|k| \sim 2^j} |\widehat{u}(k,t)|^2 \) decay as \( j \to \infty \),  
+then all high-frequency obstructions vanish. Formally:
 \[
-\lim_{j \to \infty} E_j(t) = 0 \quad \Rightarrow \quad \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0.
+\lim_{j \to \infty} E_j(t) = 0 
+\quad \Rightarrow \quad 
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0,
 \]
+where \( \mathcal{F}_t \) denotes the total barcode sheaf at time \( t \).  
+This is codified in Spectral Collapse Axiom (A7) in Appendix~Z.
 
-This forms the analytic–categorical essence of the Spectral Collapse Axiom (A7) in Appendix~Z.
+
+
+\subsection*{C.3 Spectral Collapse and Ext-Class Vanishing}
+
+To complement the persistent topology view in C.2, we now examine the collapse of spectral energy across dyadic scales and its derived categorical interpretation.
+
+\paragraph{Spectral Energy Decay.}
+Let the shell-wise energy be defined as:
+\[
+E_j(t) := \sum_{|k| \sim 2^j} |\widehat{u}(k,t)|^2,
+\]
+where \( \widehat{u}(k,t) \) is the Fourier transform of \( u(x,t) \).  
+Then \( E_j(t) \) captures the energy localized at frequency scale \( 2^j \).  
+
+---
+
+\paragraph{Spectral Collapse Principle.}
+If:
+\[
+\lim_{j \to \infty} E_j(t) = 0, \quad \forall t > T_0,
+\]
+then all high-frequency content has dissipated.  
+Topologically, this corresponds to the disappearance of fine-scale loops in \( PH_k \);  
+categorically, it implies that:
+\[
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0,
+\]
+where \( \mathcal{F}_t \) denotes the barcode sheaf at time \( t \), viewed as an object in \( D^b(\mathsf{Filt}) \).
+
+\begin{lemma}[Spectral–Ext Correspondence]
+If the dyadic shell energy \( E_j(t) \to 0 \) as \( j \to \infty \), then:
+\[
+\lim_{j \to \infty} E_j(t) = 0 
+\quad \Rightarrow \quad 
+PH_k(t) = 0 
+\quad \Rightarrow \quad 
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0.
+\]
+\end{lemma}
+
+---
+
+\paragraph{Spectral Collapse Flow Diagram.}
+
+\begin{center}
+\begin{tikzcd}[row sep=large, column sep=huge]
+u(t) \in H^1 \arrow[r, "\mathcal{F}"] \arrow[d, swap, "u \mapsto \widehat{u}(k)"] &
+\text{Sublevel Topology} \arrow[r, "PH_k"] &
+\mathcal{F}_t \in D^b(\mathsf{Filt}) \arrow[d, "\mathrm{Ext}^1(Q,-)"] \\
+\text{Fourier Modes} \arrow[rr, "\lim_{j \to \infty} E_j(t) = 0"] &&
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0
+\end{tikzcd}
+\end{center}
+
+---
+
+\paragraph{Spectral Collapse Axiom (A7).}
+We formalize this as:
+
+\begin{quote}
+\textbf{Axiom A7 (Spectral Decay Collapse)}  
+If the energy contained in dyadic shells decays as \( j \to \infty \),  
+then the derived Ext-classes vanish, signifying collapse of internal topological and categorical complexity:
+\[
+\lim_{j \to \infty} E_j(t) = 0 
+\quad \Rightarrow \quad 
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0.
+\]
+\textit{[See also Appendix~Z.1, A7; Step 6; C.2 collapse duality]}
+\end{quote}
+
+---
+
+\paragraph{Interpretation.}
+Spectral decay ensures the absence of singularities driven by high-frequency instabilities.  
+In the AK framework, it provides analytic justification for categorical collapse.  
+Together with persistent energy \( C(t) \to 0 \), this spectral condition completes the dual pathway toward smoothness.
+
 
 
 \subsection*{C.4 Physical and Geometric Interpretation}
@@ -2210,7 +2312,29 @@ In ontology, it reflects a space whose generative properties have reached minima
 
 ---
 
-\subsection*{J.8 References}
+\subsection*{J.8 Categorical Collapse and Obstruction Propagation}
+
+\begin{center}
+\begin{tikzcd}[row sep=large, column sep=huge]
+\text{Topological Obstruction} \arrow[r, "PH_k \neq 0"] &
+PH_k(t) \arrow[r, "TDA Simplification"] &
+PH_k(t) = 0 \arrow[r, "Ext-Obstruction Collapse"] &
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \arrow[r, "Motive Collapse"] &
+\text{Geometric Simplicity} \arrow[r, "\infty\text{-Topos Collapse}"] &
+\text{Analytic Smoothness}
+\end{tikzcd}
+\end{center}
+
+\paragraph{Interpretation.}
+This diagram expresses the propagation of collapse across the AK hierarchy—from persistent topological obstructions to categorical vanishing and finally analytic regularity.
+Each arrow represents a structural simplification step validated by axioms A1–A7 and collapse equivalence theorems from Step 7.
+
+\paragraph{Reference.}
+See also Appendix~Z.3 for logical alignment of appendix progression.
+
+---
+
+\subsection*{J.9 References}
 
 \begin{thebibliography}{9}
 
@@ -2735,21 +2859,19 @@ A2 & Collapse of persistent topology implies local analytic control \quad [Step 
 A3 & Derived Ext-vanishing implies vanishing obstruction class \quad [Appendix G] \\
 A4 & Functorial degeneration stabilizes barcode collapse \quad [Appendix H] \\
 A5 & Topological energy and Ext are mutually recoverable \quad [Appendix C, I] \\
-\textbf{A6} & \textbf{VMHS Collapse in Navier--Stokes implies Regularity}:  
-If the Variation of Mixed Hodge Structures (VMHS) degenerates, then  
-\[
-\mathrm{PH}_1(u(t)) = 0 \quad \Rightarrow \quad \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \quad \Rightarrow \quad u(t) \in C^\infty.
-\]  
-\textit{[See Appendix~I$^+$]} \\
-\textbf{A7} & \textbf{Spectral Decay Collapse Axiom}:  
-If the dyadic shell energies \( E_j(t) := \sum_{|k| \sim 2^j} |\widehat{u}(k,t)|^2 \)  
-satisfy \( \lim_{j \to \infty} E_j(t) = 0 \) for all \( t > T_0 \), then  
-\[
-\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0.
-\]  
-\textit{[See Appendix~C.3]}
+\textbf{A6} & \textbf{VMHS Collapse in Navier--Stokes implies Regularity}:  \\
+& If the Variation of Mixed Hodge Structures (VMHS) degenerates, then  \\
+& \[ \mathrm{PH}_1(u(t)) = 0 \quad \Rightarrow \quad \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \quad \Rightarrow \quad u(t) \in C^\infty. \]  \\
+& \textit{[See Appendix~I$^+$]} \\
+\textbf{A7} & \textbf{Spectral Decay Collapse Axiom}:  \\
+& If the dyadic shell energies $E_j(t)$ of a solution $u(t)$ decay as  \\
+& \[ \lim_{j \to \infty} E_j(t) = 0, \quad \forall t > T_0, \]  \\
+& then this implies categorical collapse:  \\
+& \[ \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0, \]  \\
+& where $\mathcal{F}_t \in D^b(\mathsf{Filt})$ is the derived sheaf associated with the topological structure  \\
+& of the sublevel sets $\{x \mid |u(x,t)| \leq r\}$.  \\
+& \textit{[See Appendix~C.3]}
 \end{tabular}
-
 
 ---
 
@@ -2825,5 +2947,6 @@ A5 & Appendix F, Step 6 & VMHS stability across barcodes \\
 A6 & Appendix G, Step 7 & Mirror–Langlands–Trop synthesis \\
 C1–C6 & Appendix J / M & Abstract triviality conditions + groupoid logic \\
 \end{tabular}
+
 
 \end{document}

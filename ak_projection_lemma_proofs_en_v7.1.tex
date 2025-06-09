@@ -2715,14 +2715,16 @@ and $\mathcal{C}_{\text{Collapse}}$ the structured collapse category generated b
 We define a diagrammatic mapping:
 
 \[
-\begin{tikzcd}[row sep=large, column sep=huge]
+\begin{tikzcd}[row sep=large, column sep=large]
 u(t) \arrow[r, "Sim"] \arrow[dr, swap, "\widehat{\mathcal{F}}_{\text{AI}}"] & 
 \{ PH_1, \widehat{u}, \mathrm{Ext}^1 \} \arrow[r, "Feature Map"] & 
-\mathcal{F}_{\text{Collapse}} \arrow[r, "AI Classifier"] & 
-\mathcal{D}_{\text{AI}} \arrow[dashed]{d}{\Phi} \\
-& & & \mathcal{C}_{\text{Collapse}}
+\mathcal{F}_{\text{Collapse}} \arrow[d, "AI Classifier"] \\
+& & 
+\mathcal{D}_{\text{AI}} \arrow[r, dashed, "\Phi"] &
+\mathcal{C}_{\text{Collapse}}
 \end{tikzcd}
 \]
+
 
 ---
 
@@ -3100,7 +3102,9 @@ A9 & BSD Collapse confirms structural Ext–PH–Sha chain & Appendix Z.8 \\
 
 \subsection*{Z.2 Collapse Classification by Origin and Target}
 
-\begin{tabular}{llll}
+\usepackage{array} 
+
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}p{2.5cm}}
 \toprule
 \textbf{Collapse Type} & \textbf{Origin Structure} & \textbf{Target Collapse} & \textbf{Reference} \\
 \midrule

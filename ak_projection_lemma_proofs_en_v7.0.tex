@@ -685,13 +685,16 @@ It provides the logical foundation for structure-preserving collapse mechanisms 
 We summarize the correspondence between high-dimensional projection, persistent homology filtration, and Ext-vanishing via the following commutative diagram:
 
 \[
+\resizebox{\textwidth}{!}{%
 \begin{tikzcd}[row sep=large, column sep=large]
 X \arrow[r, "\mathcal{P}"] \arrow[dr, swap, "\mathrm{Ext}^1(F,G)"] & 
 \mathbb{T}^N \arrow[d, "\text{Sublevel Filtration}"] \\
 & \{ X_r := \theta \mid |\mathcal{P}(x)| \leq r \} \arrow[d, "\text{Barcode}_k"] \\
 & PH_k(t) \to 0
 \end{tikzcd}
+}
 \]
+
 
 Here, projection into $\mathbb{T}^N$ induces a filtration structure on level sets, from which persistent homology barcodes are derived.  
 The collapse of barcodes corresponds to the vanishing of obstruction classes in the derived category, completing the topological–categorical–analytic triangle that underlies AK Collapse.

@@ -2534,7 +2534,177 @@ Mathematical structure → Collapse flow → Learning topology → Semantic endg
 
 ---
 
-\subsection*{L.13 References}
+\subsection*{L.13 Isomap–PH Collapse Classification (C1)}
+
+We introduce a classification scheme that integrates persistent homology with manifold learning (Isomap) to diagnose and visualize collapse phases in PDE solution spaces. This fusion allows AI models to detect structural degeneration using low-dimensional embeddings.
+
+\paragraph{Pipeline Overview.}
+\[
+u(t) \xrightarrow{\text{Simulation}} \{PH_1(t), \widehat{u}(k,t)\}
+\xrightarrow{\text{Feature Vectorization}} \mathcal{F}_{\text{Collapse}}
+\xrightarrow{\text{Isomap}} \mathcal{M}_{\text{LowDim}}
+\xrightarrow{\text{Clustering}} \text{Collapse Class}
+\]
+
+\paragraph{Feature Construction.}
+Let the feature vector be defined as:
+\[
+\mathcal{F}_{\text{Collapse}} := \text{Persistence Entropy} \oplus \|\widehat{u}(k)\|^2 \oplus \dim(\mathrm{Ext}^1)
+\]
+Each component reflects a topological, spectral, or categorical descriptor of the evolving PDE state.
+
+\paragraph{Manifold Embedding.}
+Using Isomap with geodesic distance \( d_g \), we embed \(\mathcal{F}_{\text{Collapse}}\) into a lower-dimensional manifold \(\mathcal{M}_{\text{LowDim}}\), preserving local neighborhood structures and topological variance.
+
+\paragraph{Collapse Typology.}
+Clusters formed in \(\mathcal{M}_{\text{LowDim}}\) correspond to collapse types such as:
+\begin{itemize}
+  \item C0: Full Collapse (PH, Ext, and Spectral decay)
+  \item C1/C2: Topological or Categorical Collapse
+  \item C4--C6: Virtual, Obstructive, or Bifurcation Collapse
+\end{itemize}
+
+\paragraph{AI Diagnostic Role.}
+This geometric representation enables:
+\begin{itemize}
+  \item Early detection of approaching collapse zones
+  \item Identification of soft vs. hard collapses
+  \item Classification of outliers and semantic anomalies
+\end{itemize}
+
+\paragraph{Reference.}
+See also Appendix~C.3 for topological energy metrics, and Appendix~Z.1 (A8) for formalization of AI-based collapse inference.
+
+---
+
+\subsection*{L.14 AI-Aided Collapse Inference: PH $\Leftrightarrow$ Ext Correspondence (C2)}
+
+This section formalizes the use of AI to learn and detect the structural correspondence between persistent homology and Ext-class collapse. The objective is to support logical inference about collapse zones in the AK framework through machine-learned mappings.
+
+\paragraph{Mathematical Hypothesis.}
+Let
+\[
+PH_k(t) = 0 \quad \Longleftrightarrow \quad \forall i, \mathrm{Ext}^1(Q, F^\bullet_i) = 0
+\]
+be the expected equivalence in AK-theoretic collapse (see Appendix~C.2). We train AI models to learn this functional equivalence.
+
+\paragraph{Model Design.}
+Given a dataset of PDE simulations \(\{u_i(t)\}_{i=1}^N\) and their topological–categorical features:
+\[
+\mathcal{D} = \left\{ \left(PH_k^{(i)}(t), \dim(\mathrm{Ext}^1_i(t)) \right) \right\}_{i=1}^N
+\]
+the model \( \mathcal{M} \) learns to approximate the collapse correspondence function:
+\[
+\mathcal{M}: PH_k(t) \mapsto \mathrm{Ext}^1(Q, F^\bullet)
+\]
+
+\paragraph{Learning Objective.}
+\[
+\min_{\mathcal{M}} \; \mathbb{E}_{(PH, \mathrm{Ext}) \in \mathcal{D}} \left[ \left( \mathcal{M}(PH) - \dim(\mathrm{Ext}^1) \right)^2 \right]
+\]
+With post-thresholding:
+\[
+\mathcal{M}(PH) < \epsilon \Rightarrow \text{Declare Collapse}
+\]
+
+\paragraph{Applications.}
+\begin{itemize}
+  \item Support collapse verification in analytic proofs
+  \item Quantify the gap between PH and Ext vanishing
+  \item Generate diagnostic alerts in ambiguous cases
+\end{itemize}
+
+\paragraph{Collapse Score Function.}
+Let:
+\[
+\text{Collapse Score} := \sigma\left( -\lambda_1 \cdot \text{pers}(PH)^2 - \lambda_2 \cdot \|\widehat{u}(k>k_0)\|^2 \right)
+\]
+where \(\sigma\) is the sigmoid function and \(\lambda_i\) are learned weights. This score approximates the probability of full collapse.
+
+\paragraph{Diagnostic Thresholds.}
+Using training data, the model defines collapse zones as:
+\[
+\text{Collapse Zone} := \left\{ x \in \mathcal{M}_{\text{Collapse}} \mid \text{Collapse Score}(x) > \tau \right\}
+\]
+
+\paragraph{Reference.}
+See Appendix~C for topological collapse formulation, and Appendix~Z.1 (A8) for the axiomatic support of classifier-based inference.
+
+---
+
+\subsection*{L.15 Collapse Diagram Mapping and Category Embedding (C3)}
+
+This section introduces a categorical mapping framework that links AI-diagnosed collapse structures  
+with the formal causal architecture of the AK Collapse framework.
+
+\paragraph{Motivation.}
+While AI classifiers can detect collapse zones from empirical data, the structural logic from persistent homology (PH),  
+spectral energy decay, and derived Ext vanishing must be functorially embedded to validate their categoricity.
+
+---
+
+\paragraph{Construct: Diagnostic–Collapse Mapping Diagram.}
+
+Let $\mathcal{D}_{\text{AI}}$ denote the learned diagnostic space,  
+and $\mathcal{C}_{\text{Collapse}}$ the structured collapse category generated by AK logic.
+
+We define a diagrammatic mapping:
+
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+u(t) \arrow[r, "Sim"] \arrow[dr, swap, "\widehat{\mathcal{F}}_{\text{AI}}"] & 
+\{ PH_1, \widehat{u}, \mathrm{Ext}^1 \} \arrow[r, "Feature Map"] & 
+\mathcal{F}_{\text{Collapse}} \arrow[r, "AI Classifier"] & 
+\mathcal{D}_{\text{AI}} \arrow[dashed]{d}{\Phi} \\
+& & & \mathcal{C}_{\text{Collapse}}
+\end{tikzcd}
+\]
+
+---
+
+\paragraph{Interpretation of Functor $\Phi$.}
+
+The functor $\Phi : \mathcal{D}_{\text{AI}} \to \mathcal{C}_{\text{Collapse}}$ maps predicted diagnostic structures  
+into formal categorical collapse types. Specifically:
+
+\begin{itemize}
+  \item Zones classified as “full collapse” (C0) map to $(PH=0, \mathrm{Ext}^1 = 0)$ objects.
+  \item “Obstructive non-collapse” (C6) are mapped to PH-trivial but Ext-nonvanishing objects.
+  \item Bifurcation, looped, or semantic collapse types map to objects with homotopy or filtered instability.
+\end{itemize}
+
+This mapping justifies AI output within a provable semantic logic.
+
+---
+
+\paragraph{Topos-Level Embedding.}
+
+To further formalize the diagnostic–collapse interaction, we consider:
+
+\[
+\mathsf{Diag}_{\text{Collapse}} \subset \mathsf{Topos}(\mathcal{D}_{\text{AI}}, \mathcal{C}_{\text{Collapse}})
+\]
+
+where $\mathsf{Diag}_{\text{Collapse}}$ is a subtopos generated by collapse-stable morphisms  
+and Ext-vanishing diagonals. This structure supports semantic compositionality  
+and permits refinement of proof zones from AI insight.
+
+---
+
+\paragraph{Consequence.}
+
+The integration of learned classifiers with categorical semantics ensures:
+
+\[
+\text{AI diagnosis} \Rightarrow \text{collapse typology} \Rightarrow \text{proof zone validation}.
+\]
+
+This pipeline connects experimentation with theory, enabling AI-informed mathematical reasoning  
+without compromising rigor.
+
+---
+
+\subsection*{L.16 References}
 
 \begin{thebibliography}{9}
 
@@ -2841,6 +3011,10 @@ J. Lurie.
 % Appendix Z. Axioms, Structural Index, and Collapse Logic Map (Revised)
 % ===========================
 
+
+\section*{Appendix Z. Axioms, Structural Index, and Collapse Logic Map}
+\addcontentsline{toc}{section}{Appendix Z. Axioms, Structural Index, and Collapse Logic Map}
+
 \subsection*{Z.1 Axioms Introduced in AK-HDPST}
 
 \begin{tabular}{ll}
@@ -2853,21 +3027,21 @@ A4 & Functorial degeneration stabilizes barcode collapse \quad [Appendix H] \\
 A5 & Topological energy and Ext are mutually recoverable \quad [Appendix C, I] \\
 \textbf{A6} & \textbf{VMHS Collapse in Navier--Stokes implies Regularity}:  \\
 & If the Variation of Mixed Hodge Structures (VMHS) degenerates, then  \\
-& \[ \mathrm{PH}_1(u(t)) = 0 \quad \Rightarrow \quad \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \quad \Rightarrow \quad u(t) \in C^\infty. \]  \\
+& \[ \mathrm{PH}_1(u(t)) = 0 \Rightarrow \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \Rightarrow u(t) \in C^\infty. \] \\
 & \textit{[See Appendix~I$^+$]} \\
 \textbf{A7} & \textbf{Spectral Decay Collapse Axiom}:  \\
-& If the dyadic shell energies $E_j(t)$ of a solution $u(t)$ decay as  \\
-& \[ \lim_{j \to \infty} E_j(t) = 0, \quad \forall t > T_0, \]  \\
-& then this implies categorical collapse:  \\
-& \[ \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0, \]  \\
-& where $\mathcal{F}_t \in D^b(\mathsf{Filt})$ is the derived sheaf associated with the topological structure  \\
-& of the sublevel sets $\{x \mid |u(x,t)| \leq r\}$.  \\
+& If the dyadic shell energies \(E_j(t)\) of a solution \(u(t)\) decay as \\
+& \[ \lim_{j \to \infty} E_j(t) = 0, \quad \forall t > T_0, \] \\
+& then this implies: \(\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0\) for the derived sheaf \(\mathcal{F}_t \in D^b(\mathsf{Filt})\). \\
 & \textit{[See Appendix~C.3]} \\
-\textbf{A8} & \textbf{AI Classification Collapse Axiom}:  \\
-& If an AI classifier trained on PH–Ext correspondence consistently labels  \\
-& a filtered complex as ``trivial,'' then this implies:  \\
-& \[ \mathrm{PH}_k = 0 \Rightarrow \mathrm{Ext}^1 = 0 \Rightarrow \text{Collapse zone identified}. \]  \\
-& \textit{[See Appendix~L.13--L.14]}
+\textbf{A8} & \textbf{AI Classification Collapse Axiom}: \\
+& If an AI classifier trained on PH--Ext correspondence labels a filtered object as ``trivial,'' then \\
+& \[ \mathrm{PH}_k = 0 \Rightarrow \mathrm{Ext}^1 = 0 \Rightarrow \text{Collapse zone identified}. \] \\
+& \textit{[See Appendix~L.13--L.14]} \\
+\textbf{A9} & \textbf{Diagnostic–Collapse Functorial Mapping Axiom}: \\
+& If a diagnostic functor \(\Phi: \mathcal{D}_{\text{AI}} \to \mathcal{C}_{\text{Collapse}}\) preserves class correspondence, then \\
+& \[ \text{AI Classification} \Rightarrow \text{Formal Collapse Type}. \] \\
+& \textit{[See Appendix~L.15]} \\
 \end{tabular}
 
 ---
@@ -2910,24 +3084,25 @@ A5 & Topological energy and Ext are mutually recoverable \quad [Appendix C, I] \
 }
 \]
 
-This diagram traces the cumulative implication chain across projection, energy topology, derived structure, degeneration, and AI semantics.
+This sequence encodes the progressive collapse chain from geometry to semantics,  
+ending in categorical triviality and analytic smoothness.
 
 ---
 
 \subsection*{Z.4 Semantic Collapse Completion}
 
-The following triad completes the AK--Collapse program:
+The following triad summarizes the endpoint of provable collapse:
 
 \[
 \text{Collapse Finality} \quad \Longleftrightarrow \quad
 \begin{cases}
-\text{Topological trivialization (PH)} \\
-\text{Ext-categorical vanishing} \\
-\text{Semantic resolution through obstruction theory}
+\text{Topological trivialization} \quad (PH = 0) \\
+\text{Ext-categorical vanishing} \quad (\mathrm{Ext}^1 = 0) \\
+\text{Semantic resolution via obstruction theory}
 \end{cases}
 \]
 
-This formalizes the theoretical boundaries of provable collapse and identifies non-collapse zones through Ext--PH--Obstruction misalignment.
+Any failure in this triad defines a structural or diagnostic obstruction.
 
 ---
 
@@ -2936,16 +3111,18 @@ This formalizes the theoretical boundaries of provable collapse and identifies n
 \begin{tabular}{lll}
 \textbf{Axiom} & \textbf{Where Applied} & \textbf{Purpose} \\
 \hline
-A1 & Appendix A, Step 0 & Initial structure and MECE logic \\
+A1 & Appendix A, Step 0 & Projection and MECE decomposition \\
 A2 & Appendix B, Step 1--3 & Continuity and PH evolution \\
 A3 & Appendix C, Step 4 & Energetic duality with Ext \\
-A4 & Appendix D, Step 5 & Formal derived collapse implication \\
-A5 & Appendix F, Step 6 & VMHS stability across barcodes \\
-A6 & Appendix G, Step 7 & Mirror--Langlands--Trop synthesis \\
-A7 & Appendix C.3 & Spectral collapse to Ext vanishing \\
-A8 & Appendix L.13--L.14 & AI classifier judgment of PH–Ext triviality \\
-C1--C6 & Appendix J / M & Abstract triviality conditions + groupoid logic \\
+A4 & Appendix D, Step 5 & Derived collapse formalization \\
+A5 & Appendix F, Step 6 & VMHS–Ext recovery structure \\
+A6 & Appendix G, Step 7 & Mirror–VMHS–Langlands collapse \\
+A7 & Appendix C.3 & Spectral decay and Ext vanishing \\
+A8 & Appendix L.13--L.14 & AI judgment on collapse type (C1–C2) \\
+A9 & Appendix L.15 & Functorial embedding of AI into collapse logic \\
+C1–C6 & Appendix J, M & Abstract collapse classes and propagation logic \\
 \end{tabular}
+
 
 
 \end{document}

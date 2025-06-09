@@ -534,6 +534,30 @@ u(t) \in C^\infty(\mathbb{R}^3), \quad \forall t > T_0.
 \]
 \end{theorem}
 
+\paragraph{Causal Timeline of Collapse Structure.}
+We now visualize the collapse structure across time, clarifying when each level of structural simplification occurs.
+
+\begin{center}
+\begin{tikzcd}[row sep=huge, column sep=large]
+t = 0 \arrow[r, dotted] &
+\text{Topological Complexity (PH}_1 \neq 0\text{)} \arrow[r, "\text{TDA Filtering}"] &
+\text{PH}_1(u(t)) \to 0 \arrow[r, "\text{AK-Sheaf Collapse}"] &
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \arrow[r, "\text{Collapse Zone Established}"] &
+u(t) \in C^\infty
+\end{tikzcd}
+\end{center}
+
+\paragraph{Note on Collapse Timing.}
+Each arrow marks a structural transition:
+\begin{itemize}
+  \item From raw topological complexity in initial flow,
+  \item through persistent homology simplification via filtration,
+  \item to categorical collapse of obstruction classes,
+  \item culminating in analytic smoothness after time \( t > T_0 \).
+\end{itemize}
+
+See also Appendix~Z.3 for full classification of Collapse-type transitions.
+
 \begin{center}
 \begin{tikzcd}[row sep=large, column sep=large]
 \text{VMHS Degeneration} \arrow[r] &
@@ -542,6 +566,9 @@ u(t) \in C^\infty(\mathbb{R}^3), \quad \forall t > T_0.
 u(t) \in C^\infty \arrow[r] &
 \|\nabla u\|_{L^2}, \|\omega\|_{L^2} \text{ bounded}
 \end{tikzcd}
+
+\vspace{0.5em}
+\captionof{figure}{Collapse structure unfolding in time: from topological complexity to smooth flow}
 \end{center}
 
 \paragraph{Further Prospects.}

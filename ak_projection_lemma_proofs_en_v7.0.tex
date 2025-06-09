@@ -488,21 +488,29 @@ Let $\mathcal{F}_t$ be the AK-lift of $u(t)$ into $D^b(\mathcal{AK})$. The flow 
 
 \subsection{7.2 Equivalence of Collapse and Smoothness}
 
-\begin{theorem}[PH--Ext Collapse Implies Regularity]
-If $\mathrm{PH}_1(u(t)) = 0$ and $\mathrm{Ext}^1(\mathcal{F}_t, -) = 0$ for all $t > T_0$, then $u(t)$ is smooth for all $t > T_0$. In particular, no singularities form beyond this threshold.
+\begin{theorem}[Collapse Equivalence Theorem]
+Let \( u(t) \) be a weak solution to the 3D incompressible Navier–Stokes equation on \( \mathbb{R}^3 \).  
+If for all \( t > T_0 \), we have:
+\[
+\mathrm{PH}_1(u(t)) = 0, \quad \text{and} \quad \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0,
+\]
+where \( \mathcal{F}_t \in D^b(\mathsf{Filt}) \) is the sheaf associated to the persistent barcode data of \( u(t) \),  
+then \( u(t) \in C^\infty(\mathbb{R}^3) \) for all \( t > T_0 \).  
+In particular, no singularities of Type I–III form beyond this threshold.
 \end{theorem}
 
 \begin{proof}[Sketch]
-PH$_1 = 0$ implies that the flow contains no topological complexity in the filtration of $|u(x,t)|$, i.e., no vortex tubes or loops persist. Ext$^1 = 0$ ensures no internal derived deformations remain in the lifted object $\mathcal{F}_t$. Together, these collapses imply both geometric triviality and functional stability, which enforce higher regularity by the AK–NS correspondence. Additionally, the dual-collapse zone aligns with the rigidity region defined in Chapter 6, confirming that analytic smoothness emerges from structural trivialization.
+The condition $\mathrm{PH}_1 = 0$ implies the disappearance of nontrivial topological loops or vortex structures under the sublevel filtration of $|u(x,t)|$.  
+Simultaneously, $\mathrm{Ext}^1 = 0$ in the associated derived sheaf $\mathcal{F}_t$ signals the vanishing of internal obstruction classes, meaning the system has no latent deformations or hidden instabilities.  
+This dual collapse—topological and categorical—ensures analytic regularity through the AK correspondence.  
+Furthermore, this collapse aligns with the rigidity zone established in Chapter 6, confirming the flow stabilizes into a smooth regime.
 \end{proof}
 
-\begin{corollary}[No Type I--III Blow-Up]
-The collapse conditions exclude self-similar, oscillatory, or recursive singular structures. Therefore, Type I (self-similar), Type II (oscillatory), and Type III (chaotic) singularities are excluded beyond $T_0$.
-\end{corollary}
-
-\begin{remark}[Collapse Zone and NS-Flow Stability]
-The $t > T_0$ region where $\mathrm{PH}_1 = 0$ and $\mathrm{Ext}^1 = 0$ constitutes a topologically and categorically rigid zone. Within this region, the Navier--Stokes flow stabilizes into smooth evolution absent of bifurcations or attractor bifurcations.
+\begin{remark}[Collapse Zone and Stability]
+The region $t > T_0$ with $\mathrm{PH}_1 = 0$ and $\mathrm{Ext}^1 = 0$ defines a structurally rigid zone.  
+Within this domain, the flow becomes smooth, stable, and free from bifurcations or attractor-type transitions.
 \end{remark}
+
 
 \subsection{7.3 Interpretation and Theoretical Implication}
 

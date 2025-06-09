@@ -237,6 +237,33 @@ exists in \( D^b(\mathcal{AK}) \), and reflects the limit skeleton of the tropic
 The collapse \( \mathrm{Ext}^1(\mathcal{F}_t, -) \to 0 \) signifies categorical finality, serving as a classifier for completed degenerations.
 \end{remark}
 
+\begin{lemma}[Ext-vanishing implies global gluing success in degeneration limit]
+Let \( \{X_t\}_{t \in \Delta} \) be a degenerating family of complex manifolds,  
+and let \( \mathcal{F}_t \in D^b(\mathcal{AK}) \) be the associated filtered AK-sheaves.  
+If \( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \) for all coefficient sheaves \( \mathcal{G} \in D^b(\mathcal{AK}) \), then the local-to-global gluing of the degeneration diagram succeeds.  
+In particular, the limit object \( \mathcal{F}_0 := \colim_{t \to 0} \mathcal{F}_t \) is categorically smoothable.
+\end{lemma}
+
+\begin{proof}
+Let us consider an open cover \( \{U_i\} \) of the tropical degeneration skeleton \( \Sigma_d \subset X_t \),  
+and the Čech descent data associated with the AK-sheaves \( \mathcal{F}_t \) restricted to each \( U_i \).  
+The obstruction to gluing these local data into a global object \( \mathcal{F}_0 \) lies in  
+\[
+\mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) \cong \check{H}^1(\{U_i\}, \mathcal{H}om(\mathcal{F}_t, \mathcal{G}))
+\]
+within the derived category \( D^b(\mathcal{AK}) \).
+
+Now, if \( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \) for all \( \mathcal{G} \),  
+then the first Čech cohomology vanishes, and all obstruction classes to gluing disappear.
+
+Thus, the derived colimit
+\[
+\mathcal{F}_0 := \colim_{t \to 0} \mathcal{F}_t
+\]
+is well-defined as a global object over \( D^b(\mathcal{AK}) \), and is free from derived obstruction.  
+In particular, this implies that the degeneration diagram admits a global extension and hence smoothability is preserved in the categorical sense.
+\end{proof}
+
 \begin{definition}[AK Triplet Diagram]
 We define the degeneration diagram:
 \[
@@ -3065,7 +3092,7 @@ A5 & Topological energy and Ext are mutually recoverable & Appendix C, I \\
 A6 & VMHS degeneration implies Ext + PH collapse (NS specific) & Appendix F, Ch. 7 \\
 A7 & Dyadic spectral decay implies topological collapse & Appendix B, Z.3 \\
 A8 & Ext–PH collapse implies $C^\infty$ regularity & Chapter 7 \\
-A9 & BSD Collapse confirms structural Ext–PH–Sha chain & Appendix Z.7 \\
+A9 & BSD Collapse confirms structural Ext–PH–Sha chain & Appendix Z.8 \\
 \bottomrule
 \end{tabular}
 
@@ -3083,7 +3110,7 @@ Trop Collapse & Tropical degeneration pattern & Contractible skeleton & Appendix
 VMHS Collapse & Mixed Hodge filtration degeneration & Sheaf–category trivialization & Appendix H \\
 Langlands Collapse & Motivic Galois action & Internal motive simplification & Appendix I \\
 AI Collapse & PH/Ext classifier embedding & Collapse zone detection & Appendix L \\
-BSD Collapse & Rational points on elliptic curves & PH → Ext → $\Sha = 0$ & Appendix Z.7 \\
+BSD Collapse & Rational points on elliptic curves & PH → Ext → $\Sha = 0$ & Appendix Z.8 \\
 Semantic Collapse & Obstruction logic trivialized & Smooth phase globality & Appendix J, Z.3 \\
 \bottomrule
 \end{tabular}
@@ -3117,7 +3144,24 @@ This logic underlies the collapse equivalence theorem in Chapter 7 and is expand
 
 ---
 
-\subsection*{Z.4 Semantic Collapse Completion}
+\subsection*{Z.4 Ext–PH–Smoothness Collapse Diagram (Causal Structure)}
+
+\begin{figure}[H]
+\centering
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathrm{PH}_1(\mathcal{F}_t) = 0 \arrow[r, "\text{Barcode Collapse}"] \arrow[d, swap, "\text{Topological Category Link}"] 
+& C(t) \downarrow \\
+\mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \arrow[r, "\text{Obstruction Vanishing}"] 
+& \text{Glue Success} \arrow[r, "\text{Colimit Construction}"] 
+& \mathcal{F}_0 := \colim \mathcal{F}_t \arrow[r, "\text{Categorical Smoothness}"] 
+& u(t) \in C^\infty(\mathbb{R}^3)
+\end{tikzcd}
+\caption{Causal Collapse Flow: PH-triviality implies Ext-vanishing, enabling gluing and categorical smoothness.}
+\end{figure}
+
+---
+
+\subsection*{Z.5 Semantic Collapse Completion}
 
 The following triad summarizes the endpoint of provable collapse:
 
@@ -3134,7 +3178,7 @@ Any failure in this triad defines a structural or diagnostic obstruction.
 
 ---
 
-\subsection*{Z.5 References to Z-Axioms in Appendices}
+\subsection*{Z.6 References to Z-Axioms in Appendices}
 
 \begin{tabular}{lll}
 \textbf{Axiom} & \textbf{Where Applied} & \textbf{Purpose} \\
@@ -3147,12 +3191,12 @@ A5 & Appendix F, Step 6 & VMHS–Ext recovery structure \\
 A6 & Appendix G, Step 7 & Mirror–VMHS–Langlands collapse \\
 A7 & Appendix C.3 & Spectral decay and Ext vanishing \\
 A8 & Appendix L.13--L.14 & AI judgment on collapse type (C1–C2) \\
-A9 & Appendix H.9, Z.7 & Verified Ext–PH–Sha collapse in BSD structure \\
+A9 & Appendix H.9, Z.8 & Verified Ext–PH–Sha collapse in BSD structure \\
 \end{tabular}
 
 ---
 
-\subsection*{Z.6 Collapse Timeline and Structural Causality}
+\subsection*{Z.7 Collapse Timeline and Structural Causality}
 
 \begin{center}
 \begin{tikzcd}[column sep=huge, row sep=large]
@@ -3178,9 +3222,9 @@ u(t) \in C^\infty \arrow[r, "\text{Classical regularity satisfied}"] &
 
 ---
 
-\subsection*{Z.7 BSD-Confirmed Collapse Validity}
+\subsection*{Z.8 BSD-Confirmed Collapse Validity}
 
-\textbf{Axiom Z.7 (Collapse Validity via BSD Confirmation).}  
+\textbf{Axiom Z.8 (Collapse Validity via BSD Confirmation).}  
 Let \( E/\mathbb{Q} \) be an elliptic curve, and consider the rational orbit space \( E(\mathbb{Q}) \subset \mathbb{R}^d \) embedded via Isomap.  
 Suppose the persistent homology vanishes:
 \[

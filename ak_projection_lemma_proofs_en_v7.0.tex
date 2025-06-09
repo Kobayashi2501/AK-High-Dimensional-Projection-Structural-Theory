@@ -511,7 +511,6 @@ The region $t > T_0$ with $\mathrm{PH}_1 = 0$ and $\mathrm{Ext}^1 = 0$ defines a
 Within this domain, the flow becomes smooth, stable, and free from bifurcations or attractor-type transitions.
 \end{remark}
 
-
 \subsection{7.3 Interpretation and Theoretical Implication}
 
 \paragraph{Structural Insight.}
@@ -3008,84 +3007,73 @@ J. Lurie.
 
 
 % ===========================
-% Appendix Z. Axioms, Structural Index, and Collapse Logic Map (Revised)
+% Appendix Z: Axioms, Collapse Classification, and Causal Structure (Revised)
 % ===========================
 
+\section*{Appendix Z: Axioms, Collapse Classification, and Causal Structure}
+\addcontentsline{toc}{section}{Appendix Z: Axioms, Collapse Classification, and Causal Structure}
 
-\section*{Appendix Z. Axioms, Structural Index, and Collapse Logic Map}
-\addcontentsline{toc}{section}{Appendix Z. Axioms, Structural Index, and Collapse Logic Map}
+\subsection*{Z.1 Structural Axioms of Collapse (Functionally Classified)}
 
-\subsection*{Z.1 Axioms Introduced in AK-HDPST}
-
-\begin{tabular}{ll}
-\textbf{Axiom} & \textbf{Statement and Reference} \\
-\hline
-A1 & High-dimensional projection preserves MECE decomposition \quad [Sec. 2.1] \\
-A2 & Collapse of persistent topology implies local analytic control \quad [Step 1--3] \\
-A3 & Derived Ext-vanishing implies vanishing obstruction class \quad [Appendix G] \\
-A4 & Functorial degeneration stabilizes barcode collapse \quad [Appendix H] \\
-A5 & Topological energy and Ext are mutually recoverable \quad [Appendix C, I] \\
-\textbf{A6} & \textbf{VMHS Collapse in Navier--Stokes implies Regularity}:  \\
-& If the Variation of Mixed Hodge Structures (VMHS) degenerates, then  \\
-& \[ \mathrm{PH}_1(u(t)) = 0 \Rightarrow \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \Rightarrow u(t) \in C^\infty. \] \\
-& \textit{[See Appendix~I$^+$]} \\
-\textbf{A7} & \textbf{Spectral Decay Collapse Axiom}:  \\
-& If the dyadic shell energies \(E_j(t)\) of a solution \(u(t)\) decay as \\
-& \[ \lim_{j \to \infty} E_j(t) = 0, \quad \forall t > T_0, \] \\
-& then this implies: \(\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0\) for the derived sheaf \(\mathcal{F}_t \in D^b(\mathsf{Filt})\). \\
-& \textit{[See Appendix~C.3]} \\
-\textbf{A8} & \textbf{AI Classification Collapse Axiom}: \\
-& If an AI classifier trained on PH--Ext correspondence labels a filtered object as ``trivial,'' then \\
-& \[ \mathrm{PH}_k = 0 \Rightarrow \mathrm{Ext}^1 = 0 \Rightarrow \text{Collapse zone identified}. \] \\
-& \textit{[See Appendix~L.13--L.14]} \\
-\textbf{A9} & \textbf{Diagnostic–Collapse Functorial Mapping Axiom}: \\
-& If a diagnostic functor \(\Phi: \mathcal{D}_{\text{AI}} \to \mathcal{C}_{\text{Collapse}}\) preserves class correspondence, then \\
-& \[ \text{AI Classification} \Rightarrow \text{Formal Collapse Type}. \] \\
-& \textit{[See Appendix~L.15]} \\
+\begin{tabular}{lll}
+\toprule
+\textbf{Axiom} & \textbf{Statement} & \textbf{Reference} \\
+\midrule
+A1 & High-dimensional projection preserves MECE decomposition & Sec. 2.1 \\
+A2 & Persistent topology collapse implies local analytic control & Step 1–3 \\
+A3 & Ext$^1$ vanishing implies vanishing obstruction class & Appendix G \\
+A4 & Functorial degeneration stabilizes barcode collapse & Appendix H \\
+A5 & Topological energy and Ext are mutually recoverable & Appendix C, I \\
+A6 & VMHS degeneration implies Ext + PH collapse (NS specific) & Appendix F, Ch. 7 \\
+A7 & Dyadic spectral decay implies topological collapse & Appendix B, Z.3 \\
+A8 & Ext–PH collapse implies $C^\infty$ regularity & Chapter 7 \\
+\bottomrule
 \end{tabular}
 
----
+\vspace{1em}
 
-\subsection*{Z.2 Structural Index of Appendices}
+\subsection*{Z.2 Collapse Classification by Origin and Target}
 
+\begin{tabular}{llll}
+\toprule
+\textbf{Collapse Type} & \textbf{Origin Structure} & \textbf{Target Collapse} & \textbf{Reference} \\
+\midrule
+PH Collapse & Sublevel sets of $|u(x,t)|$ & $\mathrm{PH}_1(u(t)) = 0$ & Step 1, Appendix B \\
+Ext Collapse & Derived sheaf obstruction class & $\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0$ & Appendix G \\
+Trop Collapse & Tropical degeneration pattern & Contractible skeleton & Appendix F \\
+VMHS Collapse & Mixed Hodge filtration degeneration & Sheaf–category trivialization & Appendix H \\
+Langlands Collapse & Motivic Galois action & Internal motive simplification & Appendix I \\
+AI Collapse & PH/Ext classifier embedding & Collapse zone detection & Appendix L \\
+Semantic Collapse & Obstruction logic trivialized & Smooth phase globality & Appendix J, Z.3 \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+
+\subsection*{Z.3 Causal Logic Map and Collapse Flow Structure}
+
+We collect and summarize the causal structure of collapse events as follows:
+
+\begin{center}
+\begin{tikzcd}[row sep=large, column sep=large]
+\text{VMHS Degeneration} \arrow[r] &
+\mathrm{PH}_1(u(t)) = 0 \arrow[r] &
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \arrow[r] &
+u(t) \in C^\infty \arrow[r] &
+\|\nabla u(t)\|^2,\, \|\omega(t)\|^2 < \infty
+\end{tikzcd}
+\end{center}
+
+\paragraph{Collapse Timeline:}  
 \begin{itemize}
-  \item \textbf{A} -- High-Dimensional Projection Principles
-  \item \textbf{B} -- Sobolev--Topological Continuity
-  \item \textbf{C} -- Topological Energy and Ext Duality
-  \item \textbf{D} -- Derived Ext-Collapse Structures
-  \item \textbf{E} -- Semantic Meaning and Obstruction Theory
-  \item \textbf{F} -- Degeneration and VMHS Theory
-  \item \textbf{G} -- Mirror--Langlands--Trop Collapse Synthesis
-  \item \textbf{H} -- Ext Collapse and Internal Motive Semantics
-  \item \textbf{I} -- BSD Collapse and Selmer--Ext Equivalence
-  \item \textbf{J} -- Abstract Collapse Theorems and Axiomatic Conditions
-  \item \textbf{L} -- AI-Enhanced Classification Modules
-  \item \textbf{M} -- Complete Collapse Extensions and Semantic Reinforcements
+  \item Initial flow $u(t)$ exhibits complex topological loops (PH$_1 \ne 0$)
+  \item TDA filtering enforces collapse of persistent features $\Rightarrow$ PH$_1 = 0$
+  \item AK-sheaf degeneration collapses Ext$^1$ classes
+  \item Collapse zone $t > T_0$ ensures smoothness: $u(t) \in C^\infty$
 \end{itemize}
 
----
-
-\subsection*{Z.3 Collapse Logic Flow Map}
-
-\[
-\boxed{
-\text{(A)} \Rightarrow
-\text{(B)} \Rightarrow
-\text{(C)} \Rightarrow
-\text{(D)} \Rightarrow
-\text{(F)} \Rightarrow
-\text{(G)} \Rightarrow
-\text{(H)} \Rightarrow
-\text{(I)} \Rightarrow
-\text{(J)} \Rightarrow
-\text{(L)} \Rightarrow
-\text{(M)} \Rightarrow
-\text{Collapse Finality}
-}
-\]
-
-This sequence encodes the progressive collapse chain from geometry to semantics,  
-ending in categorical triviality and analytic smoothness.
+\paragraph{Reference:}  
+This logic underlies the collapse equivalence theorem in Chapter 7 and is expanded in Appendices F–H, with structural classification in Appendix I and semantic reinforcement in Appendix J.
 
 ---
 
@@ -3123,6 +3111,31 @@ A9 & Appendix L.15 & Functorial embedding of AI into collapse logic \\
 C1–C6 & Appendix J, M & Abstract collapse classes and propagation logic \\
 \end{tabular}
 
+---
+
+\subsection*{Z.6 Collapse Timeline and Structural Causality}
+
+\begin{center}
+\begin{tikzcd}[column sep=huge, row sep=large]
+t = 0 \arrow[r, dotted] &
+\text{Topological Complexity (PH$_1 \neq 0$)} \arrow[r, "\text{TDA Filter}"] &
+\mathrm{PH}_1(u(t)) = 0 \arrow[r, "\text{AK-sheaf collapse}"] &
+\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \arrow[r, "\text{Collapse Zone ($t > T_0$)}"] &
+u(t) \in C^\infty \arrow[r, "\text{Classical regularity satisfied}"] &
+\int_0^\infty \|\nabla \times u(t)\|_{L^\infty} dt < \infty
+\end{tikzcd}
+\end{center}
+
+\vspace{1em}
+
+\paragraph{Interpretation.}
+\begin{itemize}
+  \item Phase 1: Raw topological complexity in $u_0$, represented by nontrivial $\mathrm{PH}_1$.
+  \item Phase 2: Sublevel filtering reduces $\mathrm{PH}_1$ loops via time evolution.
+  \item Phase 3: Derived sheaf $\mathcal{F}_t$ collapses $\Rightarrow \mathrm{Ext}^1 = 0$.
+  \item Phase 4: Collapse zone ($t > T_0$) established.
+  \item Phase 5: Regularity theorem triggered ⇒ smoothness + classical criteria (e.g., BKM).
+\end{itemize}
 
 
 \end{document}

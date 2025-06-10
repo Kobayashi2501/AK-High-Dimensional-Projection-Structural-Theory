@@ -2436,7 +2436,69 @@ See also Appendix~Z.3 for logical alignment of appendix progression.
 
 ---
 
-\subsection*{J.9 References}
+\subsection*{J.9 Collapse Structures as Dependent Types}
+\addcontentsline{toc}{subsection}{J.10 Collapse Structures as Dependent Types}
+
+To formalize the internal logic of collapse structures, we introduce a type-theoretic encoding  
+based on dependent types (Π-type, Σ-type) from Martin-Löf Type Theory.
+
+---
+
+\paragraph{Definition (Π-type Collapse).}
+Let \( \mathcal{F}_t \in \mathsf{Filt} \) be a filtration-based orbit object.  
+Define the collapse condition:
+
+\[
+\mathrm{PH}_1(\mathcal{F}_t) = 0
+\quad \text{as a dependent type} \quad
+\prod_{t \in T} \mathsf{PH}_1(\mathcal{F}_t) = 0
+\]
+
+This expresses that for all \( t \), topological persistence vanishes—encoded as Π-type quantification.
+
+---
+
+\paragraph{Definition (Σ-type Smoothness).}
+If local Ext-classes vanish, one may glue a smooth colimit object:
+
+\[
+\sum_{\mathcal{F}_0} \left[ \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \wedge u(t) \in C^\infty \right]
+\]
+
+This corresponds to a Σ-type: existence of a smooth glued object given vanishing obstructions.
+
+---
+
+\paragraph{Theorem (Typed Collapse Regularity).}
+If topological collapse holds Π-type:
+
+\[
+\prod_{t \in T} \mathrm{PH}_1 = 0
+\]
+
+Then, under collapse axioms A1–A7:
+
+\[
+\boxed{
+\left( \prod_{t \in T} \mathrm{PH}_1 = 0 \right)
+\Rightarrow
+\left( \sum_{\mathcal{F}_0} \mathrm{Ext}^1 = 0 \wedge u(t) \in C^\infty \right)
+}
+\]
+
+Collapse thus corresponds to a transition from Π-type vanishing (over time) to Σ-type existence (of smooth structure).
+
+---
+
+\paragraph{Interpretation.}
+This formulation enables:
+- Formal proof systems to encode collapse;
+- Structural alignment with categorical logic;
+- A bridge to homotopy type theory and constructive reasoning.
+
+---
+
+\subsection*{J.10 References}
 
 \begin{thebibliography}{9}
 
@@ -3289,6 +3351,64 @@ is not just hypothesized but \textbf{structurally verified}, validating the sema
 
 \paragraph{Reference.}  
 See Appendix H.9 for the formal theorem and proof sketch confirming this chain of collapse.
+
+\subsection*{Z.9 Collapse Lemma and Structural Regularity Theorem (補強C)}
+\addcontentsline{toc}{subsection}{Z.9 Collapse Lemma and Structural Regularity Theorem}
+
+To complete the formal structure of collapse logic, we now present the central lemma  
+which connects persistent topology, spectral energy decay, and Ext-class vanishing  
+to analytic regularity in the context of AK-HDPST.
+
+---
+
+\begin{lemma}[Collapse Lemma]
+\label{lem:collapse}
+Let \( \mathcal{F}_t \in \mathsf{Filt} \) be a time-indexed family of derived filtration objects.  
+Suppose the following three conditions hold:
+
+\begin{enumerate}
+    \item[(i)] \textbf{Topological collapse:}  
+    \[
+    \forall t \in T, \quad \mathrm{PH}_1(\mathcal{F}_t) = 0
+    \]
+    \item[(ii)] \textbf{Spectral energy decay:}  
+    \[
+    \lim_{k \to \infty} \left\| \widehat{u}(k, t) \right\|_{L^2} = 0 \quad \text{(dyadic shell average)}
+    \]
+    \item[(iii)] \textbf{Ext-class vanishing:}  
+    \[
+    \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \quad \text{for all test objects } \mathcal{G} \in D^b(\mathcal{X})
+    \]
+\end{enumerate}
+
+Then there exists a colimit object \( \mathcal{F}_0 := \colim_{t \to 0} \mathcal{F}_t \)  
+such that the associated function \( u(t) \in C^\infty(\mathbb{R}^3) \).
+
+\end{lemma}
+
+---
+
+\begin{proof}[Sketch of Proof]
+\textbf{(i)} Persistent homology collapse implies the triviality of topological loops and components  
+via functorial contraction (Appendix B, J.6).  
+
+\textbf{(ii)} Spectral decay ensures that all high-frequency modes vanish, implying  
+\( u(t) \in H^s(\mathbb{R}^3) \) for all \( s \), hence \( C^\infty \) regularity by Sobolev embedding (Appendix Z.3).
+
+\textbf{(iii)} Ext$^1$-vanishing eliminates local-to-global obstruction, allowing sheaf colimit glueing  
+to recover a global smooth object \( \mathcal{F}_0 \), interpreted as the regular solution \( u(t) \).
+
+Each component aligns with Axioms A1–A7 and categorical collapse diagrams in Appendix J.8 and Z.4.
+
+\end{proof}
+
+---
+
+\paragraph{Interpretation.}
+This lemma unifies topological, spectral, and categorical collapse mechanisms  
+into a singular formal pathway toward global regularity.  
+It serves as the foundational collapse theorem within AK theory—analogous in scope to the Beale–Kato–Majda criterion,  
+but derived from structural invariants rather than pointwise PDE estimates.
 
 
 

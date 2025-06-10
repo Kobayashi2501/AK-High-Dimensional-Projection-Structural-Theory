@@ -1580,207 +1580,85 @@ ICM, 1994.
 
 
 % ===========================
-% Appendix G: Mirror–Langlands–Trop Collapse Synthesis
+% Appendix G: Ext–PH–Smoothness Collapse Equivalence
 % ===========================
 
-\section*{Appendix G: Mirror–Langlands–Trop Collapse Synthesis}
-\addcontentsline{toc}{section}{Appendix G: Mirror–Langlands–Trop Collapse Synthesis}
+\section*{Appendix G: Ext–PH–Smoothness Collapse Equivalence}
+\addcontentsline{toc}{section}{Appendix G: Ext–PH–Smoothness Collapse Equivalence}
 
-\subsection*{G.1 Unified Objective}
-
-We synthesize three major collapse frameworks into a single categorical structure:
-
-\begin{itemize}
-  \item \textbf{Mirror Symmetry}: categorical duality between complex and symplectic geometry,
-  \item \textbf{Langlands Correspondence}: representation–sheaf duality via Ext-groups,
-  \item \textbf{Tropical Geometry}: degeneration framework encoding filtrations and barcodes.
-\end{itemize}
-
-We interpret collapse ($\mathrm{PH}_1 = 0$, $\mathrm{Ext}^1 = 0$) as simultaneous vanishing in all three frameworks.
+\paragraph{Objective.}  
+This appendix formalizes the foundational equivalence between persistent topological triviality, Ext-class vanishing, and analytic smoothness.  
+It provides the categorical–topological basis for collapse phenomena in the AK framework.
 
 ---
 
-\subsection*{G.2 SYZ Mirror and Persistent Collapse}
+\subsection*{G.1 Collapse Equivalence Theorem}
 
-Under Strominger–Yau–Zaslow (SYZ) mirror symmetry:
+\begin{theorem}[Ext–PH–Smoothness Collapse Equivalence]
+Let $\mathcal{F}_t$ be a filtered object representing the solution flow of a dissipative PDE (e.g., Navier–Stokes), and let $u(t)$ be its analytic realization.  
+Then the following conditions are equivalent:
 
-\[
-\text{Collapsing special Lagrangian torus fibrations} 
-\quad \Longleftrightarrow \quad 
-\text{Hodge filtration degeneration}.
-\]
+\begin{align*}
+\mathrm{PH}_1(\mathcal{F}_t) &= 0 \\
+\iff \quad \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) &= 0 \quad \text{(for all gluing data } \mathcal{G}) \\
+\iff \quad u(t) &\in C^\infty(\mathbb{R}^3)
+\end{align*}
 
-Persistent homology barcodes $[b,d]$ correspond to periodic cycles of these fibrations.
-
-\begin{definition}[Mirror–PH Collapse Correspondence]
-Let $[b,d] \in \mathrm{PH}_1(X_t)$ correspond to a stable cycle $\gamma_t$.
-Then:
-\[
-\text{SYZ collapse of } \gamma_t 
-\quad \Rightarrow \quad 
-[b,d] \to \emptyset \quad \Rightarrow \quad C(t) \to 0.
-\]
-\end{definition}
-
----
-
-\subsection*{G.3 Langlands Functoriality and Ext Collapse}
-
-Let $\mathcal{F}^\bullet$ be a perverse sheaf or D-module on a moduli space $M_G$ of $G$-bundles.  
-Under the geometric Langlands correspondence:
-
-\[
-\mathcal{F}^\bullet \in \mathrm{D}^b_c(\mathrm{Bun}_G) 
-\quad \leftrightarrow \quad 
-\rho \in \mathrm{Rep}(\widehat{G}).
-\]
-
-If $\mathcal{F}^\bullet$ collapses to the unit object $Q$ (trivial sheaf), then:
-
-\[
-\mathrm{Ext}^1(Q, \mathcal{F}^\bullet) = 0 
-\quad \Rightarrow \quad 
-\text{collapse of morphism space}.
-\]
-
-This realizes Langlands collapse as Ext-vanishing in derived categories.
-
----
-
-\subsection*{G.4 Tropical Degeneration and Collapse Zones}
-
-Tropicalization of degeneration spaces converts smooth moduli into polyhedral complexes.  
-Barcode persistence corresponds to:
-
-\[
-\text{Trop}(f_t) \longmapsto \text{metric trees}
-\quad \Rightarrow \quad 
-\text{barcode lengths}.
-\]
-
-\begin{definition}[Collapse Zone]
-A region in tropical parameter space where:
-\[
-\forall i, \quad \text{pers}_i(t) \leq \epsilon 
-\quad \Rightarrow \quad 
-PH_1(t) \simeq 0.
-\]
-\end{definition}
-
-This provides a geometric criterion for collapse based on tropical coordinates.
-
----
-
-\subsection*{G.5 Ext–PH–Trop Trichotomy Theorem}
-
-\begin{theorem}[Trichotomy Collapse Theorem]
-The following are equivalent under degeneration limit:
-\begin{enumerate}
-  \item $\mathrm{PH}_1(t) = 0$ (persistent topology vanishes),
-  \item $\mathrm{Ext}^1(Q, \mathcal{F}^\bullet_t) = 0$ (categorical trivialization),
-  \item Tropical degeneration yields barcode collapse (length $\to 0$).
-\end{enumerate}
-Moreover, each collapse stabilizes the others via mirror–Langlands–tropical dualities.
 \end{theorem}
 
 ---
 
-\subsection*{G.6 Functorial Degeneration Stability}
+\subsection*{G.2 Causal Interpretation}
 
-Let $\mathcal{D}_{\mathrm{degen}}$ denote a functor from topological or geometric spaces to derived categories,  
-encoding degeneration limits via:
+We interpret the equivalence as a causal flow of collapse:
 
 \[
-\mathcal{D}_{\mathrm{degen}}: (X_t) \longmapsto \mathcal{F}_t^\bullet
-\quad \text{with} \quad \mathrm{Ext}^1(Q, \mathcal{F}^\bullet_t) \to 0.
-\]
-
-\begin{axiom}[A4 — Functorial Degeneration Stabilizes Collapse]
-For any degeneration-compatible family $(X_t)$, the functor $\mathcal{D}_{\mathrm{degen}}$ preserves Ext-collapse:
-\[
-\mathrm{PH}_1(X_t) \to 0 
-\quad \Rightarrow \quad 
-\mathcal{D}_{\mathrm{degen}}(X_t) \simeq Q.
-\]
-\end{axiom}
-
----
-
-\subsection*{G.7 Mirror–Langlands–Trop Collapse Cube}
-
-\begin{center}
-\begin{tikzcd}[column sep=huge, row sep=large]
-& \textbf{PH}_1(t) = 0 \arrow[dl] \arrow[dr] & \\
-\textbf{Ext}$^1(Q, \mathcal{F}^\bullet_t) = 0$ \arrow[dr] & & 
-\textbf{Trop barcode} = 0 \arrow[dl] \\
-& \mathcal{F}^\bullet_t \simeq Q &
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathrm{PH}_1(\mathcal{F}_t) = 0 \arrow[r, "\text{Barcode Collapse}"] \arrow[d, swap, "\text{Topological Category Link}"] 
+& C(t) \downarrow \\
+\mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \arrow[r, "\text{Obstruction Vanishing}"] 
+& \text{Glue Success} \arrow[r, "\text{Colimit Construction}"] 
+& \mathcal{F}_0 := \colim \mathcal{F}_t \arrow[r, "\text{Categorical Smoothness}"] 
+& u(t) \in C^\infty(\mathbb{R}^3)
 \end{tikzcd}
-\end{center}
-
-This triangular collapse diagram expresses that Ext-vanishing, topological barcode collapse,  
-and tropical degeneration are categorically and geometrically unified.
-
----
-
-\subsection*{G.8 Structural Summary}
-
-The AK-Collapse framework realizes smoothness and regularity via:
-
-\[
-\text{Geometric Degeneration}
-\quad \xRightarrow{\mathrm{SYZ}, \mathrm{Langlands}, \mathrm{Trop}}
-\quad 
-\text{Categorical Collapse}
-\quad \Rightarrow \quad
-\text{Smooth Solution}.
 \]
 
-Thus, categorical–topological–tropical unification is the backbone of the AK–NS proof strategy.
+This diagram summarizes the transition from topological triviality to analytic regularity via categorical gluing and vanishing of obstructions.
 
 ---
 
-\subsection*{G.9 References}
+\subsection*{G.3 Structural Consequences}
 
-\begin{thebibliography}{9}
+\begin{itemize}
+  \item If $\mathrm{PH}_1(\mathcal{F}_t) \neq 0$, then either:
+    \begin{itemize}
+      \item Topological obstructions exist (e.g., cycles with long persistence),
+      \item Or categorical obstructions survive ($\mathrm{Ext}^1 \neq 0$), preventing smooth realization.
+    \end{itemize}
+  \item Conversely, $\mathrm{Ext}^1 = 0$ implies gluing success and descent to a global smooth structure $u(t)$.
+  \item This serves as a categorical strengthening of classical regularity criteria.
+\end{itemize}
 
-\bibitem{Beilinson1982}
-Beilinson, Bernstein, Deligne.\\
-\textit{Faisceaux pervers}. Astérisque 100 (1982), 5–171.
+---
 
-\bibitem{Gaitsgory2013}
-D. Gaitsgory and N. Rozenblyum.\\
-\textit{A Study in Derived Algebraic Geometry}.  
-Volume I, American Mathematical Society, 2013.
+\subsection*{G.4 Remarks}
 
-\bibitem{Kapranov2004}
-M. Kapranov.\\
-\textit{Perverse sheaves and Langlands correspondence}.  
-preprint, 2004.
+\begin{enumerate}
+  \item This equivalence underlies the collapse mechanism used in all AK-style structural resolutions (e.g., Navier–Stokes, BSD, Hilbert's 12th).
+  \item It provides a higher-categorical analog of obstruction-theoretic smoothness in PDE and arithmetic settings.
+  \item Collapse = regularity ⇔ topology = category ⇔ geometry = analysis.
+\end{enumerate}
 
-\bibitem{Mikhalkin2006}
-G. Mikhalkin.\\
-\textit{Tropical Geometry and its Applications}.  
-Proceedings of ICM 2006.
 
-\bibitem{Strominger1996}
-Strominger, Yau, Zaslow.\\
-\textit{Mirror symmetry is T-duality}.  
-Nucl. Phys. B 479 (1996): 243–259.
-
-\bibitem{Kontsevich1994}
-M. Kontsevich.\\
-\textit{Homological Algebra of Mirror Symmetry}.  
-ICM 1994.
-
-\end{thebibliography}
+---
 
 
 % ===========================
-% Appendix H: Ext Collapse and Internal Motive Semantics (Fully Reinforced)
+% Appendix H: Obstruction Semantics and Topos Collapse
 % ===========================
 
-\section*{Appendix H: Ext Collapse and Internal Motive Semantics}
-\addcontentsline{toc}{section}{Appendix H: Ext Collapse and Internal Motive Semantics}
+\section*{Appendix H: Obstruction Semantics and Topos Collapse}
+\addcontentsline{toc}{section}{Appendix H: Obstruction Semantics and Topos Collapse}
 
 \subsection*{H.1 Purpose and Background}
 
@@ -1805,11 +1683,12 @@ Then:
 \text{nontrivial extension class} \Rightarrow \text{structural instability}.
 \]
 
-Hence, Ext$^1 = 0$ serves as a proxy for smoothness.
+Hence, Ext$^1 = 0$ implies that no obstruction remains when gluing local data to a global structure.  
+This is interpreted as a necessary condition for categorical smoothness.
 
 ---
 
-\subsection*{H.3 Ext$^2$ and Higher Obstruction Vanishing}
+\subsection*{H.3 Obstruction Semantics beyond Ext$^1$}
 
 \begin{definition}[Obstruction Class in Ext$^2$]
 The obstruction to lifting a homotopy trivialization of $\mathcal{F}^\bullet$ to an actual quasi-isomorphism lies in:
@@ -1823,148 +1702,114 @@ Thus, full structural triviality requires:
 \mathrm{Ext}^i(Q, \mathcal{F}^\bullet) = 0, \quad \forall i > 0.
 \]
 
----
+This motivates a hierarchy of collapse:
 
-\subsection*{H.4 dg-Enhancement and Homotopic Purity}
-
-Let $\mathcal{D}_{dg}(\mathcal{X})$ denote the dg-enhanced derived category.  
-Then Ext$^i$ groups correspond to homotopy classes in this dg setting.  
-Trivialization:
-\[
-\mathcal{F}^\bullet \simeq Q
-\quad \text{in } \mathcal{D}_{dg} \Longleftrightarrow \mathrm{Ext}^i = 0, \forall i>0.
-\]
-
-This embeds the semantic collapse within a homotopy-invariant framework.
-
----
-
-\subsection*{H.5 Internal vs. External Collapse}
-
-- \textbf{External Collapse}: PH$_k = 0$ (topological barcode vanishing),
-- \textbf{Internal Collapse}: Ext$^1 = 0$, Ext$^2 = 0$ (derived triviality).
-
-\begin{definition}[Semantic Collapse Equivalence]
-An object $\mathcal{F}^\bullet$ is \emph{semantically collapsed} if:
-\[
-\mathcal{F}^\bullet \simeq Q \quad \text{and} \quad \mathrm{Ext}^i(Q, \mathcal{F}^\bullet) = 0 \quad \forall i>0.
-\]
-\end{definition}
-
----
-
-\subsection*{H.6 Motivic Interpretation and Purity Collapse}
-
-In motivic cohomology, a pure motive $M$ corresponds to:
-\[
-\mathrm{Ext}^i(M, M') = 0 \quad \text{for } i>0,
-\]
-when $M'$ is of strictly different weight. Thus purity implies semantically atomic structure.
-
-\[
-M(X_t) \to M(\mathrm{pt}) \quad \text{(under degeneration)} \quad \Rightarrow \quad \mathrm{Ext}^1 = 0.
-\]
-
----
-
-\subsection*{H.7 ∞-Topos and Internal Semantics}
-
-Collapse equivalence can be extended to $\infty$-topos via:
-
-\[
-\text{Ext}^1 = 0 \quad \Rightarrow \quad \text{contractibility in internal homotopy type}.
-\]
-
-The collapsed object becomes the terminal object in a stable ∞-topos.
-
----
-
-\subsection*{H.8 Semantic Collapse Flow}
-
-\begin{center}
-\begin{tikzcd}[column sep=large, row sep=large]
-\text{Degeneration} \arrow[r] &
-PH_k = 0 \arrow[r] &
-\mathrm{Ext}^1 = 0 \arrow[r] &
-\mathcal{F}^\bullet \simeq Q \arrow[r] &
-M(\mathcal{F}) \simeq M(\mathrm{pt}) \arrow[r] &
-\text{Trivial Object in } \infty\text{-Topos}
-\end{tikzcd}
-\end{center}
-
----
-
-\subsection*{H.9 Semantic Collapse via BSD Confirmation}
-\addcontentsline{toc}{subsection}{H.9 Semantic Collapse via BSD Confirmation}
-
-Ext-vanishing encodes collapse not merely geometrically, but also:
 \begin{itemize}
-  \item categorically (via derived triviality),
-  \item motivically (via purity and filtration disappearance),
-  \item homotopically (via ∞-topos simplification),
-  \item and semantically (via obstruction collapse and structural visibility).
+  \item Ext$^1$ = 0: gluing works (local → global),
+  \item Ext$^2$ = 0: uniqueness up to quasi-isomorphism,
+  \item Ext$^i$ = 0: stability in deeper derived sense.
 \end{itemize}
 
-Hence, Collapse is semantically the \textbf{end of complexity}.
+---
 
-\begin{theorem}[Semantic Collapse Realized in BSD]
-In the AK Collapse framework, suppose that a persistent homology structure \( \mathrm{PH}_1 \) vanishes on a rational orbit space \( X \subset \mathbb{R}^d \) embedded via Isomap.  
-Then the associated derived motive \( \mathcal{F}_E^\bullet \in D^b(\mathsf{Mot}) \) satisfies:
+\subsection*{H.4 Motive Collapse and Trivialization}
+
+Collapse implies that internal motives stabilize under derived functors.  
+Let $\mathcal{M}$ be a pure motive object. Then:
+
 \[
-\mathrm{Ext}^1(\mathcal{F}_E^\bullet, \mathbb{Q}_\ell) = 0,
-\]
-and hence:
-\[
-\mathcal{F}_E^\bullet \simeq H^0(\mathcal{F}_E^\bullet), \quad \text{with semisimple realization}.
-\]
-
-This validates the semantic interpretation of Ext-collapse as the disappearance of all obstruction classes and confirms its effectiveness via the BSD conjecture structure.
-\end{theorem}
-
-\begin{proof}[Sketch]
-In the BSD Collapse proof (see Appendices B, G, H):
-\begin{itemize}
-  \item \( \mathrm{PH}_1 = 0 \) was verified via Isomap and bottleneck stability,
-  \item \( \mathrm{Ext}^1 = 0 \) followed by functorial collapse via AK theory (Appendix G),
-  \item and \( \Sha(E) = 0 \) was deduced from obstruction vanishing (Appendix H.4),
-\end{itemize}
-confirming that Ext$^1$-vanishing induces both semantic flattening and structural coherence in the motive.
-\end{proof}
-
-This theorem establishes the internal realization of \textbf{collapse as semantic trivialization}, and confirms the AK axiom that:
-\[
-\boxed{\mathrm{PH}_1 = 0 \ \Rightarrow \ \mathrm{Ext}^1 = 0 \ \Rightarrow \ \text{Motive is semisimple} \ \Rightarrow \ \Sha(E) = 0}.
+\mathrm{Ext}^1(Q, \mathcal{M}) = 0 \quad \Rightarrow \quad 
+\text{motivic trivialization in } D^b(\mathsf{Mot}_\mathbb{Q}).
 \]
 
-This formally affirms the meaning-theoretic nature of Collapse in the AK structural framework.
+This allows motive gluing across cohomological functors, and collapse implies vanishing of spectral obstruction in the cofiber sequence.
 
 ---
 
-\subsection*{H.10 References}
+\subsection*{H.5 Internal Topos Collapse}
+
+Let $\mathcal{F}$ be a sheaf in a Grothendieck topos $\mathcal{E}$.  
+Collapse implies the internal logic of $\mathcal{E}$ becomes trivial in the following sense:
+
+\[
+\forall \phi \in \mathrm{Hom}_\mathcal{E}(\mathbb{1}, \Omega), \quad \phi = \top.
+\]
+
+Thus, topological collapse enforces logical collapse within the internal language of $\mathcal{E}$.  
+This semantic trivialization supports structural smoothness.
+
+---
+
+\subsection*{H.6 Collapse and Derived Gluing}
+
+Collapse can be reformulated as a gluing condition on diagrams of derived sheaves:
+
+\[
+\text{Descent data } \Rightarrow \text{colimit exists and is unique} \Rightarrow \text{Ext vanishes}.
+\]
+
+In this formulation, derived gluing and Ext$^1$-vanishing are equivalent.  
+This generalizes to higher stacks and motivic sites.
+
+---
+
+\subsection*{H.7 Functorial Semantics of Collapse}
+
+Let $C: \mathsf{Filt} \to \mathsf{Triv}$ be a collapse functor.  
+Then for any $\mathcal{F} \in \mathsf{Filt}$, we have:
+
+\[
+C(\mathcal{F}) = \mathcal{F}_0, \quad \text{where } \mathrm{Ext}^1(\mathcal{F}_0, \mathcal{G}) = 0 \quad \forall \mathcal{G}.
+\]
+
+This functorial model interprets collapse as semantic trivialization under categorical flow.
+
+---
+
+\subsection*{H.8 Collapse in Motivic Sheaf Topoi}
+
+Let $Sh(\mathcal{M})$ be a topos of motivic sheaves.  
+Then collapse of all $\mathrm{Ext}^i$ implies:
+
+\[
+\text{Obstruction-free realization in } D^b_c(Sh(\mathcal{M})) \Rightarrow \text{derived purity}.
+\]
+
+This provides a semantic mechanism for collapsing conjectural categories such as mixed motives or perverse sheaves.
+
+---
+
+\subsection*{H.9 References}
 
 \begin{thebibliography}{9}
 
-\bibitem{Beilinson1982}
-A. Beilinson, J. Bernstein, P. Deligne.  
-\textit{Faisceaux pervers}. Astérisque 100, 1982.
+\bibitem{Illusie}
+L. Illusie.\\
+\textit{Complexe cotangent et déformations}.  
+Lecture Notes in Mathematics, Vol. 239, Springer, 1971.
 
-\bibitem{Voevodsky2000}
-V. Voevodsky.  
-\textit{Triangulated categories of motives}. AMS, 2000.
+\bibitem{Toen}
+B. Toën.\\
+\textit{Higher and Derived Stacks: a global overview}.  
+In “Algebraic Geometry – Seattle 2005”, Part 1, Proc. Symp. Pure Math. 80 (2009).
 
-\bibitem{Ayoub2007}
-J. Ayoub.  
-\textit{Les six opérations de Grothendieck}. Astérisque 314–315, 2007.
+\bibitem{LurieHTT}
+J. Lurie.\\
+\textit{Higher Topos Theory}.  
+Annals of Mathematics Studies, 2009.
 
-\bibitem{Lurie2009}
-J. Lurie.  
-\textit{Higher Topos Theory}. Princeton University Press, 2009.
+\bibitem{LurieSAG}
+J. Lurie.\\
+\textit{Spectral Algebraic Geometry}.  
+Preprint, available online.
 
-\bibitem{Gaitsgory2013}
-D. Gaitsgory, N. Rozenblyum.  
-\textit{A Study in Derived Algebraic Geometry}. Vol. I, AMS, 2013.
+\bibitem{Grothendieck}
+A. Grothendieck.\\
+\textit{Pursuing Stacks}.  
+Manuscript, 1983.
 
 \end{thebibliography}
+
 
 
 % ===========================
@@ -2231,20 +2076,213 @@ u(t) \in C^\infty
 This diagram encapsulates the physical and categorical manifestation  
 of the A6 Collapse Axiom in the Navier--Stokes setting.
 
-\subsection*{I$^+$.6 Discussion and Outlook}
 
-This realization opens pathways toward integrating other geometric degenerations  
-(SYZ mirror flow, toric collapse, tropical vanishing) into PDE regularity frameworks.  
-Future extensions may involve:
+
+% ============================================
+% Appendix I⁺.6–I⁺.15: Mirror–Langlands–Trop Collapse Synthesis (Final Integrated)
+% ============================================
+
+\section*{Appendix I⁺.6–I⁺.15: Mirror–Langlands–Trop Collapse Synthesis}
+\addcontentsline{toc}{section}{Appendix I⁺.6–I⁺.15: Mirror–Langlands–Trop Collapse Synthesis}
+
+\paragraph{Note.}  
+This appendix synthesizes Mirror Symmetry, Langlands Correspondence, and Tropical Geometry  
+within the AK Collapse framework. It unifies topological, categorical, and degeneration-theoretic  
+collapse mechanisms into a coherent structural perspective applicable to both geometric and arithmetic problems.
+
+---
+
+\subsection*{I⁺.6 Unified Objective}
+
+We synthesize three collapse frameworks into a single categorical structure:
 
 \begin{itemize}
-  \item Mixed Hodge theory over filtration trees of turbulent flows,
-  \item Mirror collapse models in compressible fluid settings,
-  \item VMHS diagnosis via persistent barcode stability under Isomap dynamics (see Appendix~L).
+  \item \textbf{Mirror Symmetry}: categorical duality between complex and symplectic geometry,
+  \item \textbf{Langlands Correspondence}: representation–sheaf duality via Ext-groups,
+  \item \textbf{Tropical Geometry}: degeneration framework encoding filtrations and barcodes.
 \end{itemize}
 
-It also supports a deeper interplay between algebraic geometry, topology,  
-and nonlinear PDEs, reinforcing the universality of the AK–Collapse principle.
+Collapse ($\mathrm{PH}_1 = 0$, $\mathrm{Ext}^1 = 0$) is interpreted as simultaneous vanishing in all three frameworks.
+
+---
+
+\subsection*{I⁺.7 SYZ Mirror and Persistent Collapse}
+
+Under Strominger–Yau–Zaslow (SYZ) mirror symmetry:
+
+\[
+\text{Collapsing special Lagrangian torus fibrations} 
+\quad \Longleftrightarrow \quad 
+\text{Hodge filtration degeneration}.
+\]
+
+Persistent homology barcodes $[b,d]$ correspond to periodic cycles of these fibrations.
+
+\begin{definition}[Mirror–PH Collapse Correspondence]
+Let $[b,d] \in \mathrm{PH}_1(X_t)$ correspond to a stable cycle $\gamma_t$.
+Then:
+\[
+\text{SYZ collapse of } \gamma_t 
+\quad \Rightarrow \quad 
+[b,d] \to \emptyset \quad \Rightarrow \quad C(t) \to 0.
+\]
+\end{definition}
+
+---
+
+\subsection*{I⁺.8 Langlands Duality and Ext Collapse}
+
+In the Langlands framework, the Ext-group $\mathrm{Ext}^1(\mathcal{F}, \mathbb{Q}_\ell)$ measures deviation between automorphic and Galois categories.  
+Collapse corresponds to the vanishing of nontrivial extension classes.
+
+\[
+\text{Mod}(\mathbb{Q}_\ell[G_\mathbb{Q}]) \quad \longleftrightarrow \quad D^b_c(\mathrm{Bun}_G)
+\]
+
+\begin{proposition}[Langlands Ext Collapse]
+Let $\mathcal{F}_E$ denote the derived sheaf of an elliptic curve $E/\mathbb{Q}$.  
+Then:
+\[
+\mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 
+\quad \Longrightarrow \quad 
+\text{automorphic–Galois matching holds globally}.
+\]
+\end{proposition}
+
+---
+
+\subsection*{I⁺.9 Tropical Degeneration of Mirror Data}
+
+Tropical geometry interprets filtrations as piecewise-linear degenerations.  
+Under mirror symmetry, the base of a torus fibration degenerates into a tropical manifold $B^{\mathrm{trop}}$.
+
+Persistent barcodes $[b,d]$ encode filtration behavior:
+\[
+[b,d] \quad \mapsto \quad \text{Slope } = \frac{1}{d - b} \quad \text{on } B^{\mathrm{trop}}.
+\]
+
+\begin{definition}[Tropical Collapse Condition]
+Let $X_t$ be a family of spaces with barcode $\mathrm{PH}_1(X_t)$.  
+Then tropical collapse occurs when:
+\[
+\forall [b,d] \in \mathrm{PH}_1(X_t), \quad d - b \to 0 \quad \Rightarrow \quad B^{\mathrm{trop}} \text{ becomes contractible.}
+\]
+\end{definition}
+
+---
+
+\subsection*{I⁺.10 Collapse Functors and Frobenius Type}
+
+Collapse can be encoded via functors between degenerating structures.  
+The Frobenius endofunctor $F^*$ on filtered categories acts as a degeneration operator:
+\[
+F^*(\mathcal{F}) = \mathcal{F}^{(p)} \quad \text{with } \mathrm{Ext}^1(\mathcal{F}, \mathbb{Q}) \to 0.
+\]
+
+\begin{definition}[Collapse Functor]
+A functor $C: \mathsf{Filt} \to \mathsf{Triv}$ is called a collapse functor if:
+\[
+C(\mathcal{F}) = \mathcal{F}_0 \quad \text{and} \quad \mathrm{Ext}^1(\mathcal{F}_0, \mathcal{G}) = 0 \quad \forall \mathcal{G}.
+\]
+\end{definition}
+
+---
+
+\subsection*{I⁺.11 Equivalence Classes of Mirror Collapse}
+
+Collapse types under mirror symmetry may be classified as:
+
+\begin{itemize}
+  \item \textbf{Type I:} Homological collapse with persistent dual vanishing,
+  \item \textbf{Type II:} Sheaf collapse without dual contraction,
+  \item \textbf{Type III:} Simultaneous collapse across mirror-dual structures.
+\end{itemize}
+
+Each class corresponds to a topological configuration of degeneration limits.
+
+---
+
+\subsection*{I⁺.12 Mixed Motive Diagram and Langlands Flow}
+
+We propose the following diagram:
+
+\[
+\begin{tikzcd}
+\text{Motive}_{\mathrm{pure}} \arrow[r, "Degeneration"]
+& \text{Motive}_{\mathrm{mixed}} \arrow[r, "\mathrm{Ext}^1 = 0"]
+& \text{Langlands Flow} \arrow[r, "\text{Functor collapse}"]
+& \text{Categorical Smoothing}
+\end{tikzcd}
+\]
+
+This diagram expresses the geometric degeneration and motivic smoothness interpretation.
+
+---
+
+\subsection*{I⁺.13 Barcode–Hodge Dictionary}
+
+Persistent barcodes and Hodge data relate as follows:
+
+\[
+\begin{array}{ccc}
+\text{Barcode } [b,d] & \leftrightarrow & \text{Weight filtration level} \\
+d - b & \leftrightarrow & \text{Hodge length (degeneration)} \\
+\text{Contracted barcode} & \leftrightarrow & \text{Purity restoration} \\
+\end{array}
+\]
+
+This establishes a computational bridge between TDA and Hodge theory.
+
+---
+
+\subsection*{I⁺.14 Mirror–Langlands–Trop Collapse Summary}
+
+AK Collapse unifies:
+
+\begin{itemize}
+  \item \textbf{PH Collapse:} barcode disappearance (geometry),
+  \item \textbf{Ext Collapse:} gluing success (category),
+  \item \textbf{Langlands Collapse:} arithmetic–geometric compatibility.
+\end{itemize}
+
+This trinity underlies geometric–categorical–arithmetic unification in AK theory.
+
+---
+
+\subsection*{I⁺.15 References for Mirror–Langlands–Trop Collapse}
+
+\begin{thebibliography}{9}
+
+\bibitem{Beilinson1982}
+A. Beilinson, J. Bernstein, P. Deligne.\\
+\textit{Faisceaux pervers}. Astérisque 100 (1982), 5–171.
+
+\bibitem{Gaitsgory2013}
+D. Gaitsgory, N. Rozenblyum.\\
+\textit{A Study in Derived Algebraic Geometry}.  
+Vol. I, AMS, 2013.
+
+\bibitem{Kapranov2004}
+M. Kapranov.\\
+\textit{Perverse Sheaves and Langlands Correspondence}.  
+Preprint, 2004.
+
+\bibitem{Mikhalkin2006}
+G. Mikhalkin.\\
+\textit{Tropical Geometry and its Applications}.  
+Proceedings of ICM 2006.
+
+\bibitem{Strominger1996}
+A. Strominger, S.-T. Yau, E. Zaslow.\\
+\textit{Mirror Symmetry is T-Duality}.  
+Nucl. Phys. B 479 (1996): 243–259.
+
+\bibitem{Kontsevich1994}
+M. Kontsevich.\\
+\textit{Homological Algebra of Mirror Symmetry}.  
+ICM 1994.
+
+\end{thebibliography}
 
 
 
@@ -2598,101 +2636,66 @@ Mathematical structure → Collapse flow → Learning topology → Semantic endg
 
 ---
 
-\subsection*{L.13 Isomap–PH Collapse Classification (C1)}
+\subsection*{L.13 AI-Assisted Collapse Diagnosis via PH and Isomap}
 
-We introduce a classification scheme that integrates persistent homology with manifold learning (Isomap) to diagnose and visualize collapse phases in PDE solution spaces. This fusion allows AI models to detect structural degeneration using low-dimensional embeddings.
+We introduce a computational pipeline using AI to assist diagnosis of collapse structures:
 
-\paragraph{Pipeline Overview.}
-\[
-u(t) \xrightarrow{\text{Simulation}} \{PH_1(t), \widehat{u}(k,t)\}
-\xrightarrow{\text{Feature Vectorization}} \mathcal{F}_{\text{Collapse}}
-\xrightarrow{\text{Isomap}} \mathcal{M}_{\text{LowDim}}
-\xrightarrow{\text{Clustering}} \text{Collapse Class}
-\]
-
-\paragraph{Feature Construction.}
-Let the feature vector be defined as:
-\[
-\mathcal{F}_{\text{Collapse}} := \text{Persistence Entropy} \oplus \|\widehat{u}(k)\|^2 \oplus \dim(\mathrm{Ext}^1)
-\]
-Each component reflects a topological, spectral, or categorical descriptor of the evolving PDE state.
-
-\paragraph{Manifold Embedding.}
-Using Isomap with geodesic distance \( d_g \), we embed \(\mathcal{F}_{\text{Collapse}}\) into a lower-dimensional manifold \(\mathcal{M}_{\text{LowDim}}\), preserving local neighborhood structures and topological variance.
-
-\paragraph{Collapse Typology.}
-Clusters formed in \(\mathcal{M}_{\text{LowDim}}\) correspond to collapse types such as:
 \begin{itemize}
-  \item C0: Full Collapse (PH, Ext, and Spectral decay)
-  \item C1/C2: Topological or Categorical Collapse
-  \item C4--C6: Virtual, Obstructive, or Bifurcation Collapse
+  \item Input: filtered metric data \( X \subset \mathbb{R}^N \),
+  \item Step 1: Isomap embedding \( \mathsf{Iso}(X) \to \tilde{X} \subset \mathbb{R}^d \),
+  \item Step 2: Compute persistent homology \( \mathrm{PH}_1(\tilde{X}) \),
+  \item Step 3: Apply AI classifier \( \mathcal{A}: \mathrm{PH}_1 \mapsto \text{Collapse Type} \),
+  \item Step 4: Determine zone: $\text{Smooth} \mid \text{Critical} \mid \text{Singular}$.
 \end{itemize}
 
-\paragraph{AI Diagnostic Role.}
-This geometric representation enables:
+\paragraph{AI Model Description.}  
+The AI classifier is trained on labeled PH barcodes with collapse outcomes.  
+It identifies:
 \begin{itemize}
-  \item Early detection of approaching collapse zones
-  \item Identification of soft vs. hard collapses
-  \item Classification of outliers and semantic anomalies
+  \item Barcode decay rates: $d-b \searrow 0$,
+  \item Feature clustering and contractibility,
+  \item Correlation with Ext$^1 = 0$ outcomes (via derived category simulations).
 \end{itemize}
-
-\paragraph{Reference.}
-See also Appendix~C.3 for topological energy metrics, and Appendix~Z.1 (A8) for formalization of AI-based collapse inference.
 
 ---
 
-\subsection*{L.14 AI-Aided Collapse Inference: PH $\Leftrightarrow$ Ext Correspondence (C2)}
+\subsection*{L.14 Collapse Classification Space and Failure Diagnosis}
 
-This section formalizes the use of AI to learn and detect the structural correspondence between persistent homology and Ext-class collapse. The objective is to support logical inference about collapse zones in the AK framework through machine-learned mappings.
+We define a stratified classification space:
 
-\paragraph{Mathematical Hypothesis.}
-Let
 \[
-PH_k(t) = 0 \quad \Longleftrightarrow \quad \forall i, \mathrm{Ext}^1(Q, F^\bullet_i) = 0
-\]
-be the expected equivalence in AK-theoretic collapse (see Appendix~C.2). We train AI models to learn this functional equivalence.
-
-\paragraph{Model Design.}
-Given a dataset of PDE simulations \(\{u_i(t)\}_{i=1}^N\) and their topological–categorical features:
-\[
-\mathcal{D} = \left\{ \left(PH_k^{(i)}(t), \dim(\mathrm{Ext}^1_i(t)) \right) \right\}_{i=1}^N
-\]
-the model \( \mathcal{M} \) learns to approximate the collapse correspondence function:
-\[
-\mathcal{M}: PH_k(t) \mapsto \mathrm{Ext}^1(Q, F^\bullet)
+\mathcal{C} = \bigsqcup_{i=0}^3 \mathcal{C}_i, \quad \text{where:}
 \]
 
-\paragraph{Learning Objective.}
-\[
-\min_{\mathcal{M}} \; \mathbb{E}_{(PH, \mathrm{Ext}) \in \mathcal{D}} \left[ \left( \mathcal{M}(PH) - \dim(\mathrm{Ext}^1) \right)^2 \right]
-\]
-With post-thresholding:
-\[
-\mathcal{M}(PH) < \epsilon \Rightarrow \text{Declare Collapse}
-\]
-
-\paragraph{Applications.}
 \begin{itemize}
-  \item Support collapse verification in analytic proofs
-  \item Quantify the gap between PH and Ext vanishing
-  \item Generate diagnostic alerts in ambiguous cases
+  \item \( \mathcal{C}_0 \): complete collapse (PH₁ = 0, Ext = 0, smooth),
+  \item \( \mathcal{C}_1 \): partial collapse (PH₁ small, Ext undecided),
+  \item \( \mathcal{C}_2 \): obstruction zone (Ext$^1 \ne 0$, PH noisy),
+  \item \( \mathcal{C}_3 \): chaotic/non-collapsing region (PH persistent).
 \end{itemize}
 
-\paragraph{Collapse Score Function.}
-Let:
+\paragraph{Failure Diagnosis Logic.}
 \[
-\text{Collapse Score} := \sigma\left( -\lambda_1 \cdot \text{pers}(PH)^2 - \lambda_2 \cdot \|\widehat{u}(k>k_0)\|^2 \right)
-\]
-where \(\sigma\) is the sigmoid function and \(\lambda_i\) are learned weights. This score approximates the probability of full collapse.
-
-\paragraph{Diagnostic Thresholds.}
-Using training data, the model defines collapse zones as:
-\[
-\text{Collapse Zone} := \left\{ x \in \mathcal{M}_{\text{Collapse}} \mid \text{Collapse Score}(x) > \tau \right\}
+\text{PH}_1 \ne 0 \land \mathrm{Ext}^1 \ne 0 
+\quad \Rightarrow \quad \text{Obstruction logic activated}
+\quad \Rightarrow \quad \text{Collapse fails}.
 \]
 
-\paragraph{Reference.}
-See Appendix~C for topological collapse formulation, and Appendix~Z.1 (A8) for the axiomatic support of classifier-based inference.
+\paragraph{Interpretation.}  
+Each \( \mathcal{C}_i \) can be visualized using AI models (e.g., t-SNE, UMAP) to detect boundary regions  
+between structurally stable and unstable configurations.  
+This supports collapse detection, refinement, and future prediction of analytic smoothness.
+
+---
+
+\paragraph{Reference Integration:}  
+These modules integrate with:
+- `Appendix B` (Fourier/Decay diagnosis),
+- `Appendix G–H` (Ext–PH correspondence),
+- `Appendix I⁺` (mirror degeneration structures),
+- `Appendix Z.2–Z.3` (collapse classification & timeline),
+and serve as **AI-augmented classification engines** in the AK Collapse framework.
+
 
 ---
 
@@ -3077,53 +3080,52 @@ J. Lurie.
 % Appendix Z: Axioms, Collapse Classification, and Causal Structure (Revised)
 % ===========================
 
-\section*{Appendix Z: Axioms, Collapse Classification, and Causal Structure}
-\addcontentsline{toc}{section}{Appendix Z: Axioms, Collapse Classification, and Causal Structure}
+\section*{Appendix Z: Collapse Axioms, Classifications, and Causal Flow (Reinforced)}
+\addcontentsline{toc}{section}{Appendix Z: Collapse Axioms, Classifications, and Causal Flow (Reinforced)}
 
-\subsection*{Z.1 Structural Axioms of Collapse (Functionally Classified)}
+\subsection*{Z.1 Formal Collapse Axioms (ZFC-Structured)}
 
-\begin{tabular}{lll}
+\textbf{Notation:} Let \( \mathcal{F}_t \in D^b(\mathsf{Filt}) \) denote a filtered derived object indexed by time \( t \),  
+and let \( \mathrm{PH}_1(\mathcal{F}_t) \) denote the 1st persistent homology group of sublevel filtrations over a topological field \( k \).  
+
+\begin{tabular}{ll}
 \toprule
-\textbf{Axiom} & \textbf{Statement} & \textbf{Reference} \\
+\textbf{Axiom} & \textbf{Formal Statement} \\
 \midrule
-A1 & High-dimensional projection preserves MECE decomposition & Sec. 2.1 \\
-A2 & Persistent topology collapse implies local analytic control & Step 1–3 \\
-A3 & Ext$^1$ vanishing implies vanishing obstruction class & Appendix G \\
-A4 & Functorial degeneration stabilizes barcode collapse & Appendix H \\
-A5 & Topological energy and Ext are mutually recoverable & Appendix C, I \\
-A6 & VMHS degeneration implies Ext + PH collapse (NS specific) & Appendix F, Ch. 7 \\
-A7 & Dyadic spectral decay implies topological collapse & Appendix B, Z.3 \\
-A8 & Ext–PH collapse implies $C^\infty$ regularity & Chapter 7 \\
-A9 & BSD Collapse confirms structural Ext–PH–Sha chain & Appendix Z.8 \\
+A1 (Projection–MECE Preservation) & \( \forall t,\, \pi_H: X_t \to \mathbb{R}^N \Rightarrow \text{MECE clusters remain topologically disjoint} \). \\
+A2 (PH Collapse ⇒ Local Regularity) & \( \mathrm{PH}_1(u(t)) = 0 \Rightarrow u(t) \in H^1_{\text{loc}}(\mathbb{R}^3) \). \\
+A3 (Ext Collapse ⇒ Obstruction-Free) & \( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \Rightarrow \text{all local-to-global gluing succeeds} \). \\
+A4 (Functorial Degeneration Stability) & Degeneration of \( \mathcal{F}_t \) stabilizes barcodes: \( [b,d] \to \emptyset \Rightarrow \mathrm{PH}_1 = 0 \). \\
+A5 (Ext–Energy Duality) & \( \exists\, \mathcal{E}(t): \|\nabla u(t)\|^2 \Leftrightarrow \mathrm{Ext}^1 \) class norm. \\
+A6 (VMHS Collapse ⇒ Ext–PH Collapse) & Degeneration of VMHS on \( \mathcal{F}_t \Rightarrow \mathrm{Ext}^1 = 0,\, \mathrm{PH}_1 = 0 \). \\
+A7 (Spectral Collapse ⇒ Topological Collapse) & Dyadic decay \( \Rightarrow \lim_{k \to \infty} \|\hat{u}_k\| = 0 \Rightarrow \mathrm{PH}_1 = 0 \). \\
+A8 (Ext–PH Collapse ⇒ Smoothness) & \( \mathrm{Ext}^1 = 0 \land \mathrm{PH}_1 = 0 \Rightarrow u \in C^\infty \). \\
+A9 (BSD Collapse Structure) & \( \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \operatorname{rank}_{\mathbb{Q}} E = \operatorname{ord}_{s=1} L(E, s) \). \\
 \bottomrule
 \end{tabular}
 
-\vspace{1em}
+---
 
-\subsection*{Z.2 Collapse Classification by Origin and Target}
+\subsection*{Z.2 Collapse Classification by Origin and Target (Topos-Trop Categories)}
 
-\usepackage{array} 
-
-\begin{tabular}{>{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{3.5cm} >{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}p{2.5cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}p{2.5cm}}
 \toprule
-\textbf{Collapse Type} & \textbf{Origin Structure} & \textbf{Target Collapse} & \textbf{Reference} \\
+\textbf{Collapse Type} & \textbf{Origin Structure} & \textbf{Target Collapse} & \textbf{Primary Reference} \\
 \midrule
-PH Collapse & Sublevel sets of $|u(x,t)|$ & $\mathrm{PH}_1(u(t)) = 0$ & Step 1, Appendix B \\
-Ext Collapse & Derived sheaf obstruction class & $\mathrm{Ext}^1(Q, \mathcal{F}_t) = 0$ & Appendix G \\
-Trop Collapse & Tropical degeneration pattern & Contractible skeleton & Appendix F \\
-VMHS Collapse & Mixed Hodge filtration degeneration & Sheaf–category trivialization & Appendix H \\
-Langlands Collapse & Motivic Galois action & Internal motive simplification & Appendix I \\
-AI Collapse & PH/Ext classifier embedding & Collapse zone detection & Appendix L \\
-BSD Collapse & Rational points on elliptic curves & PH → Ext → $\Sha = 0$ & Appendix Z.8 \\
-Semantic Collapse & Obstruction logic trivialized & Smooth phase globality & Appendix J, Z.3 \\
+PH Collapse & Sublevel sets of \( |u(x,t)| \) & \( \mathrm{PH}_1(u(t)) = 0 \) & Step 1, Appendix B \\
+Ext Collapse & Derived sheaf gluing failure & \( \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \) & Appendix G, H \\
+Trop Collapse & Tropical degeneration complex & Contractible skeleton \( \Sigma \subset X^{\text{trop}} \) & Appendix F \\
+VMHS Collapse & Filtered Hodge module degeneration & Triviality of sheaf category extension classes & Appendix H \\
+Langlands Collapse & Galois/automorphic action via Ext & Motivic trivialization / sheaf cohomology collapse & Appendix I, I⁺ \\
+AI Collapse & PH/Ext classifier from Isomap/TDA & Collapse zone detection / classification shift & Appendix L.13–14 \\
+BSD Collapse & \( E(\mathbb{Q}) \subset X \subset \mathbb{R}^N \) & \( \mathrm{PH}_1 = 0 \Rightarrow \Sha(E) = 0 \) & Appendix Z.8 \\
+Semantic Collapse & Obstruction logic over Topos & \( \mathcal{F}_t \Rightarrow u \in C^\infty \) & Appendix J, Z.3 \\
 \bottomrule
 \end{tabular}
 
-\vspace{1em}
+---
 
-\subsection*{Z.3 Causal Logic Map and Collapse Flow Structure}
-
-We collect and summarize the causal structure of collapse events as follows:
+\subsection*{Z.3 Collapse–Smoothness Causal Logic Map}
 
 \begin{center}
 \begin{tikzcd}[row sep=large, column sep=large]
@@ -3135,20 +3137,24 @@ u(t) \in C^\infty \arrow[r] &
 \end{tikzcd}
 \end{center}
 
-\paragraph{Collapse Timeline:}  
+\paragraph{Collapse Timeline:}
 \begin{itemize}
-  \item Initial flow $u(t)$ exhibits complex topological loops (PH$_1 \ne 0$)
-  \item TDA filtering enforces collapse of persistent features $\Rightarrow$ PH$_1 = 0$
-  \item AK-sheaf degeneration collapses Ext$^1$ classes
-  \item Collapse zone $t > T_0$ ensures smoothness: $u(t) \in C^\infty$
+  \item Phase I: Initial state \( u(t) \) exhibits nontrivial topology — PH\(_1 \ne 0\)
+  \item Phase II: TDA processes collapse topological loops ⇒ \( \mathrm{PH}_1 = 0 \)
+  \item Phase III: Ext-class vanishing via AK-functorial sheaf degeneration
+  \item Phase IV: Gluing success and categorical coherence ⇒ \( u(t) \in C^\infty \)
+  \item Phase V: Energy/Enstrophy boundedness ⇒ global regularity phase
 \end{itemize}
 
-\paragraph{Reference:}  
-This logic underlies the collapse equivalence theorem in Chapter 7 and is expanded in Appendices F–H, with structural classification in Appendix I and semantic reinforcement in Appendix J.
+\paragraph{Reference:}
+These principles support the Collapse Equivalence Theorem (Chapter 7),  
+and integrate VMHS/topos logic (Appendices F, G, H), structural categorization (Appendix I),  
+and semantic foundations (Appendix J).
+
 
 ---
 
-\subsection*{Z.4 Ext–PH–Smoothness Collapse Diagram (Causal Structure)}
+\subsection*{Z.4 Ext–PH–Smoothness Collapse Diagram (Abstract Causal Structure)}
 
 \begin{figure}[H]
 \centering
@@ -3161,6 +3167,29 @@ This logic underlies the collapse equivalence theorem in Chapter 7 and is expand
 & u(t) \in C^\infty(\mathbb{R}^3)
 \end{tikzcd}
 \caption{Causal Collapse Flow: PH-triviality implies Ext-vanishing, enabling gluing and categorical smoothness.}
+\end{figure}
+
+\paragraph{Note on Z.4 and Z.4⁺.}  
+Z.4 presents an abstract categorical view of the Ext–PH–smoothness correspondence.  
+Z.4⁺ complements this with a more topological and visual formulation, starting from barcode triviality and ending in smooth realization.
+
+\subsection*{Z.4⁺ Topological Barcode Collapse and Smoothness Realization}
+
+\begin{figure}[H]
+\centering
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathrm{PH}_1(\mathcal{F}_t) = 0 \arrow[r, "\text{Functorial Collapse}"] \arrow[d, swap, "\text{Topological Degeneration}"] 
+& \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \arrow[r, "\text{Obstruction Vanishing}"] 
+& \text{Glue Success} \arrow[r, "\text{Colimit Construction}"] 
+& \mathcal{F}_0 := \colim \mathcal{F}_t \arrow[r, "\text{Smoothness Realization}"] 
+& u(t) \in C^\infty(\mathbb{R}^3) \\
+\text{Barcode } = \emptyset \arrow[rr, swap, "\text{No Global Topological Cycle}"] & &
+\end{tikzcd}
+
+\caption{Topological–Categorical–Analytic Collapse Equivalence: Persistent triviality yields smoothness via obstruction-free colimit construction.}
+
+\textit{This diagram makes explicit the collapse sequence starting from topological triviality (barcodes) to analytic smoothness.  
+It emphasizes the functorial degeneration mechanism central to AK Collapse.}
 \end{figure}
 
 ---

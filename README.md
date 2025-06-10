@@ -1,6 +1,6 @@
 # 🌐 AK High-Dimensional Projection Structural Theory (v7.3)
 
-📄 [日本語版 README（Japanese README Available Here）] (https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory/blob/main/README_ja.md)
+📄 [日本語版 README（Japanese README Available Here）] (README_jp.md)
 
 ---
 

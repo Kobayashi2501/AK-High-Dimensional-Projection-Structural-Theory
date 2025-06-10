@@ -711,8 +711,9 @@ It provides the logical foundation for structure-preserving collapse mechanisms 
 
 We summarize the correspondence between high-dimensional projection, persistent homology filtration, and Ext-vanishing via the following commutative diagram:
 
-\[
-\resizebox{\textwidth}{!}{%
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{}{
 \begin{tikzcd}[row sep=large, column sep=large]
 X \arrow[r, "\mathcal{P}"] \arrow[dr, swap, "\mathrm{Ext}^1(F,G)"] & 
 \mathbb{T}^N \arrow[d, "\text{Sublevel Filtration}"] \\
@@ -720,7 +721,8 @@ X \arrow[r, "\mathcal{P}"] \arrow[dr, swap, "\mathrm{Ext}^1(F,G)"] &
 & PH_k(t) \to 0
 \end{tikzcd}
 }
-\]
+\caption{Ext-driven filtration flow from projection to barcode collapse}
+\end{figure}
 
 
 Here, projection into $\mathbb{T}^N$ induces a filtration structure on level sets, from which persistent homology barcodes are derived.  
@@ -1612,16 +1614,26 @@ Then the following conditions are equivalent:
 
 We interpret the equivalence as a causal flow of collapse:
 
-\[
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{}{
 \begin{tikzcd}[row sep=large, column sep=large]
-\mathrm{PH}_1(\mathcal{F}_t) = 0 \arrow[r, "\text{Barcode Collapse}"] \arrow[d, swap, "\text{Topological Category Link}"] 
-& C(t) \downarrow \\
-\mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \arrow[r, "\text{Obstruction Vanishing}"] 
-& \text{Glue Success} \arrow[r, "\text{Colimit Construction}"] 
-& \mathcal{F}_0 := \colim \mathcal{F}_t \arrow[r, "\text{Categorical Smoothness}"] 
+\mathrm{PH}_1(\mathcal{F}_t) = 0 
+  \arrow[r, "\text{Barcode Collapse}"] 
+  \arrow[d, swap, "\text{Topological Category Link}"] 
+& C(t) 
+  \arrow[d] \\
+\mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 
+  \arrow[r, "\text{Obstruction Vanishing}"] 
+& \text{Glue Success} 
+  \arrow[r, "\text{Colimit Construction}"] 
+& \mathcal{F}_0 := \colim \mathcal{F}_t 
+  \arrow[r, "\text{Categorical Smoothness}"] 
 & u(t) \in C^\infty(\mathbb{R}^3)
 \end{tikzcd}
-\]
+}
+\caption{Causal Collapse Flow: From PH-triviality and Ext-vanishing to smoothness}
+\end{figure}
 
 This diagram summarizes the transition from topological triviality to analytic regularity via categorical gluing and vanishing of obstructions.
 
@@ -2779,8 +2791,11 @@ and $\mathcal{C}_{\text{Collapse}}$ the structured collapse category generated b
 
 We define a diagrammatic mapping:
 
-\[
-\begin{tikzcd}[row sep=large, column sep=large]
+\begin{figure}[htbp]
+\centering
+
+\resizebox{\textwidth}{ }{
+\begin{tikzcd}[row sep=large, column sep=normal]
 u(t) \arrow[r, "Sim"] \arrow[dr, swap, "\widehat{\mathcal{F}}_{\text{AI}}"] & 
 \{ PH_1, \widehat{u}, \mathrm{Ext}^1 \} \arrow[r, "Feature Map"] & 
 \mathcal{F}_{\text{Collapse}} \arrow[d, "AI Classifier"] \\
@@ -2788,7 +2803,10 @@ u(t) \arrow[r, "Sim"] \arrow[dr, swap, "\widehat{\mathcal{F}}_{\text{AI}}"] &
 \mathcal{D}_{\text{AI}} \arrow[r, dashed, "\Phi"] &
 \mathcal{C}_{\text{Collapse}}
 \end{tikzcd}
-\]
+}
+\caption{Categorical classification pipeline from simulation to collapse judgment}
+\end{figure}
+
 
 
 ---
@@ -3150,21 +3168,39 @@ J. Lurie.
 \textbf{Notation:} Let \( \mathcal{F}_t \in D^b(\mathsf{Filt}) \) denote a filtered derived object indexed by time \( t \),  
 and let \( \mathrm{PH}_1(\mathcal{F}_t) \) denote the 1st persistent homology group of sublevel filtrations over a topological field \( k \).  
 
-\begin{tabular}{ll}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{lX}
 \toprule
 \textbf{Axiom} & \textbf{Formal Statement} \\
 \midrule
-A1 (Projection–MECE Preservation) & \( \forall t,\, \pi_H: X_t \to \mathbb{R}^N \Rightarrow \text{MECE clusters remain topologically disjoint} \). \\
-A2 (PH Collapse ⇒ Local Regularity) & \( \mathrm{PH}_1(u(t)) = 0 \Rightarrow u(t) \in H^1_{\text{loc}}(\mathbb{R}^3) \). \\
-A3 (Ext Collapse ⇒ Obstruction-Free) & \( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \Rightarrow \text{all local-to-global gluing succeeds} \). \\
-A4 (Functorial Degeneration Stability) & Degeneration of \( \mathcal{F}_t \) stabilizes barcodes: \( [b,d] \to \emptyset \Rightarrow \mathrm{PH}_1 = 0 \). \\
-A5 (Ext–Energy Duality) & \( \exists\, \mathcal{E}(t): \|\nabla u(t)\|^2 \Leftrightarrow \mathrm{Ext}^1 \) class norm. \\
-A6 (VMHS Collapse ⇒ Ext–PH Collapse) & Degeneration of VMHS on \( \mathcal{F}_t \Rightarrow \mathrm{Ext}^1 = 0,\, \mathrm{PH}_1 = 0 \). \\
-A7 (Spectral Collapse ⇒ Topological Collapse) & Dyadic decay \( \Rightarrow \lim_{k \to \infty} \|\hat{u}_k\| = 0 \Rightarrow \mathrm{PH}_1 = 0 \). \\
-A8 (Ext–PH Collapse ⇒ Smoothness) & \( \mathrm{Ext}^1 = 0 \land \mathrm{PH}_1 = 0 \Rightarrow u \in C^\infty \). \\
-A9 (BSD Collapse Structure) & \( \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \operatorname{rank}_{\mathbb{Q}} E = \operatorname{ord}_{s=1} L(E, s) \). \\
+A1 (Projection–MECE Preservation) & 
+\( \forall t,\, \pi_H: X_t \to \mathbb{R}^N \Rightarrow \text{MECE clusters remain topologically disjoint}. \) \\
+A2 (PH Collapse ⇒ Local Regularity) & 
+\( \mathrm{PH}_1(u(t)) = 0 \Rightarrow u(t) \in H^1_{\text{loc}}(\mathbb{R}^3). \) \\
+A3 (Ext Collapse ⇒ Obstruction-Free) & 
+\( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \Rightarrow \text{all local-to-global gluing succeeds}. \) \\
+A4 (Functorial Degeneration Stability) & 
+Degeneration of \( \mathcal{F}_t \) stabilizes barcodes: \( [b,d] \to \emptyset \Rightarrow \mathrm{PH}_1 = 0. \) \\
+A5 (Ext–Energy Duality) & 
+\( \exists\, \mathcal{E}(t): \|\nabla u(t)\|^2 \Leftrightarrow \mathrm{Ext}^1 \) class norm. \\
+A6 (VMHS Collapse ⇒ Ext–PH Collapse) & 
+Degeneration of VMHS on \( \mathcal{F}_t \Rightarrow \mathrm{Ext}^1 = 0,\, \mathrm{PH}_1 = 0. \) \\
+A7 (Spectral Collapse ⇒ Topological Collapse) & 
+Dyadic decay \( \Rightarrow \lim_{k \to \infty} \|\hat{u}_k\| = 0 \Rightarrow \mathrm{PH}_1 = 0. \) \\
+A8 (Ext–PH Collapse ⇒ Smoothness) & 
+\( \mathrm{Ext}^1 = 0 \land \mathrm{PH}_1 = 0 \Rightarrow u \in C^\infty. \) \\
+A9 (BSD Collapse Structure) & 
+\( \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow 
+\operatorname{rank}_{\mathbb{Q}} E = \operatorname{ord}_{s=1} L(E, s). \) \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
+\caption{Collapse Axioms and Formal Equivalences}
+\end{table}
 
 ---
 
@@ -3635,7 +3671,11 @@ If the following conditions hold:
 then:
 
 \[
-\text{All gluing obstructions vanish (e.g., \( \Sha(E) = 0 \)), and special function realization is enabled (e.g., \( K^{\mathrm{ab}} = K(\Theta_K(P)) \))}
+\begin{aligned}
+& \text{All gluing obstructions vanish (e.g., } \Sha(E) = 0 \text{),} \\
+& \text{and special function realization is enabled (e.g., } 
+K^{\mathrm{ab}} = K(\Theta_K(P)) \text{).}
+\end{aligned}
 \]
 
 \textit{In both cases, the Collapse framework determines a transition to analytic or arithmetic regularity.}

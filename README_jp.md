@@ -85,7 +85,7 @@ Collapse Lemma より：
 - 実数体：Ext–PH崩壊による可換化
 - 特殊関数がAK派生圏内で再構成される
 
-### 🧮 BSD予想の構造的証明
+### 🧮 [BSD予想の構造的証明](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 - Appendix I にて以下のように定式化：
 > \[
 > \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \mathrm{rank}(E) = \mathrm{ord}_{s=1} L(E,s)

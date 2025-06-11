@@ -84,7 +84,7 @@ By decomposing these into MECE (Mutually Exclusive, Collectively Exhaustive) clu
 - Real fields: Ext–PH collapse implies abelianization
 - Special functions reconstructed via AK-derived category
 
-### 🧮 BSD Conjecture
+### 🧮 [BSD Conjecture (AK Structural Proof)]((https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory))
 - Appendix I formalizes BSD as:
 > \[
 > \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \mathrm{rank}(E) = \mathrm{ord}_{s=1} L(E,s)

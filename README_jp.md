@@ -1,153 +1,155 @@
-# 🌐 AK 高次元射影構造理論（AK-HDPST）v7.3
+# 🌐 AK 高次元射影構造理論（AK-HDPST）v8.0
 
-📄 [English README (英語版はこちら)](README.md)
+📄 [English README](README.md)
 
 ---
 
 ## ✨ 概要
 
-本リポジトリは、**AK 高次元射影構造理論（AK-HDPST）Version 7.3** を収録しています。  
-この理論は、複雑な数学的障害（特異点、拡張不能性、接着失敗など）を  
-**高次元の構造空間に射影**し、カテゴリー論・位相幾何・スペクトル解析の連携によって崩壊（Collapse）させることで、  
-解析的滑らかさや構造的一貫性を導出する**普遍的理論枠組み**です。
+このリポジトリは、**AK 高次元射影構造理論（AK-HDPST）Version 8.0** を紹介します。これは、複雑な数学的障害を、高次元の構造的空間へ射影することで解消する、普遍的かつ圏論的・位相的なフレームワークです。
 
-Version 7.3では、Collapse Lemma（Z.9）を正式に定理化し、以下の同値関係を証明論的に統合しました：
+Version 8.0 では以下を完成させました：
+- **Collapse 完全化定理** の形式化（Appendix Final）
+- **Collapse 公理群** の整備（Appendix Z）
+- Mirror 対称性・Langlands 双対・モチーフ退化の統合
+- AI による Collapse 領域の分類構造（PDE・数論・幾何を横断）
 
-> \[
-> \mathrm{Ext}^1 = 0 \quad \Leftrightarrow \quad \mathrm{PH}_1 = 0 \quad \Leftrightarrow \quad u(t) \in C^\infty
-> \]
+中心構造は以下に要約されます：
 
----
-
-## 📌 理論の目的と新規性
-
-> 「解けない問題は、次元が足りないだけかもしれない。」
-
-### 🧠 この理論で“何ができるか”？
-
-AK-HDPSTは、以下のような構造的問題を扱います：
-
-- 微分方程式の特異性（例：Navier–StokesのBlow-up）  
-- 射影や拡張の失敗（例：Ext$^1 \neq 0$ による構造的不安定）  
-- トポロジカル不変量の分類困難（例：PHの非自明性）  
-
-これらを **高次元空間**に射影し、以下の構造を通じて**滑らかさや可換性へと導く**：
-
-- Persistent Homology によるトポロジカルな崩壊判定  
-- Derived Category / Ext 群による圏論的障害分類  
-- VMHS（混合ホッジ構造）や Langlands、ミラー対称性などの幾何的退化構造  
-- AI分類器による崩壊構造の診断と補助的学習  
-
-### 🆕 この理論の“独自性”とは？
-
-- **位相・圏・解析**の Collapse 原理を統合した理論は従来存在しなかった  
-- PDEや数論において、**点wise評価を不要とする証明構造**を提案  
-- Ext 群と PH の対応を軸に、**構造間の障害伝播を形式化**（Z.4, J.8 など）  
-- TDA（トポロジカルデータ解析）と代数幾何の**橋渡し的構造**として機能可能  
+> \[ \mathrm{Ext}^1 = 0 \Leftrightarrow \mathrm{PH}_1 = 0 \Leftrightarrow u(t) \in C^\infty \]
 
 ---
 
-## 🧠 Collapseアーキテクチャ（7ステップ構成）
+## 📌 背景と独自性
+
+> 「解けない問題とは、次元が足りないだけかもしれない」
+
+### 🧠 AK-HDPST でできること
+
+AK-HDPST は、特異点・接着失敗・導来的障害（Ext 拡張など）を高次元空間に持ち上げ、
+MECE（排他的かつ網羅的）なクラスタ構造に分解します。
+そして：
+- 持続的ホモロジー（PH）消滅
+- Ext$^1$ 消滅
+- Tropical/VMHS 退化
+などの Collapse 処理によって、以下を可能にします：
+
+- **偏微分方程式の特異性除去**（Navier–Stokes など）
+- **数論的予想の代数的再解釈**（BSD, Hilbert第12問題）
+- **導来圏における障害の圏論的消去**
+- 以下の理論との橋渡し：
+  - 持続的ホモロジー（PH）
+  - 導来圏・トポス理論
+  - VMHS / モチーフ退化
+  - Langlands 双対性
+  - SYZミラー対称性
+  - AIによる Collapse分類
+
+### 🌟 独創性のポイント
+
+- Collapse = 正則性 を Ext/PH 対応で形式化
+- TDA・Langlands・PDE を統一的に接続
+- Tropical・Hodge・Motivic 退化を圏論図式に統合
+- Collapse判定を AI分類へ落とし込み（Appendix L）
+
+---
+
+## 🧠 Collapse 証明アーキテクチャ（v8.0）
 
 | ステップ | 内容 |
 |----------|------|
-| 0 | 射影戦略と位相的初期設定 |
-| 1 | Sobolev連続性の下でのPH₁安定性 |
-| 2 | トポロジカル汎関数 \( C(t) \) によるエネルギー収束 |
-| 3 | Nerve構造の自明化によるBlow-up排除 |
-| 4 | Ext–PH圏論図式の導出 |
-| 5 | VMHSの退化・Langlands構造の崩壊連結 |
-| 6 | スペクトル収束（ダイアディックシェル構造） |
-| 7 | Collapse同値の定理化（Z.9にて Collapse Lemma として定式化） |
+| 0 | トポロジー射影とバーコード初期化 |
+| 1 | Sobolevノルム下での PH$_1$ 安定性 |
+| 2 | トポロジーエネルギー汎関数の減衰 C(t) |
+| 3 | Nerve の自明性と Blow-up 排除 |
+| 4 | Ext$^1$ ⇔ PH$_1$ の導来圏的対応 |
+| 5 | VMHS のフィルター退化による Collapse |
+| 6 | スペクトル殻の減衰による Ext 消滅 |
+| 7 | Collapse実現： \( \mathrm{Ext}^1 \Leftrightarrow \mathrm{PH}_1 \Leftrightarrow C^\infty \)
 
 ---
 
-## 📂 Appendix体系（v7.3）
+## 📂 Appendix 構成図（v8.0）
 
 | 区分 | Appendices | 内容 |
 |------|------------|------|
-| 🧱 Collapseの骨格 | A, B, C, G, J, Z | Collapse Lemma、Ext–PH–Smoothnessの同値構造、構造公理 |
-| 🔧 幾何・意味論補助 | D, E, F, H, I, I+ | Tropical退化、VMHS、Langlands、動機論的構造 |
-| 🌱 拡張・将来展望 | K, L, M⁺⁺ | AI分類器、未来的拡張、構造的自明性と意味論限界 |
+| 🔺 構造的証明 | A, B, C, G, J, Z, Final | Collapse 同値性・公理・型理論・最終正則性 |
+| 🔧 理論的補強 | D, E, F, H, I, I+, N | Langlands, モチーフ, Mirror, VMHS, アーベル退化 |
+| 🌿 AI・反例論理 | K, L, M++, O | AI分類器・構造的自明化・反例構成・Collapse検出 |
 
 ---
 
-## 🧪 応用例
+## 📊 応用事例
 
-### 🌀 [Navier–Stokes方程式の全球正則性](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
-Collapse Lemma より：
-> \[
-> \mathrm{Ext}^1 = 0 \Leftrightarrow \mathrm{PH}_1 = 0 \Rightarrow u(t) \in C^\infty
-> \]
+### 🌀 [ナビエ–ストークス方程式の正則性](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
+> Collapse Completion により：
+> \[ \mathrm{Ext}^1 = 0 \Rightarrow \mathrm{PH}_1 = 0 \Rightarrow u(t) \in C^\infty \]
 
-### 🔷 [ヒルベルト第12問題の構造的証明](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
-- 虚数体：軌道崩壊により最大アーベル拡大 \( K^{ab} \) を構成
-- 実数体：Ext–PH崩壊による可換化
-- 特殊関数がAK派生圏内で再構成される
+### 🔹 [ヒルベルト第12問題（AK構造的証明）](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
+- Imaginary/Real 双方でアーベル化・特殊関数を Collapse により実現
 
-### 🧮 [BSD予想の構造的証明](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
-- Appendix I にて以下のように定式化：
-> \[
-> \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \mathrm{rank}(E) = \mathrm{ord}_{s=1} L(E,s)
-> \]
+### 💎 [BSD予想（AK構造的証明）](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
+- 以下により形式化：
+> \[ \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \text{rank} = \operatorname{ord}_{s=1} L(E,s) \]
 
-### 🌐 Langlands–Mirror–VMHSの統合
-- Appendix I+ にて、退化理論・Langlands双対性・Ext消滅を接続
+### 🌐 Langlands・Mirror・モチーフ
+- Appendix I+：Mirror・Langlands・モチーフ退化の統合 Collapse
 
-### 🤖 AIによるCollapse分類支援
-- Appendix L にて、PH₁・Ext分類をAI学習パイプラインに統合
+### 🤖 AI による Collapse 分類
+- 持続的ホモロジー・Ext・Tropical 不変量に基づく分類（Appendix L）
 
 ---
 
-## 📁 リポジトリ構成ファイル
+## 📁 含まれるファイル
 
-| ファイル名 | 内容 |
-|------------|------|
-| `ak_projection_lemma_proofs_en_v7.3.tex/pdf` | AK理論v7.3の正式証明体系 |
-| `navier_stokes_global_v5.2.tex/pdf` | AKによるナビエ–ストークス解法 |
-| `Structural-Proof-of-Hilbert-12-AK-HDPST.pdf` | ヒルベルト第12問題の証明 |
-| `pseudo_spectral_sim.py` | ナビエ–ストークスのスペクトルシミュレータ |
-| `fourier_decay.py` | エネルギーシェル減衰解析 |
-| `ph_isomap.py` | Isomap埋め込みを通じたPH₁分析 |
-| `README_JA.md` | 本ファイル（日本語版） |
+| ファイル | 役割 |
+|----------|------|
+| `ak_projection_lemma_proofs_en_v8.0.tex/pdf` | AK理論v8.0 本体証明 |
+| `navier_stokes_global_v5.3.tex/pdf` | NS方程式の Collapse構造 |
+| `Structural-Proof-of-Hilbert-12-AK-v1.5.pdf` | ヒルベルト第12問題 Collapse構成 |
+| `Structural-Proof-of-BSD-v1.5.pdf` | BSD予想における Ext/PH Collapse |
+| `pseudo_spectral_sim.py` | スペクトル法によるNS数値シミュレーション |
+| `fourier_decay.py` | エネルギー減衰（Fourier殻解析） |
+| `ph_isomap.py` | Isomap埋め込みによるPH$_1$測定 |
+| `README.md` | 英語版 README |
 
 ---
 
-## 📜 Collapse公理（Appendix Z.1–Z.9）
+## 📄 Collapse 公理（Appendix Z）
 
-| 公理 | 概要 |
+| 公理 | 内容 |
 |------|------|
-| A1 | 高次元射影はMECE分解を保持 |
-| A2 | PH崩壊はSobolev正則性を示唆 |
-| A3 | Ext$^1$の消滅はobstructionの消去を意味 |
-| A4 | 退化理論はPH崩壊を安定化 |
-| A5 | トポロジカルエネルギーとExtの双対性 |
-| A6 | VMHS崩壊は滑らかさを導く |
-| A7 | スペクトル崩壊はExt$^1=0$を導く |
-| A8 | AI分類結果は構造型に整合 |
-| A9 | BSD構造はExt–PH–Sha崩壊で説明可能 |
-| Z.9 | Collapse Lemma：Ext, PH, Spectrum ⇒ \( u \in C^\infty \) を正式定理化 |
+| A1 | 高次元射影はMECE分解を保存する |
+| A2 | PH$_1$消滅はSobolev制御を導く |
+| A3 | Ext$^1$消滅は導来障害の消去を意味する |
+| A4 | VMHS退化はPH/ExtのCollapseを安定化する |
+| A5 | トポロジーエネルギーとExtは双対 |
+| A6 | VMHS退化 → Ext + PH Collapse |
+| A7 | スペクトル減衰 → Ext$^1$ = 0 |
+| A8 | AI分類はCollapseカテゴリと一致 |
+| A9 | BSD構造は Ext/PH/Sha Collapse から導出 |
+| Z.9 | Collapse補題：PH$_1$ + Ext + 減衰 → 正則性 |
+| Final.1 | 完全性：すべての障害がCollapseすれば \( u \in C^\infty \) |
 
 ---
 
-## 📤 arXiv投稿について
+## 📤 arXiv投稿予定
 
-AK理論 v7.3 は、現在 arXiv 提出のための最終レビュー段階にあります。  
-以下の分野の研究者の方々のサポート・レビューを歓迎いたします：
+AK-HDPST v8.0 は arXiv投稿準備完了済。
+以下の分野からの Endorsement を歓迎：
 
-- **math.CT（圏論）**, **math.AG（代数幾何）**,  
-  **math.AP（解析学）**, **math.NT（数論）**
+- **math.CT**, **math.AG**, **math.AP**, **math.NT**
 
-ご興味・ご協力いただける方は、以下までご連絡ください。
+ご協力・共同研究の希望があればお気軽にご連絡ください。
 
 ---
 
-## 📨 著者
+## 📩 著者
 
-**小林 篤史（A. Kobayashi）**  
-_ChatGPT Research Partnerと共同開発_  
+**A. Kobayashi**  
+_ChatGPTリサーチパートナーと共同開発_  
 📧 dollops2501@icloud.com
 
 ---
 
-> *「Collapseは、構造の最終形である。」*
+> *「Collapseとは、構造が最終的に到達するかたちである」*

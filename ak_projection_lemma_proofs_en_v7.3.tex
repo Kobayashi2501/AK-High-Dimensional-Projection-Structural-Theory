@@ -154,6 +154,26 @@ Each $\mathcal{F}_i$ encodes a structurally preserving transformation, such that
 This functorial viewpoint allows collapse detection and propagation to be formulated as a categorical information flow.
 \end{remark}
 
+\subsection*{2.3 Application to Abelian Varieties}
+
+The projection lemma extends beyond analytic orbits to algebraic objects such as elliptic curves and higher-dimensional Abelian varieties.  
+Given an elliptic curve \( E/\QQ \), one can construct a projection map
+\[
+\mathcal{P}_E: E(\QQ) \longrightarrow \mathbb{T}^N
+\]
+such that the image \( \mathcal{P}_E(E(\QQ)) \) is MECE-decomposable, and its persistent homology satisfies \( \mathrm{PH}_1 = 0 \).  
+This provides an algebraic instance of topological collapse, initiating the AK collapse procedure from a known arithmetic structure.
+
+\begin{remark}
+In concrete computations, the point cloud \( \mathcal{P}_E(E(\QQ)) \subset \mathbb{T}^N \) admits a trivial 1-dimensional barcode diagram.  
+This implies that no topological obstruction survives under the filtration, and hence the collapse detection can be initiated from this projection.
+\end{remark}
+
+\begin{quote}
+See \textbf{Appendix N: Abelian Variety Embedding in AK-HDPST} for full diagrams, category-theoretic interpretation,  
+and the explicit mapping from \( E(\QQ) \) to a high-dimensional torus under the AK functorial projection.
+\end{quote}
+
 
 
 % Chapter 3: Topological and Entropic Functionals

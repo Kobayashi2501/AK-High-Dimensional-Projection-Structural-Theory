@@ -1739,17 +1739,29 @@ Then the collapse structures satisfy:
 \mathrm{Ext}^1(\mathcal{F}, \mathbb{Q}) = 0 = \mathrm{Ext}^1(\check{\mathcal{F}}, \mathbb{Q}).
 \]
 
-\paragraph{Diagram.}
-\[
-\resizebox{\textwidth}{!}{%
+\vspace{1.5em}
+\noindent\textbf{SYZ Mirror–Collapse Diagram}
+
+\vspace{0.5em}
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+\resizebox{\textwidth}{ }{%
 \begin{tikzcd}[column sep=large, row sep=large]
-X \arrow[r, "\text{SYZ Mirror}"] \arrow[d, "\mathrm{PH}_1"] & \check{X} \arrow[d, "\mathrm{PH}_1"] \\
-\mathrm{PH}_1(X) \arrow[r, "\sim"] \arrow[d, "\mathrm{Ext}^1"] & \mathrm{PH}_1(\check{X}) \arrow[d, "\mathrm{Ext}^1"] \\
-\mathrm{Ext}^1(\mathcal{F}, \mathbb{Q}) \arrow[r, "\sim"] \arrow[d, "\text{Collapse}"] & \mathrm{Ext}^1(\check{\mathcal{F}}, \mathbb{Q}) \arrow[d, "\text{Collapse}"] \\
-u(t) \in C^\infty \arrow[r, "\sim"] & \check{u}(t) \in C^\infty
+X \arrow[r, "\text{SYZ Mirror}"] \arrow[d, "\mathrm{PH}_1"] 
+& \check{X} \arrow[d, "\mathrm{PH}_1"] \\
+\mathrm{PH}_1(X) \arrow[r, "\sim"] \arrow[d, "\mathrm{Ext}^1"] 
+& \mathrm{PH}_1(\check{X}) \arrow[d, "\mathrm{Ext}^1"] \\
+\mathrm{Ext}^1(\mathcal{F}, \mathbb{Q}) \arrow[r, "\sim"] \arrow[d, "\text{Collapse}"] 
+& \mathrm{Ext}^1(\check{\mathcal{F}}, \mathbb{Q}) \arrow[d, "\text{Collapse}"] \\
+u(t) \in C^\infty \arrow[r, "\sim"] 
+& \check{u}(t) \in C^\infty
 \end{tikzcd}
 }
-\]
+\vspace{0.5em}
+
+\small\textit{Figure: SYZ mirror duality induces Ext$^1$ and PH$_1$ correspondence, ensuring collapse-regularity in both dual systems.}
+\end{minipage}
 
 This commuting diagram confirms the compatibility of collapse structures across SYZ mirror symmetry.
 
@@ -2439,14 +2451,25 @@ Each class corresponds to a topological configuration of degeneration limits.
 
 We propose the following diagram:
 
-\[
+\vspace{1.5em}
+\noindent\textbf{Motivic–Langlands Collapse Diagram}
+
+\vspace{0.5em}
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+\resizebox{ \textwidth}{ }{
 \begin{tikzcd}
 \text{Motive}_{\mathrm{pure}} \arrow[r, "Degeneration"]
 & \text{Motive}_{\mathrm{mixed}} \arrow[r, "\mathrm{Ext}^1 = 0"]
 & \text{Langlands Flow} \arrow[r, "\text{Functor collapse}"]
 & \text{Categorical Smoothing}
 \end{tikzcd}
-\]
+}
+\vspace{0.5em}
+
+\small\textit{Figure: From pure motives through degeneration and Ext-class vanishing to categorical smoothness via Langlands functorial collapse.}
+\end{minipage}
 
 This diagram expresses the geometric degeneration and motivic smoothness interpretation.
 
@@ -3054,10 +3077,14 @@ We say the classifier is \emph{TMA-compatible} if:
 
 ---
 
-\paragraph{Commutative Mapping Diagram.}
+\vspace{1.5em}
+\noindent\textbf{Commutative Mapping Diagram}
 
-\[
-\resizebox{\textwidth}{!}{
+\vspace{0.5em}
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+\resizebox{\textwidth}{ }{
 \begin{tikzcd}[row sep=large, column sep=large]
 u(t) \arrow[r, "\text{Sim}"] \arrow[dr, swap, "\text{Trop/Mirror/AbVar Projection}"] 
 & \mathcal{D}_{\text{AI}} \arrow[d, "\mathcal{F}_{\mathrm{TMA}}" description] \\
@@ -3065,7 +3092,11 @@ u(t) \arrow[r, "\text{Sim}"] \arrow[dr, swap, "\text{Trop/Mirror/AbVar Projectio
 & u(t) \in C^\infty
 \end{tikzcd}
 }
-\]
+\vspace{0.5em}
+
+\small\textit{Figure: AI-driven collapse resolution via TMA (Tropical–Mirror–Abelian) projections and structural classifiers.}
+\end{minipage}
+
 
 ---
 
@@ -3549,8 +3580,10 @@ and that this convergence reflects a structural unity across algebraic, symplect
 
 \subsection*{O.2 Triple Collapse Diagram}
 
-\[
-\resizebox{\textwidth}{!}{%
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+\resizebox{ \textwidth}{ }{%
 \begin{tikzcd}[row sep=large, column sep=large]
 & X \arrow[dl, "\mathrm{Trop}"'] \arrow[d, "\mathrm{Mirror}" description] \arrow[dr, "\mathrm{Jacobian}"] & \\
 \mathrm{Trop}(X) \arrow[dr, "\mathrm{PH}_1 = 0"'] & \check{X} \arrow[d, "\mathrm{PH}_1 = 0"] & J(X) \arrow[dl, "\mathrm{PH}_1 = 0"] \\
@@ -3558,7 +3591,10 @@ and that this convergence reflects a structural unity across algebraic, symplect
 & u(t) \in C^\infty &
 \end{tikzcd}
 }
-\]
+\vspace{0.5em}
+
+\small\textit{Figure: Mirror–Tropical–Jacobian collapse pathway: PH$_1 = 0$ across images implies analytic smoothness via Ext$^1$ vanishing.}
+\end{minipage}
 
 This diagram expresses that all three projection routes—Tropical degeneration, SYZ duality, and Jacobian reduction—lead to the same topological trivialization and analytic regularity.
 
@@ -4112,8 +4148,10 @@ It serves as the formal foundation for validating the sufficiency of the AK Coll
 To reinforce the semantic closure of the Collapse logic,  
 we recall the causal flow diagram originally presented in Appendix Z.4:
 
-\begin{figure}[H]
+\noindent
+\begin{minipage}{\textwidth}
 \centering
+\resizebox{ \textwidth}{ }{%
 \begin{tikzcd}[row sep=large, column sep=large]
 \mathrm{PH}_1(u(t)) = 0 \arrow[r, "\text{Barcode Collapse}"] \arrow[d, swap, "\text{Topological Category Link}"] 
 & C(t) \downarrow \\
@@ -4122,8 +4160,11 @@ we recall the causal flow diagram originally presented in Appendix Z.4:
 & \mathcal{F}_0 := \colim \mathcal{F}_t \arrow[r, "\text{Categorical Smoothness}"] 
 & u(t) \in C^\infty(\mathbb{R}^3)
 \end{tikzcd}
-\caption{Collapse Flow: Topological triviality leads to Ext-class vanishing and analytic smoothness.}
-\end{figure}
+}
+\vspace{0.5em}
+
+\small\textit{Figure: Collapse Flow – Topological triviality leads to Ext-class vanishing and analytic smoothness.}
+\end{minipage}
 
 
 
@@ -4332,15 +4373,21 @@ We present a structural diagram encoding the causal relationships among the core
 \textbf{H} (VMHS Degeneration), \textbf{J} (Type-Theoretic Collapse), and \textbf{O} (Explicit Counterexamples).  
 This map clarifies how each failure mode interacts with the AK Collapse framework and informs the boundary axioms in Appendix Z.10.
 
-\begin{figure}[H]
+
+\noindent
+\begin{minipage}{\textwidth}
 \centering
+\resizebox{\textwidth}{}{%
 \begin{tikzcd}[row sep=large, column sep=huge]
 \textbf{VMHS Collapse (H)} \arrow[dr, "\text{A6: Degeneration ⇒ Ext + PH}"'] & \\
 & \textbf{Collapse Obstruction Zone} \arrow[r, "\text{Encoded in Type Theory (J)}"] \arrow[d, swap, "\text{Counterexample Space (O)}"] & \textbf{Formal Collapse Semantics} \\
 & \textbf{Failure / Exclusion Classification (Z.10)} \arrow[ur, swap, "\text{Completeness Constraint (Final.1)}"]
 \end{tikzcd}
-\caption{Causal structure among obstruction-related appendices within AK Collapse theory.}
-\end{figure}
+}
+\vspace{0.5em}
+
+\small\textit{Figure: Causal structure among obstruction-related appendices within AK Collapse theory.}
+\end{minipage}
 
 \paragraph{Interpretation.}
 This diagram outlines how:
@@ -4447,14 +4494,21 @@ This corresponds directly to the structural zones in Appendix Z.10 (A9⁺ and A1
 
 We may visualize this classification as a functorial embedding:
 
-\[
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+\resizebox{ \textwidth}{ }{%
 \begin{tikzcd}[row sep=large, column sep=huge]
 u(t) \arrow[r, "Extract Features"] \arrow[dr, swap, "\text{Collapse Signature}"] & 
 \mathcal{D}_{\text{AI}} \arrow[r, "\mathcal{C}_{\text{PH,Ext}}"] & 
 \{ \text{collapsible}, \text{exclusion}, \text{failure} \} \\
 & \text{Barcode + Ext Data} \arrow[ur, swap, "\text{Collapse Zone Labeling}"]
 \end{tikzcd}
-\]
+}
+\vspace{0.5em}
+
+\small\textit{Figure: AI-based classification of collapse zones via PH and Ext features.}
+\end{minipage}
 
 This provides a diagnostic loop for anticipating semantic coherence in solution spaces.
 

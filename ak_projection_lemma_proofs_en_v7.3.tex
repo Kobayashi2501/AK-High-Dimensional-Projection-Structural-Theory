@@ -1,19 +1,54 @@
 % ===========================
-% AK High-Dimensional Projection Structural Theory 7.3
+% AK High-Dimensional Projection Structural Theory v8.0
 % ===========================
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref,mathrsfs}
 \geometry{margin=1in}
 
+% === Math Operators and Commands ===
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\PH}{PH}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Coker}{Coker}
+
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cH}{\mathcal{H}}
+
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Sha}{\mathbb{S}}
+
+% === Title and Metadata ===
 \title{AK High-Dimensional Projection Structural Theory\\
-\large v7.3: Unified Degeneration, Mirror Symmetry, and Tropical Collapse}
-\author{A. Kobayashi \\ ChatGPT Research Partner}
+\Large Version 8.0: Collapse Structures, Ext-Triviality, and Persistent Geometry}
+\author{A. Kobayashi \\ \small ChatGPT Research Partner}
 \date{June 2025}
 
+% === Theorem Environment ===
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
 
 \begin{document}
 \maketitle
@@ -21,10 +56,36 @@
 \tableofcontents
 \newpage
 
-
 % Chapter 1: Introduction
 \section{Introduction}
-AK High-Dimensional Projection Structural Theory (AK-HDPST) provides a unified framework for resolving complex mathematical and physical problems via higher-dimensional projection, structural decomposition, and persistent topological invariants.
+
+The \textbf{AK High-Dimensional Projection Structural Theory (AK-HDPST)} aims to resolve deep mathematical and physical obstructions by projecting complex structures into high-dimensional categorical and topological spaces. This method enables \emph{MECE decompositions}, persistent homology analysis, and obstruction detection via derived category theory.
+
+Originally motivated by the need to control singularities and obstructions in nonlinear PDEs (e.g., Navier–Stokes), the theory now integrates:
+
+\begin{itemize}
+  \item High-dimensional embeddings that preserve analytic or orbit structure;
+  \item Persistent homology barcodes (\( \mathrm{PH}_k \)) to detect topological collapse;
+  \item Derived \(\mathrm{Ext}^1\)-class analysis for categorical glueability;
+  \item Degeneration theory including VMHS, mirror symmetry, and tropical collapse;
+  \item Fourier-based spectral energy decay and topological energy diagnostics;
+  \item Formal encodings via type theory (e.g., Coq, Lean).
+\end{itemize}
+
+\textbf{Version 8.0} introduces two new structural appendices:
+
+\begin{enumerate}
+  \item \textbf{Appendix N}: Embeds Abelian varieties (e.g., elliptic curves) into the AK projection framework, establishing a connection to classical algebraic geometry;
+  \item \textbf{Appendix O}: Constructs a spectral–geometric coupling using dyadic shell energy decay, reinforcing collapse rigidity and spectral diagnostics.
+\end{enumerate}
+
+The theory’s central equivalence:
+\[
+\mathrm{PH}_1 = 0 \quad \Leftrightarrow \quad \mathrm{Ext}^1 = 0 \quad \Leftrightarrow \quad u(t) \in C^\infty
+\]
+is developed across a unified collapse lattice and supported by axiomatic, topological, and categorical analysis. The AK framework views collapse not as failure but as resolution: the convergence of obstructed structures into smooth categorical entities.
+
+
 
 
 % Chapter 2: Stepwise Architecture

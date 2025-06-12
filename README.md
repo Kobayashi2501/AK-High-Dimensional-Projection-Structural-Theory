@@ -76,14 +76,14 @@ By decomposing into MECE (Mutually Exclusive, Collectively Exhaustive) clusters 
 
 ## 📊 Applications
 
-### 🌀 Navier–Stokes Global Regularity
+### 🌀 [Navier–Stokes Global Regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 > Collapse Completion yields:
 > \[ \mathrm{Ext}^1 = 0 \Rightarrow \mathrm{PH}_1 = 0 \Rightarrow u(t) \in C^\infty \]
 
-### 🔹 Hilbert's 12th Problem (AK Collapse)
+### 🔹 [Hilbert's 12th Problem (AK Collapse)](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
 - Ext-PH collapse realizes abelianization and special functions in both imaginary and real fields
 
-### 💎 BSD Conjecture
+### 💎 [BSD Conjecture](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 - Formalized via:
 > \[ \mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \text{rank} = \operatorname{ord}_{s=1} L(E,s) \]
 
@@ -92,7 +92,6 @@ By decomposing into MECE (Mutually Exclusive, Collectively Exhaustive) clusters 
 
 ### 🤖 AI-based Collapse Classifiers
 - Neural classification over PH, Ext, and tropical invariants (Appendix L)
-
 ---
 
 ## 📁 Repository Contents

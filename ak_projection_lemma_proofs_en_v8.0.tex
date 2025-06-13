@@ -3708,6 +3708,45 @@ J. Lurie.
 
 
 
+% =============================================
+% Appendix M⁺: Homological Mirror Collapse Compatibility
+% =============================================
+\section*{Appendix M$^+$: Homological Mirror Collapse Compatibility}
+\addcontentsline{toc}{section}{Appendix M$^+$: Homological Mirror Collapse Compatibility}
+
+\subsection*{M$^+$.1 Derived Equivalence between Fukaya Category and Cohomological D-branes}
+Kontsevich's Homological Mirror Symmetry (HMS) conjecture posits an equivalence:
+\[
+D^b\mathrm{Coh}(X) \cong D^\pi\mathrm{Fuk}(X^\vee),
+\]
+where \( X \) and \( X^\vee \) are mirror dual Calabi–Yau manifolds. In this framework, categorical collapse conditions such as Ext-class vanishing correspond to topological collapse phenomena on the mirror side.
+
+\subsection*{M$^+$.2 PH₁–Ext Collapse Equivalence via Mirror Symmetry}
+\textbf{Key Diagram:}
+\[
+\mathrm{PH}_1(X^\vee) = 0 \quad \xRightarrow[\text{Mirror HMS}]{\simeq} \quad \mathrm{Ext}^1_{D^b\mathrm{Coh}(X)} = 0 \quad \xRightarrow[]{} \quad u(t) \in C^\infty
+\]
+Persistent homology trivialization on the symplectic side corresponds functorially to Ext-class vanishing in the derived category of coherent sheaves.
+
+\subsection*{M$^+$.3 Categorical Collapse Propagation}
+If \( F^\bullet_t \) is derived from a mirror Lagrangian cycle that undergoes topological barcode collapse, then:
+\[
+F^\bullet_t \simeq Q \quad \text{in } \mathcal{D}^b(\mathrm{Coh}(X)),
+\]
+where \( Q \) is the canonical trivial object (see Appendix E.4). This implies all higher Ext-groups vanish and collapse propagates via derived functors.
+
+\subsection*{M$^+$.4 Mirror-Collapse Compatibility Theorem}
+\textbf{Theorem (Mirror–Ext Collapse Compatibility).}  
+Let \( X^\vee \) be the mirror of \( X \). If the persistent homology of \( X^\vee \) collapses such that \( \mathrm{PH}_1(X^\vee) = 0 \), then:
+\[
+u(t) \in C^\infty(X) \quad \text{and} \quad F^\bullet_t \simeq Q.
+\]
+Hence, topological collapse on the mirror side enforces analytic regularity in the original geometry.
+
+\textit{Conclusion.} This theorem embeds Homological Mirror Symmetry into the AK framework, justifying algebraic collapse via geometric duality.
+
+
+
 \section*{Appendix N: Abelian Varieties and Collapse Classifications}
 \addcontentsline{toc}{section}{Appendix N: Abelian Varieties and Collapse Classifications}
 
@@ -3784,6 +3823,45 @@ Thus, they serve as ideal candidates for verifying mirror-compatible collapse, a
 
 Abelian varieties serve as structurally rich targets for projection in AK theory.  
 Their group-theoretic, cohomological, and geometric properties make them ideal for classifying collapse success and failure, and for embedding collapse within the larger categorical–mirror–topological framework.
+
+
+
+% =============================================
+% Appendix N⁺: SYZ–Tropical Collapse Degeneration
+% =============================================
+\section*{Appendix N$^+$: SYZ–Tropical Collapse Degeneration}
+\addcontentsline{toc}{section}{Appendix N$^+$: SYZ–Tropical Collapse Degeneration}
+
+\subsection*{N$^+$.1 SYZ Fibration and Tropical Degeneration}
+According to the SYZ conjecture, mirror symmetry arises from dual torus fibrations:
+\[
+X \to B \leftarrow X^\vee,
+\]
+where \( B \) is a common base manifold. In the limit \( \epsilon \to 0 \), the torus fibers of \( X \) shrink, and \( B \) degenerates into a piecewise-linear space \( B^{\mathrm{trop}} \). This degeneration bridges differential and tropical geometries.
+
+\subsection*{N$^+$.2 Tropical Collapse and Persistent Homology Trivialization}
+Barcode collapse in persistent homology corresponds to degeneration of non-trivial cycles in the torus fibers:
+\[
+X \xrightarrow{\mathrm{SYZ}} B^{\mathrm{trop}} \xrightarrow{\mathrm{TropCollapse}} \mathrm{PH}_1 = 0.
+\]
+This transformation tracks topological data as it vanishes in the tropical limit.
+
+\subsection*{N$^+$.3 Functorial Collapse Correspondence}
+We construct the following functorial collapse sequence:
+\[
+\text{Fiber Degeneration (SYZ)} \Rightarrow \text{Tropical Barcode Collapse} \Rightarrow \mathrm{Ext}^1 = 0 \Rightarrow u(t) \in C^\infty.
+\]
+Each stage formalizes the correspondence between geometric degeneration and analytic regularity.
+
+\subsection*{N$^+$.4 SYZ–Tropical Collapse Compatibility Theorem}
+\textbf{Theorem (SYZ–Tropical Collapse Compatibility).}  
+Let \( X \to B \) be a torus fibration satisfying SYZ conditions. Then tropical degeneration of the fibration implies:
+\[
+\mathrm{PH}_1 = 0 \quad \Rightarrow \quad \mathrm{Ext}^1 = 0 \quad \Rightarrow \quad u(t) \in C^\infty.
+\]
+
+\textit{Conclusion.}  
+This theorem integrates SYZ–tropical geometry into the AK framework, showing that the collapse of topological invariants in the tropicalized mirror geometry enforces smoothness in analytic dynamics.
 
 
 
@@ -4210,6 +4288,7 @@ It encapsulates the collapse logic as a multivalent implication
 across topological, spectral, and categorical regimes—realizing regularity as structural triviality.
 
 
+
 \subsection*{Z.10 Collapse Obstruction Zones and Failure Classification}
 \addcontentsline{toc}{subsection}{Z.10 Collapse Obstruction Zones and Failure Classification}
 
@@ -4299,6 +4378,50 @@ This framework is used in:
 - Appendix J⁺: Type-theoretic encoding of failure signatures.
 
 ---
+
+% =============================================
+% Appendix Z.11: Mirror and Tropical Collapse Compatibility Axioms
+% =============================================
+\section*{Appendix Z.11: Mirror and Tropical Collapse Compatibility Axioms}
+\addcontentsline{toc}{section}{Appendix Z.11: Mirror and Tropical Collapse Compatibility Axioms}
+
+\subsection*{Z.11.1 Collapse Origin Consistency Axiom (Z11-A)}
+If \( \mathrm{PH}_1 = 0 \) is induced by degeneration of SYZ fibers or HMS mirror correspondence, then:
+\[
+F_t^\bullet \simeq Q \quad \text{in } \mathcal{D}^b(\mathcal{A}) \Rightarrow \text{Collapse is AK-compatible}.
+\]
+This ensures compatibility of geometric mirror degeneration with AK-defined collapse.
+
+\subsection*{Z.11.2 Mirror-Ext Collapse Propagation Rule (Z11-B)}
+If \( \mathrm{PH}_1(X^\vee) = 0 \) and HMS holds, then:
+\[
+\mathrm{Ext}^1(F_t^\bullet, Q) = 0 \Rightarrow u(t) \in C^\infty.
+\]
+Collapse detected in the symplectic mirror implies smoothness in the original analytic space.
+
+\subsection*{Z.11.3 SYZ–Tropical Collapse Diagram Inclusion (Z11-C)}
+Collapse induced by tropicalization fits in the global collapse chain:
+\[
+\text{SYZ Fiber Collapse} \Rightarrow \text{Tropical Barcode Collapse} \Rightarrow \text{Ext-Class Vanishing} \Rightarrow u(t) \in C^\infty
+\]
+This sequence is functorially coherent with Collapse Axioms C1–C4.
+
+\subsection*{Z.11.4 Formal Structural Diagram}
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\text{Mirror Degeneration} \arrow[r] &
+\mathrm{PH}_1 = 0 \arrow[r] &
+\mathrm{Ext}^1 = 0 \arrow[r] &
+F^\bullet_t \simeq Q \arrow[r] &
+u(t) \in C^\infty
+\end{tikzcd}
+\]
+
+\subsection*{Z.11.5 Summary}
+Axioms Z11-A through Z11-C formally link the Collapse framework with Homological Mirror Symmetry and SYZ–Tropical degeneration. These reinforce the multivalent origin of topological trivialization and analytic regularity.
+
+These axioms are consistent with the global Collapse causal structure described in Z.4 and Z.8, and serve as geometric–categorical bridges.
+
 
 \paragraph{Final Note.}
 

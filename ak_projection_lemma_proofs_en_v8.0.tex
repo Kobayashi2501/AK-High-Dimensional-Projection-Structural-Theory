@@ -4423,6 +4423,162 @@ Axioms Z11-A through Z11-C formally link the Collapse framework with Homological
 These axioms are consistent with the global Collapse causal structure described in Z.4 and Z.8, and serve as geometric–categorical bridges.
 
 
+
+% =============================================
+% Appendix Z.12: Type-Theoretic Formalization and Collapse Functor Embedding
+% =============================================
+\section*{Appendix Z.12: Type-Theoretic Formalization and Collapse Functor Embedding}
+\addcontentsline{toc}{section}{Appendix Z.12: Type-Theoretic Formalization and Collapse Functor Embedding}
+
+We now provide a type-theoretic reformulation of the AK Collapse axioms, intended for formalization in Coq, Lean, or Agda.
+
+---
+
+\subsection*{Z.12.1 Collapse Axioms as Π-Type Schemas}
+
+\begin{description}
+  \item[\textbf{(C1)} — PH-to-Ext Collapse Rule:]  
+  \[
+  \Pi F : \mathcal{D}^b(\mathsf{Filt}),\; \mathrm{PH}_1(F) = 0 \rightarrow \mathrm{Ext}^1(F, Q) = 0.
+  \]
+
+  \item[\textbf{(C2)} — Ext-to-Smoothness Rule:]  
+  \[
+  \Pi F : \mathcal{D}^b(\mathsf{Filt}),\; \mathrm{Ext}^1(F, Q) = 0 \rightarrow u_F \in C^\infty.
+  \]
+
+  \item[\textbf{(C3)} — Mirror Collapse Equivalence:]  
+  \[
+  \Pi X : \mathsf{Symp},\; \mathrm{PH}_1(X^\vee) = 0 \rightarrow \mathrm{Ext}^1(\mathcal{F}_{X}, Q) = 0.
+  \]
+  Here, \( X^\vee \) denotes the HMS mirror, and \( \mathcal{F}_{X} \) its associated sheaf.
+
+  \item[\textbf{(C4)} — Functorial Stability of Collapse:]  
+  \[
+  \Pi F : \mathcal{D}^b(\mathsf{Filt}),\; F \simeq Q \Rightarrow \forall n \geq 1,\; \mathrm{Ext}^n(Q, F) = 0.
+  \]
+\end{description}
+
+---
+
+\subsection*{Z.12.2 Collapse Functor Definition}
+
+Let \( \mathcal{C}_{\text{Collapse}} \) be a functor:
+
+\[
+\mathcal{C}_{\text{Collapse}} : \mathsf{FiltTopos} \to \mathsf{C^\infty\text{-}Space}
+\]
+
+such that for any filtered derived object \( \mathcal{F}_t \), we define:
+
+\[
+\mathcal{C}_{\text{Collapse}}(\mathcal{F}_t) :=
+\begin{cases}
+  u(t) \in C^\infty, & \text{if } \mathrm{PH}_1(\mathcal{F}_t) = 0 \land \mathrm{Ext}^1(\mathcal{F}_t, Q) = 0 \\
+  \text{undefined}, & \text{otherwise}
+\end{cases}
+\]
+
+This formalizes the core of AK-collapse-driven regularity.
+
+---
+
+\subsection*{Z.12.3 Collapse Space Type Structure}
+
+We define the full collapse-compatible subspace:
+
+\[
+\mathcal{M}_{\text{Collapse}} := \left\{ \mathcal{F}_t \in \mathcal{D}^b(\mathsf{Filt}) \;\middle|\; \mathrm{PH}_1(\mathcal{F}_t) = 0 \land \mathrm{Ext}^1(\mathcal{F}_t, Q) = 0 \right\}
+\]
+
+And define its type-theoretic encoding via dependent pairs (Σ-types):
+
+\[
+\Sigma \left( F : \mathcal{D}^b(\mathsf{Filt}) \right). \left( \mathrm{PH}_1(F) = 0 \times \mathrm{Ext}^1(F, Q) = 0 \right)
+\]
+
+---
+
+\subsection*{Z.12.4 Formal Collapse Diagram in Type-Theory}
+
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\mathrm{PH}_1(F) = 0 \arrow[r, "\text{Axiom C1}"] &
+\mathrm{Ext}^1(F, Q) = 0 \arrow[r, "\text{Axiom C2}"] &
+u_F \in C^\infty
+\end{tikzcd}
+\]
+
+This diagram encodes the core inference chain of AK collapse in a type-theoretic environment.
+
+---
+
+\subsection*{Z.12.5 Implementation Remarks}
+
+\begin{itemize}
+  \item This framework is compatible with Coq’s Prop-universe and dependent types.
+  \item Collapse objects \( Q \) may be instantiated as zero barcode complexes or unit motives.
+  \item The full implementation will depend on defining concrete categories of filtered sheaves and Ext-computations.
+  \item Type-level evaluation and extraction to AI-assistive layers is discussed in Appendix L.
+\end{itemize}
+
+---
+
+\paragraph{Note.}  
+This formalization enables categorical diagnostics, exclusion proof of counterexamples, and the integration of AK collapse logic into proof assistants and AI-enhanced classification modules.
+
+
+
+\subsection*{Z.12.6+: Full Appendix–Collapse Type Mapping (A–O)}
+
+This table extends the structural–type correspondence from Appendices A–G to the full AK framework, including Appendices H–O.
+
+\begin{longtable}{|c|p{5.2cm}|p{7.5cm}|}
+\hline
+\textbf{Appendix} & \textbf{Mathematical Theme} & \textbf{Collapse Type-Theoretic Role} \\
+\hline
+\textbf{A} & MECE Projection Logic & Defines domain decomposition space for \( \mathcal{F}_t \in \mathcal{D}^b(\mathsf{Filt}) \). Supports Σ-type constraints in Z.12.3. \\
+\hline
+\textbf{B} & Sobolev Energy Decay & Provides analytic foundation for output clause \( u(t) \in C^\infty \). Supports collapse realization. \\
+\hline
+\textbf{C} & Topological Energy ↔ Ext Duality & Supplies invertible bridge: spectral energy ⇔ Ext$^1$ class ⇔ PH$_1$. Forms part of C1–C2 in Z.12.1. \\
+\hline
+\textbf{D} & Derived Ext-Collapse Structures & Enforces Ext-vanishing via obstruction classes. Forms predicate logic base for Collapse Functor totality. \\
+\hline
+\textbf{E} & Abstract Collapse Theorems & Defines core Collapse Axioms (C1–C4) and stabilizers. Maps directly into Π-type in Z.12.1. \\
+\hline
+\textbf{F} & VMHS Degeneration Collapse & Gives Hodge-theoretic realization of categorical collapse. Backs collapse propagation logic. \\
+\hline
+\textbf{G} & Mirror–Langlands–Trop Collapse & Embeds derived and motivic collapse into Langlands-compatible functorial flow. Supports global coherence of Collapse chain. \\
+\hline
+\textbf{H} & Motive Semantics and Ext Collapse & Describes internal failure spaces \( \mathcal{U}_{\text{fail}} \) via Ext and motive obstructions. Classifies semantic boundaries in Z.12.4. \\
+\hline
+\textbf{I} & BSD Collapse and Selmer–Ext Link & Interprets Collapse in number-theoretic context. Suggests refinement of Collapse Functor codomain (e.g., \( \Sha(E) = 0 \Rightarrow u(t) \in C^\infty \)). \\
+\hline
+\textbf{J} & Collapse Typing and Obstruction Labels & Refines Σ/Π-type signatures of failure zones. Supports counterexample diagnostics and AI training labels. \\
+\hline
+\textbf{K} & Structural Collapse Indexing & Maps formalized collapse axioms and their logical dependencies. Supports auto-verification trees in Coq/Lean. \\
+\hline
+\textbf{L} & AI-Enhanced Collapse Diagnostics & Provides diagrammatic embedding of AI classifiers into Collapse prediction. Suggests higher-level type-lifting via learned functors. \\
+\hline
+\textbf{M} & Semantic Limits and Collapse Boundaries & Formalizes ultimate logical, topos-theoretic, and philosophical boundaries of Collapse-type propagation. \\
+\hline
+\textbf{N} & Abelian Collapse and Fibration Alignment & Extends Collapse structure to abelian geometries. Strengthens tropical fiber collapse equivalence (used in Z.11). \\
+\hline
+\textbf{O} & Collapse Phase Transitions and Criticality & Describes structural bifurcation diagram of collapse regimes. Suggests phase-type lifting of Collapse Functor. \\
+\hline
+\end{longtable}
+
+\paragraph{Summary.}  
+Each appendix contributes to the formal structure of the Collapse Functor:
+- **A–D** define admissibility and inference schema,
+- **E–G** provide core axioms and propagation logic,
+- **H–J** classify failure modes and logical exceptions,
+- **K–O** encode higher-order indexing, diagnostic structure, and functorial semantics.
+
+These allow the AK Collapse mechanism to be embedded in proof assistants as a **structured Π–Σ–Functor theory**.
+
+
 \paragraph{Final Note.}
 
 Collapse failure is not a bug but a boundary—a zone where our current structural models cease to predict regularity.  
@@ -4430,7 +4586,6 @@ Recognizing these zones enables:
 - sharper structural conjectures,
 - exclusion of counterexamples,
 - refinement of AK classifiers and topoi.
-
 
 
 

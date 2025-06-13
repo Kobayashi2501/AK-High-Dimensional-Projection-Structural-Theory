@@ -4765,6 +4765,7 @@ Collapse is not merely failure prevention—but a formal method of isolating smo
 \section*{Appendix Final: Formal Collapse Completion}
 \addcontentsline{toc}{section}{Appendix Final}
 
+% === Final.1 ===
 \subsection*{Final.1: Completeness Axiom of Collapse Structures}
 
 \subsubsection*{Purpose}
@@ -4793,6 +4794,30 @@ Then, the Collapse structure is said to be \emph{complete} if and only if:
 \[
 \mathrm{PH}_k(u(t)) = 0 \quad \text{and} \quad \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \quad \Longrightarrow \quad u(t) \in C^\infty(\mathbb{R}^3).
 \]
+\end{quote}
+
+---
+
+\subsubsection*{Supplement: Collapse Axiom Completeness Theorem}
+
+\begin{quote}
+\textbf{Theorem.}  
+Let \( \mathcal{T}_{\text{AK}} \) be the total type-theoretic structure induced by the AK-HDPST framework,  
+with constituent axioms C1–C4 defined over derived, filtered, and categorical spaces.
+
+Then the system is \textbf{collapse-complete} in the following sense:
+\[
+\forall \mathcal{F}_t \in \mathcal{D}^b(\mathsf{Filt}),\;
+\left( \mathrm{PH}_1(\mathcal{F}_t) = 0 \land \mathrm{Ext}^1(\mathcal{F}_t, Q) = 0 \right)
+\Rightarrow u(t) \in C^\infty
+\]
+
+and conversely, for any smooth \( u(t) \), there exists a filtered object \( \mathcal{F}_t \) such that the above condition holds.  
+Thus, the inference chain:
+\[
+\mathrm{PH}_1 = 0 \Leftrightarrow \mathrm{Ext}^1 = 0 \Leftrightarrow u(t) \in C^\infty
+\]
+is \textbf{complete and closed} under AK-derived collapse conditions.
 \end{quote}
 
 ---
@@ -4845,13 +4870,13 @@ we recall the causal flow diagram originally presented in Appendix Z.4:
 
 
 
-\subsection*{Final.2: Collapse and Type-Theoretic Interpretability (Fully Enhanced)}
+\subsection*{Final.2: Collapse and Type-Theoretic Interpretability}
 
 \subsubsection*{Purpose}
 
 This section explores the interpretability of Collapse structures within formal type-theoretic frameworks,  
-particularly Martin–Löf Type Theory (MLTT) and Homotopy Type Theory (HoTT).  
-The goal is to demonstrate that the Ext–PH–Smoothness causal structure of the AK-HDPST framework  
+particularly Martin--L\"of Type Theory (MLTT) and Homotopy Type Theory (HoTT).  
+The goal is to demonstrate that the Ext--PH--Smoothness causal structure of the AK-HDPST framework  
 can be faithfully embedded into type-theoretic formalisms used in constructive and homotopical mathematics.
 
 ---
@@ -4902,7 +4927,7 @@ Then there exists a dependent type theory \( \mathbb{T} \) such that:
   \item These representations support formalization in proof assistants such as Coq or Agda,  
   ensuring that Collapse logic is suitable for constructive verification.
 
-  \item The Ext–PH–Smoothness collapse logic thus embeds not only geometrically,  
+  \item The Ext--PH--Smoothness collapse logic thus embeds not only geometrically,  
   but also syntactically within modern type-theoretic frameworks.
 \end{itemize}
 
@@ -4911,10 +4936,12 @@ Then there exists a dependent type theory \( \mathbb{T} \) such that:
 \subsubsection*{Cross-Reference}
 
 This section extends the categorical logic developed in:
-- Appendix H.4 (Obstruction as Ext Types),
-- Appendix J.2–J.3 (Collapse Logic Axioms),
-- Appendix Z.4 (Causal Collapse Diagrams), and
-- Final.1 (Completeness Axiom).
+\begin{itemize}
+  \item Appendix H.4 (Obstruction as Ext Types),
+  \item Appendix J.2--J.3 (Collapse Logic Axioms),
+  \item Appendix Z.4 (Causal Collapse Diagrams), and
+  \item Final.1 (Completeness Axiom).
+\end{itemize}
 
 It confirms that Collapse regularity logic is compatible with foundational type theories.
 
@@ -5039,95 +5066,108 @@ These cases demonstrate the generality of Collapse logic beyond Navier–Stokes 
 \subsection*{Final.4: Obstruction Classification and Semantic Exclusion}
 \addcontentsline{toc}{subsection}{Final.4: Obstruction Classification and Semantic Exclusion}
 
-This section formalizes how obstruction zones—arising from topological or categorical failure—are classified and semantically eliminated within the AK Collapse framework.  
-We present both a structural map of relevant appendices (H, J, O) and a formal elimination theorem.
+This section formalizes how obstruction zones—arising from topological or categorical failure—are classified, semantically diagnosed,  
+and excluded within the AK Collapse framework. It integrates the axiomatic structures from Appendix Z.10 and the causal semantics from Z.12.5.
 
 ---
 
-\subsubsection*{Part A. Collapse Obstruction Flow Diagram}
+\subsubsection*{Part A. Collapse Obstruction Causal Diagram (Z.12.5 Integrated)}
 
-We present a structural diagram encoding the causal relationships among the core obstruction-handling appendices:  
-\textbf{H} (VMHS Degeneration), \textbf{J} (Type-Theoretic Collapse), and \textbf{O} (Explicit Counterexamples).  
-This map clarifies how each failure mode interacts with the AK Collapse framework and informs the boundary axioms in Appendix Z.10.
+We extend the structural map of obstruction-handling modules by incorporating semantic exclusion zones classified in Appendix Z.10.  
+This upgraded diagram encodes the interplay among degeneration detection (H), type-theoretic encoding (J), counterexamples (O),  
+and failure zone axioms (Z.10: A9⁺, A10⁺):
 
-
-\noindent
-\begin{minipage}{\textwidth}
-\centering
-\resizebox{\textwidth}{}{%
+\begin{center}
+\resizebox{\textwidth}{!}{%
 \begin{tikzcd}[row sep=large, column sep=huge]
-\textbf{VMHS Collapse (H)} \arrow[dr, "\text{A6: Degeneration ⇒ Ext + PH}"'] & \\
-& \textbf{Collapse Obstruction Zone} \arrow[r, "\text{Encoded in Type Theory (J)}"] \arrow[d, swap, "\text{Counterexample Space (O)}"] & \textbf{Formal Collapse Semantics} \\
-& \textbf{Failure / Exclusion Classification (Z.10)} \arrow[ur, swap, "\text{Completeness Constraint (Final.1)}"]
+\textbf{VMHS Collapse (H)} \arrow[d, "\text{Degeneration}"] \arrow[dr, "\text{A6: PH + Ext Vanish}"] & \\
+\textbf{Ext–PH Collapse (Z.4)} \arrow[r, "\text{Success ⇒ } C^\infty"] & 
+\textbf{Valid Collapse Region } \mathcal{U}_{\mathrm{reg}} \arrow[dr, "\text{Formal Smoothness}" description] \\
+\textbf{Type-Theoretic Encodings (J)} \arrow[u, "\text{Collapse Triplet Equiv.}"] \arrow[r, "\text{Collapse Zone Typing}"] & 
+\textbf{Obstruction Zone } \mathcal{U}_{\mathrm{obs}} \arrow[r, "\text{Z.10 Classification}"] \arrow[d, "\text{Counterexamples (O)}"'] & 
+\begin{Bmatrix}
+\text{A9⁺: Exclusion Zone} \\
+\text{A10⁺: Failure Zone}
+\end{Bmatrix} \\
+& \textbf{Semantic Exclusion} \arrow[uur, "\neg \text{ZFC Collapse Axioms}"]
 \end{tikzcd}
 }
-\vspace{0.5em}
+\end{center}
 
-\small\textit{Figure: Causal structure among obstruction-related appendices within AK Collapse theory.}
-\end{minipage}
-
-\paragraph{Interpretation.}
-This diagram outlines how:
-- Appendix H detects degeneration patterns leading to Ext and PH failure,
-- Appendix J encodes these failures formally in dependent type theory,
-- Appendix O catalogs explicit counterexamples that violate collapse,
-- Appendix Z.10 provides formal classification of failure and exclusion,
-- Appendix Final.1 evaluates whether these obstructions are completely covered.
+\paragraph{Legend.}
+- A9⁺ = Collapse Exclusion Zone: \( \mathrm{Ext}^1 = 0, \mathrm{PH}_1 \neq 0 \)  
+- A10⁺ = Collapse Failure Zone: \( \mathrm{Ext}^1 \neq 0, \mathrm{PH}_1 \neq 0 \)  
+These define the categorical boundaries for valid gluing and smoothness inference under AK logic.
 
 ---
 
-\subsubsection*{Part B. Obstruction Space Elimination Theorem}
+\subsubsection*{Part B. Semantic Obstruction Elimination Theorem (Z.10 Augmented)}
 
-\paragraph{Purpose.}
-We now formalize the exclusion of pathological domains in which  
-nontrivial obstruction classes—either topological (\(\mathrm{PH}_k \neq 0\))  
-or categorical (\(\mathrm{Ext}^1 \neq 0\))—could arise.  
-We show that under the AK Collapse framework, such regions are  
-semantically excluded by structural incompatibility.
+\paragraph{Theorem: Semantic Exclusion via Collapse Axioms}
 
-\paragraph{Theorem: Semantic Elimination of Obstruction Zones}
-
-\begin{quote}
-Let \( \mathcal{U} \) be the space of weak solutions \( u(t) \)  
-to a given dynamical system (e.g., a PDE or arithmetic system).  
-Let Collapse conditions hold over a subspace \( \mathcal{U}_{\text{reg}} \subset \mathcal{U} \)  
-such that:
+Let \( \mathcal{U} \) be the space of weak or generalized solutions to a system (e.g., PDE or arithmetic object evolution).  
+Suppose the AK Collapse axioms hold over a subregion \( \mathcal{U}_{\mathrm{reg}} \subset \mathcal{U} \) such that:
 
 \begin{enumerate}
-  \item \( \mathrm{PH}_k(u(t)) = 0 \) for all \( u(t) \in \mathcal{U}_{\text{reg}} \),
-  \item \( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \) for all \( t \) in the evolution of \( u(t) \),
-  \item The collapse diagram is functorially closed and continuous over \( \mathcal{U}_{\text{reg}} \).
+  \item Persistent homology vanishes: \( \mathrm{PH}_1(u(t)) = 0 \)
+  \item Categorical Ext-class vanishes: \( \mathrm{Ext}^1(\mathcal{F}_t, \mathcal{G}) = 0 \)
+  \item The Collapse diagram (Appendix Z.4) commutes over the orbit of \( u(t) \)
 \end{enumerate}
 
-Then any solution \( u(t) \notin \mathcal{U}_{\text{reg}} \)  
-exhibiting \( \mathrm{PH}_k \neq 0 \) or \( \mathrm{Ext}^1 \neq 0 \)  
-must lie in a space \( \mathcal{U}_{\text{obs}} := \mathcal{U} \setminus \mathcal{U}_{\text{reg}} \)  
-that is semantically \emph{incoherent} under the AK-HDPST axioms.
-
+Then any solution \( u(t) \notin \mathcal{U}_{\mathrm{reg}} \) lies in the semantic obstruction zone:
 \[
-\mathcal{U}_{\text{obs}} \models \neg (\text{ZFC Collapse Axioms}) \quad \Rightarrow \quad \text{Excluded from derivation}
+\mathcal{U}_{\mathrm{obs}} := \mathcal{U} \setminus \mathcal{U}_{\mathrm{reg}} \quad \text{where} \quad 
+\mathcal{U}_{\mathrm{obs}} \models \neg(\text{Collapse Axioms})
 \]
-\end{quote}
 
-\paragraph{Interpretation.}
-
+Moreover, this zone is divided as:
+\[
+\mathcal{U}_{\mathrm{obs}} = \mathcal{U}_{\mathrm{excl}} \cup \mathcal{U}_{\mathrm{fail}}
+\]
+where:
 \begin{itemize}
-  \item The AK framework does not merely describe regular regions, but actively \textbf{excludes}  
-  singular zones via the failure of Collapse axioms in those domains.
-  \item This justifies the global regularity claim:  
-  if all valid derivations are constrained to \( \mathcal{U}_{\text{reg}} \),  
-  then pathologies in \( \mathcal{U}_{\text{obs}} \) have no semantic or logical access.
-  \item Obstruction vanishing thus serves not only as a positive indicator of regularity,  
-  but also as a negative filter excluding anomalous behaviors.
+  \item \( \mathcal{U}_{\mathrm{excl}} \models \text{A9⁺} \): Ext-class collapses but PH remains ⇒ Gluing failure
+  \item \( \mathcal{U}_{\mathrm{fail}} \models \text{A10⁺} \): Both Ext and PH fail ⇒ Complete obstruction
 \end{itemize}
 
-\paragraph{Cross-Reference.}
+---
 
-- Ext-class meaning via Appendix H.4,  
-- PH₁ elimination via Appendix Z.3,  
-- ZFC incompatibility implied by Appendix Z.1–Z.2.
+\subsubsection*{Part C. Remarks and Interpretations}
 
-This theorem formalizes the “semantic filter” role of Collapse in global regularity logic.
+\begin{itemize}
+  \item The formal logic of AK Collapse not only predicts smoothness,  
+  but semantically filters out any zones violating either topological or categorical triviality.
+
+  \item Exclusion zones are especially subtle: they resemble valid Ext behavior,  
+  but PH ≠ 0 causes non-gluable local data, violating global colimit construction.
+
+  \item Failure zones violate both sides and often correspond to known counterexamples  
+  (see Appendix O: e.g., infinite-energy blowup, nontrivial PH loops under PH barcode analysis).
+
+  \item This explains why the AK Collapse logic is both deductive (proving smoothness)  
+  and **restrictive** (excluding invalid derivations).
+
+  \item The validity of the AK program thus relies on the **inaccessibility**  
+  of \( \mathcal{U}_{\mathrm{obs}} \) under its axiomatic structure.
+\end{itemize}
+
+---
+
+\subsubsection*{Cross-Reference}
+
+- A9⁺ / A10⁺ collapse zones: Appendix Z.10  
+- Collapse Diagram and Functorial Logic: Appendix Z.4, Final.1  
+- Type-theoretic encoding of exclusion zones: Appendix J.5  
+- AI-aided detection of such zones: Final.5, Appendix L.14–L.15  
+- Counterexample diagnostics: Appendix O
+
+---
+
+\paragraph{Summary.}
+This section structurally integrates the semantic classification of obstruction zones  
+within the full AK Collapse logic, highlighting how Exclusion and Failure regions  
+are eliminated through formal axioms and topological–categorical collapse conditions.
+
 
 
 
@@ -5273,7 +5313,7 @@ This result justifies the inclusion of AI diagnostics in Collapse logic as valid
 
 This section presents a comprehensive table classifying  
 the entire system of Collapse structures defined and developed  
-across Appendices A through Final.5.  
+across Appendices A through Final.5 and Z.1–Z.12.  
 Each entry specifies the collapse type, its function, associated appendices,  
 and logical contribution (e.g., PH elimination, Ext vanishing, semantic closure, etc.).
 
@@ -5288,17 +5328,23 @@ and logical contribution (e.g., PH elimination, Ext vanishing, semantic closure,
 \textbf{ID} & \textbf{Collapse Type} & \textbf{Function} & \textbf{Reference} \\
 \hline
 A & PH Barcode Collapse & Topological regularity detection & Appendix A, B, Z.3 \\
-B & Energy–Topology Bridge & Decay-driven collapse dynamics & Appendix C \\
-C & Categorical Ext Collapse & Ext$^1 = 0$ ⇒ Obstruction-free glueing & Appendix G, H \\
+B & Energy–Topology Bridge & Decay-driven collapse dynamics & Appendix C, Z.6 \\
+C & Categorical Ext Collapse & Ext$^1 = 0$ ⇒ Obstruction-free gluing & Appendix G, H \\
 D & Mirror–Langlands Collapse & Arithmetic–Geometric fusion collapse & Appendix I \\
-E & AI–PH Diagnostic Collapse & Empirical detection of collapse via AI & Appendix L \\
+E & AI–PH Diagnostic Collapse & Empirical detection of collapse via AI & Appendix L, Final.5 \\
 F & VMHS Degeneration Collapse & Variation of Hodge structures ⇒ PH+Ext vanishing & Appendix F \\
-G & Collapse Logic Axioms & Structural triviality via axiomatization & Appendix J \\
+G & Collapse Logic Axioms & Structural triviality via axiomatization & Appendix J, Z.1–Z.2 \\
 H & Collapse Diagram Maps & Causal, categorical, and AI-augmented flows & Appendix Z.4, Z.5 \\
-I & Type-Theoretic Collapse & Embedding into MLTT / HoTT formalisms & Final.2 \\
-J & Obstruction Zone Elimination & Semantic exclusion of Ext/PH anomalies & Final.4 \\
-K & Completeness Collapse & ZFC-level closure of Ext–PH–Smoothness & Final.1 \\
+I & Type-Theoretic Collapse & Embedding into MLTT / HoTT formalisms & Final.2, Z.12.4 \\
+J & Obstruction Zone Elimination & Semantic exclusion of Ext/PH anomalies & Final.4, Z.10 \\
+K & Completeness Collapse & ZFC-level closure of Ext–PH–Smoothness & Final.1, Z.12.1 \\
 L & Cross-Conjecture Collapse & BSD / H12 collapse application structure & Final.3 \\
+M & Functorial Collapse Domain & Collapse functor and domain logic & Z.12.2 (CF1) \\
+N & Collapse Failure Diagrams & Type-theoretic failure cases (CF2–3) & Z.10, Z.12.3 \\
+O & Explicit Counterexample Collapse & Collapse-incompatible instances (e.g., \#Sha ≠ 0) & Appendix O \\
+P & Collapse Embedding Coherence & Homotopic/Type closure of collapse flow & Z.12.4, Final.2 \\
+Q & Collapse Completeness Formalization & Global closure theorem over $\mathcal{D}^b(\mathsf{Filt})$ & Final.1, Z.12.5 \\
+R & Collapse Logic Realizations & BSD / H12 / PDE generalization via collapse logic & Final.3, Appendix I$^+$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -5308,26 +5354,25 @@ L & Cross-Conjecture Collapse & BSD / H12 collapse application structure & Final
 \subsubsection*{Remarks}
 
 \begin{itemize}
-  \item This table allows future extensions and applications to reference  
-  which Collapse type is applicable in a given theoretical or empirical setting.
-  \item The identification of the logical function for each Collapse enables  
-  precise targeting of required structures when generalizing AK-HDPST.
-  \item It reflects a modular design philosophy: each Collapse type plays a  
-  distinct causal or semantic role in the overall proof strategy.
+  \item This table reflects the updated formal structure including all Z-appendix enhancements and CF1–CF5 reinforcement items.
+  \item Each Collapse type is now classified both functionally and semantically, aligned with logical inference roles in AK-HDPST.
+  \item The modular and causal design allows targeted verification of completeness, functorial soundness, and type-theoretic interpretability.
 \end{itemize}
 
 ---
 
 \subsubsection*{Cross-Reference}
 
-This table synthesizes content from:
-- Appendices A–M (structural types),
-- Appendix Z.1–Z.4 (axioms and diagrams),
-- Final.1–Final.5 (completeness, type theory, AI, BSD/H12, etc.).
+This classification integrates content from:
+\begin{itemize}
+  \item Appendices A–O (collapse structure foundations),
+  \item Appendix Z.1–Z.12 (axioms, diagrams, failure zones, type-theoretic logic),
+  \item Final.1–Final.5 (completeness, type theory, obstruction exclusion, AI classification, BSD/H12 applications).
+\end{itemize}
 
 \paragraph{Summary.}
-This classification table serves as a formal index of all known Collapse types within AK-HDPST,  
-guiding future structural extensions, conjecture applications, and AI-driven implementations.
+This table defines the current semantic, logical, and structural typology  
+of all Collapse classes in AK-HDPST v8.1, enabling modular proof tracking and extension diagnostics.
 
 
 

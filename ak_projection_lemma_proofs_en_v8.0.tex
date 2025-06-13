@@ -4154,6 +4154,23 @@ and semantic foundations (Appendix J).
 Z.4 presents an abstract categorical view of the Ext–PH–smoothness correspondence.  
 Z.4⁺ complements this with a more topological and visual formulation, starting from barcode triviality and ending in smooth realization.
 
+\paragraph{Formal Collapse Functor.}
+
+We define a Collapse functor:
+\[
+\mathcal{C}_{\mathrm{PH}} \xrightarrow{\;\;\mathcal{F}_{\mathrm{Collapse}}\;\;} \mathcal{C}_{\infty}
+\]
+where:
+\begin{itemize}
+  \item $\mathcal{C}_{\mathrm{PH}}$ is the category of filtered topological objects with PH$_1$-barcodes,
+  \item $\mathcal{C}_{\infty}$ is the category of smooth function spaces over $\mathbb{R}^3$,
+  \item $\mathcal{F}_{\mathrm{Collapse}}$ maps objects \( \mathcal{F}_t \) with $\mathrm{PH}_1 = 0$ and $\mathrm{Ext}^1 = 0$ to \( u(t) \in C^\infty \).
+\end{itemize}
+
+This functorial formulation allows categorical composition and proof automation within the Collapse logic system.
+
+
+
 \subsection*{Z.4⁺ Topological Barcode Collapse and Smoothness Realization}
 
 \begin{figure}[H]
@@ -4167,11 +4184,19 @@ Z.4⁺ complements this with a more topological and visual formulation, starting
 \text{Barcode } = \emptyset \arrow[rr, swap, "\text{No Global Topological Cycle}"] & &
 \end{tikzcd}
 
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathcal{F}_t \in \mathcal{C}_{\mathrm{PH}}^{\text{coll}} \arrow[r, "\mathcal{F}_{\mathrm{Collapse}}"]
+& u(t) \in \mathcal{C}_\infty
+\end{tikzcd}
+\]
+
 \caption{Topological–Categorical–Analytic Collapse Equivalence: Persistent triviality yields smoothness via obstruction-free colimit construction.}
 
 \textit{This diagram makes explicit the collapse sequence starting from topological triviality (barcodes) to analytic smoothness.  
 It emphasizes the functorial degeneration mechanism central to AK Collapse.}
 \end{figure}
+
 
 ---
 
@@ -4570,6 +4595,26 @@ and allows incorporation into Coq-style dependent type environments.
   d_{\text{bottleneck}}(\mathrm{PH}_1(F), \mathrm{PH}_1(F')) < \delta \Rightarrow \mathrm{PH}_1(F') = 0.
   \]
 \end{description}
+
+\paragraph{Remark.}
+Axioms (C1)–(C3) correspond to the collapse triad:
+\[
+\mathrm{PH}_1 = 0 \;\Leftrightarrow\; \mathrm{Ext}^1 = 0 \;\Leftrightarrow\; u(t) \in C^\infty
+\]
+with explicit encoding via dependent Π-types. When combined with Z.12.3's Σ-type stability zones,  
+this allows full encoding in Coq/Lean as:
+
+\[
+\Sigma \left( F : \mathcal{D}^b(\mathsf{Filt}) \right).\;
+\Pi \delta > 0.\;
+\left[
+\begin{aligned}
+  &\forall F'.\; d_{\text{bottleneck}}(\mathrm{PH}_1(F), \mathrm{PH}_1(F')) < \delta \Rightarrow \mathrm{PH}_1(F') = 0 \\
+  &\land\; \mathrm{Ext}^1(F, Q) = 0 \Rightarrow u(t) \in C^\infty
+\end{aligned}
+\right]
+\]
+
 
 ---
 

@@ -1445,11 +1445,18 @@ Therefore, no gluing obstruction remains in the derived category, and smoothness
 
 \[
 \resizebox{\textwidth}{!}{%
-\begin{tikzcd}[row sep=large, column sep=large]
-u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
-& \text{PH}_1 = 0 \arrow[d, "\text{Functor Collapse}"] \\
-\mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
-& u(t) \in C^\infty
+\begin{tikzcd}[ ]
+\begin{tabular}{c}$u(t)$\end{tabular}
+  \arrow[r, "\begin{tabular}{c}\scriptsize Spectral\\\scriptsize Decay\end{tabular}"]
+  \arrow[d, swap, "\begin{tabular}{c}\scriptsize Topological\\\scriptsize Energy\end{tabular}"]
+&
+\begin{tabular}{c}\scriptsize $\mathrm{PH}_1 = 0$\end{tabular}
+  \arrow[d, "\begin{tabular}{c}\scriptsize Functor\\\scriptsize Collapse\end{tabular}"]
+\\
+\begin{tabular}{c}\scriptsize $\mathrm{Ext}^1 = 0$\end{tabular}
+  \arrow[r, "\begin{tabular}{c}\scriptsize Obstruction\\\scriptsize Removal\end{tabular}"]
+&
+\begin{tabular}{c}\scriptsize $u(t) \in C^\infty$\end{tabular}
 \end{tikzcd}
 }
 \]
@@ -4678,27 +4685,36 @@ We also define its stability-preserving type encoding via dependent pairs (Σ-ty
 \subsection*{Z.12.4 Formal Collapse Diagram in Type-Theory}
 
 \[
-\begin{tikzcd}[column sep=huge, row sep=large]
-d_{\text{bottleneck}}(\mathrm{PH}_1(F), \mathrm{PH}_1(F')) < \delta \arrow[r, "\text{Axiom C5}"] &
-\mathrm{PH}_1(F') = 0 \arrow[r, "\text{Axiom C1}"] &
-\mathrm{Ext}^1(F', Q) = 0 \arrow[r, "\text{Axiom C2}"] &
-u(t) \in C^\infty
+\resizebox{\textwidth}{ }{%
+\begin{tikzcd}[ ]
+\begin{tabular}{c}\scriptsize $d_{\text{bottleneck}}(\mathrm{PH}_1(F),\; \mathrm{PH}_1(F')) < \delta$\end{tabular}
+  \arrow[r, "\begin{tabular}{c}\scriptsize Axiom\\\scriptsize C5\end{tabular}"]
+&
+\begin{tabular}{c}\scriptsize $\mathrm{PH}_1(F') = 0$\end{tabular}
+  \arrow[r, "\begin{tabular}{c}\scriptsize Axiom\\\scriptsize C1\end{tabular}"]
+&
+\begin{tabular}{c}\scriptsize $\mathrm{Ext}^1(F', Q) = 0$\end{tabular}
+  \arrow[r, "\begin{tabular}{c}\scriptsize Axiom\\\scriptsize C2\end{tabular}"]
+&
+\begin{tabular}{c}\scriptsize $u(t) \in C^\infty$\end{tabular}
 \end{tikzcd}
+}
 \]
 
 \vspace{1em}
 \paragraph{Collapse Failure Logic (Type-Theoretic Diagnostic).}
 
-\[
-\begin{tikzcd}[column sep=huge, row sep=large]
-\mathrm{PH}_1(F) \neq 0 \arrow[r, "\text{Topological Obstruction}"] &
-\text{Collapse fails (PH-level)} \\
-\mathrm{Ext}^1(F, Q) \neq 0 \arrow[r, "\text{Categorical Obstruction}"] &
-\text{Collapse fails (Ext-level)} \\
-\mathrm{PH}_1 \neq 0 \land \mathrm{Ext}^1 \neq 0 \arrow[r, "\text{Joint Obstruction}"] &
-u_F \notin C^\infty
-\end{tikzcd}
-\]
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\textbf{Condition} & \textbf{Consequence} \\
+\hline
+$\mathrm{PH}_1(F) \neq 0$ & Collapse fails (PH-level) \\
+$\mathrm{Ext}^1(F, Q) \neq 0$ & Collapse fails (Ext-level) \\
+$\mathrm{PH}_1 \neq 0 \land \mathrm{Ext}^1 \neq 0$ & $u_F \notin C^\infty$ (full obstruction) \\
+\end{tabularx}
+\end{center}
+
 
 This diagram encodes the **diagnostic pathway** of failure in the AK Collapse structure,  
 and corresponds to the semantic zones defined in Appendix Z.10.
@@ -5367,14 +5383,15 @@ and logical contribution (e.g., PH elimination, Ext vanishing, semantic closure,
 \subsubsection*{Collapse Structure Classification Table}
 
 \begin{center}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|c|l|l|l|}
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{ }
 \hline
 \textbf{ID} & \textbf{Collapse Type} & \textbf{Function} & \textbf{Reference} \\
 \hline
 A & PH Barcode Collapse & Topological regularity detection & Appendix A, B, Z.3 \\
 B & Energy–Topology Bridge & Decay-driven collapse dynamics & Appendix C, Z.6 \\
-C & Categorical Ext Collapse & Ext$^1 = 0$ ⇒ Obstruction-free gluing & Appendix G, H \\
+C & Categorical Ext Collapse & $\mathrm{Ext}^1 = 0$ ⇒ Obstruction-free gluing & Appendix G, H \\
 D & Mirror–Langlands Collapse & Arithmetic–Geometric fusion collapse & Appendix I \\
 E & AI–PH Diagnostic Collapse & Empirical detection of collapse via AI & Appendix L, Final.5 \\
 F & VMHS Degeneration Collapse & Variation of Hodge structures ⇒ PH+Ext vanishing & Appendix F \\
@@ -5391,7 +5408,7 @@ P & Collapse Embedding Coherence & Homotopic/Type closure of collapse flow & Z.1
 Q & Collapse Completeness Formalization & Global closure theorem over $\mathcal{D}^b(\mathsf{Filt})$ & Final.1, Z.12.5 \\
 R & Collapse Logic Realizations & BSD / H12 / PDE generalization via collapse logic & Final.3, Appendix I$^+$ \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{center}
 
 ---

@@ -4498,6 +4498,12 @@ We now provide a type-theoretic reformulation of the AK Collapse axioms, intende
   \[
   \Pi F : \mathcal{D}^b(\mathsf{Filt}),\; F \simeq Q \Rightarrow \forall n \geq 1,\; \mathrm{Ext}^n(Q, F) = 0.
   \]
+
+  \item[\textbf{(C5)} — Barcode Stability Axiom:]  
+  \[
+  \Pi \varepsilon > 0,\; \exists \delta > 0,\; \forall F' \in \mathcal{D}^b(\mathsf{Filt}),\;
+  d_{\text{bottleneck}}(\mathrm{PH}_1(F), \mathrm{PH}_1(F')) < \delta \Rightarrow \mathrm{PH}_1(F') = 0.
+  \]
 \end{description}
 
 ---
@@ -4520,7 +4526,12 @@ such that for any filtered derived object \( \mathcal{F}_t \), we define:
 \end{cases}
 \]
 
-This formalizes the core of AK-collapse-driven regularity.
+Additionally, if
+\[
+\exists \delta > 0,\; \forall F' \text{ with } d_{\text{bottleneck}}(\mathrm{PH}_1(\mathcal{F}_t), \mathrm{PH}_1(F')) < \delta,\;
+\Rightarrow \mathcal{C}_{\text{Collapse}}(F') := u(t) \in C^\infty,
+\]
+then the functor is said to be locally stable around \( \mathcal{F}_t \).
 
 ---
 
@@ -4532,10 +4543,12 @@ We define the full collapse-compatible subspace:
 \mathcal{M}_{\text{Collapse}} := \left\{ \mathcal{F}_t \in \mathcal{D}^b(\mathsf{Filt}) \;\middle|\; \mathrm{PH}_1(\mathcal{F}_t) = 0 \land \mathrm{Ext}^1(\mathcal{F}_t, Q) = 0 \right\}
 \]
 
-And define its type-theoretic encoding via dependent pairs (Σ-types):
+We also define its stability-preserving type encoding via dependent pairs (Σ-types):
 
 \[
-\Sigma \left( F : \mathcal{D}^b(\mathsf{Filt}) \right). \left( \mathrm{PH}_1(F) = 0 \times \mathrm{Ext}^1(F, Q) = 0 \right)
+\Sigma \left( F : \mathcal{D}^b(\mathsf{Filt}) \right). \left(
+\forall F',\; d_{\text{bottleneck}}(\mathrm{PH}_1(F), \mathrm{PH}_1(F')) < \delta \Rightarrow \mathrm{PH}_1(F') = 0
+\right) \times \mathrm{Ext}^1(F, Q) = 0
 \]
 
 ---
@@ -4543,36 +4556,31 @@ And define its type-theoretic encoding via dependent pairs (Σ-types):
 \subsection*{Z.12.4 Formal Collapse Diagram in Type-Theory}
 
 \[
-\begin{tikzcd}[column sep=large, row sep=large]
-\mathrm{PH}_1(F) = 0 \arrow[r, "\text{Axiom C1}"] &
-\mathrm{Ext}^1(F, Q) = 0 \arrow[r, "\text{Axiom C2}"] &
-u_F \in C^\infty
+\begin{tikzcd}[column sep=huge, row sep=large]
+d_{\text{bottleneck}}(\mathrm{PH}_1(F), \mathrm{PH}_1(F')) < \delta \arrow[r, "\text{Axiom C5}"] &
+\mathrm{PH}_1(F') = 0 \arrow[r, "\text{Axiom C1}"] &
+\mathrm{Ext}^1(F', Q) = 0 \arrow[r, "\text{Axiom C2}"] &
+u(t) \in C^\infty
 \end{tikzcd}
 \]
 
-This diagram encodes the core inference chain of AK collapse in a type-theoretic environment.
+This diagram expresses the perturbation-tolerant collapse chain, embedding AK Collapse into a type-theoretic logic chain under bounded topological noise.
 
 ---
 
 \subsection*{Z.12.5 Implementation Remarks}
 
 \begin{itemize}
-  \item This framework is compatible with Coq’s Prop-universe and dependent types.
-  \item Collapse objects \( Q \) may be instantiated as zero barcode complexes or unit motives.
-  \item The full implementation will depend on defining concrete categories of filtered sheaves and Ext-computations.
-  \item Type-level evaluation and extraction to AI-assistive layers is discussed in Appendix L.
+  \item The above axioms are compatible with Coq’s \texttt{Prop}-universe and dependent types.
+  \item The collapse objects \( Q \) may be interpreted as barcode-zero complexes or trivial motives.
+  \item Axioms (C1)–(C5) together constitute a minimal Π-type fragment suitable for Coq/Lean encoding.
+  \item Local stability domains (δ-balls in bottleneck metric) allow collapse prediction under data perturbation.
+  \item Integration into AI-assisted classification modules is discussed in Appendix L.
 \end{itemize}
 
 ---
 
-\paragraph{Note.}  
-This formalization enables categorical diagnostics, exclusion proof of counterexamples, and the integration of AK collapse logic into proof assistants and AI-enhanced classification modules.
-
-
-
 \subsection*{Z.12.6+: Full Appendix–Collapse Type Mapping (A–O)}
-
-This table extends the structural–type correspondence from Appendices A–G to the full AK framework, including Appendices H–O.
 
 \begin{longtable}{|c|p{5.2cm}|p{7.5cm}|}
 \hline
@@ -4610,23 +4618,16 @@ This table extends the structural–type correspondence from Appendices A–G to
 \hline
 \end{longtable}
 
-\paragraph{Summary.}  
-Each appendix contributes to the formal structure of the Collapse Functor:
-- **A–D** define admissibility and inference schema,
-- **E–G** provide core axioms and propagation logic,
-- **H–J** classify failure modes and logical exceptions,
-- **K–O** encode higher-order indexing, diagnostic structure, and functorial semantics.
+---
 
-These allow the AK Collapse mechanism to be embedded in proof assistants as a **structured Π–Σ–Functor theory**.
+\paragraph{Summary.}
 
+This formalization ensures that:
+- Collapse inference is stable under topological perturbation,
+- Collapse functor is localizable and compatible with proof assistants,
+- Structural exceptions can be diagnosed and excluded systematically.
 
-\paragraph{Final Note.}
-
-Collapse failure is not a bug but a boundary—a zone where our current structural models cease to predict regularity.  
-Recognizing these zones enables:
-- sharper structural conjectures,
-- exclusion of counterexamples,
-- refinement of AK classifiers and topoi.
+Collapse is not merely failure prevention—but a formal method of isolating smooth zones in a categorical–topological–analytic landscape.
 
 
 

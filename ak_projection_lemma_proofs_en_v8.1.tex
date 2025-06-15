@@ -5394,6 +5394,36 @@ Abelian varieties serve as structurally rich targets for projection in AK theory
 Their group-theoretic, cohomological, and geometric properties make them ideal for classifying collapse success and failure, and for embedding collapse within the larger categorical–mirror–topological framework.
 
 
+\subsection*{N.7 Formal Logical Compatibility (ZFC Interpretation)}
+
+Let \( \mathcal{A} \) be a complex abelian variety with tropical degeneration \( \mathrm{Trop}(\mathcal{A}) \subset \mathbb{R}^n \).  
+The collapse structure induced by this degeneration satisfies the ZFC-compatible axioms:
+
+\begin{itemize}
+  \item (A2) \( \mathrm{PH}_1(\mathcal{A}_t) = 0 \Rightarrow H^1_{\text{loc}} \) regularity holds for associated function \( u(t) \),
+  \item (A4) Barcode degeneration is functorial under \( \mathcal{F}_{\mathrm{Trop}}: \mathcal{C}_{\text{Trop}} \to \mathcal{C}_{\mathrm{PH}} \),
+  \item (Z11-C) SYZ-fiber → Trop barcode → Ext-class vanishing holds formally under collapse interpretation.
+\end{itemize}
+
+These follow the type-theoretic collapse framework as detailed in Z.12, ensuring formal compatibility.
+
+\subsection*{N.6 Collapse Functor from Abelian Degeneration}
+
+Define the functor:
+\[
+\mathcal{F}^{\mathrm{Trop}}_{\text{Collapse}}: \mathcal{C}_{\text{Trop}}(\mathcal{A}) \to \mathcal{C}_\infty
+\]
+such that:
+\begin{itemize}
+  \item Objects: tropical degeneration families \( \{ \mathcal{A}_t \}_{t \in [0,\epsilon)} \) with PH-barcode vanishing,
+  \item Morphisms: correspond to degeneration morphisms respecting the Ext-class collapse,
+  \item Output: smooth global object \( u(t) \in C^\infty(\mathbb{R}^3) \).
+\end{itemize}
+
+This functor is fully faithful under the ZFC interpretation (cf. Appendix Z.4),  
+and preserves semantic collapse finality (cf. Z.5).
+
+
 
 % =============================================
 % Appendix N⁺: SYZ–Tropical Collapse Degeneration
@@ -5446,7 +5476,6 @@ Final.6 ensures such collapse functors preserve smoothness analytically.
 \end{proof}
 
 
-
 \section*{Appendix O: Trop--Mirror--Abelian Collapse Integration}
 \addcontentsline{toc}{section}{Appendix O: Trop--Mirror--Abelian Collapse Integration}
 
@@ -5488,19 +5517,6 @@ and that this convergence reflects a structural unity across algebraic, symplect
 \end{minipage}
 
 This diagram expresses that all three projection routes—Tropical degeneration, SYZ duality, and Jacobian reduction—lead to the same topological trivialization and analytic regularity.
-
-
-\paragraph{Collapse Functor Composition.}
-
-Let \( \mathcal{C}_{\text{Trop}}, \mathcal{C}_{\text{Mirror}}, \mathcal{C}_{\text{Jac}} \) denote collapse functors induced respectively by tropical, SYZ, and Jacobian projections.  
-Then the composite functor:
-\[
-\mathcal{C}_{\text{Unified}} := \mathcal{C}_{\text{Trop}} \sqcup \mathcal{C}_{\text{Mirror}} \sqcup \mathcal{C}_{\text{Jac}} : \mathcal{D}^{b}_{\text{geom}}(X) \longrightarrow \mathcal{C}^\infty
-\]
-is a well-defined typed functor under the conditions of Z.12.2–Z.12.5, and induces analytic smoothness if the barcode vanishes:
-\[
-\mathrm{PH}_1(X) = 0 \Rightarrow \mathcal{C}_{\text{Unified}}(\mathcal{F}_X) \in \mathcal{C}^\infty.
-\]
 
 ---
 
@@ -5547,7 +5563,25 @@ This integrative collapse framework exhibits:
 
 The convergence of collapse routes affirms the structural sufficiency of AK logic in resolving geometric obstructions via projection.
 
+
+\subsection*{O.4.1 Functorial Collapse Composition Syntax}
+
+The collapse paths in the diagram above are not merely heuristic but admit a functorial and type-theoretic interpretation.  
+Let us define the composed collapse functor:
+\[
+\mathcal{C}_{\mathrm{total}} := \mathcal{C}_{\mathrm{Trop}} \circ \mathcal{C}_{\mathrm{Mirror}} \circ \mathcal{C}_{\mathrm{AbVar}} : \mathcal{X} \to C^\infty.
+\]
+
+Each component functor \( \mathcal{C}_i \) in this composition is well-defined within the AK Collapse framework as described in Z.12.2 and Final.6, satisfying:
+\[
+\mathcal{C}_i : T_i \to T_{i+1}, \quad \text{with } \mathrm{Ext}^1(T_i, \mathbb{Q}) = 0.
+\]
+
+Therefore, the combined collapse map \( \mathcal{C}_{\mathrm{total}} \) is both formally well-typed and semantically justified under AK-theoretic projection, preserving the compositional integrity of Collapse logic.
+
+
 ---
+
 
 \subsection*{O.5 Remarks and Future Extensions}
 

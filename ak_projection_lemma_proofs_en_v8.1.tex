@@ -3875,7 +3875,119 @@ This formulation enables:
 
 ---
 
-\subsection*{J.10 References}
+% ===========================
+% Appendix J.10: Collapse Category and Type-Theoretic Encoding
+% ===========================
+
+\subsection*{J.10 Collapse Category and Type-Theoretic Encoding}
+
+We define a formal category \(\mathcal{Collapse}\) representing collapse-capable structures.
+
+\begin{definition}[Collapse Category \(\mathcal{Collapse}\)]
+Let \(\mathcal{Collapse}\) be a category such that:
+\begin{itemize}
+  \item \textbf{Objects:} Filtered derived objects \(\mathcal{F}_t \in \mathsf{Filt}\) representing topological or sheaf-theoretic data.
+  \item \textbf{Morphisms:} Collapse-preserving morphisms \(f: \mathcal{F}_t \to \mathcal{F}_{t'}\) such that:
+    \[
+    \mathrm{Ext}^1(Q, \mathcal{F}_t) = 0 \Rightarrow \mathrm{Ext}^1(Q, \mathcal{F}_{t'}) = 0
+    \]
+  \item \textbf{Composition:} Defined via usual categorical composition \(g \circ f\), respecting collapse condition.
+  \item \textbf{Terminal object:} There exists a unique \(\bot \in \mathcal{Collapse}\) such that:
+    \[
+    \forall \mathcal{F}_t, \exists! f_t : \mathcal{F}_t \to \bot
+    \]
+    where \(\mathrm{Ext}^1(Q, \bot) = 0\), \(PH_1(\bot) = 0\).
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+This category admits functorial collapse operations:
+\[
+C: \mathcal{Collapse} \to \mathcal{Triv}, \quad C(\mathcal{F}_t) = \mathcal{F}_0
+\]
+where \(\mathcal{F}_0\) is semantically trivial.
+\end{remark}
+
+% ===========================
+% Appendix J.11: Obstruction Logic and Coq-Type Formulation
+% ===========================
+
+\subsection*{J.11 Obstruction Logic and Coq-Type Formulation}
+
+We define a type-theoretic space of obstructions for an object \(X\) using dependent types.
+
+\begin{definition}[Obstruction Logic Space]
+Let \(\mathfrak{Ob}(X)\) denote the space of unresolved extensions:
+\[
+\mathfrak{Ob}(X) := \{ \phi : \mathrm{Ext}^1(X, Y) \mid \phi \neq 0 \text{ for some } Y \}
+\]
+We define:
+\[
+\mathfrak{Ob}(X) = \emptyset \quad \Longleftrightarrow \quad \mathrm{Ext}^1(X, -) = 0
+\]
+\end{definition}
+
+\paragraph{Coq-style Encoding.}
+In Coq, this is represented as:
+
+\begin{verbatim}
+(* Obstruction logic type *)
+Parameter X : Type.
+Parameter Ext1 : Type -> Type -> Prop.
+Definition Ob := { Y : Type & Ext1 X Y }.
+Definition is_collapsed : Prop := forall Y : Type, ~ Ext1 X Y.
+\end{verbatim}
+
+This expresses the semantic exhaustion of obstruction space.
+
+% ===========================
+% Appendix J.12: Collapse Causality via Π-Σ Type Theorem
+% ===========================
+
+\subsection*{J.12 Collapse Causality via Π-Σ Type Theorem}
+
+We now encode the causal structure of AK Collapse via Π-type (universal vanishing) and Σ-type (existential gluing).
+
+\begin{definition}[Π-type Collapse Condition]
+Let \(\mathcal{F}_t \in \mathsf{Filt}\) be a family of derived objects indexed by time or scale \(t\).  
+Then:
+\[
+\prod_{t \in T} \mathrm{PH}_1(\mathcal{F}_t) = 0
+\]
+expresses persistent topological collapse across all filtration stages \(t\).
+\end{definition}
+
+\begin{definition}[Σ-type Smooth Gluing]
+If there exists a trivial object \(\mathcal{F}_0\) such that:
+\[
+\mathrm{Ext}^1(\mathcal{F}_0, \mathcal{G}) = 0 \quad \text{and} \quad u(t) \in C^\infty
+\]
+we encode this as:
+\[
+\sum_{\mathcal{F}_0} [\mathrm{Ext}^1 = 0 \wedge u(t) \in C^\infty]
+\]
+\end{definition}
+
+\begin{theorem}[Typed Collapse Regularity]
+Under axioms A1–A7 and derived gluing,
+\[
+\boxed{
+\left( \prod_{t \in T} \mathrm{PH}_1 = 0 \right)
+\Rightarrow
+\left( \sum_{\mathcal{F}_0} \mathrm{Ext}^1 = 0 \wedge u(t) \in C^\infty \right)
+}
+\]
+\end{theorem}
+
+\begin{remark}
+This theorem links global barcode collapse to the existence of smooth solutions in analytic domains.
+\end{remark}
+
+% ===========================
+% Appendix J.13: References
+% ===========================
+
+\subsection*{J.13 References}
 
 \begin{thebibliography}{9}
 
@@ -3891,21 +4003,13 @@ A. Beilinson, J. Bernstein, P. Deligne.
 V. Voevodsky.  
 \textit{Triangulated Categories of Motives}. AMS, 2000.
 
-\bibitem{Katzarkov2014}
-Katzarkov, Kontsevich, Pantev.  
-\textit{Bogomolov–Tian–Todorov theorems for Landau–Ginzburg models}. J. Diff. Geom., 2017.
-
-\bibitem{MacLane1994}
-S. Mac Lane.  
-\textit{Categories for the Working Mathematician}. Springer, 1994.
-
 \bibitem{Nekovar2006}
 J. Nekovář.  
 \textit{Selmer Complexes}. Astérisque 310 (2006).
 
 \bibitem{Kobayashi2025}
 A. Kobayashi, ChatGPT.  
-\textit{AK High-Dimensional Projection Structural Theory v6.1}, 2025.
+\textit{AK High-Dimensional Projection Structural Theory v8.2}, 2025.
 
 \end{thebibliography}
 

@@ -148,6 +148,17 @@ please feel free to reach out via email: 📧 dollops2501@icloud.com
 
 ---
 
+## 🔗 DOI (Published on Zenodo)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15666262.svg)](https://doi.org/10.5281/zenodo.15666262)
+
+📄 This repository is associated with the publication:
+
+**A. Kobayashi**, *AK High-Dimensional Projection Structural Theory (v9.0)*, 2025.  
+DOI: [10.5281/zenodo.15666262](https://doi.org/10.5281/zenodo.15666262)
+
+---
+
 ## 📩 Author
 
 **A. Kobayashi**  

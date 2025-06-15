@@ -130,13 +130,21 @@ Appendix L introduces neural classifiers and diagnostic modules to classify coll
 
 ## 📤 arXiv Submission
 
-**AK-HDPST v9.0** is ready for academic submission.
+**AK-HDPST v9.0** is currently being prepared for submission to arXiv.
 
-Recommended categories:
-- math.CT (Category Theory)
-- math.AG (Algebraic Geometry)
-- math.AP (Analysis of PDEs)
-- math.NT (Number Theory)
+We are actively seeking:
+- **Endorsement** from qualified researchers in related fields
+- **Feedback or suggestions** from experts in category theory, algebraic geometry, PDEs, or number theory
+- **Collaborative interest** in formal verification, AI-assisted theorem exploration, or structural mathematics
+
+If you are interested in endorsing this submission or providing commentary,  
+please feel free to reach out via email: 📧 dollops2501@icloud.com
+
+**Recommended arXiv categories:**
+- [math.CT] Category Theory  
+- [math.AG] Algebraic Geometry  
+- [math.AP] Analysis of PDEs  
+- [math.NT] Number Theory
 
 ---
 

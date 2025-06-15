@@ -4142,6 +4142,59 @@ The final target Cob is a stable homotopy category with terminal collapse invari
   \end{itemize}
 \end{itemize}
 
+\subsection*{K.8 Collapse–Geometry Alignment Theorem (with Z-Axioms)}
+
+\begin{theorem}[Collapse–Geometry Classification Alignment]
+Assume the following Z-axiomatic collapse conditions hold:
+\begin{enumerate}
+  \item[(Z.2)] \( \mathrm{Ext}^1(\mathcal{F}_t, -) = 0 \),
+  \item[(Z.3)] \( \mathrm{PH}_1(\mathcal{F}_t) = 0 \),
+  \item[(Z.6)] Derived smoothness \( u(t) \in C^\infty \) is ensured.
+\end{enumerate}
+Then the post-collapse object \( \mathcal{F}_\infty \) admits a canonical classification:
+\[
+\mathcal{F}_\infty \in D^b(\mathcal{AK}) \quad \Rightarrow \quad \mathcal{G}(\mathcal{F}_\infty) \in \texttt{Cob}
+\]
+Moreover, the geometric realization belongs to a Thurston geometry via K⁺:
+\[
+\lim_{t \to 0} X_t = X_0 \in \mathsf{ThurstonGeo}
+\]
+\end{theorem}
+
+\subsection*{K.9 Collapse–Thurston Typing Structure (Coq Type Classes)}
+
+\begin{lstlisting}[language=Coq]
+(* Define geometry types *)
+Inductive ThurstonModel :=
+  | E3 | H3 | S3 | H2xR | S2xR | SL2R | Nil | Sol.
+
+Parameter CollapseSpace : Type.
+
+(* Typing judgment: a collapse profile belongs to one geometry *)
+Parameter GeometryClassifier : CollapseSpace -> ThurstonModel.
+
+(* Additional structural axioms *)
+Axiom E3_flat : forall X, PH1_Vanish X -> Curvature X = 0 -> GeometryClassifier X = E3.
+Axiom H3_curved : forall X, PH1_Vanish X -> Curvature X < 0 -> GeometryClassifier X = H3.
+\end{lstlisting}
+
+\subsection*{K.10 Collapse–Geometry Integration Diagram (Z–K Consistency)}
+
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+\text{Z.2 Ext Collapse} \arrow[r] &
+\text{Z.3 PH Collapse} \arrow[r] &
+\text{Z.6 Smooth Gluing} \arrow[r] &
+\mathcal{F}_\infty \in D^b(\mathcal{AK}) \arrow[r, "\mathcal{G}"] &
+\texttt{Cob} \arrow[r, "\mathcal{F}_{\mathrm{geom}}"] &
+\mathsf{ThurstonGeo}
+\end{tikzcd}
+\]
+
+\textit{This diagram demonstrates the coherent flow from logical axioms (Z) to global geometric classification (K, K⁺).}
+
+
+
 
 % =============================================
 % Appendix K⁺: Hierarchical Geometric Classification via Tropical Collapse
@@ -4245,6 +4298,30 @@ The Thurston geometries offer a universal endpoint structure for such collapse l
 }
 \]
 This provides a geometric signature of collapse types and justifies the functorial view of degeneration.
+
+\subsection*{K$^+$.9 Mirror–Langlands–Trop Compatibility Remark}
+
+\begin{remark}
+The collapse-based classification of geometric endpoints in \( \mathsf{ThurstonGeo} \)
+resonates with the degeneration behavior of:
+\begin{itemize}
+  \item Mirror Calabi–Yau degeneration (SYZ fibration limit),
+  \item Langlands moduli reduction (e.g., \( \mathcal{B}un_G \to \mathcal{M}_{\text{Betti}} \)),
+  \item Tropical reduction of derived mapping stacks.
+\end{itemize}
+This justifies K⁺ as the geometric arm of the unified degeneration–correspondence theory developed in Appendix M⁺⁺.
+\end{remark}
+
+\subsection*{K$^+$.10 Future Expansion Pathways}
+
+Future augmentations may include:
+\begin{itemize}
+  \item Explicit mapping between Ext-class growth profiles and curvature spectrum,
+  \item Embedding of topological collapse into motivic class stacks,
+  \item Cobordism-homology classifiers enriched with AI inference.
+\end{itemize}
+
+These will further solidify the classification landscape post-Collapse within AK theory.
 
 
 

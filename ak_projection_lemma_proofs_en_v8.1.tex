@@ -2965,6 +2965,42 @@ Then collapse of all $\mathrm{Ext}^i$ implies:
 
 This provides a semantic mechanism for collapsing conjectural categories such as mixed motives or perverse sheaves.
 
+
+\subsection*{H.8.1 Mixed Motives Collapse Classifier}
+\addcontentsline{toc}{subsection}{H.8.1 Mixed Motives Collapse Classifier}
+
+We define a functorial classifier that assigns to each motivic sheaf its collapse status.  
+Let \( Sh(\mathcal{M}) \) denote the topos of motivic sheaves.
+
+\paragraph{Definition (Collapse Classifier for Motives).}
+
+\[
+\mathcal{M}_{\text{Collapse}} : \mathrm{Ob}(Sh(\mathcal{M})) \to \mathbf{CollapseTypes}
+\]
+
+with
+\[
+\mathcal{M}_{\text{Collapse}}(F) =
+\begin{cases}
+\textbf{Trivial} & \text{if } \mathrm{Ext}^i(F, G) = 0 \quad \forall i > 0,\; \forall G \\
+\textbf{Obstructed}_k & \text{if } \mathrm{Ext}^k(F, G) \neq 0 \text{ for some minimal } k
+\end{cases}
+\]
+
+This classifier induces a stratification:
+\[
+Sh(\mathcal{M}) = \bigsqcup_{k=0}^\infty \mathbf{Obstructed}_k
+\quad\text{with}\quad \mathbf{Obstructed}_0 := \textbf{Trivial}
+\]
+
+where each stratum corresponds to a minimal level \( k \) of persistent obstruction in the derived category.
+
+\paragraph{Interpretation.}
+
+This functor encodes the collapse status of motivic objects in terms of categorical obstruction.  
+It is structurally compatible with the AK Collapse functor and enables semantic classification of \( D^b_c(Sh(\mathcal{M})) \).
+
+
 ---
 
 \subsection*{H.9 Formal Collapse Semantics in Type Theory}
@@ -3019,6 +3055,32 @@ Axiom CollapseProperty :
 \end{lstlisting}
 
 This formalizes the functorial collapse process as a categorical projection from obstructed zones to trivial structural classes.
+
+
+\subsection*{H.10.1 Collapse–Obstruction–Motive Diagram}
+\addcontentsline{toc}{subsection}{H.10.1 Collapse–Obstruction–Motive Diagram}
+
+We summarize the semantic implication chain underlying the AK Collapse theory in the motivic context:
+
+\[
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathrm{PH}_1 = 0 \arrow[r, "\text{Topological Collapse}"] \arrow[d, "\text{Motivic Realization}"']
+& \mathrm{Ext}^1 = 0 \arrow[d, "\text{Obstruction Removal}"] \\
+\mathcal{M}_{\text{Collapse}}(F) = \textbf{Trivial} \arrow[r, "\text{Internal Collapse Functor}"]
+& \phi = \top \in \text{Internal Logic}
+\end{tikzcd}
+}
+\]
+
+This diagram expresses the full descent chain from persistent homology collapse to semantic collapse within motivic and topos-theoretic categories.
+
+\paragraph{Semantic Summary.}
+
+Collapse in the AK framework propagates from topological triviality through Ext-class disappearance  
+to motive classification and internal logical trivialization.
+
+
 
 
 \subsection*{H.11 References}

@@ -1036,8 +1036,38 @@ A projection \( P: X \rightarrow Y \) defined under these conditions formally sa
 Thus, we have established the MECE decomposition within the rigorous framework of ZFC set theory and topological continuity.
 
 
+\subsection*{A.6 Type-Theoretic Preview and Cross-Reference}
 
-\subsection*{6.5 Selected References}
+To bridge topological projection and formal proof systems, we sketch the type-theoretic encoding of the MECE decomposition.  
+This defines the Collapse functor domain from topological and categorical data into logical propositions.
+
+\begin{lstlisting}[language=Coq, caption=Type-theoretic sketch of MECE projection]
+Parameter X : Type.
+Parameter T_N : Type. (* N-dimensional torus *)
+Parameter MECE : X -> Prop.
+Parameter Projected : X -> T_N -> Prop.
+
+Axiom MECE_sound : forall x y : X, MECE x -> MECE y -> x <> y.
+Axiom Projected_disjoint : forall x y : X, t : T_N,
+  Projected x t -> Projected y t -> x = y.
+\end{lstlisting}
+
+This structure provides the starting point for Collapse functor definition (cf. Final.3.3),  
+and prepares the space for formal encoding in Coq or Lean.
+
+\vspace{0.5em}
+
+\noindent
+\textbf{Cross-reference:}  
+See also:
+\begin{itemize}
+  \item \textbf{Appendix Final.3.3} — Collapse Functor and Coq Implementation
+  \item \textbf{Appendix Z.12} — Full type-theoretic collapse encoding
+\end{itemize}
+
+
+
+\subsection*{7 Selected References}
 
 \begin{thebibliography}{9}
 

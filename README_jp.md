@@ -146,6 +146,18 @@ Appendix Lにて、PH構造・Ext構造・トロピカル構造に基づくAI分
 
 ---
 
+## 🔗 DOI（Zenodo にて公開）
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15666262.svg)](https://doi.org/10.5281/zenodo.15666262)
+
+📄 本リポジトリは以下の公開記録と対応しています：
+
+**小林篤志（A. Kobayashi）**, *AK 高次元射影構造理論（バージョン9.0）*, 2025年.  
+DOI: [10.5281/zenodo.15666262](https://doi.org/10.5281/zenodo.15666262)
+
+
+---
+
 ## 📩 著者情報
 
 **A. Kobayashi**  

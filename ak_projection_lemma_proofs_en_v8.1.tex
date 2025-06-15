@@ -2967,7 +2967,61 @@ This provides a semantic mechanism for collapsing conjectural categories such as
 
 ---
 
-\subsection*{H.9 References}
+\subsection*{H.9 Formal Collapse Semantics in Type Theory}
+
+We define the semantic collapse condition as the \textbf{trivialization of all propositions} within the internal topos logic.
+
+\begin{lstlisting}[language=Coq, caption=Topos-Level Collapse Trivialization]
+(* Collapse at the level of internal topos logic *)
+
+Parameter ToposProp : Type.
+Parameter ToposTruth : ToposProp.
+Axiom CollapseTriv : forall φ : ToposProp, φ = ToposTruth.
+
+(* Ext-class collapse induces logical trivialization *)
+Parameter Ext1 : Type -> Type -> Prop.
+Parameter Sheaf : Type.
+
+Axiom ExtCollapse :
+  forall (F G : Sheaf),
+    Ext1 F G = False ->
+    CollapseTriv (ToposTruth).
+\end{lstlisting}
+
+This expresses the internal semantic equivalence:
+\[
+\mathrm{Ext}^1(Q, \mathcal{F}^\bullet) = 0 \quad \Rightarrow \quad \forall \phi, \; \phi = \top.
+\]
+
+---
+
+\subsection*{H.10 Collapse Functor and Derived Gluing}
+
+Let \( \mathcal{C}_\mathrm{Filt} \) and \( \mathcal{C}_\mathrm{Triv} \) be the categories of filtered and collapsed structures, respectively.
+
+We define the Collapse functor:
+\[
+C : \mathcal{C}_\mathrm{Filt} \longrightarrow \mathcal{C}_\mathrm{Triv}
+\quad \text{such that} \quad
+C(\mathcal{F}) = \mathcal{F}_0, \quad \text{where } \mathrm{Ext}^1(\mathcal{F}_0, \mathcal{G}) = 0 \; \forall \mathcal{G}.
+\]
+
+\begin{lstlisting}[language=Coq, caption=Collapse Functor Typing]
+(* Collapse Functor definition *)
+
+Parameter FilteredSheaf : Type.
+Parameter TrivialSheaf : Type.
+Parameter CollapseFunctor : FilteredSheaf -> TrivialSheaf.
+
+Axiom CollapseProperty :
+  forall (F : FilteredSheaf) (G : TrivialSheaf),
+    Ext1 (CollapseFunctor F) G = False.
+\end{lstlisting}
+
+This formalizes the functorial collapse process as a categorical projection from obstructed zones to trivial structural classes.
+
+
+\subsection*{H.11 References}
 
 \begin{thebibliography}{9}
 

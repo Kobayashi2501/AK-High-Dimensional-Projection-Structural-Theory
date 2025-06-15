@@ -456,6 +456,16 @@ Given a degenerating family $\{ X_t \}_{t \in \Delta}$ of complex manifolds, the
 The tropical skeleton can be regarded as a homotopy colimit of the family $X_t$ under a degeneration-compatible topology, classifying singular strata in the limit.
 \end{remark}
 
+\begin{remark}[SYZ Mirror Interpretation]
+The tropical skeleton \( \mathrm{Trop}(X_t) \), constructed via collapsing torus fibers,  
+is deeply connected to the Strominger–Yau–Zaslow (SYZ) framework of mirror symmetry.  
+In this picture, the degeneration of a Calabi–Yau manifold along special Lagrangian \( T^3 \)-fibrations  
+yields a base space that is piecewise-linear—i.e., a tropical skeleton.  
+This base plays the role of the common ground between the collapsing geometry and its mirror dual,  
+and will be further explored in Appendix M⁺⁺ in the context of categorical duality.
+\end{remark}
+
+
 \subsection{5.2 Geometric–Categorical Correspondence}
 
 \begin{theorem}[Trop--Ext Equivalence]
@@ -623,6 +633,30 @@ This chapter ensures that the analytic, topological, and categorical frameworks 
 \paragraph{Forward Link.}
 These results prepare the ground for Chapter 7, which interprets smoothness in Navier–Stokes solutions as the consequence of topological collapse and categorical rigidity.
 
+
+\subsection*{6.3.1 Type-Theoretic Formulation of Collapse Terminality}
+
+\paragraph{Formal Collapse Terminality (Type-Theoretic Sketch).}
+We now express the categorical rigidity implied by Ext$^1$ collapse using type-theoretic notation.
+
+\begin{quote}
+\textbf{Proposition (Collapse Terminality via Type Theory).}  
+Let \( \mathcal{F} \in D^b(\mathcal{AK}) \) be a derived object.  
+Then:
+\[
+\Pi_{\mathcal{F}} \left( \mathrm{Ext}^1(\mathcal{F}, -) = 0 \right) \Rightarrow  
+\left( \forall \mathcal{G},\ \Sigma f : \mathrm{Hom}(\mathcal{G}, \mathcal{F}).\ \forall f'.\ f' = f \right)
+\]
+\end{quote}
+
+This expresses that \( \mathcal{F} \) is a terminal object in the derived category,  
+as all morphisms \( \mathcal{G} \to \mathcal{F} \) are unique up to equivalence.
+
+\paragraph{Interpretation.}
+This Π-type and Σ-type expression formalizes the semantic rigidity of AK collapse,  
+making it compatible with proof assistants like Coq or Lean, and sets the stage for the full formalization given in the Final and Z appendices.
+
+
 \subsection{6.4 Formal Collapse Principles in Arithmetic and Motivic Geometry}
 
 We now formalize key consequences of the AK collapse framework in the setting of arithmetic geometry, noncommutative categories, and motivic theory. This provides a logical counterpart to the structural collapse results in Section 6.3.
@@ -787,6 +821,9 @@ This mechanism may generalize to MHD, SQG, Euler equations, and other dissipativ
 
 \paragraph{Connection.}
 Thus, Chapter 7 completes the arc from topological functionals (Chapter 3), structural degenerations (Chapters 4–6), to analytic regularity in physical systems.
+
+\textbf{See also Appendix~Z.3 and Final.1–2 for the type-theoretic formalization of the Ext–PH–Smoothness collapse structure.}
+
 
 \begin{lemma}[Compatibility with BKM Criterion]
 Let $u(t)$ be a Leray--Hopf solution. If $\mathrm{PH}_1(u(t)) \to 0$ and $\mathrm{Ext}^1(\mathcal{F}_t, -) \to 0$, then:

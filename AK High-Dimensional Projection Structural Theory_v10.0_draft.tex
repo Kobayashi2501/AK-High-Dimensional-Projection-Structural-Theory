@@ -368,6 +368,26 @@ where \( \mathsf{Triv}(\mathcal{C}) \) is a category of contractible or path-con
 
 This axiom ensures that barcode collapse corresponds to categorical flattening.
 
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Axis
+  \draw[->] (0,0) -- (8,0) node[right] {Filtration Parameter $t$};
+
+  % Bars for PH_1 classes (Axiom A1: finite barcodes)
+  \draw[thick] (1,1) -- (4,1); \node[left] at (1,1) {$\beta_1^1$};
+  \draw[thick] (2,1.5) -- (6,1.5); \node[left] at (2,1.5) {$\beta_1^2$};
+  \draw[thick] (3.5,2) -- (5.5,2); \node[left] at (3.5,2) {$\beta_1^3$};
+
+  % Degeneration arrow
+  \node at (7,2.2) {\Huge$\Rightarrow$};
+
+  % Collapse to triviality (Axiom A3)
+  \draw[very thick,red] (7.5,1.2) -- (8,1.2); \node[right] at (8,1.2) {$\beta_1 = 0$};
+\end{tikzpicture}
+\caption{Illustration of Collapse Axiom A1–A3 via PH$_1$ barcodes. Persistent cycles die out as $t \to \infty$, implying topological triviality.}
+\end{figure}
+
 ---
 
 \subsection*{3.4 Axiom A2: Smoothness from Barcode Collapse}
@@ -416,6 +436,27 @@ the disappearance of 1-cycles in persistent homology induces a simplification of
 \quad \Longrightarrow \quad 
 \text{Smooth dynamics and categorical triviality}.
 \]
+
+\paragraph{Type-Theoretic Formalization.}
+The above three axioms can be recast in a predicate-logical and type-theoretic format, suitable for formal verification.
+
+Let \( \mathcal{F}_t \in \mathsf{Filt}(\mathcal{C}) \) be a filtered object. Then:
+
+\begin{align*}
+\textbf{Axiom A1:} &\quad \mathrm{PH}_1(\mathcal{F}_t) = 0 \quad \Rightarrow \quad \mathcal{F}_t \in \mathsf{Triv}(\mathcal{C}) \\
+\textbf{Axiom A2:} &\quad \mathrm{PH}_1(\mathcal{F}_t) = 0 \quad \Rightarrow \quad u(t) \in C^\infty \\
+\textbf{Axiom A3:} &\quad \mathrm{PH}_1(\mathcal{F}_t) \to 0 \text{ in bottleneck metric } \Rightarrow \lim_{t \to \infty} \mathcal{F}_t \in \mathsf{Triv}(\mathcal{C})
+\end{align*}
+
+In dependent type-theoretic form, we define:
+
+\[
+\texttt{TopCollapse} :\equiv \Pi \mathcal{F} : \mathsf{Filt}(\mathcal{C}),\; \left[
+\mathrm{PH}_1(\mathcal{F}) = 0 \Rightarrow \mathrm{Smooth}(\mathcal{F})
+\right].
+\]
+
+This enables formal treatment of collapse as a verifiable logical proposition over filtered categorical spaces.
 
 \begin{remark}
 These axioms form the topological backbone of AK-HDPST.  

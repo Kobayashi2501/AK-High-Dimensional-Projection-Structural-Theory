@@ -3952,6 +3952,136 @@ This glossary serves the following roles:
 \end{itemize}
 
 ---
+% =============================================================
+% Appendix U: Collapse Failure – Unstable, Unresolvable, and Undecidable Cases
+% =============================================================
+
+\section*{Appendix U: Collapse Failure – Unstable, Unresolvable, and Undecidable Cases}
+\addcontentsline{toc}{section}{Appendix U: Collapse Failure}
+
+\subsection*{U.1 Objective and Disclaimer}
+
+This appendix catalogs structures \textbf{outside the scope} of the AK Collapse theory as formalized in Appendices A–S.  
+These include filtered sheaves or dynamic systems for which the collapse mechanisms fail due to instability, non-resolvability, or undecidability.
+
+\begin{quote}
+\textit{Note: All examples in this appendix fall outside the formal collapse closure governed by axioms A0–A9.  
+They serve to delineate the limits of the theory and to mark boundaries of applicability.}
+\end{quote}
+
+---
+
+\subsection*{U.2 Categories of Failure}
+
+We define three primary classes of collapse failure:
+
+\begin{itemize}
+  \item \textbf{Unstable:} Collapse energy $E(t)$ fails to converge: $\lim_{t \to \infty} E(t) = \infty$.
+  \item \textbf{Unresolvable:} $\mathrm{PH}_1(\mathcal{F}_t) \not\to 0$ and $\mathrm{Ext}^1(\mathcal{F}_t, \mathbb{Q}) \not\to 0$, indefinitely.
+  \item \textbf{Undecidable:} Collapse validity cannot be decided constructively in MLTT (e.g., non-total functions, ill-defined dependent types).
+\end{itemize}
+
+These conditions obstruct the construction of the Collapse Functor or its realization in Coq/Lean.
+
+---
+
+\subsection*{U.3 Formal Examples}
+
+\paragraph{(1) Unstable Case: Divergent Collapse Energy}
+
+Let $\mathcal{F}_t$ be such that:
+\[
+E_{\mathrm{PH}}(t) := \dim \mathrm{PH}_1(\mathcal{F}_t) + \|\partial \mathcal{F}_t\|^2 \to \infty,
+\]
+then collapse failure is witnessed by:
+\[
+\neg\, \exists T,\, \forall t > T,\; E(t) < \varepsilon \quad \text{(for any } \varepsilon > 0).
+\]
+
+This violates Axiom A5 (Collapse Energy Convergence), and thus invalidates the derivation of regularity.
+
+---
+
+\paragraph{(2) Unresolvable Case: Obstruction Persistence}
+
+There exists a sequence $\{t_n\} \subset \mathbb{R}_{\ge 0}$ such that:
+\[
+\mathrm{PH}_1(\mathcal{F}_{t_n}) \ne 0 \quad \text{and} \quad \mathrm{Ext}^1(\mathcal{F}_{t_n}, \mathbb{Q}) \ne 0 \quad \forall n,
+\]
+with no convergent subsequence of vanishing class.
+
+Such sheaves fail both A1 and A2 (vanishing criteria), and thus lie outside Collapse Basis $\mathbb{C}_{\mathrm{AK}}$.
+
+---
+
+\paragraph{(3) Undecidable Case: Collapse Non-constructibility}
+
+In type-theoretic formalization, we may encounter:
+\[
+\texttt{CollapseValid}(\mathcal{F}_t) := \texttt{PH}_1 = 0 \wedge \texttt{Ext}^1 = 0
+\]
+being \textbf{undecidable} in Coq/Lean, due to:
+
+\begin{itemize}
+  \item $\Pi$-types over non-total or non-terminating functions.
+  \item Failure of normalization in $\mathcal{F}_t$ constructions.
+  \item Undefined dependent pattern match over $\mathrm{PH}_1$ or $\mathrm{Ext}^1$.
+\end{itemize}
+
+Such cases preclude the formation of:
+\[
+\Pi t : \mathbb{R}_{\ge 0},\; \texttt{CollapseValid}(\mathcal{F}_t) \Rightarrow \texttt{Smooth}(u(t)),
+\]
+and fall outside A6 (Type-Theoretic Realizability).
+
+---
+
+\subsection*{U.4 ZFC Considerations and Failure Domains}
+
+Collapse failure can also arise from logical limitations:
+
+\begin{itemize}
+  \item $\neg \exists$ canonical base for filtered sheaves in $\mathrm{ZF}^-$ (ZF without Choice).
+  \item Non-measurable sets or improper class-sized categories in $\mathcal{D}_{\mathrm{AK}}$.
+  \item Collapse functors that require $\kappa$-large universes beyond ZFC.
+\end{itemize}
+
+Hence, A7 and A8 are violated, rendering the collapse structure non-foundable.
+
+---
+
+\subsection*{U.5 Structural Summary}
+
+We classify Collapse failure modes as follows:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Failure Type} & \textbf{Violation of Collapse Axiom} & \textbf{Result} \\
+\hline
+Unstable & A5 (Energy) & $E(t) \not\to 0$ \\
+Unresolvable & A1–A3 (Vanishing) & $\mathrm{PH}_1, \mathrm{Ext}^1 \not\to 0$ \\
+Undecidable & A6 (Type Theory) & $\texttt{CollapseValid}$ undefined \\
+ZFC-Unstable & A7–A8 & Class-theoretic obstruction \\
+\hline
+\end{tabular}
+\end{center}
+
+These modes represent the outer boundary of AK Collapse applicability.
+
+---
+
+\subsection*{U.6 Conclusion and Justification}
+
+This appendix marks the \textbf{structural boundary} of the Collapse framework.  
+All cases listed above are excluded from the Q.E.D. closure of Collapse Completion (Appendix S).  
+Nevertheless, such boundary structures are essential in ensuring that the axioms (A0–A9) and derived theorems are \textit{sound, complete, and nontrivial}.
+
+\begin{center}
+\textit{Collapse fails constructively — and meaningfully — only when Collapse is invalid.}
+\end{center}
+
+---
 
 % ===========================
 % Appendix TT: Type-Theoretic Schemas and Collapse Logic Encoding

@@ -858,6 +858,28 @@ This chapter establishes that Collapse theory—originating in geometric and top
   \item Langlands correspondence becomes a functor of collapse categories.
 \end{itemize}
 
+\paragraph{Type-Theoretic Collapse Encoding for Arithmetic Structures}
+
+We now formalize each arithmetic instance of collapse as a logical predicate  
+suitable for Coq/Lean-based formal verification. Let \( K \) be a number field and \( \rho \) a Galois representation.
+
+\begin{align*}
+\texttt{ClassNumberCollapse}(K) &:= \mathrm{Ext}^1(\mathcal{F}_K, \mathbb{Q}_\ell) = 0 \Rightarrow h_K = 1 \\
+\texttt{ZetaCollapse}(K) &:= \lim_{t \to \infty} E(t) = 0 \Rightarrow \zeta_K(s) \text{ is regular at } s = 1 \\
+\texttt{StarkCollapse}(K) &:= \mathrm{PH}_1(\mathcal{F}_t) = 0 \Rightarrow \int_0^\infty \log \varepsilon_K(s) E(s) ds < \infty \\
+\texttt{LanglandsCollapse}(\rho) &:= \mathrm{Ext}^1(\mathcal{F}_\rho, -) = 0 \Leftrightarrow \rho \text{ is modular}
+\end{align*}
+
+These collapse predicates can be encoded in dependent type theory as:
+
+\[
+\Pi K : \text{Field},\quad \texttt{Collapse}(K) \Rightarrow \texttt{ArithmeticTriviality}(K)
+\]
+
+\paragraph{Interpretation.}  
+Collapse thus functions as a formal cause of arithmetic regularity,  
+and its Coq-level representation paves the way for machine-verifiable proofs in algebraic number theory.
+
 Together, these results show that arithmetic phenomena can be unified under a collapse-theoretic lens, providing a new approach to their structural generation and formal verification.
 
 

@@ -262,6 +262,21 @@ where:
 - \( C \) is a collapse functor mapping to a trivial or regular category \( \mathcal{C}_{\text{triv}} \);
 - The composition \( C \circ \Pi \) ensures that obstructions in \( \mathcal{C}_{\text{raw}} \) become trivial in \( \mathcal{C}_{\text{triv}} \).
 
+\paragraph{Functoriality of Collapse.}  
+Let \( f : X \to Y \) be a morphism in \( \mathcal{C}_{\text{raw}} \).  
+Then functoriality of the composition \( C \circ \Pi \) requires that:
+\[
+C(\Pi(f)) = C(\Pi(X) \to \Pi(Y)) : \mathcal{C}_{\text{triv}}(\Pi(X), \Pi(Y)).
+\]
+In categorical terms, this ensures that the following diagram commutes:
+\[
+\begin{tikzcd}
+X \arrow[d, "f"] \arrow[r, "\Pi"] & \Pi(X) \arrow[d, "\Pi(f)"] \arrow[r, "C"] & C(\Pi(X)) \arrow[d, "C(\Pi(f))"] \\
+Y \arrow[r, "\Pi"] & \Pi(Y) \arrow[r, "C"] & C(\Pi(Y))
+\end{tikzcd}
+\]
+This compositional compatibility will underlie Collapse Axiom VI and the preservation of structural triviality under morphisms.
+
 \begin{theorem}[Collapse Projection Principle]
 If \( C \circ \Pi(X) = \mathcal{F}_0 \in \mathcal{C}_{\text{triv}} \) for all \( X \in \mathcal{C}_{\text{raw}} \),  
 then the obstructions encoded in \( \mathrm{PH}_1 \) and \( \mathrm{Ext}^1 \) vanish for the image.
@@ -284,6 +299,17 @@ Specifically, Chapter 3–5 will formalize:
   \item \textbf{Collapse Axiom IV–VI:} categorical obstruction removal via Ext-vanishing;
   \item \textbf{Collapse Axiom VII–IX:} functorial collapse with type-theoretic encodings.
 \end{itemize}
+
+\paragraph{Formal Collapse Predicate.}  
+We define a collapse predicate over filtered objects \( \mathcal{F} \in \mathsf{Filt}(\mathcal{C}_{\text{lift}}) \) by:
+\[
+\mathrm{Collapse}(\mathcal{F}) := \left[ \mathrm{PH}_1(\mathcal{F}) = 0 \; \wedge \; \forall \mathcal{G}, \; \mathrm{Ext}^1(\mathcal{F}, \mathcal{G}) = 0 \right].
+\]
+This can be expressed in dependent type-theoretic form as:
+\[
+\Pi \mathcal{F} : \mathsf{Filt}(\mathcal{C}_{\text{lift}}), \quad \mathrm{Collapse}(\mathcal{F}) \to \mathrm{Smooth}(\mathcal{F}).
+\]
+In this view, Collapse functions as a formally verifiable condition on categorical objects—suitable for type-theoretic implementation.
 
 Each axiom will contribute to the full formal logic by which collapse becomes a universal engine  
 for smoothness, triviality, and obstruction resolution across geometry, topology, and number theory.

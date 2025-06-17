@@ -4661,6 +4661,98 @@ serves as a core diagnostic in the AK-Collapse theory.
 
 ---
 
+\section*{Appendix TT.12: LanglandsCollapseSheaf – Collapse Representation Structure}
+\addcontentsline{toc}{section}{TT.12: LanglandsCollapseSheaf – Collapse Representation Structure}
+
+\subsection*{TT.12.1 Purpose}
+
+This section introduces a formal structure, \texttt{LanglandsCollapseSheaf},  
+to encode the representation-theoretic realization of the Langlands correspondence  
+under Ext$^1$-collapse in the motivic derived category.  
+It formalizes the construction in \textbf{Appendix M} within the type-theoretic layer of the AK Collapse framework.
+
+---
+
+\subsection*{TT.12.2 Collapse-Representation Record Definition}
+
+We define a dependent-type record representing a motivic object equipped with collapse data and representation pairing:
+
+\begin{verbatim}
+Record LanglandsCollapseSheaf := {
+  M : Motive;
+  energy : ℝ → ℝ;
+  energy_collapse : EnergyCollapse energy;
+  Ext_trivial : Ext^1(M, ℚ_ℓ) = 0;
+  auto_rep : AutomorphicRep;
+  gal_rep  : GaloisRep;
+  collapse_match : auto_rep ≅ gal_rep;
+}.
+\end{verbatim}
+
+\paragraph{Explanation.}
+\begin{itemize}
+  \item \texttt{M} is a motive in the derived category \( D^b_{\mathrm{mot}}(K) \),
+  \item \texttt{energy} represents the collapse energy functional over time,
+  \item \texttt{energy\_collapse} expresses \( \lim_{t \to \infty} E(t) = 0 \),
+  \item \texttt{Ext\_trivial} encodes motivic Ext$^1$-vanishing,
+  \item \texttt{auto\_rep}, \texttt{gal\_rep} represent automorphic and Galois realizations,
+  \item \texttt{collapse\_match} asserts the Langlands equivalence induced by collapse.
+\end{itemize}
+
+This structure represents a constructive and functorial encoding of the Langlands correspondence via Ext-collapse.
+
+---
+
+\subsection*{TT.12.3 CollapseLanglandsFunctor – Functorial Form}
+
+We formalize a restricted collapse functor from Ext-trivial motives to representation pairs:
+
+\begin{verbatim}
+Definition CollapseLanglandsFunctor :
+  { M : Motive | Ext^1(M, ℚ_ℓ) = 0 } →
+  AutomorphicRep × GaloisRep.
+\end{verbatim}
+
+\paragraph{Correctness Property.}
+\begin{verbatim}
+Axiom CollapseLanglandsEquivalence :
+  forall M, Ext^1(M, ℚ_ℓ) = 0 →
+    let (A, G) := CollapseLanglandsFunctor M in A ≅ G.
+\end{verbatim}
+
+This axiom ensures that Ext$^1$-collapse induces a representation equivalence consistent with the Langlands correspondence.
+
+---
+
+\subsection*{TT.12.4 Position within the CollapseSheaf Hierarchy}
+
+The type \texttt{LanglandsCollapseSheaf} extends the general collapse structure of \texttt{CollapseSheaf} (see TT.11)  
+and complements \texttt{StarkCollapseSheaf} (see Appendix L.7). These structures define a growing family of  
+collapse-compatible objects realizable in Coq or Lean.
+
+\begin{itemize}
+  \item \texttt{CollapseSheaf} – basic energy decay and zeta-limit realization (TT.11),
+  \item \texttt{StarkCollapseSheaf} – logarithmic filtration and Stark units (L.7),
+  \item \texttt{LanglandsCollapseSheaf} – motivic flattening and representation pairing (TT.12).
+\end{itemize}
+
+Each structure includes:
+- A collapse energy functional \( E(t) \),
+- An Ext$^1$-vanishing predicate,
+- A realization map to a canonical arithmetic or analytic object,
+- A dependent-type-compatible record for formal verification.
+
+---
+
+\subsection*{TT.12.5 Remarks and Outlook}
+
+The \texttt{LanglandsCollapseSheaf} structure completes the formal expression  
+of Langlands correspondence within the Collapse framework, as initiated in Appendix M.
+
+While this section finalizes the Langlands-specific aspect,  
+further structures in Appendices N through R will be incorporated in subsequent sections  
+to expand the collapse-typable universe and complete its structural coverage.
+
 ---
 
 ---

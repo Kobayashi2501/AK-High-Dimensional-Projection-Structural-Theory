@@ -1272,7 +1272,16 @@ A decomposition \( \mathcal{F}_X = \bigoplus_{i \in I} \mathcal{F}_i \) is a \te
 \end{itemize}
 \end{definition}
 
-This decomposition reflects categorical disentanglement that prepares \( \mathcal{F}_X \) for collapse analysis.
+\paragraph{Coq-style Formalization.}
+
+\begin{lstlisting}[language=Coq]
+Parameter F : Index -> LiftedObject.
+Axiom MECE_decomposition :
+  forall i j : Index,
+    i <> j ->
+    Hom (F i) (F j) = 0 /\
+    Disjoint (Supp (F i)) (Supp (F j)).
+\end{lstlisting}
 
 \subsection*{A.4 Collapse-Admissibility of Projected Objects}
 
@@ -1293,26 +1302,40 @@ That is, the object lies in a collapse-compatible subcategory:
 which admits functorial simplification via collapse axioms.
 \end{definition}
 
-\subsection*{A.5 Type-Theoretic Encoding of Projection and Collapse Preparation}
+\paragraph{CollapseReady Predicate in Coq.}
 
-In type theory (e.g., Coq), the above structure is expressed as:
-
-```coq
-Parameter RawObject : Type.
-Parameter LiftedObject : Type.
-Parameter Projection : RawObject -> LiftedObject.
-
+\begin{lstlisting}[language=Coq]
 Parameter PH1 : LiftedObject -> Prop.
 Parameter Ext1 : LiftedObject -> Prop.
-Parameter CollapseReady : LiftedObject -> Prop.
 
-Axiom ProjectionYieldsCollapseReady :
-  forall x : RawObject,
-    PH1 (Projection x) ->
-    Ext1 (Projection x) ->
-    CollapseReady (Projection x).
+Definition CollapseReady (x : LiftedObject) : Prop :=
+  PH1 x /\ Ext1 x.
+\end{lstlisting}
 
-This encoding ensures that projected objects can be verified to admit structural simplification, both topologically and categorically.
+\subsection*{A.5 Collapse Functor as Structural Transformer}
+
+\begin{definition}[Collapse Functor]
+\[
+C : \mathsf{Filt}(\mathcal{C}_{\mathrm{lift}}) \longrightarrow \mathsf{Triv}(\mathcal{C})
+\]
+
+such that for any \( \mathcal{F}_X \), we have:
+
+\[
+\mathrm{PH}_1(C(\mathcal{F}_X)) = 0, \quad \mathrm{Ext}^1(C(\mathcal{F}_X), -) = 0
+\]
+\end{definition}
+
+\paragraph{Collapse Functor in Coq.}
+
+\begin{lstlisting}[language=Coq]
+Parameter Collapse : LiftedObject -> TrivialObject.
+
+Axiom Collapse_axiom :
+  forall x : LiftedObject,
+    CollapseReady x ->
+    Trivial (Collapse x).
+\end{lstlisting}
 
 \subsection*{A.6 Structural Lemma: Projection Collapse Compatibility}
 
@@ -1325,7 +1348,7 @@ be a projection functor. Suppose that
 \[
 C: \mathsf{Filt}(\mathcal{C}_{\mathrm{lift}}) \to \mathsf{Triv}(\mathcal{C})
 \]
-is a collapse functor (cf. Axiom A7). Then:
+is a collapse functor. Then:
 \[
 C \circ \Pi(X) \in \mathsf{Triv}(\mathcal{C}) \quad \Rightarrow \quad
 \text{Obstructions in } X \text{ vanish under functorial composition}.

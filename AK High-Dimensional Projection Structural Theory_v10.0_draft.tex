@@ -1526,7 +1526,7 @@ Then \( \mathcal{F}_X^{(t)} \) is \emph{collapse-prepared} if:
 
 \begin{remark}
 The predicate \texttt{CollapsePrepared}, which formalizes the condition \( \mathrm{PH}_1 = 0 \),  
-is precisely defined in Appendix T.7 for use in formal verification environments (e.g., Coq, Lean).  
+is precisely defined in Appendix TT.3 for use in formal verification environments (e.g., Coq, Lean).  
 It serves as a logical bridge between persistent homology and categorical collapse flow.
 \end{remark}
 
@@ -3833,7 +3833,42 @@ This glossary serves the following roles:
 
 ---
 
-\subsection*{T.6 Collapse Zone \& Type — Formal Typing and Coq Schema}
+% ===========================
+% Appendix TT: Type-Theoretic Schemas and Collapse Logic Encoding
+% ===========================
+\section*{Appendix TT: Type-Theoretic Schemas and Collapse Logic Encoding}
+\addcontentsline{toc}{section}{Appendix TT: Type-Theoretic Schemas and Collapse Logic Encoding}
+
+\subsection*{TT.1 Purpose and Position in AK-HDPST}
+
+This appendix collects and formalizes the **type-theoretic and constructive logic representations**  
+of key collapse structures developed across Appendices A–S. It serves as the logical mirror of Appendix T (Glossary),  
+but emphasizes \textbf{formal encodings} in Coq, Lean, and similar systems.
+
+The entries herein provide:
+
+\begin{itemize}
+  \item Predicate-based encodings of collapse readiness, PH-vanishing, and Ext-triviality;
+  \item Collapse causal flow judgments across time-dependent objects;
+  \item Functor definitions and formal equivalences compatible with dependent type theory;
+  \item Structural axioms realizable within MLTT (Martin-Löf Type Theory) and ZFC-logics.
+\end{itemize}
+
+\paragraph{Notation and Convention.}  
+Throughout, we use the following:
+\begin{itemize}
+  \item \texttt{Parameter X : Obj.} declares a variable object \( X \) in a given category.
+  \item \texttt{Ext1 X Y} is a proposition indicating \( \mathrm{Ext}^1(X,Y) \neq 0 \).
+  \item \texttt{Triv X} expresses that \( X \in \mathsf{Triv}(\mathcal{C}) \), i.e., collapse-compatible.
+  \item \texttt{Collapse : Obj → Obj} denotes the collapse functor (cf. Axiom A4).
+\end{itemize}
+
+This appendix can be viewed as the type-theoretic kernel of the AK Collapse axiomatic engine.  
+It is cross-referenced throughout the main text and Appendices T, E, and F.
+
+---
+
+\subsection*{TT.2 Collapse Zone \& Type — Formal Typing and Coq Schema}
 
 This section provides formal predicate definitions and Coq-compatible typing rules  
 for collapse detection and classification introduced in Appendix B.
@@ -3889,8 +3924,8 @@ providing reusable predicates for automated theorem provers and enabling mechani
 
 ---
 
-\subsection*{T.7 Coq-Compatible Collapse Causality Definitions}
-\addcontentsline{toc}{subsection}{T.7 Coq-Compatible Collapse Causality Definitions}
+\subsection*{TT.3 Coq-Compatible Collapse Causality Definitions}
+\addcontentsline{toc}{subsection}{TT.3 Coq-Compatible Collapse Causality Definitions}
 
 This section provides formal, Coq-compatible predicate and type-theoretic encodings  
 of the causal structure behind persistent homology, Ext-class vanishing, and collapse regularity.  
@@ -3928,8 +3963,8 @@ This supports formal system verification of the collapse conditions described in
 
 ---
 
-\subsection*{T.8 Disconnected Collapse and Refinement Formalization}
-\addcontentsline{toc}{subsection}{T.8 Disconnected Collapse and Refinement Formalization}
+\subsection*{TT.4 Disconnected Collapse and Refinement Formalization}
+\addcontentsline{toc}{subsection}{TT.4 Disconnected Collapse and Refinement Formalization}
 
 This section encodes the collapse obstruction caused by disconnected components,  
 as discussed in Appendix D, into formal type-theoretic predicates suitable for Coq or Lean environments.
@@ -4001,8 +4036,8 @@ x, y \in \texttt{DisconnectedComponent} \arrow[r, "\texttt{Cone}(x,y)"] \arrow[d
 
 ---
 
-\subsection*{T.9 Ext-Vanishing Collapse Structures}
-\addcontentsline{toc}{subsection}{T.9 Ext-Vanishing Collapse Structures}
+\subsection*{TT.5 Ext-Vanishing Collapse Structures}
+\addcontentsline{toc}{subsection}{TT.5 Ext-Vanishing Collapse Structures}
 
 This section collects type-theoretic formulations related to the vanishing of Ext-classes  
 and their implication for categorical collapse. These serve as formal counterparts to Appendix E.

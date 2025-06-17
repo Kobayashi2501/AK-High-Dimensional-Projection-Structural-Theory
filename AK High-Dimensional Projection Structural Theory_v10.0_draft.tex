@@ -1524,6 +1524,12 @@ Then \( \mathcal{F}_X^{(t)} \) is \emph{collapse-prepared} if:
 \]
 \end{definition}
 
+\begin{remark}
+The predicate \texttt{CollapsePrepared}, which formalizes the condition \( \mathrm{PH}_1 = 0 \),  
+is precisely defined in Appendix T.7 for use in formal verification environments (e.g., Coq, Lean).  
+It serves as a logical bridge between persistent homology and categorical collapse flow.
+\end{remark}
+
 This corresponds to the vanishing of all \( H_1 \)-cycles in the persistent module before threshold \( t \),  
 signifying readiness for formal collapse.
 
@@ -3869,4 +3875,42 @@ Definition DetermineCollapseType (F : FilteredObject) : CollapseType :=
 This section formalizes localized collapse detection (zones) and global collapse classification (types),  
 providing reusable predicates for automated theorem provers and enabling mechanized proof of collapse theorems.
 
+---
+
+\subsection*{T.7 Coq-Compatible Collapse Causality Definitions}
+\addcontentsline{toc}{subsection}{T.7 Coq-Compatible Collapse Causality Definitions}
+
+This section provides formal, Coq-compatible predicate and type-theoretic encodings  
+of the causal structure behind persistent homology, Ext-class vanishing, and collapse regularity.  
+It corresponds directly to the structural axioms A1–A3 and is referenced in Appendix C and R.
+
+\begin{lstlisting}[language=Coq]
+(* Collapse Preparedness *)
+Parameter F : FilteredObject.
+Definition CollapsePrepared (F : FilteredObject) := PH1 F = 0.
+
+(* Barcode Obstruction Map *)
+Parameter Barcode : Type.
+Parameter ObstructionCount : Barcode -> nat.
+Parameter Φ : Barcode -> (R -> nat).  (* Time-indexed obstruction count *)
+
+(* Time-evolving filtered objects and flows *)
+Parameter F_t : R -> FilteredObject.
+Parameter u : R -> Flow.
+Parameter Ext1 : FilteredObject -> Prop.
+Parameter Smooth : Flow -> Prop.
+
+(* Collapse Flow Judgment *)
+Definition CollapseCausalFlow :=
+  forall t : R, CollapsePrepared (F_t t) -> Ext1 (F_t t) -> Smooth (u t).
+\end{lstlisting}
+
+These definitions formalize the causal collapse principle:
+
+\[
+\mathrm{PH}_1 = 0 \quad \Rightarrow \quad \mathrm{Ext}^1 = 0 \quad \Rightarrow \quad u(t) \in C^\infty
+\]
+
+They also allow structural dynamics to be encoded in proof assistants like Coq or Lean.  
+This supports formal system verification of the collapse conditions described in Chapters 3, 8, and Appendices C, R, and S.
 

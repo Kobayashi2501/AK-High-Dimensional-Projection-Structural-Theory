@@ -1799,6 +1799,18 @@ Axiom ExtTrivialImpliesTriv :
   forall (X : Obj),
     (forall Y : Obj, ~ Ext1 X Y) -> Triv X.
 
+(* Collapse Functor and its correctness *)
+Parameter Collapse : Obj -> Obj.
+
+Axiom CollapseCorrect :
+  forall (X : Obj),
+    (forall Y : Obj, ~ Ext1 X Y) -> Triv (Collapse X).
+
+(* Collapse preserves Ext-triviality *)
+Axiom CollapsePreservesTriviality :
+  forall (X : Obj),
+    Triv X -> Triv (Collapse X).
+
 This expresses that an object with no Ext-obstructions is classified as trivial (collapse target).
 
 \subsection*{E.6 Summary and Structural Implication}
@@ -3986,6 +3998,46 @@ x, y \in \texttt{DisconnectedComponent} \arrow[r, "\texttt{Cone}(x,y)"] \arrow[d
 & \mathcal{C}_{\text{collapse}}
 \end{tikzcd}
 \end{center}
+
+---
+
+\subsection*{T.9 Ext-Vanishing Collapse Structures}
+\addcontentsline{toc}{subsection}{T.9 Ext-Vanishing Collapse Structures}
+
+This section collects type-theoretic formulations related to the vanishing of Ext-classes  
+and their implication for categorical collapse. These serve as formal counterparts to Appendix E.
+
+\paragraph{Collapse Functor Typing.}
+\begin{lstlisting}[language=Coq]
+Parameter Collapse : Obj -> Obj.
+\end{lstlisting}
+
+The collapse functor maps objects in the derived category into trivial (Ext-null) collapse targets.
+
+\paragraph{Ext-triviality implies Triviality after Collapse.}
+\begin{lstlisting}[language=Coq]
+Axiom CollapseCorrect :
+  forall (X : Obj),
+    (forall Y : Obj, ~ Ext1 X Y) -> Triv (Collapse X).
+\end{lstlisting}
+
+\paragraph{Collapse preserves triviality.}
+\begin{lstlisting}[language=Coq]
+Axiom CollapsePreservesTriviality :
+  forall (X : Obj),
+    Triv X -> Triv (Collapse X).
+\end{lstlisting}
+
+\paragraph{Collapse Equivalence Proposition.}
+\[
+\forall X \in \mathrm{Obj},\quad
+\left[ \forall Y,\; \mathrm{Ext}^1(X,Y) = 0 \right]
+\quad \Leftrightarrow \quad
+\mathrm{Triv}(\mathrm{Collapse}(X))
+\]
+
+\paragraph{Reference.}
+See Appendix E (Ext-triviality and functional smoothness).
 
 ---
 

@@ -3813,6 +3813,60 @@ This glossary serves the following roles:
   \item Establishes a reusable foundation for future theoretical extensions of the AK Collapse framework
 \end{itemize}
 
+---
 
+\subsection*{T.6 Collapse Zone \& Type — Formal Typing and Coq Schema}
+
+This section provides formal predicate definitions and Coq-compatible typing rules  
+for collapse detection and classification introduced in Appendix B.
+
+\paragraph{Collapse Zone Predicate.}
+We define a collapse zone as a pointwise local extinction of topological cycles:
+
+\[
+\texttt{CollapseZone}(x) := \forall \epsilon > 0,\; \exists r < \epsilon,\; \mathrm{PH}_1(B_r(x)) = 0
+\]
+
+In Coq:
+\begin{lstlisting}[language=Coq]
+Definition CollapseZone (x : R^n) : Prop :=
+  forall eps : R, eps > 0 -> exists r : R,
+    r < eps /\ PH1 (Ball x r) = true.
+\end{lstlisting}
+
+\paragraph{Collapse Type Judgment.}
+We classify filtered objects into one of four types:
+
+\[
+\tau(\mathcal{F}) =
+\begin{cases}
+\texttt{TypeIII} & \mathrm{PH}_1 = 0 \land \mathrm{Ext}^1 = 0 \\
+\texttt{TypeII} & \mathrm{PH}_1 \ne 0 \land \mathrm{Ext}^1 = 0 \\
+\texttt{TypeI} & \mathrm{PH}_1 = 0 \land \mathrm{Ext}^1 \ne 0 \\
+\texttt{TypeIV} & \text{otherwise}
+\end{cases}
+\]
+
+Coq-style Inductive definition:
+
+\begin{lstlisting}[language=Coq]
+Inductive CollapseType :=
+  | TypeI
+  | TypeII
+  | TypeIII
+  | TypeIV.
+
+Definition DetermineCollapseType (F : FilteredObject) : CollapseType :=
+  match PH1 F, Ext1 F with
+  | false, false => TypeIII
+  | true,  false => TypeII
+  | false, true  => TypeI
+  | true,  true  => TypeIV
+  end.
+\end{lstlisting}
+
+\paragraph{Interpretation.}
+This section formalizes localized collapse detection (zones) and global collapse classification (types),  
+providing reusable predicates for automated theorem provers and enabling mechanized proof of collapse theorems.
 
 

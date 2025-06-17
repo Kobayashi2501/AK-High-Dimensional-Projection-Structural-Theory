@@ -577,6 +577,33 @@ via persistent topology and energy dissipation.
 \text{smooth flow / trivial geometry}.
 \]
 
+\paragraph{Formal Predicate Encoding of Collapse Axioms A4–A6}
+
+We now formulate Axioms A4–A6 as logical propositions and dependent type-theoretic conditions.  
+Let \( \mathcal{F}_t \in D^b(\mathsf{Filt}) \) be a derived, persistent object. Then:
+
+\begin{align*}
+\textbf{Axiom A4:} \quad & \mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0 
+\quad \Rightarrow \quad \mathcal{F}_t \in \mathsf{Triv}(D^b) \\
+\textbf{Axiom A5:} \quad & \mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0 
+\quad \Rightarrow \quad u(t) \in C^\infty(\mathbb{R}^n) \\
+\textbf{Axiom A6:} \quad & \mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0 
+\quad \Leftrightarrow \quad \mathrm{PH}_1(\mathcal{F}_t) = 0
+\end{align*}
+
+In type-theoretic form, we define a predicate over persistent derived objects:
+
+\[
+\texttt{ExtCollapse} := \Pi \mathcal{F}_t : D^b(\mathsf{Filt}),\; 
+\left[
+\mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0 \Rightarrow \mathrm{Smooth}(\mathcal{F}_t)
+\right].
+\]
+
+This formulation renders Ext-collapse a verifiable logical condition, 
+compatible with proof assistants such as Coq or Lean.  
+It also establishes a direct type-theoretic link between topological triviality and analytic regularity.
+
 \begin{remark}
 Axioms A4–A6 establish the categorical and analytic conditions  
 under which Ext-triviality corresponds to topological regularity.  

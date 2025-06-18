@@ -95,7 +95,7 @@ Collapse-preserving 関手が合成・Pullback・Colimit に安定
 
 ### 🔵 Navier–Stokes 方程式の正則性  
 Collapse構造により \( u(t) \in C^\infty \) を導出  
-→ 対応リポジトリ：[Navier–Stokes Collapse Solver (v10.0)](https://github.com/...)
+→ 
 
 ### 📘 類数公式とZeta崩壊  
 Collapse energy ⇒ Zeta極限 ⇒ 類数有限性  

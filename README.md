@@ -110,7 +110,7 @@ under colimits, pullbacks, composition (`A11–A13`, `TT.7–TT.9`)
 
 ### 🔵 Navier–Stokes Global Regularity  
 `u(t) ∈ C^∞` follows from `PH₁ = 0` and `Ext¹ = 0`  
-→ See `navier-stokes-global-regularity` repository
+→→ [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
 ### 📘 Class Number Formula and Zeta Collapse  
 AK Collapse energy integrates to zeta limits  

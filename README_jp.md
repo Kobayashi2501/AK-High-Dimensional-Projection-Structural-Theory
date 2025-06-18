@@ -1,146 +1,161 @@
-🌐 AK 高次元射影構造理論（v10.0）
+# 🌐 AK高次元射影構造理論（AK-HDPST v10.0）
 
-📄 [English README Available Here](README.md)
+📄 [English Version (英語版はこちら)](README.md)
 
 ---
 
 ## 🧩 AK理論とは？
 
-**AK Collapse理論（AK High-Dimensional Projection Structural Theory, AK-HDPST）** は、  
-偏微分方程式（PDE）、数論的幾何、ホモロジー代数などに共通する「構造的障害（Obstruction）」を  
-高次元・構造化空間に持ち上げ、トポロジーとコホモロジーに基づく崩壊（Collapse）によって  
-解決するために構築された圏論的・型理論的な統一理論です。
+**AK高次元射影構造理論（AK-HDPST）** は、PDE（偏微分方程式）、数論、代数幾何における  
+「構造的障害」の問題を解決するために設計された、トポロジー・圏論・型理論ベースの厳密な数学的形式体系です。
 
-v10.0では、Collapse構造の完全な型理論的定式化とZFC整合性が完成し、  
-AIを用いた分類機や数論的応用までを含めた「閉じた証明体系」として確立されています。
+AK理論は次の構成を中核とします：
 
----
+- `PH₁（持続的ホモロジー）`
+- `Ext¹（余拡大障害）`
+- `エネルギー崩壊による滑らかさの実現`
+- `型理論による形式化（Coq/Lean対応）`
+- `ZFCに準拠した公理的基礎`
 
-## 🧠 哲学的背景
-
-> 「解けない問題は、偽であるとは限らない。次元が足りないだけかもしれない。」
-
-AK理論は以下の思想に基づいています：
-
-- 数学に現れる多くの障害（特異点、未分裂拡張、非正則関数）は、  
-  **構造上の自己矛盾ではなく、次元的に不十分な定式化に起因する可能性がある**
-
-- それらを**高次元のMECE（Mutually Exclusive and Collectively Exhaustive）空間に持ち上げることで**、  
-  **Persistent HomologyとExtクラスの崩壊を通じて滑らかに解決できる**
+v10.0 では Collapse 公理、分類子構造、関手構造が全て型理論的に完結しました。
 
 ---
 
-## 🧭 AK理論の適用範囲
+## 🧠 哲学的動機
 
-- トポロジカルな崩壊領域とフィルタ付き退化空間の記述
-- PH₁（Persistent Homology）・Ext¹（拡張障害）・エネルギー崩壊の因果連鎖
-- Collapse分類圏と型理論的 Collapse Functor の構築
-- Coq/Leanで形式証明可能な Collapse Typing System の実装
-- 数論における Zeta収束、類数公式、BSD 予想への対応
-- Langlands対応・Mirror対称性・Fukaya圏との構造統合
+> 「解けない問題は、偽なのではなく、次元が足りていないのかもしれない。」
 
----
+AK理論の基本的思想は：
 
-## 🔧 コア理論構造
+- 特異点・未分解な余拡大・関数的発散などの深い障害は、  
+  **本質的矛盾ではなく、構造次元の不足に起因する**と考えます。
 
-AK Collapse理論の中心的命題は：
-
-\[
-\mathrm{PH}_1 = 0 \quad \Leftrightarrow \quad \mathrm{Ext}^1 = 0 \quad \Rightarrow \quad u(t) \in C^\infty
-\]
-
-この因果関係は以下の要素で支えられます：
-
-- **CollapseZone(x)**：PH₁が局所的に消滅する領域
-- **CollapseSheaf**：PH₁ = 0かつExt¹ = 0を満たす構造体
-- **CollapseFunctor**：Collapse構造を保存する関手
-- **CollapseClassifier**：Type I〜IV による退化状態の分類
+- 問題を高次元の `MECE（漏れなく・ダブりなく）` な射影空間に持ち上げ、  
+  `PH₁ = 0` および `Ext¹ = 0` という Collapse を通じて、  
+  **滑らかさ・正則性・可換化** を実現します。
 
 ---
 
-## 🚀 AK理論で何ができるか？
+## 🧭 AK理論の対象領域
 
-### ✅ Collapse Completion Theorem（崩壊完結定理）  
-PH₁ = 0かつExt¹ = 0を満たすならば、対応する流体/写像 \( u(t) \in C^\infty \)  
-（Appendix TT.15で型理論的に Q.E.D.証明）
-
-### ✅ CollapseとZeta正則性の一致  
-エネルギー関数 \( E(t) \) が崩壊していれば、Zeta極限収束を導出可能  
-（Appendix J, K, TT.11）
-
-### ✅ Collapse型分類システム  
-Type I（Ext）、Type II（PH）、Type III（両方崩壊）、Type IV（未崩壊）  
-（TT⁺.7で圏論化）
-
-### ✅ CollapseFunctor圏  
-Collapse-preserving 関手が合成・Pullback・Colimit に安定  
-（TT.7〜TT.9, A11〜A13）
+- `トポロジー崩壊領域とフィルター退化空間`
+- `PH₁・Ext¹・滑らかさの因果構造`
+- `圏論における Collapse 関手構造`
+- `Coq・Lean・ZFC上で実装可能な証明体系`
+- `数論的崩壊（ゼータ極限、類数公式、BSD予想）`
+- `Mirror対称性・Langlands双対・Fukaya圏の型分類`
 
 ---
 
-## 🔬 Collapse理論の構成レイヤ
+## 🔧 Collapseの因果構造（中核定理）
 
-| レイヤ | コンポーネント | 説明 |
-|--------|----------------|------|
-| Collapse公理 | A0〜A9, A10〜A13 | 崩壊を保証する構造的ルール |
-| Collapse分類圏 | Type I〜IV | 退化の型判定と圏構造（TT⁺.7） |
-| Collapse関手 | Collapse(F) | Collapse構造を保存する圏論的マップ |
-| ZFC整合性 | TT.6, TT⁺ | Collapse構造はZFCでも意味を持つ |
-| 型理論実装 | TT.1〜TT.15 | Coq対応型定義と命題証明 |
-| 応用構造 | P, Q, J, K, M, N, O | Navier–Stokes、類数、Langlands、Mirrorなど |
+Collapse の因果連鎖は次の通り：
+
+`PH₁ = 0  ⇔  Ext¹ = 0  ⇒  u(t) ∈ C^∞`
+
+意味：
+- `PH₁`: トポロジー的循環（持続的ホモロジー）
+- `Ext¹`: 圏論的な接着障害
+- `u(t)`: PDE解やフロー構造
+
+Collapse は次の構成で定義されます：
+
+- `CollapseZone(x)`: 局所的に `PH₁ = 0`
+- `CollapseSheaf`: グローバルに `PH₁ = 0 ∧ Ext¹ = 0` を満たす層
+- `CollapseFunctor`: `F ↦ F'` 崩壊構造を保つ関手
+- `CollapseClassifier`: 障害の型（Type I～IV）による分類体系
 
 ---
 
-## 🌀 応用可能例（別リポジトリで展開）
+## 🚀 AK理論でできること
 
-### 🔵 Navier–Stokes 方程式の正則性  
-Collapse構造により \( u(t) \in C^\infty \) を導出  
-→ 
+### ✅ Collapse 完全性定理  
+`ℱₜ` が `PH₁ = 0 ∧ Ext¹ = 0` を満たせば、  
+導出される対象 `u(t) ∈ C^∞`（滑らかな関数または流体場）である。  
+Coq型理論では `Π` 型で形式化（TT.15）。
 
-### 📘 類数公式とZeta崩壊  
-Collapse energy ⇒ Zeta極限 ⇒ 類数有限性  
-（Appendix J, K, TT.11）
+### ✅ Collapse–Zeta 対応  
+Collapseエネルギー `E(t)` の崩壊はゼータ極限に収束：
+
+`∫₀^∞ E(t) e^(–t) dt  ⇒  ゼータ的正則性`
+
+これは類数有限性や BSD 予想の補強に用いられます。
+
+### ✅ Collapse 型分類体系  
+型分類子を用いて対象を次の型に分類：
+- Type I（Ext）
+- Type II（PH）
+- Type III（滑らか）
+- Type IV（特異）
+
+### ✅ CollapseFunctor 圏  
+Collapseを保つ関手は、`合成・余極限・引き戻し` に対して安定である  
+→ `A11–A13`, `TT.7–TT.9` にて証明
+
+---
+
+## 🔬 構造的構成一覧
+
+| 層 | 構成要素 | 内容 |
+|----|----------|------|
+| Collapse 公理 | `A0–A13` | `PH₁ / Ext¹ → 滑らかさ` の公理的構造 |
+| Collapse 分類子 | `Type I–IV` | 型論による障害の分類（TT⁺.7） |
+| Collapse 関手 | `F ↦ F'` | Collapseを保存する圏論的写像 |
+| ZFC構成 | `TT.6`, `TT⁺` | Collapse理論はZFCセマンティクスで定義可能 |
+| 型理論構文 | `TT.1–TT.15` | Coq型で表現されたCollapse体系 |
+| 応用モジュール | `P`, `Q`, `J`, `K`, `M`, `N`, `O` | Navier–Stokes, ゼータ, Langlands, Mirror等の例証
+
+---
+
+## 🌀 応用例（派生リポジトリ参照）
+
+### 🔵 Navier–Stokes全球正則性  
+`u(t) ∈ C^∞` は `PH₁ = 0 ∧ Ext¹ = 0` から導かれる  
+→ [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
+
+### 📘 類数公式とZeta Collapse  
+Collapseエネルギーはゼータ積分に変換される  
+→ Appendix `J`, `K`, `TT.11`
 
 ### 💎 Langlands Collapse Sheaf  
-Ext¹(M, ℚₗ) = 0 ⇒ 表現同値 auto ≅ Galois  
-（TT.12, TT.13）
+`Ext¹(M, ℚₗ) = 0` は自己同型 ≅ ガロア表現の同型を誘導  
+→ `TT.12`, `TT.13`
 
-### 🧠 Fukaya & Mirror Collapse  
-Collapse構造 ⇒ Fukaya圏への写像（Mirror対称性）  
-（TT.14, Appendix O）
+### 🧠 Fukaya/Mirror Collapse  
+Collapse層は Fukaya圏への関手的写像となる  
+→ `TT.14`, Appendix `O`
 
 ---
 
 ## 📁 ファイル構成
 
-| ファイル | 内容 |
-|----------|------|
-| `AK High-Dimensional Projection Structural Theory_v10.0.tex` | LaTeXソース（理論全体） |
-| `AK High-Dimensional Projection Structural Theory_v10.0.pdf` | PDF出力（本文） |
-| `README.md` | 英語版README |
-| `README_jp.md` | 本README（日本語版） |
-| `LICENSE` | ライセンスファイル（MITまたはCC） |
+| ファイル名 | 内容 |
+|------------|------|
+| `AK High-Dimensional Projection Structural Theory_v10.0.tex` | LaTeXソース全文 |
+| `AK High-Dimensional Projection Structural Theory_v10.0.pdf` | PDF版レンダリング |
+| `README.md` | 英語版 README |
+| `README_jp.md` | 日本語版 README（本ファイル） |
+| `LICENSE` | MIT または CC ライセンス（選択可能） |
 
 ---
 
-## ✉️ arXiv投稿・協力募集
+## ✉️ arXiv投稿準備と推薦者募集
 
-**AK Collapse理論 v10.0** は完成済みで、arXivへの投稿準備中です。
+**AK-HDPST v10.0** は理論的に完結し、現在 **arXiv投稿を準備中** です。
 
-以下のような方々のご協力を歓迎します：
+次のような方からのご連絡・ご支援を歓迎します：
 
-- 専門分野の査読者・アドバイザー（特に以下分野）：
-  - 圏論・ホモロジー代数
-  - トポロジー・TDA
-  - PDE（流体正則性問題）
-  - 数論・代数幾何
-- 拡張案や構成提案
-- Collapse理論の応用を模索する共同研究者
+- カテゴリ理論・ホモロジー代数・TDA・PDE 正則性分野の研究者
+- 型理論や証明支援系（Coq/Lean）による検証に関心のある方
+- BSD、Riemann、IUT など他問題への拡張応用を検討される方
 
-### 連絡先
+---
 
-**小林 篤史**  
-_ChatGPT Research Partnerと共同開発_  
-📧 dollops2501@icloud.com
+## 👤 著者連絡先
 
-> *「Collapseとは破壊ではなく、構造的障害の解決である。」*
+**著者**：小林 敦志（A. Kobayashi）  
+_共同開発：ChatGPT Research Partner_  
+📧 メール： [dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
+GitHub： [@Kobayashi2501](https://github.com/Kobayashi2501)
+
+> 「Collapseは崩壊ではなく、障害の解消である。」

@@ -5,7 +5,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref,mathrsfs}
 \usepackage{tikz}
-\usepackage{tikz-cd}
 \usepackage{xcolor}
 \usepackage{listings}
 \geometry{margin=1in}
@@ -554,12 +553,14 @@ This creates a formal bridge between topological triviality and categorical obst
 In analytic terms, the above axioms correspond to a topological–analytic diagram:
 
 \[
-\begin{tikzcd}[column sep=large, row sep=large]
-u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
-& \mathrm{PH}_1(\mathcal{F}_t) = 0 \arrow[d, "\text{Functor Collapse}"] \\
-\mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0 \arrow[r, "\text{Obstruction Removal}"]
-& u(t) \in C^\infty
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
+A: u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, "\text{Topological Energy}"']
+& B: \mathrm{PH}_1 = 0 \arrow[d, "\text{Functor Collapse}"] \\
+C: \mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
+& D: u(t) \in C^\infty \arrow[to=A, bend left=20, dashed, "\text{Loop Back}"]
 \end{tikzcd}
+}
 \]
 
 This diagram asserts that Ext-vanishing is not merely categorical but encodes analytic consequences  
@@ -728,12 +729,15 @@ Axiom CollapseChain :
 \subsection*{5.6 Collapse as Typed Categorical Transition}
 
 \[
-\begin{tikzcd}[column sep=huge, row sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \text{Filtered Objects} \arrow[r, "C"]
 & \text{Trivial Derived Objects} \arrow[r, "\text{Functor Realization}"]
 & \text{Smooth Geometric Flows}
 \end{tikzcd}
+}
 \]
+
 
 Collapse structures can be interpreted as categorical transitions governed by exact functors,  
 type-theoretic embeddings, and ZFC-level realizability.
@@ -957,13 +961,16 @@ This trichotomy allows structural classification of all geometric collapses.
 We now describe a unified flow from motives to categorical smoothness:
 
 \[
-\begin{tikzcd}[column sep=huge, row sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \text{Pure Motive} \arrow[r, "\text{Degeneration}"]
 & \text{Mixed Motive} \arrow[r, "\mathrm{Ext}^1 = 0"]
 & \text{Langlands Flow} \arrow[r, "\text{Functor Collapse}"]
 & \text{Categorical Smoothness}
 \end{tikzcd}
+}
 \]
+
 
 This diagram realizes the motivic–categorical–representation bridge within the AK projection theory.
 
@@ -1089,14 +1096,31 @@ This confirms the asymptotic regularity of the NS flow.
 
 \subsection*{8.5 Collapse Diagram for NS Evolution}
 
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{matrix, arrows.meta, decorations.pathmorphing, calc}
+
+\begin{document}
+
 \[
-\begin{tikzcd}[row sep=large, column sep=huge]
-u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, "\text{Topological Energy}"]
-& \mathrm{PH}_1 = 0 \arrow[d, "\text{Functor Collapse}"] \\
-\mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
-& u(t) \in C^\infty
-\end{tikzcd}
+\begin{tikzpicture}[every node/.style={anchor=center}]
+  \matrix (m) [matrix of math nodes, row sep=3em, column sep=5em] {
+    u(t) & {\mathrm{PH}_1(\mathcal{F}_t) = 0} \\
+    {\mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0} & u(t) \in C^\infty \\
+  };
+
+  % 通常の矢印
+  \path[->]
+    (m-1-1) edge node[above]{\scriptsize Spectral Decay} (m-1-2)
+    (m-1-1) edge node[left]{\scriptsize Topological Energy} (m-2-1)
+    (m-1-2) edge node[right]{\scriptsize Functor Collapse} (m-2-2)
+    (m-2-1) edge node[below]{\scriptsize Obstruction Removal} (m-2-2);
+
+  % 巡回矢印（右上ノード上部にループ）
+  \path[->, bend left=50] (m-1-2.north east) to node[above right]{\scriptsize loop} (m-1-2.north west);
+\end{tikzpicture}
 \]
+
 
 This diagram formalizes the causal chain of regularization in AK theory.
 
@@ -1575,14 +1599,16 @@ This diagram provides a causal map of when obstructions persist and when collaps
 
 To clarify the dual implication between topological energy decay and Ext-class vanishing, we introduce the following commutative diagram:
 
-\[
-\begin{tikzcd}[row sep=2.5em, column sep=4em]
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
 & \mathrm{PH}_1 = 0 \arrow[d, "\text{Functor Collapse}"] \\
 \mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
 & u(t) \in C^\infty
 \end{tikzcd}
-\]
+}
+\end{center}
 
 
 This confirms the dual role of topological energy as both input and consequence of Ext-class collapse.
@@ -1686,17 +1712,20 @@ This allows disconnected components to be functorially re-integrated into a coll
 
 We summarize the resolution structure via the following diagram:
 
-\[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}[row sep=large, column sep=huge]
-X = \bigsqcup X_i \arrow[r, "\text{Lifting} \;\; \Pi"] \arrow[ddr, bend right=20, "\delta \in \mathrm{Ext}^1" swap]
-& \mathcal{F}_X = \bigoplus \mathcal{F}_{X_i} \arrow[r, "\text{Refinement}"]
-& \mathcal{F}_X^{(\infty)} \arrow[d, "\text{Collapse}"] \\
-& & \mathcal{C}_{\text{collapse}} \subset D^b(\mathcal{C}) \\
-& \text{Obstructed Geometry} \arrow[ur, dashed, "\text{Resolution}" swap] &
-\end{tikzcd}
-}
-\]
+\begin{tikzpicture}
+\node (A) at (0,0) {$X = \bigsqcup X_i$};
+\node (B) at (3,0) {$\mathcal{F}_X$};
+\node (C) at (6,0) {$\mathcal{F}_X^{(\infty)}$};
+\node (D) at (6,-2) {$\mathcal{C}_{\text{collapse}}$};
+\node (E) at (1.5,-2) {Obstructed Geometry};
+
+\draw[->] (A) -- node[above] {Lifting $\Pi$} (B);
+\draw[->] (B) -- node[above] {Refinement} (C);
+\draw[->] (C) -- node[right] {Collapse} (D);
+\draw[->, bend left=20, dashed] (E) to node[above right] {Resolution} (C);
+\draw[->, bend right=20] (A) to node[left] {$\delta \in \mathrm{Ext}^1$} (E);
+\end{tikzpicture}
+
 
 \subsection*{D.6 Summary and Collapse-Ready Criteria}
 
@@ -1906,13 +1935,16 @@ functorial admissibility of collapse procedures.
 We summarize the implications of Ext collapse via the following commutative diagram:
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \text{Derived object } \mathcal{F}^\bullet \arrow[r, "\text{Check } \mathrm{Ext}^1 = 0"] \arrow[d, swap, "\text{Obstruction witness}"]
 & \text{Collapse-admissible} \arrow[d, "\text{Structural flattening}"] \\
 \text{Non-split extension} \arrow[r, "\text{Trivialization}"]
 & \mathcal{F}^\bullet \in \mathsf{Triv}(D^b(\mathcal{C}))
 \end{tikzcd}
+}
 \]
+
 
 This diagram corresponds to collapse step Axiom A5 in the AK framework.
 
@@ -2545,17 +2577,23 @@ the triangle is collapse-compatible (i.e., \(\mathcal{F}_{\mathrm{Collapse}}\) p
 We define the following diagram:
 
 \[
+\resizebox{\textwidth}{!}{%
 \begin{tikzcd}
 F^\bullet \arrow[r, "f"] \arrow[d, "\mathcal{F}_{\text{Collapse}}"']
-& G^\bullet \arrow[r, "g"] \arrow[d, "\mathcal{F}_{\text{Collapse}}"']
-& H^\bullet \arrow[r, "h"] \arrow[d, dashed, "\mathcal{F}_{\text{Collapse}}"']
-& F^\bullet[1] \arrow[d, "\mathcal{F}_{\text{Collapse}}"] \\
+& G^\bullet \arrow[d, "\mathcal{F}_{\text{Collapse}}"] \\
 \mathcal{F}(F^\bullet) \arrow[r, "\mathcal{F}(f)"']
-& \mathcal{F}(G^\bullet) \arrow[r, "\mathcal{F}(g)"']
-& \mathcal{F}(H^\bullet) \arrow[r, "\mathcal{F}(h)"']
+& \mathcal{F}(G^\bullet)
+\end{tikzcd}
+\quad
+\begin{tikzcd}
+H^\bullet \arrow[r, "h"] \arrow[d, dashed, "\mathcal{F}_{\text{Collapse}}"']
+& F^\bullet[1] \arrow[d, "\mathcal{F}_{\text{Collapse}}"] \\
+\mathcal{F}(H^\bullet) \arrow[r, "\mathcal{F}(h)"']
 & \mathcal{F}(F^\bullet)[1]
 \end{tikzcd}
+}
 \]
+
 
 \paragraph{Interpretation:}  
 Collapse functor preserves distinguished triangles iff Ext$^1$-triviality is preserved at each vertex.
@@ -2701,13 +2739,16 @@ R_K = \int_0^\infty E(s) ds.
 \subsection*{J.6 Collapse Diagram of Class-Zeta Integration}
 
 \[
-\begin{tikzcd}[column sep=large, row sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}[]
 \mathcal{F}_t \arrow[r, "\text{Filtration}"] \arrow[d, "\mathrm{PH}_1 = 0"'] 
 & \mathcal{F}_\infty \arrow[d, "\mathrm{Ext}^1 = 0"] \\
 h_K = 1 \arrow[r, "\text{Energy Regularization}"] 
 & (s - 1)\zeta_K(s) = \frac{R_K}{\sqrt{|\Delta_K|}} \cdot \text{Const.}
 \end{tikzcd}
+}
 \]
+
 
 ---
 
@@ -2871,13 +2912,16 @@ Thus, vanishing energy—structured as topological and Ext-collapsing contributi
 We summarize the causal relationships in the following commutative diagram, structured across homology (Appendix C), Ext theory (Appendix E), and energy convergence:
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
 & \mathrm{PH}_1 = 0 \arrow[d, "\text{Collapse Functor}"] \\
 \mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
 & u(t) \in C^\infty
 \end{tikzcd}
+}
 \]
+
 
 \noindent
 This diagram also holds for $f_K(t)$ arising from the collapse energy of $\mathcal{F}_t$, where $\mathrm{PH}_1$ and $\mathrm{Ext}^1$ vanishing are causally encoded through $E(t)$.
@@ -3004,13 +3048,16 @@ The PH₁-collapse guarantees topological trivialization of the filtration, and 
 \subsection*{L.5 Collapse Diagrammatic Structure}
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \mathcal{F}^\chi_t \arrow[r, "\text{Persistent Filtration}"] \arrow[d, "\mathrm{PH}_1 \to 0"'] 
 & \mathcal{F}^\chi_\infty \arrow[d, "\mathrm{Ext}^1 = 0"] \\
 \text{Topological Collapse} \arrow[r, "\text{Collapse Functor}"] 
 & \log \varepsilon_{K,\chi} = L'_K(0,\chi)
 \end{tikzcd}
+}
 \]
+
 
 ---
 
@@ -3167,13 +3214,16 @@ M \text{ splits into smooth Langlands fibers}.
 \subsection*{M.4 Collapse Functorial Diagram of Langlands Flow}
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 M \in D^b_{\mathrm{mot}}(K) \arrow[r, "\text{Collapse Functor } \mathcal{F}_{\mathrm{Collapse}}"] \arrow[d, swap, "\mathrm{Ext}^1 = 0"]
 & \mathcal{F}_{\mathrm{auto}} \in \mathrm{Rep}_{\mathrm{auto}} \arrow[d, "\text{Langlands Equiv.}"] \\
 \text{Flat motivic sheaf} \arrow[r, "\text{Realization Equivalence}"]
 & \mathcal{F}_{\mathrm{Galois}} \in \mathrm{Rep}_\mathrm{Galois}^\ell
 \end{tikzcd}
+}
 \]
+
 
 This diagram reflects the double collapse: categorical flatness (Ext=0) and functorial match between automorphic and Galois sides.
 
@@ -3316,12 +3366,19 @@ This expresses structural unification across mirror duals, automorphic correspon
 \subsection*{N.4 Collapse Functorial Diagram Across Three Domains}
 
 \[
-\begin{tikzcd}[column sep=huge, row sep=large]
-\mathcal{F}_t \arrow[r, "\text{Collapse Functor}"] \arrow[dr, swap, "\mathrm{PH}_1 = 0,\, \mathrm{Ext}^1 = 0"]
-& \left\{ D^b\mathcal{F}(X^\vee),\, \mathrm{Rep}_{\mathrm{auto}},\, \mathrm{TropVar}_K \right\} \\
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzcd}
+\mathcal{F}_t \arrow[r, "\text{Collapse Functor}"] \arrow[dr, swap, "\mathrm{PH}_1 = 0,\; \mathrm{Ext}^1 = 0"]
+& \begin{matrix}
+D^b\mathcal{F}(X^\vee), \\
+\mathrm{Rep}_{\mathrm{auto}}, \\
+\mathrm{TropVar}_K
+\end{matrix} \\
 & D^b_{\mathrm{AK}} \arrow[u, "\simeq"]
 \end{tikzcd}
+}
 \]
+
 
 This diagram indicates that collapse vanishing conditions enforce a derived-equivalent realization across the three structures.
 
@@ -3463,13 +3520,16 @@ This functor respects A∞-structure and collapse locality.
 \subsection*{O.4 Fukaya-Collapse Commutative Diagram}
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \mathcal{F}_t \arrow[r, "\text{Collapse Functor } \mathcal{F}_{\mathrm{Collapse}}^{\mathrm{HMS}}"]
 \arrow[d, "\mathrm{PH}_1 = 0, \mathrm{Ext}^1 = 0"']
 & \mathcal{F}_{\mathrm{Fuk}}(X^\vee) \in D^\pi\mathcal{F}(X^\vee) \\
 \text{Smooth filtered AK sheaf} \arrow[ur, "\text{Mirror realization}"']
 \end{tikzcd}
+}
 \]
+
 
 ---
 
@@ -3600,13 +3660,16 @@ The collapse of $\mathrm{PH}_1$ eliminates topological obstructions to smooth tr
 \subsection*{P.4 Collapse Diagram: PH₁ to Smoothness}
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \mathcal{F}_t \arrow[r, "\text{Persistence Homology}"] \arrow[d, "\text{Topological Energy Decay}"']
 & \mathrm{PH}_1 = 0 \arrow[d, "\text{Collapse Functor}"] \\
 \text{Ext-Free State} \arrow[r, "\text{Obstruction Removal}"]
 & u(t) \in C^\infty
 \end{tikzcd}
+}
 \]
+
 
 This shows the causal path from persistent topology to smoothness via categorical collapse.
 
@@ -3773,13 +3836,16 @@ where $\delta_t$ denotes the connecting morphisms between local sheaf patches. T
 \subsection*{Q.5 Collapse Diagram: Ext$^1$ to Regularity}
 
 \[
-\begin{tikzcd}[column sep=large, row sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \mathcal{F}_t \arrow[r, "\text{Ext Evaluation}"] \arrow[d, "\text{Energy Decay } E_{\mathrm{Ext}}(t) \to 0"']
 & \mathrm{Ext}^1(\mathcal{F}_t, \mathbb{Q}) = 0 \arrow[d, "\text{Collapse Functor}"] \\
 \text{Obstruction-Free State} \arrow[r, "\text{Categorical Gluing}"]
 & u(t) \in C^\infty
 \end{tikzcd}
+}
 \]
+
 
 This diagram expresses the removal of local-to-global obstruction via categorical collapse.
 
@@ -3884,13 +3950,16 @@ under which the collapse functor $\mathcal{F}_{\mathrm{Collapse}}$ maps a filter
 \subsection*{R.3 Formal Collapse Path Diagram}
 
 \[
-\begin{tikzcd}[column sep=huge, row sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 \mathcal{F}_t \arrow[r, "\mathrm{PH}_1 = 0"] \arrow[d, "\mathrm{Ext}^1 = 0"']
 & \text{Topological collapse} \arrow[d, "\text{Collapse Functor}"] \\
 \text{Categorical collapse} \arrow[r, "\text{Obstruction-free gluing}"]
 & u(t) \in C^\infty(\mathbb{R}^3)
 \end{tikzcd}
+}
 \]
+
 
 \noindent
 This diagram demonstrates that both topological and categorical collapses feed into the same smooth realization functorially.
@@ -4450,13 +4519,16 @@ This encodes the logical refinement chain:
 We formalize the collapse-valid and failure types as a lattice:
 
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
+\resizebox{\textwidth}{!}{%
+\begin{tikzcd}
 & \texttt{CollapseValid} \arrow[dl, dashed, bend left=15, "\neg"] \\
 \texttt{Unresolvable} \arrow[r, "\text{refines}"]
 & \texttt{Unstable} \arrow[r, "\text{refines}"]
 & \texttt{Undecidable}
 \end{tikzcd}
+}
 \]
+
 
 \paragraph{Remark.}  
 The dashed negation arrow indicates logical complementarity under classical logic.  
@@ -5811,12 +5883,20 @@ Let \(\mathcal{C}_{\text{Class}}\) be a category with:
 Morphisms are defined by the following Hasse diagram:
 
 \[
-\begin{tikzcd}[row sep=huge, column sep=large]
-& \texttt{TypeIII} \arrow[dl, "\text{add Ext}"'] \arrow[dr, "\text{add PH}"] & \\
-\texttt{TypeI} \arrow[dr, "\text{add PH}"'] & & \texttt{TypeII} \arrow[dl, "\text{add Ext}"] \\
-& \texttt{TypeIV} &
-\end{tikzcd}
+\begin{tikzpicture}[node distance=2.5cm, auto]
+  \node (A) at (3,4) {\texttt{TypeIII}};
+  \node (B) at (0,2) {\texttt{TypeI}};
+  \node (C) at (6,2) {\texttt{TypeII}};
+  \node (D) at (3,0) {\texttt{TypeIV}};
+
+  \draw[->] (A) -- (B) node[midway, left] {\small add Ext};
+  \draw[->] (A) -- (C) node[midway, right] {\small add PH};
+  \draw[->] (B) -- (D) node[midway, left] {\small add PH};
+  \draw[->] (C) -- (D) node[midway, right] {\small add Ext};
+\end{tikzpicture}
 \]
+
+
 \end{definition}
 
 ---

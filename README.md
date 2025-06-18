@@ -12,11 +12,11 @@ across PDEs, number theory, and algebraic geometry.
 
 It introduces a structured collapse framework based on:
 
-- **Persistent Homology (PH₁)**
-- **Ext-class cohomological obstructions (Ext¹)**
-- **Smoothness realization via energy decay**
-- **Type-theoretic formalization (Coq/Lean-compatible)**
-- **ZFC-based axiomatic foundation**
+- `Persistent Homology (PH₁)`
+- `Ext-class cohomological obstructions (Ext¹)`
+- `Smoothness realization via energy decay`
+- `Type-theoretic formalization (Coq/Lean-compatible)`
+- `ZFC-based axiomatic foundation`
 
 Version 10.0 finalizes the type-theoretic realization, classifier logic, and functorial constructions.
 
@@ -32,8 +32,8 @@ AK Theory is grounded in the belief that:
   are not intrinsic contradictions but **dimensionally insufficient formulations**.
 
 - By **lifting** these problems into high-dimensional, MECE-partitioned projection spaces,  
-  they can be **resolved** through **structural collapse**: vanishing of PH₁ and Ext¹,  
-  leading to **smoothness, regularity, or abelianization**.
+  they can be **resolved** through **structural collapse**: vanishing of `PH₁` and `Ext¹`,  
+  leading to `smoothness`, `regularity`, or `abelianization`.
 
 ---
 
@@ -41,12 +41,12 @@ AK Theory is grounded in the belief that:
 
 AK Theory addresses:
 
-- **Topological collapse zones and filtered degeneration spaces**
-- **Causal logic between PH₁, Ext¹, and energy-smoothness**
-- **Functorial collapse under category theory**
-- **Formal proof chains interpretable in Coq, Lean, or ZFC**
-- **Arithmetic collapse over number fields, zeta limits, and class number formula**
-- **Unified collapse typing for Mirror symmetry, Langlands duality, and Fukaya categories**
+- `Topological collapse zones` and `filtered degeneration spaces`
+- `Causal logic` between `PH₁`, `Ext¹`, and `energy-smoothness`
+- `Functorial collapse` under category theory
+- `Formal proof chains` interpretable in Coq, Lean, or ZFC
+- `Arithmetic collapse` over number fields, zeta limits, and class number formula
+- `Unified collapse typing` for Mirror symmetry, Langlands duality, and Fukaya categories
 
 ---
 
@@ -54,36 +54,32 @@ AK Theory addresses:
 
 The fundamental causal equivalence is:
 
-\[
-\mathrm{PH}_1 = 0 \quad \Leftrightarrow \quad \mathrm{Ext}^1 = 0 \quad \Rightarrow \quad u(t) \in C^\infty
-\]
+`PH₁ = 0  ⇔  Ext¹ = 0  ⇒  u(t) ∈ C^∞`
 
 Where:
-- PH₁: Persistent homology (topological cycles)
-- Ext¹: Obstruction cohomology
-- \( u(t) \): Flow or solution object (e.g., PDE velocity field)
+- `PH₁`: Persistent homology (topological cycles)
+- `Ext¹`: Obstruction cohomology
+- `u(t)`: Flow or solution object (e.g., PDE velocity field)
 
 Collapse is defined via:
 
-- **CollapseZone(x)**: PH₁ vanishes locally
-- **CollapseSheaf**: Filtered objects satisfying global PH₁ = 0 and Ext¹ = 0
-- **CollapseFunctor**: \( F \mapsto F' \) preserving collapse structure
-- **CollapseClassifier**: Typing scheme (Type I–IV) for degeneration states
+- `CollapseZone(x)`: `PH₁` vanishes locally
+- `CollapseSheaf`: Filtered objects satisfying global `PH₁ = 0` and `Ext¹ = 0`
+- `CollapseFunctor`: `F ↦ F'` preserving collapse structure
+- `CollapseClassifier`: Typing scheme (Type I–IV) for degeneration states
 
 ---
 
 ## 🚀 What Can AK Theory Do?
 
 ### ✅ Collapse Completion Theorem  
-If \( \mathcal{F}_t \) satisfies PH₁ = 0 and Ext¹ = 0,  
-then the induced object \( u(t) \in C^\infty \) (smooth function or flow).  
-Formalized via Π-type judgments in Coq (TT.15).
+If `ℱₜ` satisfies `PH₁ = 0` and `Ext¹ = 0`,  
+then the induced object `u(t) ∈ C^∞` (smooth function or flow).  
+Formalized via `Π`-type judgments in Coq (TT.15).
 
 ### ✅ Collapse–Zeta Correspondence  
-Collapse energy \( E(t) \) satisfying decay induces convergence of  
-\[
-\int_0^\infty E(t) e^{-t} dt \quad \Rightarrow \quad \text{Zeta-regularity}
-\]
+Collapse energy `E(t)` satisfying decay induces convergence of  
+`∫₀^∞ E(t) e^(–t) dt  ⇒  Zeta-regularity`
 
 Used to interpret class number finiteness and BSD consequences.
 
@@ -92,8 +88,8 @@ Encodes object structure via type-theoretic classifiers:
 Type I (Ext), Type II (PH), Type III (smooth), Type IV (singular)
 
 ### ✅ CollapseFunctor Category  
-Collapse-preserving functors maintain PH₁ and Ext¹ vanishing  
-under colimits, pullbacks, composition (A11–A13, TT.7–TT.9)
+Collapse-preserving functors maintain `PH₁` and `Ext¹` vanishing  
+under colimits, pullbacks, composition (`A11–A13`, `TT.7–TT.9`)
 
 ---
 
@@ -101,32 +97,32 @@ under colimits, pullbacks, composition (A11–A13, TT.7–TT.9)
 
 | Layer | Component | Description |
 |-------|-----------|-------------|
-| Collapse Axioms | A0–A9, A10–A13 | Structural rules: PH₁/Ext¹ → smoothness |
-| Collapse Classifier | Type I–IV | Typing collapse types (TT⁺.7) |
-| Collapse Functor | \( F \mapsto F' \) | Category-compatible resolution map |
-| ZFC Formalization | TT.6, TT⁺ | Collapse logic is ZFC-compatible |
-| Type-Theory Encoding | TT.1–TT.15 | Coq-ready typing system, classifier category |
-| Application Modules | P, Q, J, K, M, N, O | Navier–Stokes, Zeta, Langlands, Mirror examples |
+| Collapse Axioms | `A0–A9`, `A10–A13` | Structural rules: `PH₁/Ext¹ → smoothness` |
+| Collapse Classifier | `Type I–IV` | Typing collapse types (`TT⁺.7`) |
+| Collapse Functor | `F ↦ F'` | Category-compatible resolution map |
+| ZFC Formalization | `TT.6`, `TT⁺` | Collapse logic is ZFC-compatible |
+| Type-Theory Encoding | `TT.1–TT.15` | Coq-ready typing system, classifier category |
+| Application Modules | `P`, `Q`, `J`, `K`, `M`, `N`, `O` | Navier–Stokes, Zeta, Langlands, Mirror examples |
 
 ---
 
 ## 🌀 Applications (see downstream repositories)
 
 ### 🔵 Navier–Stokes Global Regularity  
-`u(t) ∈ C^\infty` follows from PH₁ = 0 and Ext¹ = 0  
-→ 
+`u(t) ∈ C^∞` follows from `PH₁ = 0` and `Ext¹ = 0`  
+→ See `navier-stokes-global-regularity` repository
 
 ### 📘 Class Number Formula and Zeta Collapse  
 AK Collapse energy integrates to zeta limits  
-→ Appendix J, K + TT.11
+→ See Appendix `J`, `K`, and `TT.11`
 
 ### 💎 Langlands Collapse Sheaf  
-Ext¹(M, ℚₗ) = 0 induces auto ≅ Galois representation equivalence  
-→ TT.12 (LanglandsCollapseSheaf), TT.13 (TripleCollapseClassifier)
+`Ext¹(M, ℚₗ) = 0` induces `auto ≅ Galois representation` equivalence  
+→ See `TT.12 (LanglandsCollapseSheaf)`, `TT.13 (TripleCollapseClassifier)`
 
 ### 🧠 Fukaya & Mirror Collapse  
 Collapse sheaf maps functorially to Fukaya objects  
-→ TT.14 (FukayaCollapseSheaf), Appendix O
+→ See `TT.14 (FukayaCollapseSheaf)`, Appendix `O`
 
 ---
 
@@ -144,9 +140,10 @@ Collapse sheaf maps functorially to Fukaya objects
 
 ## ✉️ arXiv Submission & Collaboration
 
-**AK-HDPST v10.0** is complete and being prepared for submission.
+**AK-HDPST v10.0** is complete and currently being prepared for submission to **arXiv**.
 
 We welcome:
+
 - Expert reviews or endorsements in:
   - Category theory
   - Topological data analysis (TDA)
@@ -155,12 +152,13 @@ We welcome:
 - Suggestions for further extension or formalization
 - Prospective collaborators for applying AK Collapse to open problems (e.g., BSD, Riemann, IUT)
 
-### Contact
+---
 
-**A. Kobayashi**  
+## 👤 Contact
+
+**Author**: A. Kobayashi  
 _Co-developed with ChatGPT Research Partner_  
-📧 dollops2501@icloud.com
+📧 Email: [dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
+GitHub: [@Kobayashi2501](https://github.com/Kobayashi2501)
 
 > “Collapse is not destruction, but the resolution of obstruction.”
-
----

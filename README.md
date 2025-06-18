@@ -1,168 +1,168 @@
-# 🌐 AK High-Dimensional Projection Structural Theory (v9.0)
+# 🌐 AK High-Dimensional Projection Structural Theory (v10.0)
 
 📄 [日本語版 README (Japanese README Available Here)](README_jp.md)
 
 ---
 
-## ✨ Overview
+## 🧩 What is AK Theory?
 
-This repository presents **Version 9.0** of the  
-**AK High-Dimensional Projection Structural Theory (AK-HDPST)** — a universal, categorical–topological framework  
-designed to resolve complex mathematical obstructions by lifting them into structured high-dimensional spaces  
-and resolving them via collapse logic and Ext-class vanishing.
+**AK High-Dimensional Projection Structural Theory (AK-HDPST)** is a mathematically rigorous,  
+category-theoretic and topological formalism designed to resolve obstruction-based problems  
+across PDEs, number theory, and algebraic geometry.
 
-Version 9.0 completes:
+It introduces a structured collapse framework based on:
 
-- The **Collapse Completion Theorem** (Appendix Final)
-- Full **ZFC-compatible formalization of Collapse Axioms** (Appendix Z)
-- Embedding of **Mirror symmetry, Langlands duality, and motivic degenerations**
-- Collapse **Functor formalization** via Π-type and Σ-type (Appendix Z.12)
-- AI-enhanced **collapse zone diagnostics and classification modules** (Appendix L)
-- Complete integration of formal–structural collapse proof pipelines for applications to PDEs, number theory, and derived geometry
+- **Persistent Homology (PH₁)**
+- **Ext-class cohomological obstructions (Ext¹)**
+- **Smoothness realization via energy decay**
+- **Type-theoretic formalization (Coq/Lean-compatible)**
+- **ZFC-based axiomatic foundation**
 
-The core structure remains:
+Version 10.0 finalizes the type-theoretic realization, classifier logic, and functorial constructions.
+
+---
+
+## 🧠 Philosophical Motivation
+
+> “Unsolvable problems may not be false — they may be underdimensioned.”
+
+AK Theory is grounded in the belief that:
+
+- Many deep mathematical obstructions (e.g., singularities, unsplit extensions, functional divergence)  
+  are not intrinsic contradictions but **dimensionally insufficient formulations**.
+
+- By **lifting** these problems into high-dimensional, MECE-partitioned projection spaces,  
+  they can be **resolved** through **structural collapse**: vanishing of PH₁ and Ext¹,  
+  leading to **smoothness, regularity, or abelianization**.
+
+---
+
+## 🧭 Scope of AK Theory
+
+AK Theory addresses:
+
+- **Topological collapse zones and filtered degeneration spaces**
+- **Causal logic between PH₁, Ext¹, and energy-smoothness**
+- **Functorial collapse under category theory**
+- **Formal proof chains interpretable in Coq, Lean, or ZFC**
+- **Arithmetic collapse over number fields, zeta limits, and class number formula**
+- **Unified collapse typing for Mirror symmetry, Langlands duality, and Fukaya categories**
+
+---
+
+## 🔧 Core Collapse Framework
+
+The fundamental causal equivalence is:
 
 \[
-\mathrm{Ext}^1 = 0 \quad \Leftrightarrow \quad \mathrm{PH}_1 = 0 \quad \Leftrightarrow \quad u(t) \in C^\infty
+\mathrm{PH}_1 = 0 \quad \Leftrightarrow \quad \mathrm{Ext}^1 = 0 \quad \Rightarrow \quad u(t) \in C^\infty
 \]
 
----
+Where:
+- PH₁: Persistent homology (topological cycles)
+- Ext¹: Obstruction cohomology
+- \( u(t) \): Flow or solution object (e.g., PDE velocity field)
 
-## 🎯 Motivation and Uniqueness
+Collapse is defined via:
 
-> “Unsolvable problems may simply lack sufficient dimension.”
-
-### What can AK-HDPST do?
-
-AK-HDPST provides a formal method for:
-
-- **Lifting obstructions** (e.g., gluing failure, singularities, Ext-class nontriviality) into higher-dimensional MECE-structured projection spaces
-- **Resolving them via categorical collapse logic**, unifying persistent homology, Ext$^1$ vanishing, and geometric smoothness
-- **Generating proof chains** across algebraic topology, PDE theory, Hodge degeneration, and derived categories
-- **Classifying mathematical phases**, degeneration zones, and structural failure regions via AI-based classifiers
-- **Reconstructing functions** required by classical conjectures (e.g., Hilbert's 12th, BSD) through collapse-generative mechanisms
-
-### Novelty:
-
-- Collapse completion establishes a **constructive path from topological to categorical to analytic resolution**
-- Bridges disparate areas: TDA, Ext-functors, Mirror symmetry, Langlands correspondence, derived geometry
-- Uses formal Π-type collapse functors for Coq/Lean-compatible formalization
-- Enables **semantic AI diagnostics** and degeneration visualization (Appendix L, M++, Z.10)
+- **CollapseZone(x)**: PH₁ vanishes locally
+- **CollapseSheaf**: Filtered objects satisfying global PH₁ = 0 and Ext¹ = 0
+- **CollapseFunctor**: \( F \mapsto F' \) preserving collapse structure
+- **CollapseClassifier**: Typing scheme (Type I–IV) for degeneration states
 
 ---
 
-## 🧠 Core Collapse Architecture (v9.0)
+## 🚀 What Can AK Theory Do?
 
-| Step | Description |
+### ✅ Collapse Completion Theorem  
+If \( \mathcal{F}_t \) satisfies PH₁ = 0 and Ext¹ = 0,  
+then the induced object \( u(t) \in C^\infty \) (smooth function or flow).  
+Formalized via Π-type judgments in Coq (TT.15).
+
+### ✅ Collapse–Zeta Correspondence  
+Collapse energy \( E(t) \) satisfying decay induces convergence of  
+\[
+\int_0^\infty E(t) e^{-t} dt \quad \Rightarrow \quad \text{Zeta-regularity}
+\]
+
+Used to interpret class number finiteness and BSD consequences.
+
+### ✅ Collapse Typing System  
+Encodes object structure via type-theoretic classifiers:  
+Type I (Ext), Type II (PH), Type III (smooth), Type IV (singular)
+
+### ✅ CollapseFunctor Category  
+Collapse-preserving functors maintain PH₁ and Ext¹ vanishing  
+under colimits, pullbacks, composition (A11–A13, TT.7–TT.9)
+
+---
+
+## 🔬 Structural Composition
+
+| Layer | Component | Description |
+|-------|-----------|-------------|
+| Collapse Axioms | A0–A9, A10–A13 | Structural rules: PH₁/Ext¹ → smoothness |
+| Collapse Classifier | Type I–IV | Typing collapse types (TT⁺.7) |
+| Collapse Functor | \( F \mapsto F' \) | Category-compatible resolution map |
+| ZFC Formalization | TT.6, TT⁺ | Collapse logic is ZFC-compatible |
+| Type-Theory Encoding | TT.1–TT.15 | Coq-ready typing system, classifier category |
+| Application Modules | P, Q, J, K, M, N, O | Navier–Stokes, Zeta, Langlands, Mirror examples |
+
+---
+
+## 🌀 Applications (see downstream repositories)
+
+### 🔵 Navier–Stokes Global Regularity  
+`u(t) ∈ C^\infty` follows from PH₁ = 0 and Ext¹ = 0  
+→ 
+
+### 📘 Class Number Formula and Zeta Collapse  
+AK Collapse energy integrates to zeta limits  
+→ Appendix J, K + TT.11
+
+### 💎 Langlands Collapse Sheaf  
+Ext¹(M, ℚₗ) = 0 induces auto ≅ Galois representation equivalence  
+→ TT.12 (LanglandsCollapseSheaf), TT.13 (TripleCollapseClassifier)
+
+### 🧠 Fukaya & Mirror Collapse  
+Collapse sheaf maps functorially to Fukaya objects  
+→ TT.14 (FukayaCollapseSheaf), Appendix O
+
+---
+
+## 📁 File Contents
+
+| File | Description |
 |------|-------------|
-| 0 | High-dimensional MECE projection of obstruction structure |
-| 1 | PH$_1$ stability under Sobolev norms |
-| 2 | Topological energy functional decay \( C(t) \) |
-| 3 | Nerve triviality + blow-up exclusion |
-| 4 | Ext$^1$ ⇔ PH$_1$ via derived-category logic |
-| 5 | Filtered VMHS degeneration ⇒ Collapse of Ext and PH |
-| 6 | Dyadic spectral energy decay ⇒ Ext$^1$ vanishing |
-| 7 | Collapse Realization: \( \mathrm{Ext}^1 = 0 \Leftrightarrow \mathrm{PH}_1 = 0 \Leftrightarrow u(t) \in C^\infty \)
+| `AK High-Dimensional Projection Structural Theory_v10.0.tex` | Complete LaTeX source of v10.0 |
+| `AK High-Dimensional Projection Structural Theory_v10.0.pdf` | Rendered document (main theory) |
+| `README.md` | English project overview |
+| `README_jp.md` | Japanese version of README |
+| `LICENSE` | MIT or CC license (as chosen) |
 
 ---
 
-## 📚 Appendix Roadmap (v9.0)
+## ✉️ arXiv Submission & Collaboration
 
-| Category | Appendices | Description |
-|----------|------------|-------------|
-| 🔺 Structural Proof | A, B, C, G, J, Z, Final | Collapse equivalence, axioms, functoriality, smoothness completion |
-| 🔧 Theoretical Expansion | D, E, F, H, I, I+, N, P | Langlands, Motives, Mirror symmetry, VMHS, tropical degeneration |
-| 🌿 AI & Semantic Logic | K, L, M++, O | AI classification, collapse counterexamples, semantic trivialization |
+**AK-HDPST v10.0** is complete and being prepared for submission.
 
----
+We welcome:
+- Expert reviews or endorsements in:
+  - Category theory
+  - Topological data analysis (TDA)
+  - PDEs and regularity theory
+  - Homological algebra / algebraic geometry
+- Suggestions for further extension or formalization
+- Prospective collaborators for applying AK Collapse to open problems (e.g., BSD, Riemann, IUT)
 
-## 🌀 Applications
-
-### 🔵 [Navier–Stokes Global Regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
-
-Collapse completion yields:
-
-\[
-\mathrm{Ext}^1 = 0 \Rightarrow \mathrm{PH}_1 = 0 \Rightarrow u(t) \in C^\infty
-\]
-
-### 🔹 [Hilbert's 12th Problem](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
-
-Collapse logic constructs special functions and abelianizations for both imaginary and real fields.
-
-### 💎 [BSD Conjecture](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
-
-Collapse formalizes:
-
-\[
-\mathrm{Ext}^1(\mathcal{F}_E, \mathbb{Q}_\ell) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \mathrm{rank} = \operatorname{ord}_{s=1} L(E,s)
-\]
-
-### 🌐 Langlands, Mirror, and Motives
-
-Appendix I+ unifies mirror symmetry, Langlands duality, and motivic degenerations under collapse classification.
-
-### 🤖 AI-based Collapse Diagnostics
-
-Appendix L introduces neural classifiers and diagnostic modules to classify collapse vs. failure zones across Ext/PH spaces.
-
----
-
-## 📄 Collapse Axioms and Formalization (Appendix Z)
-
-| Axiom | Description |
-|-------|-------------|
-| A0 | Collapse topology is MECE-partitionable |
-| A1 | PH$_1$ = 0 implies Sobolev regularity |
-| A2 | Ext$^1$ = 0 eliminates obstruction class |
-| A3 | Collapse functor: \( \mathrm{PH}_1 \Rightarrow \mathrm{Ext}^1 \Rightarrow C^\infty \) |
-| A4 | VMHS degeneration ⇒ Ext + PH collapse |
-| A5 | Topological energy and Ext are dual |
-| A6 | Dyadic decay ⇒ Ext$^1$ = 0 |
-| A7 | ZFC-compatible encoding of all above axioms |
-| A8 | AI classifiers match structural collapse semantics |
-| A9 | BSD follows via Ext/PH/Selmer correspondence |
-| Z.9 | Collapse Lemma: \( \mathrm{PH}_1 = \mathrm{Ext}^1 = 0 \Rightarrow C^\infty \) |
-| Z.12 | Π-type Collapse Functor + Σ-type Typing Space + Equivalence Diagrams |
-| Final.1 | Collapse system is complete ⇔ structural smoothness obtained |
-
----
-
-## 📤 arXiv Submission
-
-**AK-HDPST v9.0** is currently being prepared for submission to arXiv.
-
-We are actively seeking:
-- **Endorsement** from qualified researchers in related fields
-- **Feedback or suggestions** from experts in category theory, algebraic geometry, PDEs, or number theory
-- **Collaborative interest** in formal verification, AI-assisted theorem exploration, or structural mathematics
-
-If you are interested in endorsing this submission or providing commentary,  
-please feel free to reach out via email: 📧 dollops2501@icloud.com
-
-**Recommended arXiv categories:**
-- [math.CT] Category Theory  
-- [math.AG] Algebraic Geometry  
-- [math.AP] Analysis of PDEs  
-- [math.NT] Number Theory
-
----
-
-## 🔗 DOI (Published on Zenodo)
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15666262.svg)](https://doi.org/10.5281/zenodo.15666262)
-
-📄 This repository is associated with the publication:
-
-**A. Kobayashi**, *AK High-Dimensional Projection Structural Theory (v9.0)*, 2025.  
-DOI: [10.5281/zenodo.15666262](https://doi.org/10.5281/zenodo.15666262)
-
----
-
-## 📩 Author
+### Contact
 
 **A. Kobayashi**  
 _Co-developed with ChatGPT Research Partner_  
 📧 dollops2501@icloud.com
 
-> *“Collapse is not destruction, but synthesis of higher structure.”*
+> “Collapse is not destruction, but the resolution of obstruction.”
+
+---
+
+# AK-HDPST_AK-High-Dimensional-Projection-Structural-Theory

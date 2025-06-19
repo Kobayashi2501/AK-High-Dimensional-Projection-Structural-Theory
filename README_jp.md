@@ -109,12 +109,16 @@ Collapseを保つ関手は、`合成・余極限・引き戻し` に対して安
 
 ## 🌀 応用例（派生リポジトリ参照）
 
-### 🔵 Navier–Stokes全球正則性  
+### 🔵 Navier–Stokes 全球正則性  
 `u(t) ∈ C^∞` は `PH₁ = 0 ∧ Ext¹ = 0` から導かれる  
 → [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-### 📘 類数公式とZeta Collapse  
-Collapseエネルギーはゼータ積分に変換される  
+### 📉 BSD予想（Collapse BSD 定理）  
+$\mathrm{PH}_1(E)=0$ より $\operatorname{rank}_{ℤ} E(ℚ) = \operatorname{ord}_{s=1} L(E,s)$ が導かれる  
+→ [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
+
+### 📘 類数公式と Zeta Collapse  
+Collapse エネルギーはゼータ積分へ変換される  
 → Appendix `J`, `K`, `TT.11`
 
 ### 💎 Langlands Collapse Sheaf  
@@ -122,7 +126,7 @@ Collapseエネルギーはゼータ積分に変換される
 → `TT.12`, `TT.13`
 
 ### 🧠 Fukaya/Mirror Collapse  
-Collapse層は Fukaya圏への関手的写像となる  
+Collapse 層は Fukaya 圏への関手的写像となる  
 → `TT.14`, Appendix `O`
 
 ---

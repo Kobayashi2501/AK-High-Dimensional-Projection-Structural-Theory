@@ -106,23 +106,28 @@ under colimits, pullbacks, composition (`A11–A13`, `TT.7–TT.9`)
 
 ---
 
-## 🌀 Applications (see downstream repositories)
+## 🌀 Applications (Related Repositories)
 
 ### 🔵 Navier–Stokes Global Regularity  
-`u(t) ∈ C^∞` follows from `PH₁ = 0` and `Ext¹ = 0`  
-→→ [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
+`u(t) ∈ C^∞` follows from `PH₁ = 0 ∧ Ext¹ = 0`  
+→ [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-### 📘 Class Number Formula and Zeta Collapse  
-AK Collapse energy integrates to zeta limits  
-→ See Appendix `J`, `K`, and `TT.11`
+### 📉 BSD Conjecture (Collapse BSD Theorem)  
+From $\mathrm{PH}_1(E) = 0$, we deriverank<sub>ℤ</sub> E(ℚ) = ord<sub>s=1</sub> L(E,s)  
+→ [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
+
+### 📘 Class Number & Zeta Collapse  
+Collapse energy translates into Zeta-type integrals  
+→ Appendix `J`, `K`, `TT.11`
 
 ### 💎 Langlands Collapse Sheaf  
-`Ext¹(M, ℚₗ) = 0` induces `auto ≅ Galois representation` equivalence  
-→ See `TT.12 (LanglandsCollapseSheaf)`, `TT.13 (TripleCollapseClassifier)`
+`Ext¹(M, ℚₗ) = 0` induces self-duality ≅ Galois equivalence  
+→ `TT.12`, `TT.13`
 
-### 🧠 Fukaya & Mirror Collapse  
-Collapse sheaf maps functorially to Fukaya objects  
-→ See `TT.14 (FukayaCollapseSheaf)`, Appendix `O`
+### 🧠 Fukaya/Mirror Collapse  
+Collapse sheaves functorially map to Fukaya categories  
+→ `TT.14`, Appendix `O`
+
 
 ---
 

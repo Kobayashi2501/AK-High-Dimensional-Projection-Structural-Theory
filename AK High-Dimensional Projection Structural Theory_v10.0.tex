@@ -2,14 +2,57 @@
 % AK High-Dimensional Projection Structural Theory v10.0
 % ===========================
 \documentclass[11pt]{article}
+
+% === Language and Encoding ===
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref,mathrsfs}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% === Math and Symbols ===
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}  % for \llbracket etc.
+\usepackage{bm}        % bold math
 \usepackage{tikz}
-\usepackage{xcolor}
+\usetikzlibrary{matrix, arrows.meta, calc, decorations.pathmorphing}
+
+% === Code, Listings, Diagrams ===
 \usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  breaklines=true,
+  frame=single,
+  captionpos=b
+}
+
+% === Graphics and Layout ===
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{geometry}
 \geometry{margin=1in}
 
-% === Math Operators and Commands ===
+% === Hyperlinks ===
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+% === Title Metadata ===
+\title{AK High-Dimensional Projection Structural Theory\\
+\Large Version 10.0: Collapse Structures, Ext-Triviality, and Persistent Geometry}
+\author{Atsushi Kobayashi \\ \small with ChatGPT Research Partner}
+\date{June 2025}
+
+% === Theorem Environments ===
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+% === Math Operators ===
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Spec}{Spec}
@@ -22,11 +65,12 @@
 \DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\Coker}{Coker}
 
+% === Custom Shortcuts ===
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\CC}{\mathbb{C}}
-\newcommand{\TT}{\mathbb{T}}
 \newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\TT}{\mathbb{T}}
 
 \newcommand{\cF}{\mathcal{F}}
 \newcommand{\cG}{\mathcal{G}}
@@ -40,32 +84,10 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\Sha}{\mathbb{S}}
 
-% === Code Listing for Coq or Type-Theoretic Definitions ===
-\lstset{
-  basicstyle=\ttfamily\footnotesize,
-  keywordstyle=\color{blue},
-  commentstyle=\color{gray},
-  breaklines=true,
-  frame=single,
-  captionpos=b
-}
-
-% === Title and Metadata ===
-\title{AK High-Dimensional Projection Structural Theory\\
-\Large Version 10.0: Collapse Structures, Ext-Triviality, and Persistent Geometry}
-\author{Atsushi. Kobayashi \\ \small ChatGPT Research Partner}
-\date{June 2025}
-
-% === Theorem Environment ===
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-
+% === Document Starts ===
 \begin{document}
-\maketitle
 
+\maketitle
 \tableofcontents
 \newpage
 

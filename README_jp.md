@@ -114,7 +114,7 @@ Collapseを保つ関手は、`合成・余極限・引き戻し` に対して安
 → [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
 ### 📉 BSD予想（Collapse BSD 定理）  
-$\mathrm{PH}_1(E)=0$ より $\operatorname{rank}_{ℤ} E(ℚ) = \operatorname{ord}_{s=1} L(E,s)$ が導かれる  
+$\mathrm{PH}_1(E)=0$ より rank<sub>ℤ</sub> E(ℚ) = ord<sub>s=1</sub> L(E,s) が導かれる  
 → [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
 ### 📘 類数公式と Zeta Collapse  

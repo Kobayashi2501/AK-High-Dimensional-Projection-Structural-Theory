@@ -113,8 +113,46 @@ under colimits, pullbacks, composition (`A11–A13`, `TT.7–TT.9`)
 → [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
 ### 📉 BSD Conjecture (Collapse BSD Theorem)  
-From $\mathrm{PH}_1(E) = 0$, we deriverank<sub>ℤ</sub> E(ℚ) = ord<sub>s=1</sub> L(E,s)  
+From `PH₁(E) = 0`, we derive `rank_ℤ E(ℚ) = ord_{s=1} L(E,s)`  
 → [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
+
+### 🧮 ABC Conjecture (Collapse ABC Theorem)  
+From `PH₁(Fₐᵦ𝑐) = 0` and `Ext¹ = 0`, energy decay `E(t) ≤ Ae^−κt` implies  
+`log c ≤ (1 + ε) log rad(abc)`  
+→ [`collapse-abc-theorem`](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main)
+
+✅ Completion Status  
+This version completes the structural proof of the ABC conjecture under:
+
+- PH₁ collapse (persistent homology trivial)  
+- Ext¹ vanishing (derived obstruction removed)  
+- Collapse energy decay  
+- ZFC + MLTT (type theory) consistency  
+
+Thus, formally:
+
+**PH₁ = 0 ⇒ Ext¹ = 0 ⇒ E(t) ≤ Ae^−κt ⇒ log c ≤ (1 + ε) log rad(abc)**
+
+---
+
+### 💠 Riemann Hypothesis (Collapse RH Resolution)  
+If `PH₁(𝓜_ζ) = 0` holds for the zeta moduli collapse sheaf,  
+then non-trivial zeros of ζ(s) lie on `Re(s) = 1/2`  
+→ [`collapse-riemann-hypothesis`](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main)
+
+✅ Completion Status  
+This version completes a formal resolution of RH under:
+
+- Collapse axioms (A0–A9)  
+- Ext-layer vanishing  
+- Topological + categorical obstruction removal  
+- Final mapping to `Re(s) = 1/2`
+
+Thus, formally:
+
+**If PH₁(𝓜_ζ) = 0 ⇒ Re(s) = 1/2 for all non-trivial zeros of ζ(s)**
+
+---
 
 ### 📘 Class Number & Zeta Collapse  
 Collapse energy translates into Zeta-type integrals  
@@ -127,7 +165,6 @@ Collapse energy translates into Zeta-type integrals
 ### 🧠 Fukaya/Mirror Collapse  
 Collapse sheaves functorially map to Fukaya categories  
 → `TT.14`, Appendix `O`
-
 
 ---
 

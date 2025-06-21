@@ -69,6 +69,37 @@ Collapse は次の構成で定義されます：
 
 ## 🚀 AK理論でできること
 
+
+---
+
+### ✅ Collapse 型分類体系  
+型分類子を用いて対象を次の型に分類：
+- Type I（Ext）
+- Type II（PH）
+- Type III（滑らか）
+- Type IV（特異）
+
+### ✅ CollapseFunctor 圏  
+Collapseを保つ関手は、`合成・余極限・引き戻し` に対して安定である  
+→ `A11–A13`, `TT.7–TT.9` にて証明
+
+---
+
+## 🔬 構造的構成一覧
+
+| 層 | 構成要素 | 内容 |
+|----|----------|------|
+| Collapse 公理 | `A0–A13` | `PH₁ / Ext¹ → 滑らかさ` の公理的構造 |
+| Collapse 分類子 | `Type I–IV` | 型論による障害の分類（TT⁺.7） |
+| Collapse 関手 | `F ↦ F'` | Collapseを保存する圏論的写像 |
+| ZFC構成 | `TT.6`, `TT⁺` | Collapse理論はZFCセマンティクスで定義可能 |
+| 型理論構文 | `TT.1–TT.15` | Coq型で表現されたCollapse体系 |
+| 応用モジュール | `P`, `Q`, `J`, `K`, `M`, `N`, `O` | Navier–Stokes, ゼータ, Langlands, Mirror等の例証
+
+---
+
+## 🌀 応用例（関連リポジトリ）
+
 ### 🔵 ナビエ–ストークス方程式（Collapse NS定理）  
 `PH₁(ℱₜ) = 0` および `Ext¹(ℱₜ, ℚ) = 0` に加え、Collapseエネルギーが  
 `E_PH(t), E_Ext(t) → 0` と収束することで  
@@ -108,43 +139,6 @@ Collapse は次の構成で定義されます：
 **PH₁ = 0 ⇒ Ext¹ = 0 ⇒ rank_ℤ E(ℚ) = ord_{s=1} L(E, s)**
 
 ---
-
-### ✅ Collapse 型分類体系  
-型分類子を用いて対象を次の型に分類：
-- Type I（Ext）
-- Type II（PH）
-- Type III（滑らか）
-- Type IV（特異）
-
-### ✅ CollapseFunctor 圏  
-Collapseを保つ関手は、`合成・余極限・引き戻し` に対して安定である  
-→ `A11–A13`, `TT.7–TT.9` にて証明
-
----
-
-## 🔬 構造的構成一覧
-
-| 層 | 構成要素 | 内容 |
-|----|----------|------|
-| Collapse 公理 | `A0–A13` | `PH₁ / Ext¹ → 滑らかさ` の公理的構造 |
-| Collapse 分類子 | `Type I–IV` | 型論による障害の分類（TT⁺.7） |
-| Collapse 関手 | `F ↦ F'` | Collapseを保存する圏論的写像 |
-| ZFC構成 | `TT.6`, `TT⁺` | Collapse理論はZFCセマンティクスで定義可能 |
-| 型理論構文 | `TT.1–TT.15` | Coq型で表現されたCollapse体系 |
-| 応用モジュール | `P`, `Q`, `J`, `K`, `M`, `N`, `O` | Navier–Stokes, ゼータ, Langlands, Mirror等の例証
-
----
-
-## 🌀 応用例（関連リポジトリ）
-
-### 🔵 Navier–Stokes 方程式の全球正則性  
-`PH₁ = 0 ∧ Ext¹ = 0` より `u(t) ∈ C^∞` を導出  
-→ [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
-
-### 📉 BSD予想（Collapse BSD定理）  
-`PH₁(E) = 0` より  
-`rank_ℤ E(ℚ) = ord_{s=1} L(E,s)` を導出  
-→ [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
 ### 🧮 ABC予想（Collapse ABC定理）  
 `PH₁(Fₐᵦ𝑐) = 0` および `Ext¹ = 0` に加え、エネルギー減衰 `E(t) ≤ Ae^−κt` が成立すると  

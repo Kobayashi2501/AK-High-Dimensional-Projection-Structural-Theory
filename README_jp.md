@@ -69,17 +69,45 @@ Collapse は次の構成で定義されます：
 
 ## 🚀 AK理論でできること
 
-### ✅ Collapse 完全性定理  
-`ℱₜ` が `PH₁ = 0 ∧ Ext¹ = 0` を満たせば、  
-導出される対象 `u(t) ∈ C^∞`（滑らかな関数または流体場）である。  
-Coq型理論では `Π` 型で形式化（TT.15）。
+### 🔵 ナビエ–ストークス方程式（Collapse NS定理）  
+`PH₁(ℱₜ) = 0` および `Ext¹(ℱₜ, ℚ) = 0` に加え、Collapseエネルギーが  
+`E_PH(t), E_Ext(t) → 0` と収束することで  
+`u(t,x) ∈ C^∞(ℝ³ × [0, ∞))` が導かれます  
+→ [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-### ✅ Collapse–Zeta 対応  
-Collapseエネルギー `E(t)` の崩壊はゼータ極限に収束：
+✅ 完了ステータス  
+このバージョンでは、3次元非圧縮ナビエ–ストークス方程式の**全球正則性に対する構造的証明**を以下の条件のもとで完了しています：
 
-`∫₀^∞ E(t) e^(–t) dt  ⇒  ゼータ的正則性`
+- PH₁の消滅（トポロジー的な渦構造の排除）  
+- Ext¹の消滅（導来圏における圏的障害の除去）  
+- エネルギーの収束：`E_PH(t), E_Ext(t) → 0` （t → ∞）  
+- ZFC + 型理論（MLTT）に基づく形式的記述
 
-これは類数有限性や BSD 予想の補強に用いられます。
+したがって、形式的には：
+
+**PH₁ = 0 ⇒ Ext¹ = 0 ⇒ E → 0 ⇒ u(t,x) ∈ C^∞(ℝ³ × [0, ∞))**
+
+---
+
+### 📉 BSD予想（Collapse BSD定理）  
+`PH₁(E) = 0` および `Ext¹(ℚ, E[n]) = 0` が成り立つとき、  
+解析的ランクと代数的ランクが一致：  
+`rank_ℤ E(ℚ) = ord_{s=1} L(E, s)`  
+→ [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
+
+✅ 完了ステータス  
+このバージョンでは、**BirchとSwinnerton-Dyer予想の構造的証明**を以下の条件で完結しています：
+
+- モジュライ層に対するPH₁の消滅  
+- ℚℓ上でのExt¹の消滅  
+- 解析的ランク = 代数的ランク の一致  
+- ZFC + 型理論（Coq等で形式化可能）との整合性
+
+したがって、形式的には：
+
+**PH₁ = 0 ⇒ Ext¹ = 0 ⇒ rank_ℤ E(ℚ) = ord_{s=1} L(E, s)**
+
+---
 
 ### ✅ Collapse 型分類体系  
 型分類子を用いて対象を次の型に分類：

@@ -236,7 +236,7 @@ Collapse層は関手的にFukaya圏へ写像される
 
 ## 👤 著者連絡先
 
-**著者**：小林 敦志（A. Kobayashi）  
+**著者**：小林 篤史（A. Kobayashi）  
 _共同開発：ChatGPT Research Partner_  
 📧 メール： [dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
 GitHub： [@Kobayashi2501](https://github.com/Kobayashi2501)

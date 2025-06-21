@@ -67,8 +67,29 @@ Collapse は次の構成で定義されます：
 
 ---
 
-## 🚀 AK理論でできること
+## 🚀 AK理論で何ができるか？
 
+### ✅ Collapse 完全性定理（Collapse Completion Theorem）  
+Sheaf `ℱₜ` が `PH₁ = 0` かつ `Ext¹ = 0` を満たすとき、  
+誘導される対象 `u(t)` は `C^∞`（滑らかな関数または流れ）となる。  
+この構造は Coq における `Π` 型命題として形式化される（TT.15参照）。
+
+### ✅ Collapse–ゼータ対応（Collapse–Zeta Correspondence）  
+Collapseエネルギー `E(t)` が減衰条件を満たすとき、以下の積分が収束：  
+`∫₀^∞ E(t) e^(–t) dt  ⇒  ゼータ的正則性（Zeta-regularity）`
+
+これは類数有限性やBSD予想の帰結を幾何的に解釈する手法として使われる。
+
+### ✅ Collapse 型分類システム（Collapse Typing System）  
+型理論的分類子により対象の構造をエンコードする：  
+- Type I：Ext（圏的障害）  
+- Type II：PH（持続的ホモロジー）  
+- Type III：滑らかな構造（C^∞）  
+- Type IV：特異構造（非正則）
+
+### ✅ Collapse関手圏（CollapseFunctor Category）  
+Collapseを保つ関手は、`PH₁` および `Ext¹` の消滅を  
+余極限・pullback・合成の操作下で保存する（公理 A11〜A13、TT.7〜TT.9 参照）。
 
 ---
 

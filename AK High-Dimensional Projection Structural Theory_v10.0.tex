@@ -1,29 +1,33 @@
 % ===============================================
 % AK High-Dimensional Projection Structural Theory v10.0
-% Recommended Preamble (for Overleaf + XeLaTeX)
+% XeLaTeX-Optimized Preamble (Overleaf safe)
 % ===============================================
 \documentclass[11pt]{article}
 
-% === Encoding and Font ===
-\usepackage[utf8]{inputenc}     % UTF-8 Encoding
-\usepackage[T1]{fontenc}        % Output font encoding
-\usepackage{fontspec}           % XeLaTeX font support
-\setmainfont{Times New Roman}   % Set main font (adjustable)
+% === Language and Font ===
+\usepackage[utf8]{inputenc}       % UTF-8 input
+\usepackage[T1]{fontenc}          % T1 font encoding
+\usepackage{fontspec}             % XeLaTeX font support
+\setmainfont{Times New Roman}     % Set main font
 
 % === Math and Symbols ===
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
-\usepackage{stmaryrd}
-\usepackage{bm}
-
-% === TikZ and Diagram Tools ===
+\usepackage{stmaryrd}             % For \llbracket etc.
+\usepackage{bm}                   % Bold math symbols
+\usepackage{changepage} 
+% === TikZ and Diagrams ===
 \usepackage{tikz}
-\usetikzlibrary{matrix, arrows.meta, decorations.pathmorphing, cd}  % include 'cd' last
+\usepackage{tikz-cd}
+\usetikzlibrary{
+  cd, matrix, arrows.meta, decorations.pathmorphing, calc, positioning
+}
 
-% === Listings (Coq etc.) ===
+% === Listings for Coq, Code etc. ===
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{graphicx}             % For rotatebox, scalebox etc.
 
 \lstdefinelanguage{Coq}{
   keywords={Definition,Theorem,Proof,Qed,Fixpoint,match,with,end,fun,let,in,forall,exists,Inductive,return,Type},
@@ -35,28 +39,31 @@
   string=[b]",
   stringstyle=\color{red},
 }
-
 \lstset{
   language=Coq,
   basicstyle=\ttfamily\footnotesize,
   keywordstyle=\color{blue},
   commentstyle=\color{gray},
   breaklines=true,
+  breakindent=0pt,
+  columns=flexible,
+  xleftmargin=1em,
+  framexrightmargin=1em,
   frame=single,
   captionpos=b
 }
 
-% === Graphics and Layout ===
-\usepackage{graphicx}
+
+% === Geometry and Layout ===
 \usepackage{geometry}
-\usepackage{placeins}
 \geometry{margin=1in}
+\usepackage{placeins}             % \FloatBarrier support
 
 % === Hyperlinks ===
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
-% === Language (Load last to avoid conflicts) ===
-\usepackage[english]{babel}
+% === Language Support ===
+\usepackage[english]{babel}       % Use English language (place last)
 
 % === Theorem Environments ===
 \newtheorem{theorem}{Theorem}[section]
@@ -66,6 +73,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{axiom}{Axiom}[section]
 \newtheorem{conjecture}{Conjecture}[section]
 
 % === Math Operators ===
@@ -100,7 +108,7 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\Sha}{\mathcal{X}}
 
-% === Title and Author Metadata ===
+% === Document Metadata ===
 \title{AK High-Dimensional Projection Structural Theory\\
 \Large Version 10.0: Collapse Structures, Ext-Triviality, and Persistent Geometry}
 \author{\textbf{Atsushi Kobayashi} \quad {\small (with ChatGPT Research Partner)}}
@@ -112,7 +120,6 @@
 \maketitle
 \tableofcontents
 \newpage
-
 
 
 % ===========================
@@ -1138,12 +1145,6 @@ This confirms the asymptotic regularity of the NS flow.
 
 \subsection*{8.5 Collapse Diagram for NS Evolution}
 
-\documentclass{article}
-\usepackage{tikz}
-\usetikzlibrary{matrix, arrows.meta, decorations.pathmorphing, calc}
-
-\begin{document}
-
 \[
 \begin{tikzpicture}[every node/.style={anchor=center}]
   \matrix (m) [matrix of math nodes, row sep=3em, column sep=5em] {
@@ -1151,14 +1152,12 @@ This confirms the asymptotic regularity of the NS flow.
     {\mathrm{Ext}^1(\mathcal{Q}, \mathcal{F}_t) = 0} & u(t) \in C^\infty \\
   };
 
-  % 通常の矢印
   \path[->]
     (m-1-1) edge node[above]{\scriptsize Spectral Decay} (m-1-2)
     (m-1-1) edge node[left]{\scriptsize Topological Energy} (m-2-1)
     (m-1-2) edge node[right]{\scriptsize Functor Collapse} (m-2-2)
     (m-2-1) edge node[below]{\scriptsize Obstruction Removal} (m-2-2);
 
-  % 巡回矢印（右上ノード上部にループ）
   \path[->, bend left=50] (m-1-2.north east) to node[above right]{\scriptsize loop} (m-1-2.north west);
 \end{tikzpicture}
 \]
@@ -2209,7 +2208,10 @@ Let each $F$ be a sheaf over a topological space $X$ definable via open covers. 
 
 \subsection*{H.6 Formal Collapse Chain in Coq}
 
-```coq
+\textbf{Collapse Typing in Coq.}
+\vspace{0.5em}
+
+\begin{lstlisting}[language=Coq, mathescape=false]
 (* Collapse Typing in Coq *)
 Parameter PH_trivial : forall (F : TopObj), Prop.
 Parameter Ext_trivial : forall (F : SmthObj), Prop.
@@ -2221,6 +2223,7 @@ Theorem Collapse_Causal :
 Definition Collapse_Sigma :
   forall F : TopObj,
     { F' : SmthObj | Ext_trivial F' /\ F' = Collapse F }.
+\end{lstlisting}
 
 This code ensures the functorial, constructive, and realizable encoding of the Collapse mechanism.
 
@@ -2564,9 +2567,11 @@ All objects $\mathcal{F}_t$, morphisms between sheaves, filtered colimits, and p
   \item The framework remains compatible with ZFC and interpretable in homotopical and derived category models.
   \item These extensions prepare the formal ground for both:
   \begin{itemize}
-    \item derived-category embedding of Collapse structures (Appendix I⁺), and
+    \item derived-category embedding of Collapse structures (Appendix I$^{+}$), and
     \item arithmetic/topological degeneration formalism (Appendix J onward).
   \end{itemize}
+\end{itemize}
+
 
 
 
@@ -2574,7 +2579,7 @@ All objects $\mathcal{F}_t$, morphisms between sheaves, filtered colimits, and p
 % Appendix I⁺: Derived Collapse and Ext-Category Formalization
 % =============================================================
 
-\section*{Appendix I⁺: Derived Collapse and Ext-Category Formalization}
+\section*{Appendix I$^{+}$: Derived Collapse and Ext-Category Formalization}
 \addcontentsline{toc}{section}{Appendix I⁺: Derived Collapse and Ext-Category Formalization}
 
 This appendix refines the categorical framework of Appendix I by embedding the AK Collapse structure  
@@ -2585,7 +2590,7 @@ and relate it to collapse success via formal diagrammatic equivalences.
 
 ---
 
-\subsection*{I⁺.1 Collapse Functor as Endofunctor in Derived Category}
+\subsection*{I$^{+}$.1 Collapse Functor as Endofunctor in Derived Category}
 
 Let \( \mathcal{A} \) be an abelian category, and \( D^b(\mathcal{A}) \) its bounded derived category.  
 We define:
@@ -2605,7 +2610,7 @@ such that for any complex \( F^\bullet \in D^b(\mathcal{A}) \),
 
 ---
 
-\subsection*{I⁺.2 Distinguished Triangles and Collapse Implication}
+\subsection*{I$^{+}$.2 Distinguished Triangles and Collapse Implication}
 
 Let:
 \[
@@ -2621,26 +2626,24 @@ the triangle is collapse-compatible (i.e., \(\mathcal{F}_{\mathrm{Collapse}}\) p
 
 ---
 
-\subsection*{I⁺.3 Ext-Collapse Diagrammatic Equivalence}
+\subsection*{I$^{+}$.3 Ext-Collapse Diagrammatic Equivalence}
 
 We define the following diagram:
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
+\begin{tikzcd}[column sep=large, row sep=large]
 F^\bullet \arrow[r, "f"] \arrow[d, "\mathcal{F}_{\text{Collapse}}"']
 & G^\bullet \arrow[d, "\mathcal{F}_{\text{Collapse}}"] \\
 \mathcal{F}(F^\bullet) \arrow[r, "\mathcal{F}(f)"']
 & \mathcal{F}(G^\bullet)
 \end{tikzcd}
 \quad
-\begin{tikzcd}
+\begin{tikzcd}[column sep=large, row sep=large]
 H^\bullet \arrow[r, "h"] \arrow[d, dashed, "\mathcal{F}_{\text{Collapse}}"']
 & F^\bullet[1] \arrow[d, "\mathcal{F}_{\text{Collapse}}"] \\
 \mathcal{F}(H^\bullet) \arrow[r, "\mathcal{F}(h)"']
 & \mathcal{F}(F^\bullet)[1]
 \end{tikzcd}
-}
 \]
 
 
@@ -2649,7 +2652,7 @@ Collapse functor preserves distinguished triangles iff Ext$^1$-triviality is pre
 
 ---
 
-\subsection*{I⁺.4 Coq-Compatible Derived Collapse Schema}
+\subsection*{I$^{+}$.4 Coq-Compatible Derived Collapse Schema}
 
 \begin{lstlisting}[language=Coq]
 (* Derived category objects *)
@@ -2673,7 +2676,7 @@ Axiom CollapsePreservesTriangle :
 
 ---
 
-\subsection*{I⁺.5 Derived Collapse Equivalence and Endofunctoriality}
+\subsection*{I$^{+}$.5 Derived Collapse Equivalence and Endofunctoriality}
 
 \begin{definition}[Collapse-Equivalence in \( D^b(\mathcal{A}) \)]
 We say \( F^\bullet \sim_{\mathrm{Collapse}} G^\bullet \) if there exists  
@@ -2689,7 +2692,7 @@ a full subcategory \( \mathcal{D}_{\mathrm{Collapse}} \subset D^b(\mathcal{A}) \
 
 ---
 
-\subsection*{I⁺.6 Remarks and Structural Implications}
+\subsection*{I$^{+}$.6 Remarks and Structural Implications}
 
 \begin{itemize}
   \item Collapse can be internalized as a type-stable endofunctor within \( D^b(\mathcal{A}) \)
@@ -2788,16 +2791,13 @@ R_K = \int_0^\infty E(s) ds.
 \subsection*{J.6 Collapse Diagram of Class-Zeta Integration}
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}[]
+\begin{tikzcd}[column sep=large, row sep=large]
 \mathcal{F}_t \arrow[r, "\text{Filtration}"] \arrow[d, "\mathrm{PH}_1 = 0"'] 
 & \mathcal{F}_\infty \arrow[d, "\mathrm{Ext}^1 = 0"] \\
 h_K = 1 \arrow[r, "\text{Energy Regularization}"] 
-& (s - 1)\zeta_K(s) = \frac{R_K}{\sqrt{|\Delta_K|}} \cdot \text{Const.}
+& (s - 1)\zeta_K(s) = \dfrac{R_K}{\sqrt{|\Delta_K|}} \cdot \text{Const.}
 \end{tikzcd}
-}
 \]
-
 
 ---
 
@@ -2961,16 +2961,13 @@ Thus, vanishing energy—structured as topological and Ext-collapsing contributi
 We summarize the causal relationships in the following commutative diagram, structured across homology (Appendix C), Ext theory (Appendix E), and energy convergence:
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
+\begin{tikzcd}[column sep=large, row sep=large]
 u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
 & \mathrm{PH}_1 = 0 \arrow[d, "\text{Collapse Functor}"] \\
 \mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
 & u(t) \in C^\infty
 \end{tikzcd}
-}
 \]
-
 
 \noindent
 This diagram also holds for $f_K(t)$ arising from the collapse energy of $\mathcal{F}_t$, where $\mathrm{PH}_1$ and $\mathrm{Ext}^1$ vanishing are causally encoded through $E(t)$.
@@ -3097,16 +3094,13 @@ The PH₁-collapse guarantees topological trivialization of the filtration, and 
 \subsection*{L.5 Collapse Diagrammatic Structure}
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
+\begin{tikzcd}[column sep=large, row sep=large]
 \mathcal{F}^\chi_t \arrow[r, "\text{Persistent Filtration}"] \arrow[d, "\mathrm{PH}_1 \to 0"'] 
 & \mathcal{F}^\chi_\infty \arrow[d, "\mathrm{Ext}^1 = 0"] \\
 \text{Topological Collapse} \arrow[r, "\text{Collapse Functor}"] 
 & \log \varepsilon_{K,\chi} = L'_K(0,\chi)
 \end{tikzcd}
-}
 \]
-
 
 ---
 
@@ -3263,16 +3257,13 @@ M \text{ splits into smooth Langlands fibers}.
 \subsection*{M.4 Collapse Functorial Diagram of Langlands Flow}
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
+\begin{tikzcd}[column sep=large, row sep=large]
 M \in D^b_{\mathrm{mot}}(K) \arrow[r, "\text{Collapse Functor } \mathcal{F}_{\mathrm{Collapse}}"] \arrow[d, swap, "\mathrm{Ext}^1 = 0"]
 & \mathcal{F}_{\mathrm{auto}} \in \mathrm{Rep}_{\mathrm{auto}} \arrow[d, "\text{Langlands Equiv.}"] \\
 \text{Flat motivic sheaf} \arrow[r, "\text{Realization Equivalence}"]
 & \mathcal{F}_{\mathrm{Galois}} \in \mathrm{Rep}_\mathrm{Galois}^\ell
 \end{tikzcd}
-}
 \]
-
 
 This diagram reflects the double collapse: categorical flatness (Ext=0) and functorial match between automorphic and Galois sides.
 
@@ -3414,20 +3405,20 @@ This expresses structural unification across mirror duals, automorphic correspon
 
 \subsection*{N.4 Collapse Functorial Diagram Across Three Domains}
 
-\[
-\resizebox{0.95\textwidth}{!}{%
-\begin{tikzcd}
-\mathcal{F}_t \arrow[r, "\text{Collapse Functor}"] \arrow[dr, swap, "\mathrm{PH}_1 = 0,\; \mathrm{Ext}^1 = 0"]
-& \begin{matrix}
-D^b\mathcal{F}(X^\vee), \\
-\mathrm{Rep}_{\mathrm{auto}}, \\
-\mathrm{TropVar}_K
-\end{matrix} \\
-& D^b_{\mathrm{AK}} \arrow[u, "\simeq"]
-\end{tikzcd}
-}
-\]
+\begin{tikzpicture}[>=stealth, scale=1, every node/.style={align=center}]
+  % ノード定義
+  \node (A) at (0,0) {\textbf{A:}\\ $u(t)$};
+  \node (B) at (6,0) {\textbf{B:}\\ $\mathrm{PH}_1 = 0$};
+  \node (C) at (0,-3) {\textbf{C:}\\ $\mathrm{Ext}^1 = 0$};
+  \node (D) at (6,-3) {\textbf{D:}\\ $u(t) \in C^\infty$};
 
+  % 矢印
+  \draw[->] (A) -- node[above] {\footnotesize Spectral Decay} (B);
+  \draw[->] (A) -- node[left] {\footnotesize Topological Energy} (C);
+  \draw[->] (B) -- node[right] {\footnotesize Functor Collapse} (D);
+  \draw[->] (C) -- node[below] {\footnotesize Obstruction Removal} (D);
+  \draw[->, dashed, bend left=25] (D) to node[above right] {\footnotesize Loop Back} (A);
+\end{tikzpicture}
 
 This diagram indicates that collapse vanishing conditions enforce a derived-equivalent realization across the three structures.
 
@@ -3568,17 +3559,17 @@ This functor respects A∞-structure and collapse locality.
 
 \subsection*{O.4 Fukaya-Collapse Commutative Diagram}
 
-\[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
-\mathcal{F}_t \arrow[r, "\text{Collapse Functor } \mathcal{F}_{\mathrm{Collapse}}^{\mathrm{HMS}}"]
-\arrow[d, "\mathrm{PH}_1 = 0, \mathrm{Ext}^1 = 0"']
-& \mathcal{F}_{\mathrm{Fuk}}(X^\vee) \in D^\pi\mathcal{F}(X^\vee) \\
-\text{Smooth filtered AK sheaf} \arrow[ur, "\text{Mirror realization}"']
-\end{tikzcd}
-}
-\]
+\begin{tikzpicture}[>=stealth, scale=1, every node/.style={align=center}]
+  % ノード配置
+  \node (Ft) at (0,0) {$\mathcal{F}_t$};
+  \node (Fuk) at (6,0) {$\mathcal{F}_{\mathrm{Fuk}}(X^\vee) \in D^\pi \mathcal{F}(X^\vee)$};
+  \node (AK) at (0,-3) {Smooth filtered AK sheaf};
 
+  % 矢印
+  \draw[->] (Ft) -- node[above] {\footnotesize Collapse Functor $\mathcal{F}_{\mathrm{Collapse}}^{\mathrm{HMS}}$} (Fuk);
+  \draw[->] (Ft) -- node[left] {\footnotesize $\mathrm{PH}_1 = 0,\; \mathrm{Ext}^1 = 0$} (AK);
+  \draw[->] (AK) -- node[above right] {\footnotesize Mirror realization} (Fuk);
+\end{tikzpicture}
 
 ---
 
@@ -3709,16 +3700,13 @@ The collapse of $\mathrm{PH}_1$ eliminates topological obstructions to smooth tr
 \subsection*{P.4 Collapse Diagram: PH₁ to Smoothness}
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
-\mathcal{F}_t \arrow[r, "\text{Persistence Homology}"] \arrow[d, "\text{Topological Energy Decay}"']
+\begin{tikzcd}[column sep=1.5cm, row sep=1.2cm]
+u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
 & \mathrm{PH}_1 = 0 \arrow[d, "\text{Collapse Functor}"] \\
-\text{Ext-Free State} \arrow[r, "\text{Obstruction Removal}"]
+\mathrm{Ext}^1 = 0 \arrow[r, "\text{Obstruction Removal}"]
 & u(t) \in C^\infty
 \end{tikzcd}
-}
 \]
-
 
 This shows the causal path from persistent topology to smoothness via categorical collapse.
 
@@ -3843,7 +3831,7 @@ Let $\mathcal{F}_t$ be a derived sheaf encoding local velocity and vorticity dat
 
 ---
 
-\subsection*{Q.3 Proposition: Ext$^1$-Vanishing Implies Smoothness
+\subsection*{Q.3 Proposition: Ext$^1$-Vanishing Implies Smoothness}
 
 \begin{proposition}[Ext-Based Smoothness Criterion]
 \label{prop:ExtCollapse}
@@ -3885,16 +3873,13 @@ where $\delta_t$ denotes the connecting morphisms between local sheaf patches. T
 \subsection*{Q.5 Collapse Diagram: Ext$^1$ to Regularity}
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
+\begin{tikzcd}[column sep=1.8cm, row sep=1.6cm]
 \mathcal{F}_t \arrow[r, "\text{Ext Evaluation}"] \arrow[d, "\text{Energy Decay } E_{\mathrm{Ext}}(t) \to 0"']
 & \mathrm{Ext}^1(\mathcal{F}_t, \mathbb{Q}) = 0 \arrow[d, "\text{Collapse Functor}"] \\
 \text{Obstruction-Free State} \arrow[r, "\text{Categorical Gluing}"]
 & u(t) \in C^\infty
 \end{tikzcd}
-}
 \]
-
 
 This diagram expresses the removal of local-to-global obstruction via categorical collapse.
 
@@ -3999,16 +3984,13 @@ under which the collapse functor $\mathcal{F}_{\mathrm{Collapse}}$ maps a filter
 \subsection*{R.3 Formal Collapse Path Diagram}
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
+\begin{tikzcd}[column sep=1.8cm, row sep=1.4cm]
 \mathcal{F}_t \arrow[r, "\mathrm{PH}_1 = 0"] \arrow[d, "\mathrm{Ext}^1 = 0"']
 & \text{Topological collapse} \arrow[d, "\text{Collapse Functor}"] \\
 \text{Categorical collapse} \arrow[r, "\text{Obstruction-free gluing}"]
 & u(t) \in C^\infty(\mathbb{R}^3)
 \end{tikzcd}
-}
 \]
-
 
 \noindent
 This diagram demonstrates that both topological and categorical collapses feed into the same smooth realization functorially.
@@ -4497,7 +4479,7 @@ Nevertheless, such boundary structures are essential in ensuring that the axioms
 % Appendix U⁺: Semantic Collapse Failure Typing and Complement Structures
 % =============================================================
 
-\section*{Appendix U⁺: Semantic Collapse Failure Typing and Complement Structures}
+\section*{Appendix U$^{+}$: Semantic Collapse Failure Typing and Complement Structures}
 \addcontentsline{toc}{section}{Appendix U⁺: Semantic Collapse Failure Typing and Complement Structures}
 
 This appendix formalizes the semantic classification of \textbf{Collapse Failure} types introduced in Appendix U.  
@@ -4506,7 +4488,7 @@ and characterize their interaction with ZFC semantics and causal inferences.
 
 ---
 
-\subsection*{U⁺.1 Collapse Failure Type Space}
+\subsection*{U$^{+}$.1 Collapse Failure Type Space}
 
 We define the set of collapse-failure variants as an inductive type.
 
@@ -4521,7 +4503,7 @@ These variants exhaustively classify the ways in which a collapse structure may 
 
 ---
 
-\subsection*{U⁺.2 Collapse Status Judgment and Complementarity}
+\subsection*{U$^{+}$.2 Collapse Status Judgment and Complementarity}
 
 We define the decidable proposition of collapse status:
 
@@ -4545,7 +4527,7 @@ This axiom asserts that every sheaf under analysis is either collapse-admissible
 
 ---
 
-\subsection*{U⁺.3 Logical Implication and Failure Dynamics}
+\subsection*{U$^{+}$.3 Logical Implication and Failure Dynamics}
 
 We define propagation relations among failure types.
 
@@ -4563,21 +4545,21 @@ This encodes the logical refinement chain:
 
 ---
 
-\subsection*{U⁺.4 Semantic Lattice of Collapse Status}
+\subsection*{U$^{+}$.4 Semantic Lattice of Collapse Status}
 
 We formalize the collapse-valid and failure types as a lattice:
 
 \[
-\resizebox{\textwidth}{!}{%
-\begin{tikzcd}
-& \texttt{CollapseValid} \arrow[dl, dashed, bend left=15, "\neg"] \\
+\begin{tikzcd}[column sep=1.8cm, row sep=1.5cm]
+& \texttt{CollapseValid}
+  \arrow[dl, dashed, bend left=15, ""{name=neglabel, midway, above left}] \\
 \texttt{Unresolvable} \arrow[r, "\text{refines}"]
 & \texttt{Unstable} \arrow[r, "\text{refines}"]
 & \texttt{Undecidable}
 \end{tikzcd}
-}
+\quad
+\text{(where } \neg \text{ indicates invalidation)}
 \]
-
 
 \paragraph{Remark.}  
 The dashed negation arrow indicates logical complementarity under classical logic.  
@@ -4585,7 +4567,7 @@ Collapse-validity and failure types form a Boolean algebra under this complement
 
 ---
 
-\subsection*{U⁺.5 ZFC Semantics and Logical Interpretation}
+\subsection*{U$^{+}$.5 ZFC Semantics and Logical Interpretation}
 
 All types and propositions defined above are interpretable in ZFC logic:
 
@@ -4600,9 +4582,9 @@ As such, each failure type corresponds to a definable logical obstruction over t
 
 ---
 
-\subsection*{U⁺.6 CollapseFailureClassifier Category}
+\subsection*{U$^{+}$.6 CollapseFailureClassifier Category}
 
-We define a failure classifier category mirroring \(\mathcal{C}_{\text{Class}}\) in TT⁺.7.
+We define a failure classifier category mirroring \(\mathcal{C}_{\text{Class}}\) in TT$^{+}$.7.
 
 \begin{lstlisting}[language=Coq]
 Inductive FailureType := Undecidable | Unstable | Unresolvable.
@@ -4622,7 +4604,7 @@ This defines a small category \(\mathcal{C}_{\text{Fail}}\) of collapse-failure 
 
 ---
 
-\subsection*{U⁺.7 Summary and Implications}
+\subsection*{U$^{+}$.7 Summary and Implications}
 
 This appendix formally completes the semantic architecture of the AK Collapse framework  
 by structuring failure types as explicit, navigable logical categories.
@@ -4779,6 +4761,7 @@ as discussed in Appendix D, into formal type-theoretic predicates suitable for C
 
 \paragraph{Type Declarations and Obstruction Encoding}
 
+\begin{adjustwidth}{0em}{0em}  % 必要に応じて調整
 \begin{lstlisting}[language=Coq]
 (* Types for disconnected and connected components *)
 Parameter DisconnectedComponent : Type.
@@ -4795,6 +4778,8 @@ Axiom NoCollapseFromDisconnected :
     Ext1 (Sheaf x) (Sheaf y) <> 0 ->
     ~ CollapseReady (Union x y).
 \end{lstlisting}
+\end{adjustwidth}
+
 
 This axiom expresses that the existence of a nontrivial extension class between disjoint components  
 prevents them from forming a collapse-ready structure.
@@ -6031,7 +6016,5 @@ AK Collapse structures, classifier hierarchies, and logical consequence across t
 \begin{flushright}
 \texttt{Collapse Typing System \quad Fully Structured \quad Q.E.D.}
 \end{flushright}
-
-
 
 \end{document}

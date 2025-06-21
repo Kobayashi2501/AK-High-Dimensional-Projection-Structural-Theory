@@ -107,27 +107,63 @@ Collapseを保つ関手は、`合成・余極限・引き戻し` に対して安
 
 ---
 
-## 🌀 応用例（派生リポジトリ参照）
+## 🌀 応用例（関連リポジトリ）
 
-### 🔵 Navier–Stokes 全球正則性  
-`u(t) ∈ C^∞` は `PH₁ = 0 ∧ Ext¹ = 0` から導かれる  
+### 🔵 Navier–Stokes 方程式の全球正則性  
+`PH₁ = 0 ∧ Ext¹ = 0` より `u(t) ∈ C^∞` を導出  
 → [`navier-stokes-global-regularity`](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-### 📉 BSD予想（Collapse BSD 定理）  
-$\mathrm{PH}_1(E)=0$ より rank<sub>ℤ</sub> E(ℚ) = ord<sub>s=1</sub> L(E,s) が導かれる  
+### 📉 BSD予想（Collapse BSD定理）  
+`PH₁(E) = 0` より  
+`rank_ℤ E(ℚ) = ord_{s=1} L(E,s)` を導出  
 → [`bsd-collapse-theorem`](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
-### 📘 類数公式と Zeta Collapse  
-Collapse エネルギーはゼータ積分へ変換される  
+### 🧮 ABC予想（Collapse ABC定理）  
+`PH₁(Fₐᵦ𝑐) = 0` および `Ext¹ = 0` に加え、エネルギー減衰 `E(t) ≤ Ae^−κt` が成立すると  
+`log c ≤ (1 + ε) log rad(abc)` が導かれる  
+→ [`collapse-abc-theorem`](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main)
+は以下の条件下でABC予想の構造的証明が完結しています：
+
+- PH₁消滅（持続的ホモロジー）  
+- Ext¹消滅（導来的障害の除去）  
+- Collapseエネルギーの指数減衰  
+- ZFCおよび型理論（MLTT）との整合性  
+
+したがって形式的には：
+
+**PH₁ = 0 ⇒ Ext¹ = 0 ⇒ E(t) ≤ Ae^−κt ⇒ log c ≤ (1 + ε) log rad(abc)**
+
+---
+
+### 💠 リーマン予想（Collapse RH解法）  
+Zetaモジュライ層 𝓜_ζ に対して `PH₁(𝓜_ζ) = 0` が成立すれば、  
+ζ(s) の非自明な零点はすべて `Re(s) = 1/2` に存在する  
+→ [`collapse-riemann-hypothesis`](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main)
+以下のもとでリーマン予想の形式的解決がなされました：
+
+- Collapse公理群（A0–A9）  
+- Ext層の消滅  
+- トポロジーおよび圏的障害の除去  
+- 最終的な写像：`Re(s) = 1/2` への収束  
+
+したがって形式的には：
+
+**PH₁(𝓜_ζ) = 0 ⇒ Re(s) = 1/2 が ζ(s) のすべての非自明な零点に対して成立**
+
+---
+
+### 📘 類数公式とZeta Collapse  
+CollapseエネルギーはZeta型積分構造へ変換される  
 → Appendix `J`, `K`, `TT.11`
 
-### 💎 Langlands Collapse Sheaf  
-`Ext¹(M, ℚₗ) = 0` は自己同型 ≅ ガロア表現の同型を誘導  
+### 💎 Langlands Collapse層  
+`Ext¹(M, ℚₗ) = 0` が自己同型性 ≅ ガロア同型性を導く  
 → `TT.12`, `TT.13`
 
-### 🧠 Fukaya/Mirror Collapse  
-Collapse 層は Fukaya 圏への関手的写像となる  
+### 🧠 Fukaya／ミラーCollapse  
+Collapse層は関手的にFukaya圏へ写像される  
 → `TT.14`, Appendix `O`
+
 
 ---
 

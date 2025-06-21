@@ -39,6 +39,7 @@
   string=[b]",
   stringstyle=\color{red},
 }
+
 \lstset{
   language=Coq,
   basicstyle=\ttfamily\footnotesize,
@@ -47,11 +48,13 @@
   breaklines=true,
   breakindent=0pt,
   columns=flexible,
+  keepspaces=true,
   xleftmargin=1em,
   framexrightmargin=1em,
   frame=single,
   captionpos=b
 }
+
 
 
 % === Geometry and Layout ===
@@ -669,8 +672,7 @@ These form the core analytic consequences of AK Collapse theory.
 % ===========================
 % Chapter 5: Collapse Axiom VII–IX — Functor Categories and Type-Theoretic Structures
 % ===========================
-\section*{Chapter 5: Collapse Axiom VII--IX:\\
-Functor Categories and Type-Theoretic Structures}
+\section*{Chapter 5: Collapse Axiom VII--IX Functor Categories and Type-Theoretic Structures}
 \addcontentsline{toc}{section}{\numberline{Chapter 5} Collapse Axiom VII--IX}
 
 \subsection*{5.1 Functorial Viewpoint on Collapse}
@@ -4476,7 +4478,7 @@ Nevertheless, such boundary structures are essential in ensuring that the axioms
 ---
 
 % =============================================================
-% Appendix U⁺: Semantic Collapse Failure Typing and Complement Structures
+% Appendix U$^{+}$: Semantic Collapse Failure Typing and Complement Structures
 % =============================================================
 
 \section*{Appendix U$^{+}$: Semantic Collapse Failure Typing and Complement Structures}
@@ -4786,7 +4788,15 @@ prevents them from forming a collapse-ready structure.
 
 \paragraph{Cone-Based Gluing and Refinement Typing}
 
-\begin{lstlisting}[language=Coq]
+\begin{itemize}
+  \item \textbf{Cone}: Categorical gluing object.
+  \item \textbf{GluingSheaf}: Sheaf constructed via \texttt{Cone}.
+  \item \textbf{StratifiedRefinement}: Maps a disconnected to a connected component.
+  \item \textbf{CollapseViaRefinement}: Ensures readiness of collapse after refinement.
+\end{itemize}
+
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 (* Cone object representing categorical gluing *)
 Parameter Cone : forall A B, Type.
 
@@ -4804,6 +4814,7 @@ Axiom CollapseViaRefinement :
     CollapseReady (StratifiedRefinement x).
 \end{lstlisting}
 
+
 This formalization captures the process where disconnected sheaves are refined—through cone gluing  
 and stratification—into collapse-compatible connected configurations.
 
@@ -4820,9 +4831,13 @@ resolution paths are fully formalized and machine-verifiable in dependent type t
 
 \begin{center}
 \begin{tikzcd}[row sep=large, column sep=huge]
-x, y \in \texttt{DisconnectedComponent} \arrow[r, "\texttt{Cone}(x,y)"] \arrow[dr, swap, "\texttt{Ext}^1 \ne 0"]
-& \texttt{GluingSheaf}(x,y) \arrow[d, "\texttt{StratifiedRefinement}"] \\
-& \texttt{ConnectedComponent} \arrow[r, "\texttt{CollapseReady}"]
+x, y \in \texttt{DisconnectedComponent}
+  \arrow[r, "{\texttt{Cone}(x,y)}"]
+  \arrow[dr, swap, "{\texttt{Ext}^1 \ne 0}"]
+& \texttt{GluingSheaf}(x,y)
+  \arrow[d, "{\texttt{StratifiedRefinement}}"] \\
+& \texttt{ConnectedComponent}
+  \arrow[r, "{\texttt{CollapseReady}}"]
 & \mathcal{C}_{\text{collapse}}
 \end{tikzcd}
 \end{center}
@@ -4836,25 +4851,36 @@ This section collects type-theoretic formulations related to the vanishing of Ex
 and their implication for categorical collapse. These serve as formal counterparts to Appendix E.
 
 \paragraph{Collapse Functor Typing.}
-\begin{lstlisting}[language=Coq]
+
+The functor \texttt{Collapse} maps each object to a collapsed version.
+
+\noindent
+\begin{lstlisting}
 Parameter Collapse : Obj -> Obj.
 \end{lstlisting}
+
 
 The collapse functor maps objects in the derived category into trivial (Ext-null) collapse targets.
 
 \paragraph{Ext-triviality implies Triviality after Collapse.}
-\begin{lstlisting}[language=Coq]
+
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Axiom CollapseCorrect :
   forall (X : Obj),
     (forall Y : Obj, ~ Ext1 X Y) -> Triv (Collapse X).
 \end{lstlisting}
 
 \paragraph{Collapse preserves triviality.}
-\begin{lstlisting}[language=Coq]
+
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Axiom CollapsePreservesTriviality :
   forall (X : Obj),
     Triv X -> Triv (Collapse X).
 \end{lstlisting}
+
+
 
 \paragraph{Collapse Equivalence Proposition.}
 \[
@@ -4879,7 +4905,7 @@ are not only topologically valid but logically conservative over ZFC.
 
 \paragraph{Type Declarations and Logical Foundations.}
 
-\begin{lstlisting}[language=Coq]
+\begin{lstlisting}[language=Coq, breaklines=true]
 (* Base types and predicates *)
 Parameter Sheaf : Type.
 Parameter VectorSpace : Type.
@@ -4901,9 +4927,12 @@ Parameter Triv : Sheaf -> Prop.
 Parameter Collapse : Sheaf -> Sheaf.
 \end{lstlisting}
 
+---
+
 \paragraph{Axiom: PH-Triviality in ZFC.}
 
-\begin{lstlisting}[language=Coq]
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Axiom PH_Trivial_ZFC :
   forall (F : FilteredComplex),
     (forall t : R, H1 F t = ZeroVectorSpace) -> Triv (Collapse F).
@@ -4912,9 +4941,12 @@ Axiom PH_Trivial_ZFC :
 This encodes that a filtered complex with trivial first homology over all scales  
 collapses into a topologically trivial object.
 
+---
+
 \paragraph{Axiom: Ext$^1$-Vanishing in ZFC.}
 
-\begin{lstlisting}[language=Coq]
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Axiom Ext_Trivial_ZFC :
   forall (F G : Sheaf),
     (forall E : Sheaf,
@@ -4925,9 +4957,12 @@ Axiom Ext_Trivial_ZFC :
 
 This reflects that all extension sequences split, hence no categorical obstruction remains.
 
+---
+
 \paragraph{Axiom: MECE-Type Decomposition in ZFC.}
 
-\begin{lstlisting}[language=Coq]
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Axiom MECE_Decomposition_ZFC :
   forall (fs : list Component),
     (forall i j, i <> j -> Hom (nth i fs) (nth j fs) = Empty_set) ->
@@ -4937,9 +4972,12 @@ Axiom MECE_Decomposition_ZFC :
 This means that a sheaf formed by orthogonal components (Ext-null, Hom-null)  
 is globally collapse-admissible.
 
+---
+
 \paragraph{Collapse Preservation Axioms.}
 
-\begin{lstlisting}[language=Coq]
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Axiom CollapseCorrect :
   forall (X : Sheaf),
     (forall Y : Sheaf, ~ Ext1 X Y) -> Triv (Collapse X).
@@ -4948,6 +4986,7 @@ Axiom CollapsePreservesTriviality :
   forall (X : Sheaf),
     Triv X -> Triv (Collapse X).
 \end{lstlisting}
+
 
 These define the operational behavior of the collapse functor under ZFC semantics.
 
@@ -5018,9 +5057,12 @@ Theorem CollapseFunctorComposedPreserves :
 \end{lstlisting}
 
 \paragraph{Interpretation.}
-- `G_preserves_Ext_trivial` ensures that the secondary functor \( G \) maintains Ext-triviality.
-- `CollapseFunctorComposedPreserves` captures the essence of **Axiom A11** in a dependent type-theoretic formulation.
-- Collapse composed with any Ext-preserving functor remains logically valid and conservative.
+\begin{itemize}
+  \item \texttt{G\_preserves\_Ext\_trivial} ensures that the secondary functor \( G \) maintains Ext-triviality.
+  \item \texttt{CollapseFunctorComposedPreserves} captures the essence of \textbf{Axiom A11} in a dependent type-theoretic formulation.
+  \item Collapse composed with any Ext-preserving functor remains logically valid and conservative.
+\end{itemize}
+
 
 \paragraph{ZFC Correspondence.}
 All constructs above are interpretable as ZFC-functors and predicates.  
@@ -5121,7 +5163,8 @@ then \( F \) also satisfies collapse conditions.
 
 \paragraph{Type-Theoretic Declaration in Coq.}
 
-\begin{lstlisting}[language=Coq]
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 (* Object declarations *)
 Parameter TopObj : Type.
 Parameter Pullback : TopObj -> TopObj -> TopObj -> TopObj.
@@ -5236,12 +5279,15 @@ This axiom asserts that collapse behavior introduces **refined invariants** beyo
 \begin{itemize}
   \item \( \texttt{CollapseObstruction} : \texttt{NumberField} \to \texttt{bool} \)  
   identifies the (non)triviality of collapse via sheaf-theoretic Ext and PH conditions.
+\end{itemize}
   
-  \item \( \texttt{Collapse_Success} \) gives a dependent type refinement of class number 1 fields.
-  
-  \item \( \texttt{CollapseSymmetryBreaking} \) provides a discriminator of arithmetic inequivalence  
+\begin{itemize}
+  \item \texttt{Collapse\_Success} gives a dependent type refinement of class number 1 fields.
+
+  \item \texttt{CollapseSymmetryBreaking} provides a discriminator of arithmetic inequivalence  
   not visible through signature or discriminant alone.
 \end{itemize}
+
 
 \paragraph{Interpretation.}
 
@@ -5253,10 +5299,10 @@ This formalization makes explicit:
 
 \begin{center}
 \begin{tikzcd}[row sep=large, column sep=large]
-K \arrow[r, "\text{Filtered Sheaf } \mathcal{F}_t"] \arrow[d, "\text{Classical Invariants}"']
-& \mathcal{F}_t \arrow[d, "\mathrm{PH}_1, \mathrm{Ext}^1 \Rightarrow \texttt{CollapseObstruction}(K)"] \\
-(\Delta_K, r_1, r_2) \arrow[r, dashed, "\text{indistinct}"]
-& \texttt{CollapseRefined}(K)
+K \arrow[r, "{\text{Filtered Sheaf } \mathcal{F}_t}"] \arrow[d, "{\text{Classical Invariants}}"']
+& \mathcal{F}_t \arrow[d, "{\mathrm{PH}_1,\, \mathrm{Ext}^1 \Rightarrow \mathtt{CollapseObstruction}(K)}"] \\
+(\Delta_K, r_1, r_2) \arrow[r, dashed, "{\text{indistinct}}"]
+& {\mathtt{CollapseRefined}(K)}
 \end{tikzcd}
 \end{center}
 
@@ -5732,10 +5778,10 @@ Logical, motivic, and quantum extensions are reserved for future development.)}
 
 
 % =============================================================
-% Appendix TT⁺: Type-Theoretic Collapse Realization Supplement
+% Appendix TT$^{+}$: Type-Theoretic Collapse Realization Supplement
 % =============================================================
 
-\section*{Appendix TT⁺: Type-Theoretic Collapse Realization Supplement}
+\section*{Appendix TT$^{+}$: Type-Theoretic Collapse Realization Supplement}
 \addcontentsline{toc}{section}{Appendix TT⁺: Type-Theoretic Collapse Realization Supplement}
 
 This appendix complements Appendix TT by providing a complete, machine-verifiable encoding  
@@ -5745,7 +5791,7 @@ collapse objects, causal inference chains, and structural composition laws.
 
 ---
 
-\subsection*{TT⁺.1 Collapse Type Environment and Predicate Declarations}
+\subsection*{TT$^{+}$.1 Collapse Type Environment and Predicate Declarations}
 
 We begin by declaring the basic object types, collapse predicates, and functorial operations.
 
@@ -5764,7 +5810,7 @@ Parameter Collapse : TopObj -> SmthObj.
 
 ---
 
-\subsection*{TT⁺.2 Collapse Causal Chain and Dependent Type Encodings}
+\subsection*{TT$^{+}$.2 Collapse Causal Chain and Dependent Type Encodings}
 
 We encode the causal chain:
 
@@ -5789,7 +5835,7 @@ Definition Collapse_Realize :
 
 ---
 
-\subsection*{TT⁺.3 Collapse Structure Record}
+\subsection*{TT$^{+}$.3 Collapse Structure Record}
 
 We bundle the collapse structure as a formal record type.
 
@@ -5807,7 +5853,7 @@ This record captures the full state of a collapse-validated transformation.
 
 ---
 
-\subsection*{TT⁺.4 Collapse Functor Composition and Identity Laws}
+\subsection*{TT$^{+}$.4 Collapse Functor Composition and Identity Laws}
 
 To enable compositional reasoning, we define the Collapse Functor as a categorical structure.
 
@@ -5842,7 +5888,7 @@ Theorem Collapse_id_right :
 
 ---
 
-\subsection*{TT⁺.5 CollapseClassifier Type and Logical Contract}
+\subsection*{TT$^{+}$.5 CollapseClassifier Type and Logical Contract}
 
 We define a type-level classifier for collapse admissibility.
 
@@ -5866,7 +5912,7 @@ This classifier partitions objects based on homology and cohomology collapse sta
 
 ---
 
-\subsection*{TT⁺.6 ZFC-Semantic Justification and Interpretability}
+\subsection*{TT$^{+}$.6 ZFC-Semantic Justification and Interpretability}
 
 Collapse structures, as defined above, are fully interpretable within ZFC set theory:
 
@@ -5881,7 +5927,7 @@ Hence, the entire Coq-level structure presented in TT⁺.1–TT⁺.5 respects lo
 
 ---
 
-\subsection*{TT⁺.7 CollapseClassifierCategory — Typal Classification as a Category}
+\subsection*{TT$^{+}$.7 CollapseClassifierCategory — Typal Classification as a Category}
 \addcontentsline{toc}{subsection}{TT⁺.7 CollapseClassifierCategory — Typal Classification as a Category}
 
 This section promotes the CollapseClassifier (Type I–IV) from a mere evaluative predicate  
@@ -5995,7 +6041,7 @@ It provides the logical foundation for typing judgment flow and ensures compatib
 
 ---
 
-\subsection*{TT⁺.8 Summary and Integration}
+\subsection*{TT$^{+}$.8 Summary and Integration}
 \addcontentsline{toc}{subsection}{TT⁺.8 Summary and Integration}
 
 This appendix supplements the main type-theoretic Collapse structure (Appendix TT) by introducing  

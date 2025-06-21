@@ -4904,6 +4904,7 @@ are not only topologically valid but logically conservative over ZFC.
 
 \paragraph{Type Declarations and Logical Foundations.}
 
+\noindent
 \begin{lstlisting}[language=Coq, breaklines=true]
 (* Base types and predicates *)
 Parameter Sheaf : Type.
@@ -5937,13 +5938,15 @@ whose objects are Collapse Types, and morphisms represent permitted structural d
 
 \paragraph{Definition: Collapse Classifier Type.}
 
-\begin{lstlisting}[language=Coq]
+\noindent
+\begin{lstlisting}[language=Coq, breaklines=true]
 Inductive CollapseType :=
-  | TypeI   (* PH₁ = 0, Ext ≠ 0 *)
-  | TypeII  (* PH₁ ≠ 0, Ext = 0 *)
-  | TypeIII (* PH₁ = 0, Ext = 0 *)
-  | TypeIV. (* PH₁ ≠ 0, Ext ≠ 0 *)
+  | TypeI   (* PH1 = 0, Ext <> 0 *)
+  | TypeII  (* PH1 <> 0, Ext = 0 *)
+  | TypeIII (* PH1 = 0, Ext = 0 *)
+  | TypeIV. (* PH1 <> 0, Ext <> 0 *)
 \end{lstlisting}
+
 
 We reinterpret these as the \textbf{objects} of a small category \(\mathcal{C}_{\text{Class}}\).
 
@@ -5982,6 +5985,7 @@ Morphisms are defined by the following Hasse diagram:
 
 \paragraph{Coq-Compatible Encoding.}
 
+\noindent
 \begin{lstlisting}[language=Coq]
 Inductive CollapseMorphism : CollapseType -> CollapseType -> Type :=
   | Id : forall T, CollapseMorphism T T

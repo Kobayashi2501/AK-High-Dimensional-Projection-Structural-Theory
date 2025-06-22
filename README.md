@@ -182,6 +182,31 @@ Thus, formally:
 
 ---
 
+### 💠 Hilbert's 12th Problem (Collapse Hilbert12 Resolution)  
+If `PH₁(𝓕_K) = 0` and `Ext¹(𝓕_K, ℚₗ) = 0` hold for the collapse-compatible sheaf over a number field K,  
+then there exists an explicit transcendental generator `x ∈ K^{ab}`.  
+→ [`collapse-hilbert12`](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
+
+✅ Completion Status  
+This version completes a formal resolution of Hilbert's 12th Problem under:
+
+- Collapse axioms (A0–A9)  
+- Functorial PH₁ / Ext¹ collapse chain  
+- Type-theoretic generator realization via Π/Σ predicates  
+- Coq/Lean-compatible QED (Appendix H)
+
+Thus, formally:
+
+**If PH₁(𝓕_K) = 0 ∧ Ext¹(𝓕_K, ℚₗ) = 0 ⇒ ∃ x ∈ CollapseImage(𝓕_K) ⊆ K^{ab}**
+
+This includes all transcendental types:
+
+- Type I: `j(τ)` for imaginary quadratic fields  
+- Type II: `exp(2πiα)`, `Γ(z)` for ℚ and real fields  
+- Type III: `θ[ε](τ, z)` and Siegel modular forms for higher CM fields
+
+---
+
 ### 📘 Class Number & Zeta Collapse  
 Collapse energy translates into Zeta-type integrals  
 → Appendix `J`, `K`, `TT.11`

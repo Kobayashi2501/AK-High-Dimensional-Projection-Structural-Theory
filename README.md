@@ -233,6 +233,14 @@ Collapse sheaves functorially map to Fukaya categories
 
 ---
 
+## DOI
+
+This project has been formally archived on Zenodo:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713864.svg)](https://doi.org/10.5281/zenodo.15713864)
+
+---
+
 ## ✉️ arXiv Submission & Collaboration
 
 **AK-HDPST v10.0** is complete and currently being prepared for submission to **arXiv**.

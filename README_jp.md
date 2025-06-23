@@ -233,7 +233,6 @@ CollapseエネルギーはZeta型積分構造へ変換される
 Collapse層は関手的にFukaya圏へ写像される  
 → `TT.14`, Appendix `O`
 
-
 ---
 
 ## 📁 ファイル構成
@@ -245,6 +244,14 @@ Collapse層は関手的にFukaya圏へ写像される
 | `README.md` | 英語版 README |
 | `README_jp.md` | 日本語版 README（本ファイル） |
 | `LICENSE` | MIT または CC ライセンス（選択可能） |
+
+---
+
+## DOI
+
+このプロジェクトはZenodoに正式にアーカイブされています：
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713864.svg)](https://doi.org/10.5281/zenodo.15713864)
 
 ---
 

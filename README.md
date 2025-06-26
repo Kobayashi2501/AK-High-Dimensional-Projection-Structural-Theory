@@ -116,21 +116,27 @@ through group-theoretic and functorial collapse structures.
 
 - **Navier–Stokes Global Regularity**  
   Collapse of topological, categorical, and group-theoretic obstructions ⇒ `u(t) ∈ C^∞(ℝ³ × [0, ∞))`  
+  ➡ [navier-stokes-global-regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
 - **Birch and Swinnerton-Dyer Conjecture (Rank 0 case)**  
   Collapse of moduli sheaf structures ⇒ Mordell–Weil group finiteness  
+  ➡ [bsd-collapse-theorem](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
 - **ABC Conjecture**  
   Collapse-induced energy decay ⇒ Height/radical inequality  
+  ➡ [collapse-abc-theorem](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main)
 
 - **Riemann Hypothesis**  
   Zeta collapse structure ⇒ Non-trivial zeros lie on Re(s) = 1/2  
+  ➡ [collapse-riemann-hypothesis](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main)
 
 - **Hilbert's 12th Problem**  
   Collapse structures over number fields ⇒ Explicit transcendental generators  
+  ➡ [collapse-hilbert12](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
 
 - **Hodge Conjecture (Structural Resolution)**  
   Collapse typing `Type III` ⇒ Algebraic realization of Hodge classes  
+  ➡ [collapse-hodge-ak-theory](https://github.com/Kobayashi2501/collapse-hodge-ak-theory)
 
 ---
 

@@ -83,14 +83,31 @@ Collapseの構成要素：
 
 ---
 
-## 🌟 代表的応用例（v11.0）
+## 🌟 解決された古典的問題群（AK Collapse v11.0）
 
-- **Navier–Stokes方程式の全球正則性**(https://github.com/Kobayashi2501/navier-stokes-global-regularity)
+- **Navier–Stokes方程式 全球正則性**  
+  トポロジー・圏論・群論的障害のCollapse ⇒ `u(t) ∈ C^∞(ℝ³ × [0, ∞))`  
+  ➡ [navier-stokes-global-regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
+
 - **BSD予想（ランク0の場合）のCollapse的解決**  
+  モジュライ層構造のCollapse ⇒ Mordell–Weil群の有限性  
+  ➡ [bsd-collapse-theorem](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
+
 - **ABC予想のCollapse的エネルギー減衰解釈**  
-- **リーマン予想のCollapse的ゼータ構造解釈**  
-- **ヒルベルト第12問題の明示的生成元獲得**  
+  Collapse誘導によるエネルギー減衰 ⇒ 高さ・基数の不等式成立  
+  ➡ [collapse-abc-theorem](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main)
+
+- **リーマン予想のCollapse的解釈**  
+  ゼータCollapse構造 ⇒ 非自明零点がRe(s)=1/2上に存在  
+  ➡ [collapse-riemann-hypothesis](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main)
+
+- **ヒルベルト第12問題のCollapse的構造的解決**  
+  数体上のCollapse構造 ⇒ 明示的な超越生成元の獲得  
+  ➡ [collapse-hilbert12](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
+
 - **Hodge予想のCollapse的構造的解釈**  
+  Collapse分類`Type III`によりHodgeクラスの代数的実現  
+  ➡ [collapse-hodge-ak-theory](https://github.com/Kobayashi2501/collapse-hodge-ak-theory)  
 
 ---
 

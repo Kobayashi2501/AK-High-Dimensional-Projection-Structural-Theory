@@ -165,7 +165,7 @@ through group-theoretic and functorial collapse structures.
 
 This project has been formally archived on Zenodo:
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713864.svg)](https://doi.org/10.5281/zenodo.15713864)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15743071.svg)](https://doi.org/10.5281/zenodo.15743071)
 
 ---
 

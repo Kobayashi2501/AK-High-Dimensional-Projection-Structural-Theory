@@ -136,7 +136,7 @@ Collapseの構成要素：
 
 このプロジェクトはZenodoに正式アーカイブ済み：
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713864.svg)](https://doi.org/10.5281/zenodo.15713864)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15743071.svg)](https://doi.org/10.5281/zenodo.15743071)
 
 ---
 

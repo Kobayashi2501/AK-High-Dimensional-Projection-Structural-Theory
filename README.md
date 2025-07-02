@@ -171,7 +171,7 @@ including Riemann Hypothesis and Navier–Stokes global regularity.
 
 The project is formally archived on Zenodo:
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15743071.svg)](https://doi.org/10.5281/zenodo.15743071)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15788159.svg)](https://doi.org/10.5281/zenodo.15788159)
 
 ---
 

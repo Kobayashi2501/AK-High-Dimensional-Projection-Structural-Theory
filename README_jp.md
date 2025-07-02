@@ -167,7 +167,7 @@ Mirror対称性・Langlands対応・Tropical構造がCollapseにより統一的�
 
 このプロジェクトはZenodoにて正式アーカイブ済み：
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15743071.svg)](https://doi.org/10.5281/zenodo.15743071)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15788159.svg)](https://doi.org/10.5281/zenodo.15788159)
 
 ---
 

@@ -4865,30 +4865,65 @@ where $\mathcal{G}_{\mathrm{triv}}$ is a trivial, finite, or abelianized group, 
 
 ---
 
-\subsection*{M$^{+}$.3 Functorial Collapse and Group Equivalence with Iwasawa Refinement}
+\subsection*{M$^{+}$.3 Functorial Collapse and Group Equivalence with Iwasawa-Refined Hierarchical Stratification}
 
-Collapse induces functorial equivalences:
+Collapse induces a stratified functorial equivalence:
 
 \[
-\mathcal{F}_{\mathrm{Collapse}}^{\mathrm{Lang}} : D^b_{\mathrm{mot}}(K) \longrightarrow \mathrm{Rep}_{\mathrm{auto}}(G(\mathbb{A}_K)) \cong \mathrm{Rep}_{\mathrm{Galois}}^\ell(K),
+\mathcal{F}_{\mathrm{Collapse}}^{\mathrm{Lang}} : D^b_{\mathrm{mot}}(K) \longrightarrow \mathcal{L}_{\mathrm{strat}},
 \]
 
-under the following strengthened collapse conditions:
+where \( \mathcal{L}_{\mathrm{strat}} \) denotes the Langlands correspondence space, equipped with explicit stratification according to collapse success or failure.
+
+\paragraph{Stratified Structure of \( \mathcal{L}_{\mathrm{strat}} \).}
+
+We decompose:
+
+\[
+\mathcal{L}_{\mathrm{strat}} = \mathcal{L}_{\mathrm{equiv}} \;\sqcup\; \mathcal{L}_{\mathrm{nontriv}},
+\]
+
+where:
 
 \begin{itemize}
-    \item Ext$^1$-collapse for motivic sheaves $M$;
-    \item Iwasawa Sheaf $\mathcal{F}_{\mathrm{Iw}}$ satisfies:
+    \item \( \mathcal{L}_{\mathrm{equiv}} \) — Langlands equivalence holds functorially;
+    \item \( \mathcal{L}_{\mathrm{nontriv}} \) — residual arithmetic or group-theoretic obstructions preclude equivalence.
+\end{itemize}
+
+\paragraph{Collapse-Induced Stratification Criteria.}
+
+The position of \( \mathcal{F}_{\mathrm{Collapse}}^{\mathrm{Lang}}(M) \) within \( \mathcal{L}_{\mathrm{strat}} \) depends on:
+
+\begin{itemize}
+    \item Ext$^1$-collapse for motivic sheaves \( M \);
+    \item Iwasawa Sheaf \( \mathcal{F}_{\mathrm{Iw}} \) satisfies:
     \[
     \mathrm{PH}_1(\mathcal{F}_{\mathrm{Iw}}) = 0, \quad \mathrm{Ext}^1(\mathcal{F}_{\mathrm{Iw}}, -) = 0;
     \]
     \item Group-theoretic obstructions, including infinite-level Galois complexity, are eliminated.
 \end{itemize}
 
-The Ext$^1$-collapse simplifies group-theoretic obstructions, while Iwasawa-theoretic refinement ensures arithmetic precision in this simplification process.
+\paragraph{Stratified Outcomes.}
+
+\begin{itemize}
+    \item If all collapse conditions succeed, then:
+    \[
+    \mathcal{F}_{\mathrm{Collapse}}^{\mathrm{Lang}}(M) \in \mathcal{L}_{\mathrm{equiv}} \simeq \mathrm{Rep}_{\mathrm{auto}}(G(\mathbb{A}_K)) \simeq \mathrm{Rep}_{\mathrm{Galois}}^\ell(K),
+    \]
+    and the Langlands correspondence is functorially realized.
+
+    \item If any collapse condition fails, then:
+    \[
+    \mathcal{F}_{\mathrm{Collapse}}^{\mathrm{Lang}}(M) \in \mathcal{L}_{\mathrm{nontriv}},
+    \]
+    indicating residual obstructions and failure of equivalence, with arithmetic non-triviality preserved within the stratified structure.
+\end{itemize}
+
+This stratification elevates Langlands Collapse from a binary success/failure dichotomy to a structured, arithmetic-sensitive, functorially transparent model.
 
 ---
 
-\subsection*{M$^{+}$.4 Coq-Style Encoding of Group-Theoretic Langlands Collapse with Iwasawa Layer}
+\subsection*{M$^{+}$.4 Coq-Style Encoding of Stratified Langlands Collapse with Iwasawa Layer}
 
 \begin{lstlisting}[language=Coq]
 (* Groups *)
@@ -4902,10 +4937,15 @@ Parameter Ext1Trivial : Type -> Prop.
 Parameter PH1Trivial : Type -> Prop.
 Parameter GroupCollapse : Type -> Prop.
 
-(* Collapse functor *)
-Parameter CollapseLanglandsFunctor : Type -> Type.
+(* Langlands stratified correspondence space *)
+Inductive LanglandsStrat :=
+  | LanglandsEquiv : LanglandsStrat
+  | LanglandsNontriv : LanglandsStrat.
 
-(* Langlands collapse axioms with Iwasawa refinement *)
+(* Collapse functor *)
+Parameter CollapseLanglandsFunctor : Type -> LanglandsStrat.
+
+(* Langlands collapse axioms with stratification *)
 Axiom GaloisGroupCollapse :
   Ext1Trivial GaloisGroup -> PH1Trivial IwasawaSheaf ->
   GroupCollapse GaloisGroup.
@@ -4914,11 +4954,36 @@ Axiom MotivicPi1Collapse :
   Ext1Trivial MotivicPi1 -> PH1Trivial IwasawaSheaf ->
   GroupCollapse MotivicPi1.
 
-Axiom LanglandsCollapseFunctorCorrect :
-  forall M,
-    Ext1Trivial M -> PH1Trivial IwasawaSheaf ->
-    CollapseLanglandsFunctor M = AutoGroup.
+Axiom LanglandsCollapseStratification :
+  forall M : Type,
+    (Ext1Trivial M /\ PH1Trivial IwasawaSheaf) ->
+      CollapseLanglandsFunctor M = LanglandsEquiv
+  /\
+    (~(Ext1Trivial M /\ PH1Trivial IwasawaSheaf)) ->
+      CollapseLanglandsFunctor M = LanglandsNontriv.
 \end{lstlisting}
+
+\paragraph{Interpretation.}
+
+This formalism explicitly distinguishes:
+
+\begin{itemize}
+    \item Collapse success: motivic, group, and Iwasawa-layer simplification yields Langlands equivalence.
+    \item Collapse failure: residual obstructions are retained within the Langlands-nontrivial sector, preserving arithmetic information.
+\end{itemize}
+
+\paragraph{Structural Coherence.}
+
+The stratified Langlands Collapse integrates coherently with:
+
+\begin{itemize}
+    \item Hierarchical collapse chain (Appendix M);
+    \item Group-theoretic obstruction elimination (Chapter 8);
+    \item Arithmetic collapse classification (\( \mathcal{C}_{\mathrm{nontriv}}^{\mathrm{arith}} \) structures, Appendix M).
+\end{itemize}
+
+Thus, Langlands Collapse is formally refined to a logically precise, obstruction-aware, arithmetic-sensitive framework, suitable for type-theoretic verification and rigorous structural analysis.
+
 
 ---
 

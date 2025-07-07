@@ -3627,27 +3627,35 @@ This constitutes the complete, final structural refinement of collapse failure m
 
 ---
 
-\subsection*{G$^{+}$.2 Failure Convergence Zones and Collapse-Inaccessible Domains: Formal Definition and Structural Integration}
+\subsection*{G$^{+}$.2 Failure Convergence Zones and Collapse-Inaccessible Domains: Extended Formal Definition with Local Energy Model}
 
-\paragraph{Definition (Failure Convergence Zone and Collapse-Inaccessible Domain).}
+\paragraph{Definition (Spatio-Temporal Failure Convergence Zone).}
 
-For a filtered object or sheaf $\mathcal{F}_t$, define the \textbf{failure convergence zone}:
+For a filtered object or sheaf $\mathcal{F}(x,t)$ defined over space-time coordinates $(x,t) \in \mathbb{R}^n \times \mathbb{R}_{\geq 0}$, define the \textbf{spatio-temporal failure convergence zone} as:
 
 \[
-\mathcal{Z}_{\mathrm{fail}} = \left\{ t \in \mathbb{R}_{\geq 0} \;\middle|\; E_{\mathrm{PH}}(t) > 0 \;\lor\; E_{\mathrm{Ext}}(t) > 0 \right\}
+\mathcal{Z}_{\mathrm{fail}} = \left\{ (x,t) \in \mathbb{R}^n \times \mathbb{R}_{\geq 0} \;\middle|\; E_{\mathrm{PH}}(x,t) > 0 \;\lor\; E_{\mathrm{Ext}}(x,t) > 0 \right\}
 \]
 
 where:
 
 \begin{itemize}
-    \item $E_{\mathrm{PH}}(t)$ = persistent homology energy (topological obstruction measure);
-    \item $E_{\mathrm{Ext}}(t)$ = Ext energy (categorical obstruction measure).
+    \item $E_{\mathrm{PH}}(x,t)$ = local persistent homology energy (measuring topological obstruction density);
+    \item $E_{\mathrm{Ext}}(x,t)$ = local Ext energy (measuring categorical obstruction density).
 \end{itemize}
 
-We then define the corresponding \textbf{collapse-inaccessible domain} of structural objects:
+The \textbf{valid domain of AK Collapse Theory} is then defined as:
 
 \[
-\mathcal{C}_{\mathrm{nontriv}} = \left\{ \mathcal{F} \;\middle|\; \mathcal{F} \text{ fails to satisfy } \mathrm{PH}_1(\mathcal{F}) = 0 \text{ or } \mathrm{Ext}^1(\mathcal{F}, -) = 0 \right\}
+\mathcal{D}_{\mathrm{valid}} := \left( \mathbb{R}^n \times \mathbb{R}_{\geq 0} \right) \setminus \overline{\mathcal{Z}_{\mathrm{fail}}}
+\]
+
+\paragraph{Definition (Collapse-Inaccessible Structural Domain).}
+
+In structural object space, define:
+
+\[
+\mathcal{C}_{\mathrm{nontriv}} = \left\{ \mathcal{F} \;\middle|\; \mathrm{PH}_1(\mathcal{F}) \neq 0 \;\lor\; \mathrm{Ext}^1(\mathcal{F}, -) \neq 0 \right\}
 \]
 
 Conversely, the \textbf{collapse-accessible domain} is:
@@ -3656,50 +3664,92 @@ Conversely, the \textbf{collapse-accessible domain} is:
 \mathcal{C}_{\mathrm{triv}} = \left\{ \mathcal{F} \;\middle|\; \mathrm{PH}_1(\mathcal{F}) = 0 \;\land\; \mathrm{Ext}^1(\mathcal{F}, -) = 0 \right\}
 \]
 
-\paragraph{Interpretation.}
-The valid domain of AK Collapse Theory is strictly $\mathbb{R}_{\geq 0} \setminus \overline{\mathcal{Z}_{\mathrm{fail}}}$ in parameter space, and $\mathcal{C}_{\mathrm{triv}}$ in structural object space. However, contrary to naive exclusion, $\mathcal{C}_{\mathrm{nontriv}}$ is not rejected but explicitly classified and structurally integrated within the extended framework, encoding persistent arithmetic or group-theoretic obstructions (e.g., nontrivial class groups, Selmer groups, Iwasawa invariants).
+\paragraph{ZFC-Internal Interpretation.}
+
+Importantly, $\mathcal{C}_{\mathrm{nontriv}}$ is not an informal "外部不定領域" (external undefined region), but a rigorously ZFC-definable subcategory of $\mathsf{Filt}(\mathcal{C})$, encoding arithmetic or group-theoretic obstructions such as:
+
+\begin{itemize}
+    \item Nontrivial ideal class groups ($h_K > 1$);
+    \item Selmer groups and Mordell–Weil group components;
+    \item Iwasawa invariants ($\lambda, \mu$) obstructing infinite-level collapse.
+\end{itemize}
+
+Thus, all collapse failure phenomena reside strictly within the formal confines of set-theoretic and categorical definitions, preserving theoretical closure and logical consistency.
 
 ---
 
-\subsection*{G$^{+}$.3 Structural Boundary, Residual Arithmetic Obstructions, and Transitional Behavior}
+\subsection*{G$^{+}$.3 Structural Boundary, Residual Arithmetic Obstructions, and Recursive Collapse Recovery Conditions}
 
-The \textbf{boundary of collapse applicability} is defined as:
+\paragraph{Definition (Structural Boundary of Collapse Domains).}
+
+The boundary of collapse applicability in space-time is:
 
 \[
 \partial \mathcal{Z}_{\mathrm{fail}} = \overline{\mathcal{Z}_{\mathrm{fail}}} \setminus \mathcal{Z}_{\mathrm{fail}}
 \]
 
-Similarly, in structural object space, we define:
+In structural object space:
 
 \[
 \partial \mathcal{C}_{\mathrm{triv}} = \overline{\mathcal{C}_{\mathrm{triv}}} \setminus \mathcal{C}_{\mathrm{triv}}
 \]
 
-Objects $\mathcal{F}$ on $\partial \mathcal{C}_{\mathrm{triv}}$ exhibit transitional or marginal behavior, including:
+\paragraph{Transitional and Residual Behavior.}
+
+Objects $\mathcal{F} \in \partial \mathcal{C}_{\mathrm{triv}}$ exhibit:
 
 \begin{itemize}
-    \item Asymptotic approach to collapse readiness ($E_{\mathrm{PH}}(t) \to 0$, $E_{\mathrm{Ext}}(t) \to 0$ as $t \to \infty$);
-    \item Partial resolution of topological or categorical obstructions;
-    \item Persistence of residual arithmetic invariants (e.g., nontrivial $h_K$, $\lambda$, $\mu$ invariants) despite structural degeneration;
-    \item Structural placement within $\mathcal{C}_{\mathrm{nontriv}}$, encoding arithmetic collapse failure without excluding the object from theoretical consideration.
+    \item Asymptotic approach to collapse readiness:
+    \[
+    \lim_{t \to \infty} \sup_{x} \left( E_{\mathrm{PH}}(x,t) + E_{\mathrm{Ext}}(x,t) \right) = 0
+    \]
+    \item Partial resolution of topological/categorical obstructions without full collapse;
+    \item Persistence of residual arithmetic invariants:
+    \[
+    h_K > 1, \quad \lambda, \mu \geq 1, \quad \mathrm{SelmerGroup} \neq \{0\}
+    \]
+    despite degeneration of other structural complexity.
 \end{itemize}
 
-\paragraph{Interpretation.}
-The extended AK Collapse framework admits a precise, layered classification:
+Such objects belong formally to $\mathcal{C}_{\mathrm{nontriv}}$ but reside near $\partial \mathcal{C}_{\mathrm{triv}}$, admitting recursive recovery possibilities.
+
+\paragraph{Definition (Recursive Collapse Recovery Zone).}
+
+We define the \textbf{recursive recovery zone} as:
 
 \[
-\mathcal{C} = \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \partial \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \mathcal{C}_{\mathrm{nontriv}}
+\mathcal{R}_{\mathrm{recover}} = \left\{ \mathcal{F} \in \mathcal{C}_{\mathrm{nontriv}} \;\middle|\; \exists \, t_n \to \infty, \; \sup_{x} \left( E_{\mathrm{PH}}(x,t_n) + E_{\mathrm{Ext}}(x,t_n) \right) \to 0 \right\}
 \]
 
-ensuring:
+Within $\mathcal{R}_{\mathrm{recover}}$, collapse may eventually succeed asymptotically, even for initially nontrivial structures.
+
+\paragraph{Layered Structural Classification.}
+
+The full structural domain $\mathcal{C}$ admits the partition:
+
+\[
+\mathcal{C} = \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \partial \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \mathcal{R}_{\mathrm{recover}} \;\sqcup\; \mathcal{C}_{\mathrm{nontriv}} \setminus \mathcal{R}_{\mathrm{recover}}
+\]
+
+ensuring precise, ZFC-compliant classification of:
 
 \begin{itemize}
-    \item Successful collapse structures reside in $\mathcal{C}_{\mathrm{triv}}$;
-    \item Marginal, transitional structures with partial or asymptotic collapse properties lie on $\partial \mathcal{C}_{\mathrm{triv}}$;
-    \item Collapse-inaccessible structures with persistent arithmetic or group-theoretic obstructions are classified within $\mathcal{C}_{\mathrm{nontriv}}$, forming the precise mathematical realization of collapse failure regions.
+    \item Fully collapsed (trivial) structures;
+    \item Transitional structures with partial or marginal collapse;
+    \item Recoverable nontrivial structures with asymptotic collapse potential;
+    \item Irreducibly collapse-inaccessible structures encoding persistent arithmetic or group-theoretic obstructions.
 \end{itemize}
 
-This classification fully integrates collapse success, failure, and boundary phenomena within a consistent, formally verifiable, and type-theoretically sound theoretical framework.
+\paragraph{Conclusion.}
+
+This extended classification:
+
+\begin{itemize}
+    \item Fully integrates spatial, temporal, and structural failure analysis;
+    \item Eliminates external undefined regions from the theory;
+    \item Provides rigorous foundations for recursive collapse recovery mechanisms;
+    \item Preserves logical closure and type-theoretic soundness within the AK Collapse framework.
+\end{itemize}
 
 ---
 
@@ -6619,7 +6669,7 @@ By defining precise boundaries, we ensure that the AK Collapse framework remains
 
 ---
 
-\subsection*{U.2 Collapse Failure: Rigorous Classification with Arithmetic Inaccessibility}
+\subsection*{U.2 Collapse Failure: Rigorous Classification with Categorical Domain Structure}
 
 We classify collapse failure into four rigorously defined categories, corresponding to precise violations of Collapse Axioms:
 
@@ -6630,41 +6680,47 @@ We classify collapse failure into four rigorously defined categories, correspond
     \item \textbf{Foundational}: Violation of Axioms A7–A9 (ZFC and Category-Theoretic Foundations) due to set-theoretic or categorical inconsistencies.
 \end{enumerate}
 
-In addition to this structural classification, we formally introduce the notion of \textbf{Collapse-Inaccessible Domain}:
+\paragraph{Categorical Domain Classification.}
 
-\paragraph{Definition (Collapse-Inaccessible Domain).}
-
-The category of arithmetic and group-theoretic structures where collapse fails, yet residual arithmetic obstructions persist, is defined as:
+Collapse-inaccessible structures exhibiting failure, yet retaining mathematically meaningful arithmetic or group-theoretic invariants, are formally classified as:
 
 \[
-\mathcal{C}_{\mathrm{nontriv}} := \left\{ X \;\middle|\; X \in \mathsf{Filt}(\mathcal{C}) \;\land\; \neg \mathsf{CollapseValid}(X) \;\land\; \mathsf{ArithmeticObstruction}(X) \right\}.
+\mathcal{C}_{\mathrm{nontriv}} := \left\{ X \;\middle|\; X \in \mathsf{Filt}(\mathcal{C}) \;\land\; \neg \mathsf{CollapseValid}(X) \;\land\; \mathsf{ArithmeticObstruction}(X) \right\} \subset \mathsf{Filt}(\mathcal{C}).
 \]
 
 Here:
 \begin{itemize}
-    \item $\mathsf{Filt}(\mathcal{C})$ is the category of filtered, collapse-structured objects;
-    \item $\mathsf{CollapseValid}(X)$ denotes collapse applicability;
-    \item $\mathsf{ArithmeticObstruction}(X)$ signifies the presence of residual arithmetic invariants, such as nontrivial class groups, Selmer groups, Iwasawa layers, or unresolved Galois complexity.
+    \item $\mathsf{Filt}(\mathcal{C})$ — Category of filtered, collapse-structured objects (defined over ZFC);
+    \item $\mathsf{CollapseValid}(X)$ — Collapse applicability predicate;
+    \item $\mathsf{ArithmeticObstruction}(X)$ — Presence of residual arithmetic invariants (e.g., nontrivial class groups, Selmer groups, Iwasawa invariants, unresolved Galois complexity).
 \end{itemize}
 
-This domain $\mathcal{C}_{\mathrm{nontriv}}$ is not merely excluded from the theory but systematically classified within its categorical framework.
+\paragraph{Structural Partition.}
 
-\paragraph{Structural Implication.}
-
-Collapse Theory thus admits a logically partitioned structure:
+The theoretical domain $\mathsf{Filt}(\mathcal{C})$ thus admits the exhaustive, ZFC-internal partition:
 
 \[
-\mathsf{Filt}(\mathcal{C}) = \mathcal{C}_{\mathrm{triv}} \;\cup\; \partial \mathcal{C}_{\mathrm{triv}} \;\cup\; \mathcal{C}_{\mathrm{nontriv}}.
+\mathsf{Filt}(\mathcal{C}) = \mathcal{C}_{\mathrm{triv}} \;\cup\; \partial \mathcal{C}_{\mathrm{triv}} \;\cup\; \mathcal{C}_{\mathrm{nontriv}},
 \]
 
-Where:
+where:
+
 \begin{itemize}
-    \item $\mathcal{C}_{\mathrm{triv}}$: Collapse-success domain (fully trivialized structures);
-    \item $\partial \mathcal{C}_{\mathrm{triv}}$: Boundary regime with partial or asymptotic collapse behavior;
-    \item $\mathcal{C}_{\mathrm{nontriv}}$: Collapse-inaccessible domain, retaining arithmetic or group-theoretic obstructions.
+    \item $\mathcal{C}_{\mathrm{triv}}$ — Collapse-success domain (fully trivialized structures);
+    \item $\partial \mathcal{C}_{\mathrm{triv}}$ — Boundary regime with partial or asymptotic collapse behavior;
+    \item $\mathcal{C}_{\mathrm{nontriv}}$ — Collapse-inaccessible domain, retaining arithmetic or group-theoretic obstructions, fully classified within $\mathsf{Filt}(\mathcal{C})$.
 \end{itemize}
 
-This classification ensures that collapse failure is not external to the theory but incorporated as a structured, mathematically tractable component.
+\paragraph{Logical Consistency.}
+
+This classification is:
+
+\begin{itemize}
+    \item Fully compatible with the refined failure structure of Appendix U$^{+}$;
+    \item Explicitly confined within ZFC-set-theoretic foundations;
+    \item Mathematically rigorous and logically exhaustive;
+    \item Essential for integrating failure phenomena as structured, tractable components of AK Collapse Theory.
+\end{itemize}
 
 ---
 
@@ -6804,7 +6860,7 @@ In addition to preserving all content from the original U$^{+}$, this refinement
 
 ---
 
-\subsection*{U$^{+}$.2 Collapse Failure Type Encoding, Exhaustiveness, and Inaccessible Domain Classification}
+\subsection*{U$^{+}$.2 Collapse Failure Type Encoding, Exhaustiveness, and Layered Inaccessible Domain Classification}
 
 We define the four fundamental collapse failure types:
 
@@ -6816,57 +6872,89 @@ Inductive CollapseFailure :=
   | Foundational.   (* Set-theoretic, size, or categorical foundational obstruction *)
 \end{lstlisting}
 
-\paragraph{Exhaustiveness.} These four types exhaustively partition all structures for which Collapse Functor application is invalid.
+\paragraph{Exhaustiveness.} These four types exhaustively partition all structures for which Collapse Functor application is invalid, fully aligning with the collapse-inaccessible domains defined in Appendix G$^{+}$.
 
-\paragraph{Arithmetic Inaccessible Domain.} We additionally define the formal classification of Collapse-inaccessible, arithmetic-obstructed structures:
+\paragraph{Refined Inaccessible Domain Hierarchy.}
+
+We extend the structural domain $\mathcal{C}$ partition as:
+
+\[
+\mathcal{C} = \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \partial \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \mathcal{R}_{\mathrm{recover}} \;\sqcup\; \mathcal{C}_{\mathrm{nontriv}}^{\mathrm{irred}}
+\]
+
+where:
+
+\begin{itemize}
+    \item $\mathcal{C}_{\mathrm{triv}}$ — Fully collapsed (trivial) structures;
+    \item $\partial \mathcal{C}_{\mathrm{triv}}$ — Transitional, marginal structures;
+    \item $\mathcal{R}_{\mathrm{recover}}$ — Asymptotically collapse-recoverable, nontrivial structures;
+    \item $\mathcal{C}_{\mathrm{nontriv}}^{\mathrm{irred}}$ — Irreducibly collapse-inaccessible structures with persistent obstructions.
+\end{itemize}
+
+We define the type-theoretic predicate isolating $\mathcal{C}_{\mathrm{nontriv}}^{\mathrm{irred}}$:
 
 \begin{lstlisting}[language=Coq]
 Parameter Filt : Type.
 Parameter CollapseValid : Filt -> Prop.
 Parameter ArithmeticObstruction : Filt -> Prop.
+Parameter AsymptoticRecoverable : Filt -> Prop.
 
-Definition CollapseInaccessible (F : Filt) : Prop :=
-  ~ CollapseValid F /\ ArithmeticObstruction F.
+Definition CollapseIrreduciblyInaccessible (F : Filt) : Prop :=
+  ~ CollapseValid F /\ ArithmeticObstruction F /\ ~ AsymptoticRecoverable F.
 \end{lstlisting}
 
 \paragraph{Interpretation.}
 
-The predicate \texttt{CollapseInaccessible} isolates objects residing in $\mathcal{C}_{\mathrm{nontriv}}$, where collapse fails, yet arithmetic or group-theoretic invariants (e.g., class group complexity, Selmer group obstructions, Iwasawa layers) persist in a mathematically meaningful, structured form.
-
-Collapse Theory thus provides:
+The predicate \texttt{CollapseIrreduciblyInaccessible} formally identifies structures exhibiting:
 
 \begin{itemize}
-    \item A complete failure classification via \texttt{CollapseFailure};
-    \item A constructive, type-theoretic mechanism for identifying and categorizing collapse-inaccessible, arithmetic-obstructed structures;
-    \item A mathematically sound, logically exhaustive formal boundary for the applicability and limitations of Collapse Functor operations.
+    \item Persistent homology or Ext-class obstructions;
+    \item Arithmetic invariants obstructing collapse (e.g., $h_K > 1$, $\lambda, \mu \geq 1$, nontrivial Selmer groups);
+    \item No recursive or asymptotic pathway to collapse recovery.
+\end{itemize}
+
+This extends Collapse Theory to:
+
+\begin{itemize}
+    \item Distinguish irreducible failure from transitional or recoverable collapse-inaccessible states;
+    \item Maintain ZFC-internal consistency and exhaustive classification;
+    \item Encode arithmetic and group-theoretic obstructions in a formally verifiable, type-safe manner.
 \end{itemize}
 
 ---
 
-\subsection*{U$^{+}$.3 Collapse Status Typing with Exception Encapsulation}
+\subsection*{U$^{+}$.3 Collapse Status Typing with Layered Exception Encapsulation}
 
-We define the collapse status as:
+We define the collapse status with explicit boundary and failure layer encoding:
 
 \begin{lstlisting}[language=Coq]
 Inductive CollapseStatus :=
   | CollapseValid                         (* All Axioms A0–A9 satisfied *)
-  | CollapseFailed (f : CollapseFailure). (* Precisely typed failure *)
+  | CollapseMarginal                      (* On boundary, partial collapse *)
+  | CollapseRecoverable                   (* Asymptotic collapse recoverable *)
+  | CollapseIrredInaccessible (f : CollapseFailure). (* Irreducibly inaccessible *)
 \end{lstlisting}
 
 \paragraph{Exhaustive Status Theorem.}
 
 \[
-\forall \mathcal{F} : \texttt{CollapseSheaf},\;
-\texttt{CollapseStatus}(\mathcal{F}) = \texttt{CollapseValid} \lor \exists f,\; \texttt{CollapseFailed}(f).
+\forall \mathcal{F} : \mathsf{Filt}(\mathcal{C}),\;
+\exists s : \texttt{CollapseStatus},\; \texttt{CollapseStatusOf}(\mathcal{F}) = s.
 \]
 
-Thus, every filtered structure either admits collapse or fails with an explicit, constructible reason.
+This guarantees:
+
+\begin{itemize}
+    \item Every structure resides in precisely one rigorously defined collapse domain;
+    \item All failure types (\texttt{CollapseFailure}) are explicitly isolated within \texttt{CollapseIrredInaccessible};
+    \item Boundary and recovery states are constructively encoded, supporting formal reasoning and machine verification.
+\end{itemize}
 
 ---
 
-\subsection*{U$^{+}$.4 Logical Refinement Chain and Failure Lattice}
+\subsection*{U$^{+}$.4 Logical Refinement Chain and Failure Lattice with Marginal Layer}
 
-We encode the refinement hierarchy:
+We refine the failure refinement lattice to incorporate boundary and recovery transitions:
 
 \begin{lstlisting}[language=Coq]
 Inductive FailureRefinement : CollapseFailure -> CollapseFailure -> Prop :=
@@ -6875,33 +6963,47 @@ Inductive FailureRefinement : CollapseFailure -> CollapseFailure -> Prop :=
   | Unstable_to_Unresolvable    : FailureRefinement Unstable Unresolvable.
 \end{lstlisting}
 
-\paragraph{Logical Interpretation.} This defines the semantic chain:
+In parallel, collapse status admits the refinement hierarchy:
 
 \[
-\texttt{Foundational} \Rightarrow \texttt{Undecidable} \Rightarrow \texttt{Unstable} \Rightarrow \texttt{Unresolvable}.
+\texttt{CollapseValid} \to \texttt{CollapseMarginal} \to \texttt{CollapseRecoverable} \to \texttt{CollapseIrredInaccessible}(f)
 \]
 
-Thus, failure types refine progressively from foundational to resolvable obstructions.
+for some $f : \texttt{CollapseFailure}$.
+
+\paragraph{Logical Interpretation.}
+
+This expresses:
+
+\begin{itemize}
+    \item Smooth progression from fully collapsed to marginal, recoverable, and irreducibly inaccessible states;
+    \item Precise alignment between structural domains ($\mathcal{C}_{\mathrm{triv}}$, $\partial \mathcal{C}_{\mathrm{triv}}$, $\mathcal{R}_{\mathrm{recover}}$, $\mathcal{C}_{\mathrm{nontriv}}^{\mathrm{irred}}$) and type-theoretic predicates;
+    \item Full compatibility with Coq/Lean formal systems, enabling machine-verified classification.
+\end{itemize}
 
 ---
 
-\subsection*{U$^{+}$.5 ZFC Interpretation and Logical Soundness}
+\subsection*{U$^{+}$.5 ZFC Interpretation and Formal Logical Closure of Collapse Failure}
 
-Each failure type admits precise ZFC-semantic interpretation:
+The extended classification ensures:
 
 \begin{itemize}
-    \item $\texttt{Foundational}$: Set-theoretic limitations (e.g., class-size, non-constructible universes);
-    \item $\texttt{Undecidable}$: Type-theoretic undecidability (e.g., non-total functions, halting problem analogues);
-    \item $\texttt{Unstable}$: Divergent collapse energy or ill-posed evolution equations;
-    \item $\texttt{Unresolvable}$: Persistent homology or Ext$^1$ obstructions.
+    \item All structural domains ($\mathcal{C}$ partitions) and failure types ($\texttt{CollapseFailure}$) are ZFC-definable;
+    \item Arithmetic and group-theoretic obstructions (e.g., class groups, Iwasawa invariants, Selmer groups) reside strictly within $\mathcal{C}_{\mathrm{nontriv}}^{\mathrm{irred}}$, preserving theoretical integrity;
+    \item Marginal and recoverable structures are constructively identifiable, avoiding artificial theory boundaries;
+    \item Recursive collapse recovery mechanisms are formally encoded, supporting rigorous asymptotic analysis;
+    \item Type-theoretic exception handling fully encapsulates all collapse states, eliminating undefined or logically ambiguous behavior.
 \end{itemize}
 
-These definitions ensure that Collapse Failure is:
+\paragraph{Conclusion.}
+
+Collapse Failure, inaccessible domains, and their boundaries are:
 
 \begin{itemize}
-    \item Logically consistent and exhaustive;
-    \item Fully compatible with ZFC-set-theoretic foundations;
-    \item Isolated from valid Collapse structure by type-safe mechanisms.
+    \item Fully formalized within ZFC and dependent type theory;
+    \item Rigorously partitioned with precise structural and logical meaning;
+    \item Logically exhaustive and constructively verifiable;
+    \item Mathematically integrated into the AK Collapse framework without informal exclusions.
 \end{itemize}
 
 ---

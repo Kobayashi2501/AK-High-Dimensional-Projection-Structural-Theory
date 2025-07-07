@@ -3471,9 +3471,9 @@ This constitutes the complete, final structural refinement of collapse failure m
 
 ---
 
-\subsection*{G$^{+}$.2 Failure Convergence Zones: Global Concept and Definition}
+\subsection*{G$^{+}$.2 Failure Convergence Zones and Collapse-Inaccessible Domains: Formal Definition and Structural Integration}
 
-\paragraph{Definition (Failure Convergence Zone).}
+\paragraph{Definition (Failure Convergence Zone and Collapse-Inaccessible Domain).}
 
 For a filtered object or sheaf $\mathcal{F}_t$, define the \textbf{failure convergence zone}:
 
@@ -3484,29 +3484,66 @@ For a filtered object or sheaf $\mathcal{F}_t$, define the \textbf{failure conve
 where:
 
 \begin{itemize}
-    \item $E_{\mathrm{PH}}(t)$ = persistent homology energy (topological complexity measure);
+    \item $E_{\mathrm{PH}}(t)$ = persistent homology energy (topological obstruction measure);
     \item $E_{\mathrm{Ext}}(t)$ = Ext energy (categorical obstruction measure).
 \end{itemize}
 
-The \textbf{valid domain of AK Collapse Theory} is strictly $\mathbb{R}_{\geq 0} \setminus \overline{\mathcal{Z}_{\mathrm{fail}}}$.
+We then define the corresponding \textbf{collapse-inaccessible domain} of structural objects:
+
+\[
+\mathcal{C}_{\mathrm{nontriv}} = \left\{ \mathcal{F} \;\middle|\; \mathcal{F} \text{ fails to satisfy } \mathrm{PH}_1(\mathcal{F}) = 0 \text{ or } \mathrm{Ext}^1(\mathcal{F}, -) = 0 \right\}
+\]
+
+Conversely, the \textbf{collapse-accessible domain} is:
+
+\[
+\mathcal{C}_{\mathrm{triv}} = \left\{ \mathcal{F} \;\middle|\; \mathrm{PH}_1(\mathcal{F}) = 0 \;\land\; \mathrm{Ext}^1(\mathcal{F}, -) = 0 \right\}
+\]
+
+\paragraph{Interpretation.}
+The valid domain of AK Collapse Theory is strictly $\mathbb{R}_{\geq 0} \setminus \overline{\mathcal{Z}_{\mathrm{fail}}}$ in parameter space, and $\mathcal{C}_{\mathrm{triv}}$ in structural object space. However, contrary to naive exclusion, $\mathcal{C}_{\mathrm{nontriv}}$ is not rejected but explicitly classified and structurally integrated within the extended framework, encoding persistent arithmetic or group-theoretic obstructions (e.g., nontrivial class groups, Selmer groups, Iwasawa invariants).
 
 ---
 
-\subsection*{G$^{+}$.3 Structural Boundary and Transitional Behavior}
+\subsection*{G$^{+}$.3 Structural Boundary, Residual Arithmetic Obstructions, and Transitional Behavior}
 
-The boundary of collapse applicability is given by:
+The \textbf{boundary of collapse applicability} is defined as:
 
 \[
 \partial \mathcal{Z}_{\mathrm{fail}} = \overline{\mathcal{Z}_{\mathrm{fail}}} \setminus \mathcal{Z}_{\mathrm{fail}}
 \]
 
-On $\partial \mathcal{Z}_{\mathrm{fail}}$, possible behaviors include:
+Similarly, in structural object space, we define:
+
+\[
+\partial \mathcal{C}_{\mathrm{triv}} = \overline{\mathcal{C}_{\mathrm{triv}}} \setminus \mathcal{C}_{\mathrm{triv}}
+\]
+
+Objects $\mathcal{F}$ on $\partial \mathcal{C}_{\mathrm{triv}}$ exhibit transitional or marginal behavior, including:
 
 \begin{itemize}
-    \item Asymptotic approach to collapse readiness ($E_{\mathrm{total}}(t) \to 0$ as $t \to \infty$);
-    \item Partial resolution of topological and Ext obstructions;
-    \item Emergence of structural regularity in a limit or weak sense.
+    \item Asymptotic approach to collapse readiness ($E_{\mathrm{PH}}(t) \to 0$, $E_{\mathrm{Ext}}(t) \to 0$ as $t \to \infty$);
+    \item Partial resolution of topological or categorical obstructions;
+    \item Persistence of residual arithmetic invariants (e.g., nontrivial $h_K$, $\lambda$, $\mu$ invariants) despite structural degeneration;
+    \item Structural placement within $\mathcal{C}_{\mathrm{nontriv}}$, encoding arithmetic collapse failure without excluding the object from theoretical consideration.
 \end{itemize}
+
+\paragraph{Interpretation.}
+The extended AK Collapse framework admits a precise, layered classification:
+
+\[
+\mathcal{C} = \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \partial \mathcal{C}_{\mathrm{triv}} \;\sqcup\; \mathcal{C}_{\mathrm{nontriv}}
+\]
+
+ensuring:
+
+\begin{itemize}
+    \item Successful collapse structures reside in $\mathcal{C}_{\mathrm{triv}}$;
+    \item Marginal, transitional structures with partial or asymptotic collapse properties lie on $\partial \mathcal{C}_{\mathrm{triv}}$;
+    \item Collapse-inaccessible structures with persistent arithmetic or group-theoretic obstructions are classified within $\mathcal{C}_{\mathrm{nontriv}}$, forming the precise mathematical realization of collapse failure regions.
+\end{itemize}
+
+This classification fully integrates collapse success, failure, and boundary phenomena within a consistent, formally verifiable, and type-theoretically sound theoretical framework.
 
 ---
 

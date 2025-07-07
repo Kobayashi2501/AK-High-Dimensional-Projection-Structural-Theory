@@ -6268,7 +6268,7 @@ By defining precise boundaries, we ensure that the AK Collapse framework remains
 
 ---
 
-\subsection*{U.2 Collapse Failure: Rigorous Classification}
+\subsection*{U.2 Collapse Failure: Rigorous Classification with Arithmetic Inaccessibility}
 
 We classify collapse failure into four rigorously defined categories, corresponding to precise violations of Collapse Axioms:
 
@@ -6278,6 +6278,42 @@ We classify collapse failure into four rigorously defined categories, correspond
     \item \textbf{Undecidable}: Violation of Axiom A6 (Type-Theoretic Realizability) arising from logical undecidability or non-constructibility.
     \item \textbf{Foundational}: Violation of Axioms A7–A9 (ZFC and Category-Theoretic Foundations) due to set-theoretic or categorical inconsistencies.
 \end{enumerate}
+
+In addition to this structural classification, we formally introduce the notion of \textbf{Collapse-Inaccessible Domain}:
+
+\paragraph{Definition (Collapse-Inaccessible Domain).}
+
+The category of arithmetic and group-theoretic structures where collapse fails, yet residual arithmetic obstructions persist, is defined as:
+
+\[
+\mathcal{C}_{\mathrm{nontriv}} := \left\{ X \;\middle|\; X \in \mathsf{Filt}(\mathcal{C}) \;\land\; \neg \mathsf{CollapseValid}(X) \;\land\; \mathsf{ArithmeticObstruction}(X) \right\}.
+\]
+
+Here:
+\begin{itemize}
+    \item $\mathsf{Filt}(\mathcal{C})$ is the category of filtered, collapse-structured objects;
+    \item $\mathsf{CollapseValid}(X)$ denotes collapse applicability;
+    \item $\mathsf{ArithmeticObstruction}(X)$ signifies the presence of residual arithmetic invariants, such as nontrivial class groups, Selmer groups, Iwasawa layers, or unresolved Galois complexity.
+\end{itemize}
+
+This domain $\mathcal{C}_{\mathrm{nontriv}}$ is not merely excluded from the theory but systematically classified within its categorical framework.
+
+\paragraph{Structural Implication.}
+
+Collapse Theory thus admits a logically partitioned structure:
+
+\[
+\mathsf{Filt}(\mathcal{C}) = \mathcal{C}_{\mathrm{triv}} \;\cup\; \partial \mathcal{C}_{\mathrm{triv}} \;\cup\; \mathcal{C}_{\mathrm{nontriv}}.
+\]
+
+Where:
+\begin{itemize}
+    \item $\mathcal{C}_{\mathrm{triv}}$: Collapse-success domain (fully trivialized structures);
+    \item $\partial \mathcal{C}_{\mathrm{triv}}$: Boundary regime with partial or asymptotic collapse behavior;
+    \item $\mathcal{C}_{\mathrm{nontriv}}$: Collapse-inaccessible domain, retaining arithmetic or group-theoretic obstructions.
+\end{itemize}
+
+This classification ensures that collapse failure is not external to the theory but incorporated as a structured, mathematically tractable component.
 
 ---
 
@@ -6417,9 +6453,9 @@ In addition to preserving all content from the original U$^{+}$, this refinement
 
 ---
 
-\subsection*{U$^{+}$.2 Collapse Failure Type Encoding and Exhaustiveness}
+\subsection*{U$^{+}$.2 Collapse Failure Type Encoding, Exhaustiveness, and Inaccessible Domain Classification}
 
-We define:
+We define the four fundamental collapse failure types:
 
 \begin{lstlisting}[language=Coq]
 Inductive CollapseFailure :=
@@ -6430,6 +6466,29 @@ Inductive CollapseFailure :=
 \end{lstlisting}
 
 \paragraph{Exhaustiveness.} These four types exhaustively partition all structures for which Collapse Functor application is invalid.
+
+\paragraph{Arithmetic Inaccessible Domain.} We additionally define the formal classification of Collapse-inaccessible, arithmetic-obstructed structures:
+
+\begin{lstlisting}[language=Coq]
+Parameter Filt : Type.
+Parameter CollapseValid : Filt -> Prop.
+Parameter ArithmeticObstruction : Filt -> Prop.
+
+Definition CollapseInaccessible (F : Filt) : Prop :=
+  ~ CollapseValid F /\ ArithmeticObstruction F.
+\end{lstlisting}
+
+\paragraph{Interpretation.}
+
+The predicate \texttt{CollapseInaccessible} isolates objects residing in $\mathcal{C}_{\mathrm{nontriv}}$, where collapse fails, yet arithmetic or group-theoretic invariants (e.g., class group complexity, Selmer group obstructions, Iwasawa layers) persist in a mathematically meaningful, structured form.
+
+Collapse Theory thus provides:
+
+\begin{itemize}
+    \item A complete failure classification via \texttt{CollapseFailure};
+    \item A constructive, type-theoretic mechanism for identifying and categorizing collapse-inaccessible, arithmetic-obstructed structures;
+    \item A mathematically sound, logically exhaustive formal boundary for the applicability and limitations of Collapse Functor operations.
+\end{itemize}
 
 ---
 

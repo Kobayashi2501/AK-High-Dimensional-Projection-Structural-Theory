@@ -1,4 +1,4 @@
-# 🌐 AK High-Dimensional Projection Structural Theory (v12.0)
+# 🌐 AK High-Dimensional Projection Structural Theory (v12.5)
 
 📄 [日本語版 README (Japanese README Available Here)](README_jp.md)
 
@@ -7,17 +7,17 @@
 ## 🧩 What is AK Theory?
 
 **AK High-Dimensional Projection Structural Theory (AK-HDPST)** is a mathematically rigorous,  
-category-theoretic, type-theoretic, and topological formalism designed to systematically eliminate  
+category-theoretic, type-theoretic, and topological framework designed to systematically eliminate  
 obstructions across PDEs, number theory, algebraic geometry, and their categorical unifications.
 
-Version 12.0 introduces major structural advancements:
+Version 12.5 builds upon the v12.0 architecture and incorporates several fundamental extensions:
 
-- **Iwasawa-Theoretic Collapse**: Precise arithmetic refinement via Iwasawa Sheaf structures  
-- **Geometrization-Refined Collapse**: Visual, quantitative enhancement via the Geometrization Conjecture  
-- **Mirror–Langlands–Tropical Collapse Integration (Q+)**: Functorial unification across geometric, arithmetic, and tropical domains with arithmetic tropical refinement  
-- **Spectral Collapse Formalization (T+)**: Collapse-theoretic elimination of analytic spectral obstructions (Riemann Hypothesis, Navier–Stokes)  
-- **Full $\infty$-Categorical and Motivic Compatibility**  
-- **Type-Theoretic Total Formalization (Coq/Lean-ready)**  
+- **Langlands Collapse (fully elevated)**: A group-theoretic and functorial integration of automorphic and Galois structures  
+- **Iwasawa Stratification**: Arithmetic collapse layering through ZFC-definable Iwasawa sheaves  
+- **Collapse Failure Classification**: Formal separation of collapse-inadmissible domains and obstruction zones  
+- **Motivic and Spectral Collapse Expansion**: Enhanced treatment of Hodge, tropical, and motivic obstructions  
+- **Collapse Functor Hierarchy & Type-Theoretic Collapse Axioms**: Fully machine-verifiable predicates with Coq/Lean compatibility  
+- **Appendix V–Z⁺**: Comprehensive classification of collapse domains, failure patterns, and spectral refinements
 
 ---
 
@@ -25,133 +25,106 @@ Version 12.0 introduces major structural advancements:
 
 > “Obstructions are not contradictions — they indicate insufficient structural and dimensional frameworks.”
 
-AK Theory is grounded in the belief that:
+AK Theory holds that:
 
-- Many deep mathematical obstructions (singularities, unsplit extensions, group-theoretic complexity)  
-  are symptoms of dimensionally or categorically inadequate formulations.
+- Many deep mathematical obstructions (e.g., singularities, unsplit extensions, arithmetic failures)  
+  are not flaws, but symptoms of dimensionally or categorically inadequate representations.
 
-- By **lifting** structures into high-dimensional, MECE-partitioned projection spaces,  
-  and applying layered categorical, arithmetic, and group-theoretic collapse mechanisms,  
-  these obstructions can be **systematically eliminated**, leading to:
+- By projecting structures into high-dimensional, MECE-partitioned categorical spaces,  
+  and applying layered topological, group-theoretic, and type-theoretic collapses,  
+  structural obstructions can be resolved and eliminated.  
 
-  - Topological simplification (`PH₁ = 0`)  
-  - Categorical trivialization (`Ext¹ = 0`)  
-  - Group-theoretic collapse  
-  - Arithmetic refinement (Iwasawa Collapse)  
-  - Visual-geometric understanding (Geometrization-refined Collapse)  
-  - Spectral obstruction elimination (Spectral Collapse)  
+This leads to:
+
+- Topological simplification (PH₁ = 0)  
+- Ext-class vanishing (Ext¹ = 0)  
+- Galois/fundamental group collapse  
+- Iwasawa-based arithmetic layer refinement  
+- Motivic and spectral collapse resolution  
+- Type-theoretic axiomatization compatible with ZFC and proof assistants
 
 ---
 
-## 🧭 Scope of AK Theory (v12.0)
+## 🧭 Scope of AK Theory (v12.5)
 
-AK Theory addresses:
+AK Theory now spans:
 
 - Persistent homology collapse and categorical trivialization  
-- Group-theoretic collapse: Galois, fundamental, automorphism groups  
-- Arithmetic collapse refined by Iwasawa theory  
-- Visual-geometric interpretation via the Geometrization Conjecture  
-- Mirror–Langlands–Tropical collapse integration (with arithmetic tropical structures)  
-- Spectral collapse for analytic obstruction elimination (Riemann, Navier–Stokes)  
-- Type-theoretic formalization: Coq/Lean-compatible, ZFC-interpretable  
-- Motivic and $\infty$-categorical compatibility  
+- Group-theoretic collapse of Galois/fundamental/automorphism groups  
+- Arithmetic refinement via Iwasawa stratification  
+- Visual interpretation via 3-manifold geometric collapse (Geometrization refinement)  
+- Langlands Collapse and automorphic-Galois integration  
+- Mirror–Langlands–Tropical collapse hierarchy (Q⁺ structure)  
+- Spectral collapse for analytic obstruction elimination (RH, Navier–Stokes)  
+- Collapse failure typing: formally obstructed domains  
+- Full Coq/Lean/ZFC-based formalization of collapse predicates  
+- Higher-categorical and motivic compatibility
 
 ---
 
-## 🔧 Core Collapse Framework (Fully Reinforced)
+## 🔧 Core Collapse Framework (v12.5)
 
-Fundamental causal structure:
+Fundamental chain of structural elimination:
 
-**`PH₁ = 0 ⇔ Ext¹ = 0 ⇨ Group Collapse ⇨ Smoothness`**
+**PH₁ = 0 ⇨ Ext¹ = 0 ⇨ Group Collapse ⇨ Iwasawa Collapse ⇨ Spectral Collapse ⇨ Smoothness**
 
-Extended with:
+Reinforced by:
 
-- **Iwasawa Collapse**: Arithmetic refinement, $PH₁(\mathcal{F}_{\mathrm{Iw}}) = 0$, $Ext¹(\mathcal{F}_{\mathrm{Iw}}) = 0$  
-- **Geometric Collapse Spectrum**: Visual classification via 3-manifold decomposition  
-- **Mirror–Langlands–Trop Collapse**: Functorial equivalence across geometric, arithmetic, and tropical structures  
-- **Spectral Collapse**: Collapse-driven elimination of spectral obstructions  
-- **Type-Theoretic Collapse Chain**: Machine-verifiable formalization of the entire structure  
+- **Collapse Typing**: Type I–IV classification of degenerative structures  
+- **Collapse Functors**: Category-compatible collapse mappings with arithmetic/topological domains  
+- **Langlands Collapse**: Functorial connection of automorphic and Galois layers  
+- **Iwasawa Collapse**: Arithmetic refinement through filtration over number fields  
+- **Spectral Collapse**: Structural resolution of spectral obstruction layers  
+- **Motivic Collapse**: Collapse-theoretic access to Hodge and motivic decompositions  
+- **Collapse Failure Zones**: Explicit domains where collapse mechanisms provably fail  
+- **Type-Theoretic Axioms**: Logical foundation for formal collapse expression  
+- **ZFC-compatible encoding**: Rigorous set-theoretic justification of collapse conditions
 
 ---
 
-## 🚀 What Can AK Theory Do? (v12.0 Applications)
+## 🚀 Applications of AK Theory (v12.5)
 
-### ✅ Global Regularity via Collapse Completion  
-If  
-`PH₁ = 0`, `Ext¹ = 0`, `Group Collapse`, and `Spectral Collapse`  
-hold,  
-then induced structures are globally smooth (`u(t) ∈ C^∞`),  
-applicable to Navier–Stokes, spectral flows, and complex algebraic varieties.
+### ✅ Global Regularity via Full Collapse  
+Combined collapse of PH₁, Ext¹, group and spectral structures induces global smoothness  
+in PDEs such as Navier–Stokes and in moduli stacks of algebraic varieties.
 
-### ✅ Iwasawa-Theoretic Arithmetic Collapse  
-Collapse of arithmetic obstruction layers via Iwasawa Sheaf structures  
-yields precise group-theoretic simplification and zeta-function invariant realization.
+### ✅ Langlands Collapse Integration  
+Collapse-compatible reformulation of the Langlands correspondence  
+enables group-functorial simplification of arithmetic and automorphic layers.
 
-### ✅ Geometric Refinement (Geometrization Conjecture Integration)  
-Collapse structure is visually and quantitatively refined  
-through canonical geometric decomposition of degenerating structures.
-
-### ✅ Mirror–Langlands–Tropical Collapse (Q+)  
-Unified collapse equivalence across Mirror symmetry, Langlands duality, and tropical degenerations,  
-with arithmetic tropical structures clarified.
+### ✅ Iwasawa-Stratified Arithmetic Collapse  
+Collapse of Iwasawa sheaf obstructions recovers class group triviality and zeta invariants  
+through refined arithmetic filtrations.
 
 ### ✅ Spectral Collapse Resolution  
-Collapse-induced elimination of analytic obstructions in spectral problems,  
-including Riemann Hypothesis and Navier–Stokes global regularity.
+Collapse-theoretic elimination of analytic obstructions in spectral problems  
+such as the Riemann Hypothesis and spectral flow.
+
+### ✅ Collapse Failure Analysis  
+Explicit classification of domains where collapse fails or diverges  
+(e.g., nontrivial Ext, group torsion, or infinite arithmetic layers).
 
 ---
 
-## 🔬 Structural Composition (v12.0)
-
-| Layer                  | Component                             | Description                          |
-|-----------------------|---------------------------------------|--------------------------------------|
-| Collapse Axioms       | `A0–A9`, Iwasawa, Group, Spectral    | Structural rules for collapse        |
-| Collapse Classifier    | Type I–IV (degeneration typing)      | Typing of collapse states            |
-| Collapse Functors      | `F ↦ F'`, Arithmetic & Geometric     | Category-compatible collapse maps    |
-| Iwasawa Collapse       | Arithmetic-refined collapse           | Group & zeta-invariant simplification |
-| Geometric Collapse Spectrum | Visual collapse quantification  | Collapse & 3-manifold decomposition |
-| Mirror–Langlands–Trop Collapse | Q+ structure                | Unified geometric-arithmetic collapse |
-| Spectral Collapse      | Obstruction elimination for spectra  | RH, Navier–Stokes structural collapse |
-| Type-Theory Encoding   | Coq/Lean-ready predicates            | Fully machine-verifiable formalization |
-
----
-
-## 🌟 Resolved Classical Problems (v12.0)
+## 📚 Resolved Problems and Reports (v12.5-Linked)
 
 - **Navier–Stokes Global Regularity**  
-  Collapse of topological, categorical, and group-theoretic obstructions ⇒ `u(t) ∈ C^∞(ℝ³ × [0, ∞))`  
   ➡ [navier-stokes-global-regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-- **Birch and Swinnerton-Dyer Conjecture (Rank 0 case)**  
-  Collapse of moduli sheaf structures ⇒ Mordell–Weil group finiteness  
+- **Birch and Swinnerton-Dyer (Rank 0)**  
   ➡ [bsd-collapse-theorem](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
 - **ABC Conjecture**  
-  Collapse-induced energy decay ⇒ Height/radical inequality  
   ➡ [collapse-abc-theorem](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main)
 
 - **Riemann Hypothesis**  
-  Zeta collapse structure ⇒ Non-trivial zeros lie on Re(s) = 1/2  
   ➡ [collapse-riemann-hypothesis](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main)
 
 - **Hilbert's 12th Problem**  
-  Collapse structures over number fields ⇒ Explicit transcendental generators  
   ➡ [collapse-hilbert12](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
 
-- **Hodge Conjecture (Structural Resolution)**  
-  Collapse typing `Type III` ⇒ Algebraic realization of Hodge classes  
+- **Hodge Conjecture**  
   ➡ [collapse-hodge-ak-theory](https://github.com/Kobayashi2501/collapse-hodge-ak-theory)
-
----
-
-## 📚 Extended Frameworks (v12.0)
-
-- **Langlands Collapse**: Group-theoretic simplification enabling Langlands duality  
-- **Motif-Theoretic Collapse**: Collapse-driven motivic simplification  
-- **Mirror–Tropical Collapse (Q+ complete)**: Unified collapse across geometry and arithmetic  
-- **Spectral Collapse (T+ formalization)**: Analytic obstruction elimination formalized  
-- **Type-Theoretic Collapse Failure Handling**: Formal classification of collapse failure scenarios  
-- **$\infty$-Categorical Extension**: Collapse structure extended to higher categories  
 
 ---
 
@@ -159,8 +132,8 @@ including Riemann Hypothesis and Navier–Stokes global regularity.
 
 | File                                            | Description                               |
 |-------------------------------------------------|-------------------------------------------|
-| `AK High-Dimensional Projection Structural Theory_v12.0.tex` | Complete LaTeX source (fully reinforced) |
-| `AK High-Dimensional Projection Structural Theory_v12.0.pdf` | Rendered full document                   |
+| `AK High-Dimensional Projection Structural Theory_v12.5.tex` | Complete LaTeX source (fully reinforced) |
+| `AK High-Dimensional Projection Structural Theory_v12.5.pdf` | Rendered full document                   |
 | `README.md`                                    | English project overview (this file)      |
 | `README_jp.md`                                 | Japanese version of README                |
 | `LICENSE`                                      | MIT or CC license (as chosen)             |
@@ -177,17 +150,16 @@ The project is formally archived on Zenodo:
 
 ## ✉️ arXiv Submission & Collaboration
 
-**AK-HDPST v12.0** is complete and prepared for arXiv submission.
+**AK-HDPST v12.5** is complete and prepared for formal submission.
 
 We welcome:
 
-- Expert reviews in:
-  - Category theory, Topology, Group theory  
-  - PDEs, Number theory, Algebraic geometry  
-  - Homological algebra, Motivic structures  
-  - Spectral theory, $\infty$-categories, Type theory  
-- Suggestions for structural extension or critical review  
-- Prospective collaborators applying Collapse Theory to unresolved mathematical problems  
+- Critical reviews in:
+  - Category theory, Topology, Number theory, Group theory  
+  - PDEs, Algebraic geometry, Motivic structures  
+  - Type theory, Spectral theory, $\infty$-category theory  
+- Feedback on collapse typing, obstruction structures, or collapse failures  
+- Collaborators interested in applying the collapse framework to mathematical frontiers
 
 ---
 

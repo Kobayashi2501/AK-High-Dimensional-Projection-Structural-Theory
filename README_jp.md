@@ -141,7 +141,7 @@ Collapseが不可能な領域（非自明なExt、群の捩れ、無限層構造
 
 本プロジェクトはZenodoにて正式アーカイブされています：
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15788159.svg)](https://doi.org/10.5281/zenodo.15788159)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15832788.svg)](https://doi.org/10.5281/zenodo.15832788)
 
 ---
 

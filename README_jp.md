@@ -1,199 +1,169 @@
-# 🌐 AK高次元射影構造理論 (v12.0)
+# 🌐 AK高次元射影構造理論（v12.5）
 
-📄 [English README (英語版はこちら)](README.md)
-
----
-
-## 🧩 AK理論とは
-
-**AK高次元射影構造理論（AK-HDPST）**は、数学的に厳密な  
-圏論・型理論・トポロジーに基づく形式体系であり、  
-偏微分方程式・数論・代数幾何・圏論的統一構造における  
-構造的障害（obstruction）を体系的に除去することを目的としています。
-
-Version 12.0では以下の大規模な構造強化が実施されました：
-
-- **岩澤理論層組み込み**：Iwasawa層を用いた精密な数論的Collapse補強  
-- **幾何化予想連動のCollapse精密化**：3次元多様体の幾何分解をCollapseの視覚的・定量的理解に接続  
-- **Mirror–Langlands–Tropical Collapse統合 (Q⁺)**：幾何・数論・熱帯構造のCollapse統一と数論的Tropical構造の整理  
-- **スペクトルCollapse形式化 (T⁺)**：解析的障害（リーマン予想・Navier–Stokes）のCollapseによる理論的消去  
-- **完全な∞-圏論的・モチーフ的整合性**  
-- **型理論による全構造の形式化（Coq/Lean完全対応）**  
+📄 [English README is available here](README.md)
 
 ---
 
-## 🧠 理論背景と哲学
+## 🧩 AK理論とは？
 
-> 「障害（obstruction）は矛盾ではない —— それは構造的・次元的枠組みの不十分さを示す徴候である。」
+**AK高次元射影構造理論（AK-HDPST）** は、圏論・型理論・トポロジーに基づく数学的に厳密な理論であり、  
+偏微分方程式、数論、代数幾何、およびそれらの圏論的統合における**構造的障害（obstruction）を体系的に除去**することを目的としています。
 
-AK理論は次の考え方に基づいています：
+バージョン12.5では、v12.0の基盤に以下の根本的拡張が加わりました：
 
-- 多くの数学的障害（特異点・未分解拡張・群論的複雑性）は、  
-  根本的な矛盾ではなく、次元や圏論的枠組みの不足が原因である。
-
-- 高次元・MECE分割された射影空間へ問題構造を**持ち上げ（lifting）**、  
-  カテゴリー・数論・群論の多層的Collapse機構を適用することで、  
-  以下のように体系的に障害を除去できる：
-
-  - トポロジー簡約化（`PH₁ = 0`）  
-  - カテゴリー障害消去（`Ext¹ = 0`）  
-  - 群論的Collapse（群の単純化）  
-  - 数論的精密化（Iwasawa Collapse）  
-  - 幾何的視覚補強（幾何化Collapse）  
-  - スペクトル障害消去（Spectral Collapse）  
+- **Langlands Collapse（完全昇格）**：ガロア表現と保型形式の関手的接合による群論的統一  
+- **岩澤層分類（Iwasawa Stratification）**：ZFC定義可能な岩澤層による数論的Collapseの階層化  
+- **Collapse不能領域の分類**：Collapse不可能領域や形式的障害の明確な分離と定式化  
+- **モチーフ的・スペクトル的Collapseの強化**：Hodge理論、トロピカル構造、モチーフ的障害の統合整理  
+- **Collapse関手階層と型理論的Collapse公理**：Coq／Leanとの互換性を持つ機械検証可能なCollapse述語群  
+- **Appendix V～Z⁺の追加**：Collapse可能領域・不能領域・スペクトル構造の体系的分類
 
 ---
 
-## 🧭 AK理論の適用範囲（v12.0）
+## 🧠 哲学的動機
 
-AK理論は以下を扱います：
+> 「障害は矛盾ではない——それは構造と次元が不十分であることの兆候である。」
 
-- Persistent Homology Collapseとカテゴリー的障害消去  
-- 群論的Collapse（Galois群・基本群・自己同型群の簡約化）  
-- 岩澤理論を用いた数論的Collapse精密化  
-- 幾何化予想と連動した視覚的Collapse理解  
-- Mirror–Langlands–Tropical Collapse統合と数論的Tropical構造の整理  
-- スペクトルCollapseによる解析的障害（リーマン・Navier–Stokes）の理論的除去  
-- 型理論による完全形式化（Coq/Lean対応、ZFC整合）  
-- モチーフ圏・∞-圏論との高次整合性  
+AK理論の根底には次の信念があります：
 
----
+- 数学的な深い障害（特異点、非分裂拡張、群の複雑性など）は、<br>
+  多くの場合、**次元的・圏論的に不十分な定式化の結果として現れる**。
 
-## 🔧 Collapse基盤構造（v12.0完全版）
+- 対象を高次元かつMECE（重複なく漏れのない）に分割された射影空間に持ち上げ、<br>
+  層的なトポロジー・群論・型理論的Collapseを適用することで、<br>
+  これらの障害は**系統的に解消・除去**できる。
 
-基本的な因果構造：
+このアプローチにより、以下の現象が得られます：
 
-**`PH₁ = 0 ⇔ Ext¹ = 0 ⇨ Group Collapse ⇨ 滑らかさ実現`**
-
-さらに以下が拡張：
-
-- **Iwasawa Collapse**：岩澤層による数論的精密化  
-  `$PH₁(\mathcal{F}_{\mathrm{Iw}}) = 0$, $Ext¹(\mathcal{F}_{\mathrm{Iw}}) = 0$`  
-- **幾何Collapse Spectrum**：3次元多様体の幾何分解をCollapse視覚化に活用  
-- **Mirror–Langlands–Trop Collapse (Q⁺)**：幾何・数論・Tropical構造のCollapse統一  
-- **Spectral Collapse (T⁺)**：解析的障害のCollapse駆動による消去  
-- **型理論的Collapse鎖**：全過程を形式的かつ機械検証可能に記述  
+- トポロジー的単純化（PH₁ = 0）  
+- 拡張類の消滅（Ext¹ = 0）  
+- ガロア群や基本群のCollapse  
+- 岩澤層による数論的階層のCollapse  
+- モチーフ的・スペクトル的障害の整理と除去  
+- ZFCおよび証明支援系（Coq, Lean）で定式化可能なCollapse述語
 
 ---
 
-## 🚀 AK理論の実用例（v12.0）
+## 🧭 AK理論の適用領域（v12.5）
 
-### ✅ Collapse Completionによる滑らかさ実現  
-`PH₁ = 0`、`Ext¹ = 0`、`Group Collapse`、`Spectral Collapse`が成立すれば、  
-誘導される構造（流体・幾何・関数）はグローバルに滑らか (`u(t) ∈ C^∞`) となる。
+AK理論は以下の領域に適用可能です：
 
-### ✅ Iwasawa理論連動の数論Collapse  
-Iwasawa層を用いた数論的Collapseにより、群の単純化とzeta関数不変量の具体実現が達成される。
-
-### ✅ 幾何化Collapseによる視覚的補強  
-Collapse構造が幾何化予想に基づき、3次元多様体の幾何分解を通じて視覚的・定量的に理解できる。
-
-### ✅ Mirror–Langlands–Tropical Collapse (Q⁺)  
-Mirror対称性・Langlands対応・Tropical構造がCollapseにより統一的に結びつく。
-
-### ✅ Spectral Collapseによる解析的障害消去  
-リーマン予想・Navier–Stokes問題を含む解析的障害がCollapse構造により理論的に消去される。
+- 持続的ホモロジーのCollapseと圏論的平坦化  
+- ガロア群・基本群・自己同型群のCollapse  
+- 岩澤層による数論的障害の階層的Collapse  
+- 3次元多様体分解による幾何学的可視化（幾何化予想との接続）  
+- Langlands対応のCollapse統合と関手的構造整理  
+- Mirror対称性・Langlands・Tropical Collapseの統合階層（Q⁺構造）  
+- スペクトル障害（ゼータ関数・流体のスペクトル問題）のCollapseによる解消  
+- Collapse不能領域の分類（非可縮的拡張・群の歪み・数論的障害の定式化）  
+- Coq／LeanによるCollapse公理の型理論的定式化  
+- モチーフ理論・∞圏との整合性
 
 ---
 
-## 🔬 構造階層（v12.0）
+## 🔧 Collapse構造の中核（v12.5）
 
-| 階層                    | 構成要素                                | 説明                                        |
-|-------------------------|------------------------------------------|---------------------------------------------|
-| Collapse公理群          | `A0–A9`、Iwasawa、Group、Spectral      | Collapse成立の基本公理                     |
-| Collapse分類子          | Type I–IV（退化状態の分類）             | Collapse過程の類型整理                     |
-| Collapse関手群           | `F ↦ F'`、数論・幾何Collapse関手       | 圏論的Collapse写像                         |
-| Iwasawa Collapse        | 数論的Collapse補強                      | 群の単純化とzeta不変量の実現               |
-| 幾何Collapse Spectrum   | 幾何分解に基づくCollapse視覚定量化      | Collapseの幾何的直感補助                   |
-| Mirror–Langlands–Trop Collapse | Q⁺統合構造                     | 幾何・数論・TropicalのCollapse統一         |
-| Spectral Collapse        | 解析的障害のCollapse駆動による消去      | リーマン・Navier–Stokes問題への理論的接続  |
-| 型理論的形式化           | Coq/Lean準拠Collapse記述                | 完全形式化と機械検証対応                   |
+基本的な構造的除去の連鎖：
+
+**PH₁ = 0 ⇒ Ext¹ = 0 ⇒ 群Collapse ⇒ 岩澤Collapse ⇒ スペクトルCollapse ⇒ 構造的滑らかさ**
+
+補強された構成要素：
+
+- **Collapse Typing**：障害タイプI〜IVによる分類  
+- **Collapse関手**：圏論的整合性を保ったCollapse写像  
+- **Langlands Collapse**：保型的・ガロア的構造のCollapse的接合  
+- **岩澤Collapse**：数論的フィルトレーションとZFC定義可能な構造崩壊  
+- **スペクトルCollapse**：リーマン予想やNavier–Stokes問題における解析的障害の除去  
+- **モチーフCollapse**：ホッジ構造・モチーフ圏とのCollapse的整合  
+- **Collapse不能領域**：Collapseが不可能な構造の分類・定義  
+- **型理論的Collapse公理**：論理的基礎と機械検証可能性の保証  
+- **ZFC互換記述**：集合論的整合性のあるCollapse記法
 
 ---
 
-## 🌟 解決済の古典的問題（v12.0）
+## 🚀 AK理論の応用事例（v12.5）
 
-- **Navier–Stokes全球正則性**  
-  トポロジー・カテゴリー・群論・スペクトル障害のCollapseにより  
-  `u(t) ∈ C^∞(ℝ³ × [0, ∞))` を達成  
+### ✅ グローバル正則性の実現  
+PH₁, Ext¹, 群的Collapse, スペクトルCollapse が全て成立すれば、  
+流体方程式（Navier–Stokes）や代数多様体上の構造は滑らか（C^∞）になる。
+
+### ✅ Langlands Collapse統合  
+Langlands対応をCollapse理論で再定式化し、  
+ガロア層・保型層のCollapseを関手的に整理可能とする。
+
+### ✅ 岩澤層分類と数論的Collapse  
+岩澤層によるフィルトレーション構造のCollapseにより、  
+類数の1化やゼータ不変量の回収が可能。
+
+### ✅ スペクトルCollapseによる解析的障害の除去  
+ゼータ関数の零点や流体のスペクトル構造に現れる解析的障害をCollapseにより構造的に除去。
+
+### ✅ Collapse Failure領域の解析  
+Collapseが不可能な領域（非自明なExt、群の捩れ、無限層構造）を定義・分類。
+
+---
+
+## 📚 解決された問題と関連レポート（v12.5連携）
+
+- **ナビエ–ストークス方程式の正則性**  
   ➡ [navier-stokes-global-regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-- **Birch–Swinnerton-Dyer予想（Rank 0）**  
-  Iwasawa CollapseによるMordell–Weil群の有限性証明  
+- **BSD予想（Rank 0）**  
   ➡ [bsd-collapse-theorem](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
 - **ABC予想**  
-  Collapse駆動のエネルギー減衰から高さ・根基不等式を導出  
   ➡ [collapse-abc-theorem](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main)
 
-- **リーマン予想（Spectral Collapse版）**  
-  Collapseとスペクトル構造により $\mathrm{Re}(s) = \frac{1}{2}$ 上の非自明零点を確立  
+- **リーマン予想**  
   ➡ [collapse-riemann-hypothesis](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main)
 
-- **Hilbert第12問題**  
-  Collapse構造により数体上の超越的生成元を具体構成  
+- **ヒルベルト第12問題**  
   ➡ [collapse-hilbert12](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST)
 
-- **Hodge予想（構造的解消）**  
-  Collapse Type IIIが代数的Hodge類の実現を導く  
+- **ホッジ予想**  
   ➡ [collapse-hodge-ak-theory](https://github.com/Kobayashi2501/collapse-hodge-ak-theory)
 
 ---
 
-## 📚 拡張Collapse体系（v12.0）
+## 📁 ファイル構成
 
-- **Langlands Collapse**：群論的簡約とLanglands双対性の接続  
-- **Motif Collapse**：退化幾何のCollapseによるモチーフ圏の簡約化  
-- **Mirror–Tropical Collapse (Q⁺完全版)**：幾何・数論・Tropical Collapseの完全統一  
-- **Spectral Collapse (T⁺形式化)**：解析的障害のCollapse理論的除去  
-- **Collapse Failure分類**：Collapse破綻ケースの型理論的分類整理  
-- **∞-圏論的拡張**：Collapse構造の高次圏論への自然拡張  
-
----
-
-## 📁 収録ファイル一覧
-
-| ファイル名                                           | 内容                                           |
-|------------------------------------------------------|------------------------------------------------|
-| `AK High-Dimensional Projection Structural Theory_v12.0.tex` | 完全補強済みLaTeXソース                       |
-| `AK High-Dimensional Projection Structural Theory_v12.0.pdf` | 全文書のレンダリングPDF                       |
-| `README.md`                                          | 英語版プロジェクト概要（このファイル）         |
-| `README_jp.md`                                       | 日本語版プロジェクト概要                       |
-| `LICENSE`                                            | MITまたはCCライセンス（選択制）                 |
+| ファイル名                                      | 内容                                         |
+|--------------------------------------------------|----------------------------------------------|
+| `AK High-Dimensional Projection Structural Theory_v12.5.tex` | LaTeXソース（完全補強済み）              |
+| `AK High-Dimensional Projection Structural Theory_v12.5.pdf` | コンパイル済みPDF                          |
+| `README.md`                                     | 英語版概要（このプロジェクトの主README）   |
+| `README_jp.md`                                  | 本ファイル（日本語版README）               |
+| `LICENSE`                                       | ライセンス（MITまたはCC）                  |
 
 ---
 
-## DOI
+## DOI（論文アーカイブ）
 
-このプロジェクトはZenodoにて正式アーカイブ済み：
+本プロジェクトはZenodoにて正式アーカイブされています：
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15788159.svg)](https://doi.org/10.5281/zenodo.15788159)
 
 ---
 
-## ✉️ arXiv投稿・共同研究のご案内
+## ✉️ arXiv投稿と共同研究者募集
 
-**AK-HDPST v12.0**は完成済みで、arXiv投稿準備が整っています。
+**AK-HDPST v12.5** は完成済みであり、arXiv提出に向けた準備が整っています。
 
-以下を歓迎します：
+以下の分野における批判的レビューおよび協力者を歓迎します：
 
-- 各分野の専門的レビュー  
-  - 圏論・トポロジー・群論  
-  - PDE・数論・代数幾何  
-  - ホモロジー代数・モチーフ構造  
-  - スペクトル理論・∞-圏・型理論  
-- 構造拡張・形式化・批判的フィードバックの提案  
-- Collapse理論を未解決数学問題へ適用する共同研究者の参加  
+- 圏論、トポロジー、数論、群論  
+- PDE、代数幾何、モチーフ構造  
+- 型理論、スペクトル理論、∞圏理論  
+- Collapse分類、障害構造、Collapse不能領域の検討  
+- Collapse理論を未解決問題へ応用したい研究者
 
 ---
 
 ## 👤 連絡先
 
-**著者**：小林　篤史
-_ChatGPT Research Partnerと共同開発_  
-📧 メール：[dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
-GitHub：[Kobayashi2501](https://github.com/Kobayashi2501)
+**著者**：A. Kobayashi  
+（ChatGPTとの協働により構築）  
+📧 Email: [dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
+GitHub: [@Kobayashi2501](https://github.com/Kobayashi2501)
 
-> 「Collapseとは破壊ではなく、構造的障害の解消である。」
-
----
+> 「Collapseは破壊ではない —— それは構造的障害の解消である。」

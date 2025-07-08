@@ -125,6 +125,32 @@ Collapseが不可能な領域（非自明なExt、群の捩れ、無限層構造
 
 ---
 
+## 🧠 モチーフ理論的拡張：M予想
+
+AK Collapse理論の構造的・哲学的拡張として、**M予想（The M Conjecture）** を正式に統合します。
+
+M予想は、以下の対象を定量的かつ視覚的に再構成します：
+
+- ミラー対称性（Mirror Symmetry）  
+- モチーフ（Motives）  
+- モチーフ圏 $\mathcal{M}_{\mathrm{mot}}$
+
+その手法は：
+
+- Collapse適合条件（$\mathrm{PH}_1 = 0$、$\mathrm{Ext}^1 = 0$、群の簡約）  
+- モチーフ射影関手 $\Pi_{\mathrm{mot}}$ による関手的投影  
+- Collapseスペクトルの一致によるMirror対称性の再解釈  
+- 型理論（Coq/Lean）による形式化可能性
+
+この予想は、「モチーフは形而上的理念ではなく、Collapse力学から生じる**可観測な構造残差**である」と主張します。MQ1〜MQ11の11個の構成的予想を含み、テスト可能な定量的予測と圏論的な再解釈を伴います。
+
+📘 **M予想の全文はこちら**：  
+👉 [The M Conjecture — GitHubリポジトリ](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
+
+本予想は、数論・代数幾何・ホモトピー理論・Mirror対称性をCollapse理論のもとで統合します。
+
+---
+
 ## 📁 ファイル構成
 
 | ファイル名                                      | 内容                                         |

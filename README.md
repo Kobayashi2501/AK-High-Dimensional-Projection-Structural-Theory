@@ -128,6 +128,34 @@ Explicit classification of domains where collapse fails or diverges
 
 ---
 
+
+## 🧠 Motive-Theoretic Extension: The M Conjecture
+
+We now formally incorporate the **M Conjecture** as a structural and philosophical extension of AK Collapse Theory.
+
+The M Conjecture provides a quantitative and visual reinterpretation of:
+
+- Mirror Symmetry  
+- Motives  
+- The Category of Motives $\mathcal{M}_{\mathrm{mot}}$
+
+Through the lens of:
+
+- Collapse admissibility: $\mathrm{PH}_1 = 0$, $\mathrm{Ext}^1 = 0$, group simplification  
+- Functorial collapse projection: $\Pi_{\mathrm{mot}}$  
+- Mirror symmetry reinterpretation via collapse spectrum alignment  
+- Type-theoretic encoding (Coq/Lean compatible)
+
+The conjecture proposes that **motives are observable consequences** of collapse dynamics, not metaphysical ideals. It includes eleven formal components (MQ1–MQ11), with testable predictions and categorical reinterpretation.
+
+📘 **Explore the full M Conjecture here**:  
+👉 [The M Conjecture — GitHub Repository](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
+
+This unifies number theory, algebraic geometry, homotopy theory, and Mirror Symmetry under one collapse-theoretic framework.
+
+---
+
+
 ## 📁 File Contents
 
 | File                                            | Description                               |

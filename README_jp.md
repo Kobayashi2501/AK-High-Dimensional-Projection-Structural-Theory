@@ -152,7 +152,7 @@ Collapse不能な領域（未決性、不安定性）の型理論的記述。
 
 このプロジェクトはZenodoにアーカイブされています：
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15832788.svg)](https://doi.org/10.5281/zenodo.15832788)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16004497.svg)](https://doi.org/10.5281/zenodo.16004497)
 
 ---
 

@@ -151,7 +151,7 @@ Key elements include:
 
 The project is formally archived on Zenodo:
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16004497.svg)](https://doi.org/10.5281/zenodo.16004497)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16007426.svg)](https://doi.org/10.5281/zenodo.16007426)
 
 ---
 

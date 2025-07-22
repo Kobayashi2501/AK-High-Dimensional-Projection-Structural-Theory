@@ -125,16 +125,59 @@ Collapse-inadmissible zones classified into logical lattice of failure types.
 
 ---
 
-## 📘 Motive-Theoretic Extension: The M Conjecture
+## 📘 Motive-Theoretic Extension: The M Conjecture v2.0
 
-The **M Conjecture** views motives and mirror structures as collapse-theoretic shadows of functorial degeneration.
+The **M Conjecture** proposes a collapse-theoretic reinterpretation of motives, mirror symmetry, and their associated categories.
 
-Highlights:
+Instead of treating motives as metaphysical or axiomatic constructs, it introduces a structural mechanism by which motives **emerge functorially** from **collapse-admissible degeneration**.
 
-- `PH₁ = 0 ⇒ MotiveDegeneration`
-- Mirror–Langlands–Tropical triple equivalence
-- Collapse spectrum over motivic categories
-- Eleven axioms (MQ1–MQ11), Coq formalized
+---
+
+### 🔹 Core Collapse Motive Conjectures
+
+- **M1** — *Collapse Generates Motives*:  
+  If `PH₁ = 0`, `Ext¹ = 0`, and group symmetry collapses,  
+  then a canonical AK-motive emerges as a **fixed point of collapse**:  
+  `M_AK := Fix_Collapse(𝔽)`
+
+- **M2** — *Mirror–Motive Equivalence*:  
+  If `Δ_col(X) = Δ_col(X∨)` for a mirror pair,  
+  then `M_AK(X) ≅ M_AK(X∨)`  
+  ⇒ mirror symmetry is realized **structurally via collapse spectra**
+
+---
+
+### 🧩 Eleven Structural Axioms (MQ1–MQ11)
+
+A system of conjectures supporting M1 and M2:
+
+- Collapse spectrum equivalence (`Δ_col`)
+- Collapse depth ⇒ motive complexity
+- Group collapse ⇒ motive triviality
+- Mirror duality invariant under collapse
+- Homotopy classification by collapse type
+- Collapse failure ⇔ Grothendieck obstruction
+- Collapse ⇒ reconstructible motive
+- `[PH₁ = 0 ⇔ Ext¹ = 0] ⇒ M_AK → M_classical`
+- Motive entropy ∝ collapse layer count
+
+---
+
+### 💠 Implications
+
+- Reconstructs motive categories from observable structural collapse  
+- Connects Mirror Symmetry, Langlands, and Tropical degenerations  
+- Enables Coq/Lean formalization of motive emergence  
+- Quantifies motive complexity via Ext-energy and topological decay
+
+---
+
+### 🧪 Formal Status
+
+- **Collapse-fixed motives**: defined and visualized  
+- **Spectral diagrams**: barcode-based  
+- **Type-theoretic closure**: proven via `Collapse Q.E.D.`  
+- **Formalized**: Coq (M1), Lean (M2), Appendix Z/Z⁺
 
 👉 [Explore The M Conjecture](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
 

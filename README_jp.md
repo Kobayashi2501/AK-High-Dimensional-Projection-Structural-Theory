@@ -126,16 +126,54 @@ Collapse Failure を型理論的に分類・例外処理可能に。
 
 ---
 
-## 📘 モチーフ理論的拡張：M予想
+## 📘 モチーフ理論拡張：M予想 v2.0
 
-**M予想**は、モチーフやミラー構造が Collapse 理論による射影的影に過ぎないという構造仮説です。
+**M予想**は、動機（motive）、Mirror対称性、およびそれらの圏構造を  
+**Collapse理論的視点**から再構築する大胆な理論です。
 
-主な要素：
+動機をあらかじめ与えられた理想的存在と見なすのではなく、  
+構造的退化（degeneration）とCollapse可能性（admissibility）に基づく  
+**函手的な生成結果（functorial output）** として定式化します。
 
-- `PH₁ = 0 → MotiveDegeneration`
-- Mirror–Langlands–Tropical 三重対応
-- Collapseスペクトルによるモチーフ空間の定量解析
-- 11の公理群（MQ1〜MQ11）とCoq形式による記述
+---
+
+### 🔹 中心命題（マクロ予想）
+
+- **M1** — *Collapseによる動機生成予想*：  
+  `PH₁ = 0`、`Ext¹ = 0`、対称群が自明化すれば、  
+  Collapseの不動点としてAK動機 `M_AK` が生成される：  
+  `M_AK := Fix_Collapse(𝔽)`
+
+- **M2** — *Mirror–動機同型予想*：  
+  Mirror対 `(X, X∨)` に対し Collapseスペクトルが一致すれば：  
+  `Δ_col(X) = Δ_col(X∨)`  
+  AK動機が同型になる：`M_AK(X) ≅ M_AK(X∨)`  
+  ⇒ Mirror対称性が Collapseスペクトルとして実現される。
+
+---
+
+### 🧩 派生命題（MQ1–MQ11）
+
+M1・M2 を支える11の補助的構造予想：
+
+- Collapseスペクトル一致性（`Δ_col`）  
+- Collapse深度 ⇒ 動機複雑性  
+- 群のCollapse ⇒ 動機の自明性  
+- Mirror対称性はCollapse対称性として保たれる  
+- Collapse型によるホモトピー分類  
+- Collapse不能 ⇔ Grothendieck的障害  
+- Collapseフローから動機再構成可能  
+- `[PH₁ = 0 ⇔ Ext¹ = 0] ⇒ M_AK → M_従来型`  
+- 動機のエントロピー ∝ Collapse層数
+
+---
+
+### 💠 成立した場合の意義
+
+- 動機圏は Collapse構造から視覚的・定量的に再構成可能  
+- Mirror・Langlands・Tropical の統合的Collapse表現  
+- Coq / Lean による動機生成の型理論的定式化  
+- Extエネルギー・位相退化による動機複雑性の定量化
 
 👉 [M予想リポジトリはこちら](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
 

@@ -1,4 +1,4 @@
-# 🌐 AK高次元射影構造理論（v13.0）
+# 🌐 AK高次元射影構造理論 (v14.0)
 
 📄 [English README (英語版はこちら)](README.md)
 
@@ -6,102 +6,110 @@
 
 ## 🧩 AK理論とは？
 
-**AK高次元射影構造理論（AK-HDPST）** は、偏微分方程式（PDE）、数論、代数幾何、圏論における構造的障害（obstruction）を、高次元射影とCollapse関手によって体系的に除去する数学的枠組みです。
+**AK高次元射影構造理論（AK-HDPST）**は、型理論・圏論・トポロジーを統合した理論枠組であり、数理構造に潜在する障害（obstruction）を系統的に除去することを目的としています。
 
-v13.0では以下の拡張を含みます：
+v14.0は本理論の最終形として、以下の要素を完全統合しています：
 
-- **Collapse Q.E.D. 定理の完全閉包**（Coq/Lean形式での再帰的証明構造）
-- **統一Collapse連鎖**：PH1 = 0 → Ext1 = 0 → 群Collapse → スペクトル／エントロピーCollapse → 型理論的整合
-- **スペクトル・Langlands・Tropical・モチーフ統合**：解析的・数論的・動機的障害の解消
-- **Collapse Failure型分類**：Collapse不能な領域の形式的診断（例：不安定／非可決）
-- **情報理論的Collapse拡張**：ICM・KLダイバージェンスによる成功判定
-- **Appendix A〜Z⁺**：Collapse構造の完全形式化（Coq/Lean対応）
-
----
-
-## 🧠 哲学的モチベーション
-
-> 「障害とは矛盾ではなく、次元的・構造的な不備の徴候である」
-
-AK理論では、特異点・非自明なExt¹・スペクトル的発散などの障害を、より高次元で精密な構造に写像（射影）することで解消できるとします。
-
-本理論は以下を実現します：
-
-- トポロジー的簡約（PH1 = 0）
-- Extクラスの消滅（Ext1 = 0）
-- 群的構造の崩壊（Galois群・Selmer群・自己同型群など）
-- スペクトル的障害の収束（SpectralEnergy → 0）
-- エントロピー的整合性（ICM > 0 ⇒ KL > 0）
+- ✅ **Collapse Q.E.D.定理** — 再帰的・型理論的・Coq/Lean形式に基づいた機械検証可能な閉包定理
+- ✅ **スペクトル崩壊 × 情報理論的崩壊** の統合
+- ✅ **微分崩壊（Differential Collapse）モジュールの追加**
+- ✅ **崩壊不能領域の完全分類（Unresolvable, Undecidable, Unstable, Foundational）**
+- ✅ **Appendix A～Z⁺ 完備化**：Coq/Lean対応の形式的記述付き
+- ✅ 明示的な推論構造：  
+  `射影 → 崩壊 → 可容性 → 解決 → Q.E.D.`
 
 ---
 
-## 🧭 AK理論 v13.0 の適用範囲
+## 🧠 理論的背景と哲学的動機
 
-AK理論の対象は以下を含みます：
+> 「障害とは矛盾ではなく、次元的な不十分性である。」
 
-- 持続的ホモロジーとExt¹の消滅による障害解消
-- 数論的群の崩壊（Galois群、Selmer群など）
-- 岩澤層による数論的精密化（Iwasawa Collapse）
-- Langlands対応のCollapse関手的再定式化
-- Navier–Stokesやリーマン予想におけるスペクトル的収束
-- モチーフ的Collapse（Hodge・動機・Ext¹_motiveの消滅）
-- Collapse Failure（失敗）の型理論的分類
-- 全構造の型理論的・圏論的形式化（Coq/Lean整合）
-- 情報理論的Collapse（エントロピー減衰による診断）
-- Collapse Q.E.D.の完全閉包と機械検証
+AK理論は、数学的な「障害」（Ext群の非自明性、特異点、スペクトル発散、型理論的未定義性など）を、低次元構造の限界に起因する現象とみなします。
 
----
+これに対し、高次元への射影と崩壊関手（Collapse Functor）を通じて以下を回復します：
 
-## 🔧 Collapse理論の基本構造（v13.0）
-
-以下の構造的消去連鎖を中核に据えます：
-
-PH1 = 0 ⇒ Ext1 = 0 ⇒ 群Collapse ⇒ スペクトルCollapse ⇒ エントロピーCollapse ⇒ 型整合性
-
-
-補強内容：
-
-- **Collapse関手**：トポロジー・圏・数論の整合射影
-- **Langlands・Mirror Collapse**：自己同型表現とガロア表現の合一
-- **Iwasawa Collapse**：Ext1_Iwasawa ⇒ 群Collapse(G_I)
-- **Spectral Collapse**：SpectralEnergy(t) < ε（t十分大で）
-- **情報理論的Collapse**：ICM(X) > 0 ⇒ KL(X, Collapse(X)) > 0
-- **Collapse Failure分類**：未定義／不安定／構造的不能領域
-- **型理論的形式化**：Coq/Leanによる完全な記述と検証
+- トポロジー的平坦化：`PH₁ = 0`
+- 圏論的簡約：`Ext¹ = 0`
+- 群の退化：`GroupCollapse`
+- スペクトルの平滑化：`SpectralEnergy → 0`
+- 情報量の減衰：`ICM(X) > 0`
+- 崩壊成功の保証：`CollapseSuccessful(X)`
 
 ---
 
-## 🚀 AK理論の応用例（v13.0）
+## 🧭 AK理論（v14.0）の適用範囲
 
-### ✅ Navier–Stokesの滑らかさの証明  
-PH1・Ext1・群・スペクトル崩壊により、PDEの大域的正則性を証明。
-
-### ✅ Langlands Collapseの実現  
-Ext1_Langlands ⇒ A ≅ G により、自己同型とガロア構造の合一。
-
-### ✅ 岩澤層による数論的Collapse  
-岩澤層のフィルトレーションにより、クラス群のCollapseを誘導。
-
-### ✅ スペクトルCollapse（RH、Navier–Stokes）  
-SpectralEnergy < ε による解析的障害の消滅。
-
-### ✅ モチーフCollapse  
-Ext1_motive ⇒ 群Collapseによる動機的単純化。
-
-### ✅ 情報理論的Collapse  
-エントロピーとKLダイバージェンスに基づくCollapse診断。
-
-### ✅ Collapse Failureの理論化  
-Collapse不能な領域（未決性、不安定性）の型理論的記述。
+- 持続的ホモロジーと Ext 消失
+- セルマー群や類群の崩壊
+- Langlands崩壊：Galois–Automorphic–Functor の統合
+- 岩澤理論ベースの崩壊層（Iwasawa Collapse）
+- PDEやゼータ関数系に対するスペクトル崩壊
+- 射影退化を含むモチーフ圏崩壊
+- 情報理論に基づく崩壊判定（ICM・KL発散）
+- ZFC × 型理論の整合性検証
+- Collapse Failureの分類と例外伝播理論
+- Collapse Q.E.D.定理の形式的閉包（Coq/Lean対応）
 
 ---
 
-## 📚 解決済み問題・関連プロジェクト（v13.0連携）
+## 🔧 中核となるCollapse構造
 
-- **Navier–Stokes方程式 大域正則性**  
+崩壊プロセスは以下の順で進行します：
+
+PH₁ = 0
+↓
+Ext¹ = 0
+↓
+Group Collapse
+↓
+Spectral Collapse
+↓
+Entropic Collapse (ICM > 0)
+↓
+型理論的整合性
+
+
+各段階に対応する型：
+- `CollapseAdmissible`
+- `CollapseSuccessful`
+- `CollapseReady`
+- `CollapseFailure`
+- `CollapseQED`
+
+---
+
+## 🚀 AK理論（v14.0）の応用例
+
+### ✅ Navier–Stokes方程式のグローバル正則性  
+PH₁ → Ext₁ → 群 → スペクトル → 情報量と崩壊の連鎖により滑らかさを確保。
+
+### ✅ BSD予想（Rank 0）  
+Ext₁の消失によりSelmer群の退化を導出。
+
+### ✅ Langlands崩壊  
+Galois–Automorphic間の関手同値性をExt₁から導出。
+
+### ✅ スペクトル崩壊（Riemann予想、Navier–Stokes）  
+ラプラシアン固有値の収束（λᵢ → 0）による解析的崩壊。
+
+### ✅ モチーフ崩壊  
+導来モチーフに対する Ext 消失による関手的退化。
+
+### ✅ 情報理論的崩壊  
+`ICM(X) := H(X) − H(C(X)) > 0`  
+`KL(Pₓ ‖ P_{C(X)}) > 0` により構造的変化を定量化。
+
+### ✅ 崩壊不能領域の理論的分類  
+Collapse Failure を型理論的に分類・例外処理可能に。
+
+---
+
+## 📚 解決済みの理論課題と関連リポジトリ
+
+- **Navier–Stokes正則性**  
   ➡ [navier-stokes-global-regularity](https://github.com/Kobayashi2501/navier-stokes-global-regularity)
 
-- **BSD予想（ランク0）**  
+- **BSD予想（Rank 0）**  
   ➡ [bsd-collapse-theorem](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory)
 
 - **ABC予想**  
@@ -118,64 +126,56 @@ Collapse不能な領域（未決性、不安定性）の型理論的記述。
 
 ---
 
-## 🧠 モチーフ理論的拡張：M予想
+## 📘 モチーフ理論的拡張：M予想
 
-**M予想**は、Mirror対称性・モチーフ・動機圏をCollapse理論により再定義しようとする試みです。
+**M予想**は、モチーフやミラー構造が Collapse 理論による射影的影に過ぎないという構造仮説です。
 
 主な要素：
 
-- Collapse条件に基づくモチーフの可視化（PH1=0, Ext1=0）
-- Collapse関手によるモチーフ射影（Π_mot）
-- Mirror–Langlands–Tropical間のCollapse対応
-- Collapseスペクトルによる定量化
-- MQ1〜MQ11 の11命題からなる構成
-- Coq/Leanによる型理論的記述
+- `PH₁ = 0 → MotiveDegeneration`
+- Mirror–Langlands–Tropical 三重対応
+- Collapseスペクトルによるモチーフ空間の定量解析
+- 11の公理群（MQ1〜MQ11）とCoq形式による記述
 
-📘 **M予想の詳細はこちら**：  
-👉 [The M Conjecture — GitHub Repository](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
+👉 [M予想リポジトリはこちら](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
 
 ---
 
-## 📁 ファイル構成
+## 📁 含まれるファイル
 
-| ファイル名                                            | 内容                                      |
-|------------------------------------------------------|-------------------------------------------|
-| `AK High-Dimensional Projection Structural Theory_v13.0.tex` | LaTeXソースファイル（完全補強済）         |
-| `AK High-Dimensional Projection Structural Theory_v13.0.pdf` | PDF版                                     |
-| `README.md`                                          | 英語版README（このファイルの英語版）       |
-| `README_jp.md`                                       | 日本語README（このファイル）               |
-| `LICENSE`                                            | MITまたはCCライセンス（選択に応じて）      |
+| ファイル名                                                  | 説明                                |
+|-------------------------------------------------------------|-------------------------------------|
+| `AK High-Dimensional Projection Structural Theory_v14.0.tex` | LaTeXソース全文（形式的記述付き）  |
+| `AK High-Dimensional Projection Structural Theory_v14.0.pdf` | PDF形式の完成版                     |
+| `README.md`                                                 | 英語版README                        |
+| `README_jp.md`                                              | 日本語版README（このファイル）      |
+| `LICENSE`                                                   | ライセンス情報（MITまたはCC）       |
 
 ---
 
-## DOI
-
-このプロジェクトはZenodoにアーカイブされています：
+## 📌 DOI
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16007426.svg)](https://doi.org/10.5281/zenodo.16007426)
 
 ---
 
-## ✉️ arXiv投稿と共同研究の呼びかけ
+## ✉️ arXiv投稿と共同研究のご案内
 
-**AK-HDPST v13.0** は arXiv投稿に向けて完全準備済です。
+AK-HDPST v14.0は、査読誌への投稿に耐えうる完成状態にあります。
 
-募集対象：
+以下の協力者を歓迎します：
 
-- 査読・批評（以下分野）：
-  - トポロジー、数論、代数幾何、群論、型理論、圏論、PDE
-- 共同研究：
-  - Collapse Failureの検出
-  - スペクトルCollapseの数理解析
-  - モチーフ・Langlands統合の圏論的精緻化
+- トポロジー、数論、圏論、スペクトル解析、PDE、型理論 等の専門家
+- Collapse Failure領域の検出と分類研究
+- ミラー対称性・Langlands・Tropical構造のCollapse整理
 
 ---
 
 ## 👤 著者情報
 
-**著者**: 小林篤史 (A. Kobayashi)  
-_共同開発: ChatGPT リサーチパートナー_  
+**著者**：小林篤史（A. Kobayashi）  
+_ChatGPT研究パートナーと共同開発_  
 📧 Email: [dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
 GitHub: [@Kobayashi2501](https://github.com/Kobayashi2501)
 
-> 「Collapseは崩壊ではない — それは構造障害の解決である」
+> **「崩壊とは破壊ではなく、構造の解決である。」**

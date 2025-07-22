@@ -170,15 +170,6 @@ A system of conjectures supporting M1 and M2:
 - Enables Coq/Lean formalization of motive emergence  
 - Quantifies motive complexity via Ext-energy and topological decay
 
----
-
-### 🧪 Formal Status
-
-- **Collapse-fixed motives**: defined and visualized  
-- **Spectral diagrams**: barcode-based  
-- **Type-theoretic closure**: proven via `Collapse Q.E.D.`  
-- **Formalized**: Coq (M1), Lean (M2), Appendix Z/Z⁺
-
 👉 [Explore The M Conjecture](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
 
 ---

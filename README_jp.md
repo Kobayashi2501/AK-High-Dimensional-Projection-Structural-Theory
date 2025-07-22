@@ -155,7 +155,7 @@ Collapse Failure を型理論的に分類・例外処理可能に。
 
 ## 📌 DOI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16007426.svg)](https://doi.org/10.5281/zenodo.16007426)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16296770.svg)](https://doi.org/10.5281/zenodo.16296770)
 
 ---
 

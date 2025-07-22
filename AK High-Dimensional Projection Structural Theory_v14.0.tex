@@ -9358,37 +9358,46 @@ inductive CollapseReady : Type → Prop
 \noindent The following TikZ diagram illustrates the logical flow and convergence of various collapse judgments toward the unified predicate \texttt{CollapseReady}.
 
 \begin{center}
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}[node distance=2.4cm, every node/.style={align=center}]
-% Base nodes
-\node (PH1) [draw, rounded corners, minimum width=3.4cm] {$\mathrm{PH}_1(F) = 0$};
-\node (Ext1) [below left=of PH1, draw, rounded corners] {$\mathrm{Ext}^1(F) = 0$};
-\node (Grp) [below right=of PH1, draw, rounded corners] {$\mathrm{GroupCollapse}(G)$};
-\node (Ready) [below=of Ext1, xshift=2.4cm, draw, thick, rounded corners, fill=blue!10] {\textbf{Collapse Ready}};
+\resizebox{0.98\textwidth}{!}{
+\begin{tikzpicture}[
+  every node/.style={align=center, rounded corners, minimum width=3.4cm, font=\small},
+  thick,
+  node distance=2.7cm and 2.7cm
+]
 
-% New inputs (with footnotes)
-\node (Spectral) [left=4cm of Ext1, draw, dashed] {SpectralEnergy $< \varepsilon$\footnotemark[1]};
-\node (KL) [right=4cm of Grp, draw, dashed] {KL-Div $> 0$\footnotemark[2]};
-\node (Geom) [below left=of Spectral, draw, dashed] {CollapseEnergy $< \varepsilon$};
-\node (LapSpec) [below=of Spectral, draw, dashed] {Laplacian $\lambda_i \ll \varepsilon$};
-\node (Ricci) [below right=of LapSpec, draw, dashed] {Ricci$>$0 / Inject$< \varepsilon$};
-\node (InfCat) [right=4cm of LapSpec, draw, dashed] {$\mathrm{PH}_1=0$, $\mathrm{Ext}^1=0$ on $\infty$-Cat};
+% Central node
+\node (Ready) [draw, fill=blue!10] {\textbf{Collapse Ready}};
 
-% Arrows
-\draw[->] (PH1) -- node[left] {\small PH$\to$Ext} (Ext1);
-\draw[->] (Ext1) -- node[below left] {\small Ext$\to$Group} (Grp);
-\draw[->] (Grp) -- node[right] {\small Group$\to$Ready} (Ready);
+% Main path
+\node (PH1) [above=of Ready] {$\mathrm{PH}_1(F) = 0$};
+\node (Ext1) [left=of Ready] {$\mathrm{Ext}^1(F) = 0$};
+\node (Grp) [right=of Ready] {$\mathrm{GroupCollapse}(G)$};
 
-% Dotted inputs
-\draw[dashed,->] (Spectral) -- node[above right] {\small Spectral} (Ready);
-\draw[dashed,->] (KL) -- node[above left] {\small Info Collapse} (Ready);
+% Auxiliary criteria (circular arc)
+\node (Spectral) [above left=of Ext1, draw, dashed] {SpectralEnergy $< \varepsilon$\footnotemark[1]};
+\node (KL) [above right=of Grp, draw, dashed] {KL-Div $> 0$\footnotemark[2]};
+\node (Geom) [below left=of Ext1, draw, dashed] {CollapseEnergy $< \varepsilon$};
+\node (LapSpec) [below=of PH1, yshift=-1cm, draw, dashed] {Laplacian $\lambda_i \ll \varepsilon$};
+\node (Ricci) [below right=of Grp, draw, dashed] {Ricci $>$ 0 / Inject $< \varepsilon$};
+\node (InfCat) [below=of Ready, yshift=-1.2cm, draw, dashed] {$\mathrm{PH}_1=0$, $\mathrm{Ext}^1=0$ \\ on $\infty$-Cat};
+
+% Arrows (main chain)
+\draw[->] (PH1) -- node[right] {\footnotesize PH$\to$Ready} (Ready);
+\draw[->] (Ext1) -- node[above] {\footnotesize Ext} (Ready);
+\draw[->] (Grp) -- node[above] {\footnotesize Group} (Ready);
+
+% Dotted auxiliary arrows
+\draw[dashed,->] (Spectral) -- (Ready);
+\draw[dashed,->] (KL) -- (Ready);
 \draw[dashed,->] (Geom) -- (Ready);
 \draw[dashed,->] (LapSpec) -- (Ready);
 \draw[dashed,->] (Ricci) -- (Ready);
 \draw[dashed,->] (InfCat) -- (Ready);
+
 \end{tikzpicture}
 }
 \end{center}
+
 
 \footnotetext[1]{See Appendix T$^{+}$ for the spectral collapse convergence structure.}
 \footnotetext[2]{See Appendix Y for information-theoretic KL-based collapse validation.}
@@ -9619,37 +9628,46 @@ inductive CollapseReady : Type → Prop
 \subsubsection*{Z.10.2 Collapse Proof Path Diagram (Fully Extended)}
 
 \begin{center}
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}[node distance=2.4cm, every node/.style={align=center}]
-% Base nodes
-\node (PH1) [draw, rounded corners, minimum width=3.4cm] {$\mathrm{PH}_1(F) = 0$};
-\node (Ext1) [below left=of PH1, draw, rounded corners] {$\mathrm{Ext}^1(F) = 0$};
-\node (Grp) [below right=of PH1, draw, rounded corners] {$\mathrm{GroupCollapse}(G)$};
-\node (Ready) [below=of Ext1, xshift=2.4cm, draw, thick, rounded corners, fill=blue!10] {\textbf{Collapse Ready}};
+\resizebox{0.98\textwidth}{!}{
+\begin{tikzpicture}[
+  every node/.style={align=center, rounded corners, minimum width=3.4cm, font=\small},
+  thick,
+  node distance=2.7cm and 2.7cm
+]
 
-% New inputs
-\node (Spectral) [left=4cm of Ext1, draw, dashed] {SpectralEnergy $< \varepsilon$};
-\node (KL) [right=4cm of Grp, draw, dashed] {KL-Div $> 0$};
-\node (Geom) [below left=of Spectral, draw, dashed] {CollapseEnergy $< \varepsilon$};
-\node (LapSpec) [below=of Spectral, draw, dashed] {Laplacian $\lambda_i \ll \varepsilon$};
-\node (Ricci) [below right=of LapSpec, draw, dashed] {Ricci$>$0 / Inject$< \varepsilon$};
-\node (InfCat) [right=4cm of LapSpec, draw, dashed] {$\mathrm{PH}_1=0$, $\mathrm{Ext}^1=0$ on $\infty$-Cat};
+% Central node
+\node (Ready) [draw, fill=blue!10] {\textbf{Collapse Ready}};
 
-% Arrows
-\draw[->] (PH1) -- node[left] {\small PH$\to$Ext} (Ext1);
-\draw[->] (Ext1) -- node[below left] {\small Ext$\to$Group} (Grp);
-\draw[->] (Grp) -- node[right] {\small Group$\to$Ready} (Ready);
+% Main path
+\node (PH1) [above=of Ready] {$\mathrm{PH}_1(F) = 0$};
+\node (Ext1) [left=of Ready] {$\mathrm{Ext}^1(F) = 0$};
+\node (Grp) [right=of Ready] {$\mathrm{GroupCollapse}(G)$};
 
-% Dotted inputs
-\draw[dashed,->] (Spectral) -- node[above right] {\small Spectral} (Ready);
-\draw[dashed,->] (KL) -- node[above left] {\small Info Collapse} (Ready);
+% Auxiliary criteria (circular arc)
+\node (Spectral) [above left=of Ext1, draw, dashed] {SpectralEnergy $< \varepsilon$\footnotemark[1]};
+\node (KL) [above right=of Grp, draw, dashed] {KL-Div $> 0$\footnotemark[2]};
+\node (Geom) [below left=of Ext1, draw, dashed] {CollapseEnergy $< \varepsilon$};
+\node (LapSpec) [below=of PH1, yshift=-1cm, draw, dashed] {Laplacian $\lambda_i \ll \varepsilon$};
+\node (Ricci) [below right=of Grp, draw, dashed] {Ricci $>$ 0 / Inject $< \varepsilon$};
+\node (InfCat) [below=of Ready, yshift=-1.2cm, draw, dashed] {$\mathrm{PH}_1=0$, $\mathrm{Ext}^1=0$ \\ on $\infty$-Cat};
+
+% Arrows (main chain)
+\draw[->] (PH1) -- node[right] {\footnotesize PH$\to$Ready} (Ready);
+\draw[->] (Ext1) -- node[above] {\footnotesize Ext} (Ready);
+\draw[->] (Grp) -- node[above] {\footnotesize Group} (Ready);
+
+% Dotted auxiliary arrows
+\draw[dashed,->] (Spectral) -- (Ready);
+\draw[dashed,->] (KL) -- (Ready);
 \draw[dashed,->] (Geom) -- (Ready);
 \draw[dashed,->] (LapSpec) -- (Ready);
 \draw[dashed,->] (Ricci) -- (Ready);
 \draw[dashed,->] (InfCat) -- (Ready);
+
 \end{tikzpicture}
 }
 \end{center}
+
 
 ---
 

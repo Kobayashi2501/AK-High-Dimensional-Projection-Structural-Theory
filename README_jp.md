@@ -185,7 +185,7 @@ Collapseによってモチーフが構成的に出現するという仮説。
 
 ## 📌 DOI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16296770.svg)](https://doi.org/10.5281/zenodo.16296770)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16524359.svg)](https://doi.org/10.5281/zenodo.16524359)
 
 ---
 

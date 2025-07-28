@@ -188,7 +188,7 @@ Proposes that **motives emerge functorially** from collapse-admissible degenerat
 
 ## 📌 DOI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16296770.svg)](https://doi.org/10.5281/zenodo.16296770)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16524359.svg)](https://doi.org/10.5281/zenodo.16524359)
 
 ---
 

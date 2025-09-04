@@ -1,211 +1,423 @@
-# 🌐 AK高次元射影構造理論（v14.5）
+# AK-HDPST v15.0 — AK 高次元射影構造理論
 
-📄 [English README (英語版はこちら)](README.md)
+高次元射影と統制された障害除去に基づく、関手的 collapse（縮約）のための二層・監査可能な証明フレームワーク。
 
----
+- コア: 1D 構成可能（constructible）persistence 上の機械検証可能な主張
+- [Spec]: 明示的な仮定と監査ログに基づく安全な拡張（collapse 後は非拡大）
 
-## 🧩 AK理論とは？
-
-**AK高次元射影構造理論（AK-HDPST）** は、型理論・圏論・位相幾何に基づき、あらゆる数学的構造に内在する阻害要因（obstructions）を体系的に排除するための統一的枠組みです。
-
-**v14.5** では、Collapse理論の最終定理「**Collapse Q.E.D.**」の形式証明に加え、**μ-invariantによる崩壊不能の分類（Type IV Failure）** を導入し、より堅牢な崩壊判定基準を確立しました。
-
-### 🔑 v14.5の主な特長
-
-- ✅ **Collapse Q.E.D.定理** — 型理論的・再帰的・機械検証可能（Coq/Lean対応）
-- ✅ **スペクトル崩壊・エントロピー崩壊の統合**
-- ✅ **微分幾何的Collapseモジュール** — 曲率退化による構造単純化
-- ✅ **μ-invariant分類（Type IV Failure）による崩壊失敗の可視化**
-- ✅ **Appendix A〜Z⁺** — 50以上の補論、Coq/Lean構文で完全整備
-- ✅ **射影 ⇒ 崩壊 ⇒ 崩壊許容性 ⇒ 解消 ⇒ Q.E.D.** の構文的パイプラインを構築
+リポジトリは研究フレームワークとして、API、実行プロトコル、監査アーティファクトを提供します。強い保証は以下の「コアのスコープ」に限定されます。
 
 ---
 
-## 🧠 哲学的モチーフ
+## ハイライト
 
-> 「阻害とは矛盾ではない──それは次元的不足である。」
-
-AK理論では、Ext群の非消滅やPH₁の存在、スペクトル発散、論理的不完全性などの“阻害”を、「埋め込み次元の不足」によって生じると解釈します。
-
-次元的補完（collapse）を通じて、以下が実現されます：
-
-- 位相単純化：`PH₁ = 0`
-- 圏論的平坦化：`Ext¹ = 0`
-- 群論的退化：`GroupCollapse`
-- スペクトル正則性：`λ₁ → 0`
-- 情報量の簡約性：`ICM(X) > 0`
-- 崩壊成功条件：`CollapseSuccessful(X)`
+- 正確なトランケーション `T_tau` が長さ <= tau のバーを削除（Serre 反射）。インターリービング/ボトルネック距離に対して 1-Lipschitz
+- フィルタ付き持ち上げ `C_tau` は f.q.i.（filtered quasi-isomorphism）まで一意で、`P_i(C_tau F) ~ T_tau(P_i F)`
+- Collapse ゲート: 一方向のみ使用（PH1(F)=0 => Ext1(R(F),k)=0、t-正確・振幅 <= 1 の場合）
+- 塔監査 `(mu, nu)`: collapse 後の比較写像の核・余核から見えない極限失敗を検出
+- 更新ポリシー: 削除型は collapse 後に非増大、包含型は非拡大（安定性のみ）
+- 再現性: 窓（window）単位のプロトコル、δ台帳、B-Gate+ の安全余白、バージョン付き成果物
 
 ---
 
-## 🧭 AK理論v14.5の適用領域
+## 目次
 
-- 持続的ホモロジーとExt群の消滅による簡約化
-- 群やSelmer群のIwasawa理論による階層的崩壊
-- Langlands崩壊（Galois → Transfer → Functorial）
-- PDE（Navier–Stokes、リーマン予想）のスペクトル崩壊
-- モチーフ圏の導来的Collapseと再構成
-- 情報理論的Collapse（エントロピー、KL距離）
-- ZFC・型理論両対応（Coq/Leanによる形式検証）
-- Failure分類格子（不安定・非可視・決定不能・基礎的破綻）
-- Collapse Q.E.D. の再帰的定式化と論理的閉包
-
----
-
-## 🆕 v14.5の主な更新内容
-
-- 📌 **μ-invariantによるCollapse Failure (Type IV)**  
-  Ext¹やPH₁では検出不能な崩壊失敗を次で定義：  
-  ```
-  μ_Collapse := dim ker(Collapse(F_∞) → ⋃ Collapse(F_{Kₙ}))
-  ```
-  詳細は **Appendix M⁺⁺**, **U⁺**, **Chapter 6, 8, 12** を参照。
-
-- 📌 **Failure格子の拡張完結**  
-  Failure Typeに以下を追加：
-  - Topological（PH₁）
-  - Categorical（Ext¹）
-  - Spectral（エネルギー発散）
-  - Foundational（ZFC非整合）
-  - Undecidable（ゲーデル的）
-  - **Undetectable（μ-invariant）**
-  - Geometric（曲率・ホロノミー崩壊不能）
-  - Unstable（フィルター極限で崩壊不能）
-
-- 📌 **Collapse Q.E.D.補強**  
-  以下を明示的に前提とした閉包形式：
-  ```
-  CollapseAdmissible(F) ∧ ¬TypeIV(F) ⇒ CollapseTheory_QED
-  ```
-
-- 📌 **Langlands Collapse補足**  
-  Collapseは有限基底変換では見えず、Iwasawa塔におけるμ-invariantで初めて検出可能となる場合がある。
-
-- 📌 **Navier–Stokes補足強化**  
-  Collapse Zoneへの収束は「Failureが検出されていない」ことの明示が必要（Appendix M⁺⁺参照）。
+- 概要
+- スコープと保証
+- コンセプトと構成要素
+- インストール
+- クイックスタート（CLI / Python API）
+- 設定ファイル（`run.yaml`）
+- ワークフローと例
+- 更新ポリシー（許可オペ）
+- 監査と成果物
+- ロードマップ
+- コントリビュート
+- 引用・参考文献
+- ライセンス
 
 ---
 
-## 🔧 Collapse理論の中核構造
+## 概要
 
-Collapseは次の段階的過程で進行します：
+AK-HDPST v15.0 は「証明志向」フレームワークです。  
+- コア: 何を証明し保証するか（構成可能 1D persistence 上）  
+- [Spec]: どの仮定のもとで安全に拡張できるか（collapse 後は非拡大、監査付き）
 
-```
-PH₁ = 0
-↓
-Ext¹ = 0
-↓
-Group Collapse
-↓
-Spectral Collapse
-↓
-Entropic Collapse（ICM > 0）
-↓
-Type-Theoretic Collapse
-↓
-Collapse Q.E.D.
-```
-
-主要モジュール群：
-- `CollapseFunctors`
-- `CollapseAdmissible`
-- `CollapseSuccessful`
-- `CollapseFailure`（μ-invariant含む）
-- `CollapseQED`
+すべての比較は `T_tau` 適用後に行います（窓プロトコル: t -> persistence -> T_tau -> compare）。  
+これにより安定性保証が明確になり、塔の `(mu, nu)` で失敗を可視化できます。
 
 ---
 
-## 🚀 AK理論v14.5の応用
+## スコープと保証
 
-### ✅ Navier–Stokesグローバル正則性  
-PH₁・Ext¹・スペクトル・エントロピーの全崩壊条件により滑らかさが導かれる。  
-Type IV Failure（μ-obstruction）がないことがQ.E.D.の前提。
+強い主張は次に限定されます。
 
-### ✅ BSD予想（ランク0）  
-Selmer群の崩壊とExt-motivic構造による解明。  
-μ-invariantによってランク0未達が分類される。
+- 1 パラメータ・構成可能 persistence（係数は体）
+- 正確な Serre 反射 `T_tau`（長さ <= tau のバーを削除、1-Lipschitz）
+- フィルタ持ち上げ `C_tau`（f.q.i. まで）で `P_i(C_tau F) ~ T_tau(P_i F)`
+- 一方向ブリッジのみ: t-正確・振幅 <= 1 の下で PH1(F)=0 => Ext1(R(F),k)=0
+- 塔診断 `(mu, nu)` は collapse 後の比較写像の核・余核から算出
 
-### ✅ Langlands Collapse  
-Galois ⇒ Transfer ⇒ Functorial の3段階で分類。  
-Ext¹の非可視的失敗はμ-invariantにより検出される。
+注意:
+- 一般には PH1 <-> Ext1 は主張しません
+- BSD, RH, Navier–Stokes などの主張は行いません
 
-### ✅ リーマン予想・スペクトル崩壊  
-固有値の崩壊連鎖によりCollapse可能性を証明。  
-スペクトル的μ-type Failureも除外対象に。
+---
 
-### ✅ 情報理論的Collapse  
-Collapseが成立するためには次を満たす必要がある：
-```
-ICM(X) := H(X) − H(C(X)) > 0
-KL(Pₓ ‖ P_{C(X)}) > 0
+## コンセプトと構成要素
+
+- `T_tau`（正確トランケーション）
+  - 長さ <= tau のバーを削除する反射
+  - インターリービング/ボトルネック距離に対して 1-Lipschitz
+
+- `C_tau`（フィルタ持ち上げ、f.q.i. まで）
+  - 鎖複体レベルでの持ち上げ
+  - `P_i(C_tau F) ~ T_tau(P_i F)` を次数ごとに満たす
+
+- Collapse ゲートと一方向ブリッジ
+  - `CollapseAdmissible(F)` は PH1=0 かつ Ext1=0（Ext1 は上記条件下で PH1=0 から一方向使用）
+
+- 塔診断
+  - 導入射 `{F_n} -> F_infty` に対し、collapse 後の比較写像から `(mu, nu)` を定義
+  - `(mu, nu) != (0, 0)` は極限での失敗（Type IV）を検出
+
+- 更新ポリシー（collapse 後）
+  - 削除型: 窓付きエネルギーやスペクトル指標が非増大
+  - 包含型: 非拡大（安定性のみ）
+  - スペクトル指標は f.q.i. 不変ではないため、固定ポリシー `(beta, M(tau), s)` の下で管理
+
+- [Spec] 層
+  - 幾何/算術/トロピカル・ミラー/ランズランズ風/数理 PDE などのパイプラインは collapse 後の非拡大を条件に許可し、塔診断で監査
+  - 外部実現（Sheaf/Fukaya）は PF/BC や action フィルタ等の仮定の下でのみ使用
+
+---
+
+## インストール
+
+本リポジトリは Python パッケージと CLI を提供します。
+
+```bash
+# クローン
+git clone https://github.com/your-org/ak-hdpst.git
+cd ak-hdpst
+
+# 仮想環境（推奨）
+python -m venv .venv
+source .venv/bin/activate  # Windows は .venv\Scripts\activate
+
+# インストール
+pip install -e ".[all]"
 ```
 
----
-
-## 📚 解決対象と関連リポジトリ
-
-| 解決対象 | リンク |
-|--------|--------|
-| Navier–Stokes正則性 | [repo](https://github.com/Kobayashi2501/navier-stokes-global-regularity) |
-| BSD予想（ランク0） | [repo](https://github.com/Kobayashi2501/Structural-Proof-of-the-BSD-Conjecture-via-AK-Theory) |
-| ABC予想 | [repo](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/tree/main) |
-| リーマン予想 | [repo](https://github.com/Kobayashi2501/A-Formal-Collapse-Resolution-of-the-Riemann-Hypothesis-via-AK-Theory/tree/main) |
-| ヒルベルト第12問題 | [repo](https://github.com/Kobayashi2501/Structural-Proof-of-Hilbert-s-12th-Problem-via-Categorical-Degeneration-in-AK-HDPST) |
-| ホッジ予想 | [repo](https://github.com/Kobayashi2501/collapse-hodge-ak-theory) |
+オプション:
+- `.[viz]` 可視化
+- `.[lean]` / `.[coq]` 形式化スタブ
 
 ---
 
-## 📘 モチーフ理論的拡張：M予想 v2.0
+## クイックスタート
 
-Collapseによってモチーフが構成的に出現するという仮説。  
-「モチーフは前提ではなく、Collapseの不動点である」という視点。
+### 最小 CLI
 
-### 🔹 代表的な主張
+```bash
+# 設定ファイル雛形
+cp examples/minimal/run.yaml ./run.yaml
 
-- `PH₁ = 0 ∧ Ext¹ = 0 ⇒ M_AK := Fix_Collapse(𝔽)`
-- Mirror pair間で `Δ_col(X) = Δ_col(X∨)` なら `M_AK(X) ≅ M_AK(X∨)`
-- Collapse深度 ∝ モチーフの複雑度
-- Collapse Failure ⇔ Grothendieck的障害
+# 実行
+akhdpst run run.yaml
 
-👉 [M予想を読む](https://github.com/Kobayashi2501/the-M-Conjecture/tree/main)
+# 監査
+akhdpst audit out/artifacts
+```
 
----
+### 最小 Python API
 
-## 📁 含まれるファイル
+```python
+from akhdpst.core import T_tau, C_tau, collapse_admissible
+from akhdpst.audit import audit_tower
+from akhdpst.io import load_filtered_complex
 
-| ファイル | 説明 |
-|--------|------|
-| `AK High-Dimensional Projection Structural Theory_v14.0.tex` | LaTeXソース（v14.0） |
-| `AK High-Dimensional Projection Structural Theory_v14.5.pdf` | PDF形式完成稿（v14.5） |
-| `README.md` | 英語版（v14.5） |
-| `README_jp.md` | 日本語版（本ファイル） |
-| `LICENSE` | MITまたはCCライセンス |
+F = load_filtered_complex("data/example.h5")
 
----
+tau = 0.15
+F_tau = C_tau(F, tau)  # f.q.i. までの持ち上げ
+P_tau = {i: T_tau(F.persistence(i), tau) for i in [0,1,2]}
 
-## 📌 DOI
+ok = collapse_admissible(F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True)
+print("CollapseAdmissible =", ok)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16524359.svg)](https://doi.org/10.5281/zenodo.16524359)
-
----
-
-## ✉️ 査読・協力者募集中
-
-AK-HDPST v14.5は、正式なジャーナル投稿準備が整いました。
-
-次の分野でのコラボレーション歓迎：
-
-- Collapse理論の言語・幾何・表現論への応用
-- Spectral / Entropy分類とCollapse失敗の回避
-- モチーフ・Selmer・Iwasawa理論への展開
+tower = [F_t for F_t in ...]
+mu, nu = audit_tower(tower, tau=tau)
+print("mu =", mu, "nu =", nu)
+```
 
 ---
 
-## 👤 著者情報
+## 設定ファイル（`run.yaml`）
 
-**小林篤史（A. Kobayashi）**  
-_ChatGPTリサーチパートナーと共同開発_  
-📧 [dollops2501@icloud.com](mailto:dollops2501@icloud.com)  
-GitHub: [@Kobayashi2501](https://github.com/Kobayashi2501)
+1 つのファイルで、窓・tau・オペ・δ台帳・ゲート条件を管理。成果物はチェックサムで相互リンク。
 
-> **「Collapseとは破壊ではない ── それは構造的解決である。」**
+```yaml
+meta:
+  name: "demo-v15.0"
+  seed: 42
+  version: "15.0"
+  author: "your-name"
+
+data:
+  input: "data/example.h5"
+  backend: "bars"          # bars | chain
+  degrees: [0, 1]
+
+windows:                   # 右開区間（MECE）
+  - label: "w0"
+    range: [0.0, 0.5)
+  - label: "w1"
+    range: [0.5, 1.0)
+
+truncation:
+  tau: 0.15
+  lift: "C_tau"
+  reflector: "T_tau"
+
+operations:
+  policy:
+    type: "mixed"          # deletion | inclusion | mixed
+    beta: 0.9
+    M_tau: "auto"
+    s: 2
+  steps:
+    - type: "deletion"
+      op: "dirichlet_restriction"
+      args: {nodes: [1, 5, 7]}
+    - type: "inclusion"
+      op: "add_edges"
+      args: {pairs: [[2,3],[5,8]]}
+
+spec:
+  enabled: true
+  items:
+    - name: "mirror_transfer"
+      hypotheses: ["nonexpansive_after_truncation", "delta_controlled_commutation"]
+      delta_budget: 0.01
+    - name: "projection_formula"
+      hypotheses: ["base_change_ok", "window_protocol_ok"]
+      delta_budget: 0.00
+
+gate:                      # B-Gate+ 条件
+  require:
+    PH1_zero: true
+    Ext1_zero: true        # t-exact・振幅 <= 1 の範囲のみ評価
+    mu_zero: true
+    nu_zero: true
+    gap_tau_gt_sum_delta: true
+
+audit:
+  outputs: ["bars", "spec", "ext", "phi"]
+  checksums: "sha256"
+  restart: "summability"
+
+output:
+  dir: "out/artifacts"
+  overwrite: false
+```
+
+---
+
+## ワークフローと例
+
+### 1) 窓プロトコル
+
+- 必ず `T_tau` 適用後に比較:
+  - 窓ごとに t を評価
+  - persistence 化
+  - `T_tau` 適用
+  - 写像比較と `(mu, nu)` 監査
+
+```bash
+akhdpst run examples/windowed/run.yaml
+akhdpst audit out/artifacts --by-window
+```
+
+### 2) Collapse ゲート
+
+- 条件:
+  - PH1(F)=0
+  - Ext1(R(F),k)=0（上記条件下で PH1(F)=0 から一方向）
+  - mu=0, nu=0
+  - gap_tau > sum(delta)
+
+```bash
+akhdpst gate check --run run.yaml --window w0
+```
+
+### 3) Spec パイプラインと監査
+
+- Spec の各ステップは collapse 後に非拡大であること。δ台帳に必ず記録。
+
+```bash
+akhdpst run examples/spec/mirror.yaml
+akhdpst audit out/artifacts --show-delta-ledger
+```
+
+---
+
+## 更新ポリシー（許可オペ）
+
+collapse 後における経験則:
+
+| 種別 | 例 | collapse 後の保証 |
+| --- | --- | --- |
+| 削除型 | ディリクレ制限、主小行列、PSD Loewner 収縮、保守的平均化 | 窓付き persistence エネルギー・スペクトル指標の非増大 |
+| 包含型 | セル追加、境界条件緩和、ハンドル付加 | 非拡大（安定性のみ） |
+
+注意:
+- `L(C_tau F)` 上のスペクトル指標は f.q.i. 不変ではないため、`(beta, M(tau), s)` の固定ポリシーで運用
+- Spec は collapse 後の非拡大と δ台帳記録を必須とする
+
+---
+
+## 監査と成果物
+
+実行ごとに再現可能な成果物を出力し、相互にチェックサムでリンクします。
+
+例のディレクトリ構成:
+
+```
+out/artifacts/
+  bars/
+    w0_degree1_trunc.json
+    w1_degree1_trunc.json
+  spec/
+    ledger_w0.json
+    ledger_w1.json
+  ext/
+    Rw0_ext1.txt
+  phi/
+    maps_w0_degree1.h5
+  run.yaml
+  audit_summary.json
+  checksums.txt
+```
+
+- `bars/`: 窓・次数ごとのトランケーション後バーコード
+- `spec/`: δ台帳と仮定チェック
+- `ext/`: Ext 監査（該当時）
+- `phi/`: 比較写像と `(mu, nu)` のレポート
+- `audit_summary.json`: ゲート判定と診断の集約
+- `checksums.txt`: すべての成果物の SHA256
+
+---
+
+## コマンド（CLI）
+
+```bash
+# 実行
+akhdpst run run.yaml
+
+# 監査
+akhdpst audit out/artifacts
+
+# B-Gate+ 判定（窓ごと）
+akhdpst gate check --run run.yaml --window w0
+
+# バーコードの簡易可視化
+akhdpst viz bars --dir out/artifacts --degree 1
+
+# 塔診断
+akhdpst diag tower --dir out/artifacts --degree 0
+```
+
+---
+
+## Python API（抜粋）
+
+```python
+from akhdpst.core import T_tau, C_tau
+from akhdpst.gate import collapse_admissible, b_gate_plus
+from akhdpst.audit import audit_tower, summarize_audit
+from akhdpst.spec import run_spec_pipeline
+
+# persistence レベルの正確トランケーション
+P_trunc = T_tau(P, tau=0.2)
+
+# フィルタ持ち上げ（f.q.i. まで）
+F_trunc = C_tau(F, tau=0.2)
+
+# ゲート（Ext の一方向ブリッジを内部使用）
+ok_gate = collapse_admissible(
+    F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True
+)
+ok_bgate = b_gate_plus(window="w0", mu=0, nu=0, gap_tau=0.05, delta_sum=0.01)
+
+# 塔診断
+mu, nu = audit_tower(tower=[F0, F1, F2, F_inf], tau=0.2, degrees=[0,1])
+
+# Spec パイプライン（collapse 後非拡大、δ台帳必須）
+spec_out = run_spec_pipeline(F, items=[...], tau=0.2, ledger=ledger)
+```
+
+---
+
+## ロードマップ
+
+- 形式化スタブと証明（Lean/Coq）: 反射・診断・ゲート
+- tau スイープと安定帯の自動検出
+- 大規模バーコード/鎖複体の GPU・並列化
+- 窓監査・δ台帳可視化ノートブック
+- PDE・Fukaya などの Spec 契約拡充（action フィルタ支援）
+
+---
+
+## コントリビュート
+
+Issue / PR 歓迎です:
+- コアと [Spec] の分離をコード・ドキュメントで明確に
+- Spec 追加は「collapse 後非拡大・δ台帳記録」を満たすこと
+- 最小例と `examples/`・`tests/` の更新を同梱
+
+開発コマンド:
+
+```bash
+pip install -e ".[dev]"
+pytest -q
+ruff check .
+mypy akhdpst
+```
+
+---
+
+## 引用・参考文献
+
+研究成果で AK-HDPST v15.0 を使用する場合は引用をお願いします。
+
+```
+AK–HDPST v15.0: Exact Truncation, Collapse Gate, and Auditable Spec Extensions
+Authors: ...
+Year: 2025
+URL: https://github.com/your-org/ak-hdpst
+```
+
+主要参考:
+- Crawley-Boevey (2015): pointwise finite-dimensional persistence modules の分解
+- Chazal, de Silva, Glisse, Oudot (2016): persistence modules とバーコードの構造・安定性
+
+---
+
+## ライセンス
+
+MIT License（`LICENSE` を参照）。
+
+---
+
+## 付録: 用語チートシート
+
+- 構成可能 1D persistence: 有界窓で有限臨界集合・各点有限次元
+- `T_tau`: 長さ <= tau のバーを削除する正確反射、1-Lipschitz
+- `C_tau`: `T_tau` のフィルタ持ち上げ（f.q.i. まで）、`P_i(C_tau F) ~ T_tau(P_i F)`
+- Collapse ゲート: PH1(F)=0 かつ Ext1(R(F),k)=0（上記条件下で一方向のみ使用）
+- B-Gate+: PH1=0、Ext1=0（適用域のみ）、mu=nu=0、gap_tau > sum(delta)
+- `(mu, nu)`: collapse 後の比較写像の核・余核の generic 次元合計。極限の見えない失敗を検出
+- 窓プロトコル: t -> persistence -> T_tau -> compare（右開・非重複の MECE 窓）
+- [Spec]: collapse 後非拡大の拡張。δ台帳に記録し、塔診断で監査

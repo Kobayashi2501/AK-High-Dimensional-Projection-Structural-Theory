@@ -411,6 +411,8 @@ Related foundational references:
 - Crawley-Boevey (2015): Decomposition of pointwise finite-dimensional persistence modules
 - Chazal, de Silva, Glisse, Oudot (2016): Structure and stability of persistence modules and barcodes
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17059079.svg)](https://doi.org/10.5281/zenodo.17059079)
+
 ---
 
 ## License

@@ -1,176 +1,228 @@
-# AK-HDPST v15.0 — AK 高次元射影構造理論
+# AK–HDPST v16.0 — AK 高次元射影構造理論
 
-高次元射影と統制された障害除去に基づく、関手的 collapse（縮約）のための二層・監査可能な証明フレームワーク。
+高次元射影と制御された障害除去による関手的崩壊のための、二層・監査可能な証明フレームワーク。
 
-- コア: 1D 構成可能（constructible）persistence 上の機械検証可能な主張
-- [Spec]: 明示的な仮定と監査ログに基づく安全な拡張（collapse 後は非拡大）
+- Core: 体上の1次元構成可能パーシステンスにおける機械検証可能な主張
+- [Spec]: 切り詰め後に非膨張で安全な拡張（明示的・監査可能な仮定付き）
 
-リポジトリは研究フレームワークとして、API、実行プロトコル、監査アーティファクトを提供します。強い保証は以下の「コアのスコープ」に限定されます。
+リポジトリの状態: 参照API・実行プロトコル・監査成果物を備えた研究用フレームワーク。強い保証は以下の Core 範囲に限定。
+
+シンプルなフロー（測定順序）:
+t  →  パーシステンス `P_i`  →  切り詰め `T_tau`  →  比較/監査
+```
 
 ---
 
-## ハイライト
+## v16.0 の新機能（v15.0 比）
 
-- 正確なトランケーション `T_tau` が長さ <= tau のバーを削除（Serre 反射）。インターリービング/ボトルネック距離に対して 1-Lipschitz
-- フィルタ付き持ち上げ `C_tau` は f.q.i.（filtered quasi-isomorphism）まで一意で、`P_i(C_tau F) ~ T_tau(P_i F)`
-- Collapse ゲート: 一方向のみ使用（PH1(F)=0 => Ext1(R(F),k)=0、t-正確・振幅 <= 1 の場合）
-- 塔監査 `(mu, nu)`: collapse 後の比較写像の核・余核から見えない極限失敗を検出
-- 更新ポリシー: 削除型は collapse 後に非増大、包含型は非拡大（安定性のみ）
-- 再現性: 窓（window）単位のプロトコル、δ台帳、B-Gate+ の安全余白、バージョン付き成果物
+- ウィンドウ化インフラ
+  - Overlap Gate の強化（ウィンドウ化、崩壊後のグルーイング；オーバーラップ上の Čech–Ext¹ 無サイクル性；オーバーラップ上の δ 予算）
+  - Window Stack（WinFib）：グロタンディーク・ファイブレーション風のブックキーピング足場
+  - 安定性バンド：τ スイープとタワー監査のためのバンド検知；バンドに基づく堅牢なゲーティング
+- セーフティと監査
+  - ウィンドウ毎の B–Gate⁺ 安全マージン；Restart/Summability により証明書を大域的に貼り合わせ
+  - δ 台帳の標準化と層化：アルゴリズム（Mirror–Collapse と A/B 残差を含む）、離散化、測定
+  - 標準実行スキーマのフィールド：overlap_checks、spectral_policy（昇順；op/fro ノルム）、spectral_bounds、Lambda_len 監査、phi_iso_tail
+- 診断と比較器
+  - タワー診断（μ, ν）：切り詰め後の核/余核を形式化；不可視な Type IV 障害（有限段は OK、極限で崩れる）
+  - PF/BC 崩壊後比較器（`T_tau` 適用後のウィンドウ上で射影公式/基底変換を評価）
+  - 非入れ子トーション反射子に対する A/B ソフト可換ポリシー（加法的 Δ_comm 予算）
+- 量的構造
+  - 長さスペクトル作用素 `Lambda_len`（ウィンドウ付きクリップド長多重集合；切り詰め後の同型不変）
+  - トロピカル/弱群崩壊ツール [Spec]：ウィンドウ付きエネルギー優越の収縮；バー基底上の群作用プロキシ
+- ドメイン・フック [Spec]
+  - Fukaya 作用フィルトレーション・パイプライン（継続 1-Lipschitz；ストップ追加は削除型；(μ, ν) によるタワー安定性）
+  - 三層（Gal → Trans → Funct）のラングランズ風ゲート（ウィンドウ化レイヤ核と PF/BC 監査）
+- 形式テストスイート（IMRN/AiM 対応）
+  - T14 Overlap Gate グルーイング；T15 長さスペクトル監査；T7 飽和ゲート；T10 A/B テスト；T13 δ 予算加法性；T11 Restart/Summability
 
 ---
 
 ## 目次
 
 - 概要
-- スコープと保証
-- コンセプトと構成要素
+- 対象範囲と保証
+- Core（可証）と [Spec]（監査可能）の内容
+- 概念とコンポーネント
 - インストール
-- クイックスタート（CLI / Python API）
-- 設定ファイル（`run.yaml`）
+- クイックスタート（CLI と Python API）
+- 設定（`run.yaml`）
 - ワークフローと例
-- 更新ポリシー（許可オペ）
+- 更新ポリシー（許可される操作）
 - 監査と成果物
+- コマンドリファレンス
+- Python API リファレンス（抜粋）
 - ロードマップ
 - コントリビュート
-- 引用・参考文献
+- 引用と参考文献
 - ライセンス
+- 付録：用語チートシート
 
 ---
 
 ## 概要
 
-AK-HDPST v15.0 は「証明志向」フレームワークです。  
-- コア: 何を証明し保証するか（構成可能 1D persistence 上）  
-- [Spec]: どの仮定のもとで安全に拡張できるか（collapse 後は非拡大、監査付き）
+AK–HDPST v16.0 は、以下を明確に分離する証明指向フレームワークです。
+- Core: 体上の構成可能 1D パーシステンスにおける、証明済みで機械検証可能な保証
+- [Spec]: 切り詰め後に非膨張で、完全に監査される運用拡張（δ 台帳、オーバーラップ・グルーイング、安定性バンド）
 
-すべての比較は `T_tau` 適用後に行います（窓プロトコル: t -> persistence -> T_tau -> compare）。  
-これにより安定性保証が明確になり、塔の `(mu, nu)` で失敗を可視化できます。
+すべての比較は、ウィンドウ化された単層プロトコル（切り詰め後）に従います:
+t → パーシステンス `P_i` → `T_tau` → 比較/監査
 
----
-
-## スコープと保証
-
-強い主張は次に限定されます。
-
-- 1 パラメータ・構成可能 persistence（係数は体）
-- 正確な Serre 反射 `T_tau`（長さ <= tau のバーを削除、1-Lipschitz）
-- フィルタ持ち上げ `C_tau`（f.q.i. まで）で `P_i(C_tau F) ~ T_tau(P_i F)`
-- 一方向ブリッジのみ: t-正確・振幅 <= 1 の下で PH1(F)=0 => Ext1(R(F),k)=0
-- 塔診断 `(mu, nu)` は collapse 後の比較写像の核・余核から算出
-
-注意:
-- 一般には PH1 <-> Ext1 は主張しません
-- BSD, RH, Navier–Stokes などの主張は行いません
+これにより、測度的安定性、透明な失敗モード（例：Type IV）、再現可能なパイプラインが保証されます。
 
 ---
 
-## コンセプトと構成要素
+## 対象範囲と保証（Core）
 
-- `T_tau`（正確トランケーション）
-  - 長さ <= tau のバーを削除する反射
-  - インターリービング/ボトルネック距離に対して 1-Lipschitz
+強い主張は以下に限定:
+- 一パラメータ、体 k 上の構成可能パーシステンス
+- 正確な Serre 反射子 `T_tau`（長さ ≤ τ のバーを削除）；正確・冪等・1‑Lipschitz（インタリービング/ボトルネック）
+- フィルタ付き持ち上げ `C_tau`（フィルタ付き疑似同型（f.q.i.）まで）で `P_i(C_tau F) ≅ T_tau(P_i F)`
+- 片方向ブリッジのみ：t‑正確・振幅 ≤ 1 の実現の下で `PH1(F)=0 ⇒ Ext1(R(F), k)=0`（逆は主張しない）
+- 切り詰め後の比較写像からのタワー診断 `(mu, nu)`；不可視な極限失敗（Type IV）を検知
+- ウィンドウ化ゲーティング：B–Gate⁺（PH1/Ext1/(μ,ν)/セーフティマージン）と Overlap Gate（崩壊後の局所から大域）
 
-- `C_tau`（フィルタ持ち上げ、f.q.i. まで）
-  - 鎖複体レベルでの持ち上げ
-  - `P_i(C_tau F) ~ T_tau(P_i F)` を次数ごとに満たす
+主張しないこと:
+- `PH1 ⇔ Ext1` の大域同値
+- BSD、RH、Navier–Stokes などへの言及（[Spec] レベルのプロトコルを超えない）
+- 構成可能性の範囲外や多パラメータへの保証
 
-- Collapse ゲートと一方向ブリッジ
-  - `CollapseAdmissible(F)` は PH1=0 かつ Ext1=0（Ext1 は上記条件下で PH1=0 から一方向使用）
+---
 
-- 塔診断
-  - 導入射 `{F_n} -> F_infty` に対し、collapse 後の比較写像から `(mu, nu)` を定義
-  - `(mu, nu) != (0, 0)` は極限での失敗（Type IV）を検出
+## Core と [Spec] の内容
 
-- 更新ポリシー（collapse 後）
-  - 削除型: 窓付きエネルギーやスペクトル指標が非増大
-  - 包含型: 非拡大（安定性のみ）
-  - スペクトル指標は f.q.i. 不変ではないため、固定ポリシー `(beta, M(tau), s)` の下で管理
+Core（可証）:
+- 正確な切り詰め `T_tau` と 1‑Lipschitz 安定性
+- フィルタ付き持ち上げ `C_tau`（f.q.i. まで）
+- 片方向 PH1 ⇒ Ext1（振幅 ≤ 1）
+- タワー診断 `(mu,nu)`、τ スイープ、安定性バンド
+- B–Gate⁺（安全マージン）と Overlap Gate（オーバーラップ上の Čech–Ext¹）
+- Restart/Summability によるウィンドウ別証明書の大域貼り合わせ
+- 長さスペクトルの正当性（クリップド長多重集合；切り詰め後の同型不変）
 
-- [Spec] 層
-  - 幾何/算術/トロピカル・ミラー/ランズランズ風/数理 PDE などのパイプラインは collapse 後の非拡大を条件に許可し、塔診断で監査
-  - 外部実現（Sheaf/Fukaya）は PF/BC や action フィルタ等の仮定の下でのみ使用
+[Spec]（監査可能・切り詰め後に非膨張）:
+- PF/BC 崩壊後比較器（固有/滑らか + 体係数）
+- Mirror/Transfer の δ 制御可換（自然 2‑セル；加法的、後処理で非増加）
+- 非入れ子反射子の A/B ソフト可換ポリシー（Δ_comm を δ 台帳へ）
+- トロピカル/弱群の崩壊プロキシ
+- 三層ラングランズ・ゲート（Gal/Trans/Funct）
+- 作用フィルトレーション付き Fukaya 実現（継続 1‑Lipschitz；ストップ追加は削除型）
+
+---
+
+## 概念とコンポーネント
+
+- `T_tau`（正確な切り詰め）
+  - 長さ ≤ τ のバーを削除する正確な反射的局所化
+  - 冪等；インタリービング/ボトルネックに対して 1‑Lipschitz
+- `C_tau`（フィルタ付き持ち上げ；f.q.i. まで）
+  - 連鎖レベルの持ち上げで `P_i(C_tau F) ≅ T_tau(P_i F)`
+- 崩壊ゲート（B–Gate⁺）
+  - 各ウィンドウで：PH1(F)=0；Ext1(R(F),k)=0（振幅 ≤ 1 のときのみ対象）；μ=ν=0；安全余裕 `gap_tau > Σ delta`
+- Overlap Gate（崩壊後）
+  - オーバーラップ上の切り詰め後局所同値；Čech–Ext¹ 無サイクル性；オーバーラップ上の δ 予算；安定性バンド確認
+- タワー診断
+  - `T_tau` 後の比較写像に対し `(mu, nu)` = 核/余核の一般繊維次元；`(mu,nu)≠(0,0)` で Type IV
+- 安定性バンド
+  - τ スイープ；バンド検出；`(mu,nu)=(0,0)` が連続 τ 範囲で安定なゲーティング
+- PF/BC 崩壊後比較器 [Spec]
+  - t における対象毎の PF/BC 計算 → パーシステンスへ輸送 → `T_tau` 適用 → ウィンドウで比較
+- Mirror/Transfer の可換性 [Spec]
+  - 自然 2‑セル `Mirror ∘ C_tau ⇒ C_tau ∘ Mirror` と一様な δ(i,τ)；パイプラインで加法的；後処理で非増加
+- A/B ソフト可換 [Spec]
+  - 非入れ子反射子向け；Δ_comm ≤ η をテスト；不合格時はフォールバック順序へ、Δ_comm を δ 台帳へ記録
+- 長さスペクトル作用素 `Lambda_len`
+  - ウィンドウ付きクリップド長の固有値（順序なし多重集合）は、クリップド・バーコード長に一致；切り詰め後の同型不変
 
 ---
 
 ## インストール
 
-本リポジトリは Python パッケージと CLI を提供します。
-
 ```bash
-# クローン
+# 1) クローン
 git clone https://github.com/your-org/ak-hdpst.git
 cd ak-hdpst
 
-# 仮想環境（推奨）
+# 2) 環境作成
 python -m venv .venv
-source .venv/bin/activate  # Windows は .venv\Scripts\activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# インストール
-pip install -e ".[all]"
+# 3) インストール
+pip install -e ".[all]"     # 追加機能: [viz], [lean], [coq]
 ```
-
-オプション:
-- `.[viz]` 可視化
-- `.[lean]` / `.[coq]` 形式化スタブ
 
 ---
 
 ## クイックスタート
 
-### 最小 CLI
+### 最小 CLI 実行
 
 ```bash
-# 設定ファイル雛形
-cp examples/minimal/run.yaml ./run.yaml
+# 実行設定の用意
+cp examples/v16/minimal/run.yaml ./run.yaml
 
-# 実行
+# パイプラインの実行（ウィンドウ化・切り詰め後）
 akhdpst run run.yaml
 
-# 監査
+# ウィンドウ毎のゲート判定と δ 台帳を確認
 akhdpst audit out/artifacts
 ```
 
 ### 最小 Python API
 
 ```python
-from akhdpst.core import T_tau, C_tau, collapse_admissible
-from akhdpst.audit import audit_tower
-from akhdpst.io import load_filtered_complex
+from akhdpst.core import T_tau, C_tau
+from akhdpst.gate import collapse_admissible, b_gate_plus
+from akhdpst.tower import audit_tower, detect_stability_band
+from akhdpst.compare import pf_bc_compare_after_collapse
+from akhdpst.length import lambda_len
 
-F = load_filtered_complex("data/example.h5")
+# フィルタ付き連鎖複体または次数別パーシステンスをロード
+F = ...  # ユーザがロード
 
+# tau で切り詰め（パーシステンスとフィルタ付き持ち上げ）
 tau = 0.15
-F_tau = C_tau(F, tau)  # f.q.i. までの持ち上げ
-P_tau = {i: T_tau(F.persistence(i), tau) for i in [0,1,2]}
+P_trunc = {i: T_tau(F.persistence(i), tau) for i in [0,1]}
+F_trunc = C_tau(F, tau)  # f.q.i. まで
 
-ok = collapse_admissible(F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True)
-print("CollapseAdmissible =", ok)
+# ゲート確認（片方向ブリッジは t-正確・振幅<=1 のときのみ使用）
+ok_gate = collapse_admissible(
+    F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True
+)
 
-tower = [F_t for F_t in ...]
-mu, nu = audit_tower(tower, tau=tau)
-print("mu =", mu, "nu =", nu)
+# タワー診断（tau ごと）；安定性バンド
+mu, nu = audit_tower(tower=[F0, F1, F2, F_inf], tau=tau, degrees=[0,1])
+bands = detect_stability_band(tower=[F0, F1, F2, F_inf], degree=1, tau_sweep=[0.1,0.15,0.2])
+
+# PF/BC 崩壊後比較器（ウィンドウ化、T_tau 後）
+ok_pfbc = pf_bc_compare_after_collapse(
+    obj_left="Rf_*(A⊗f^*B)", obj_right="Rf_*A ⊗ B",
+    window=("w0", [0.0, 0.5]), tau=tau
+)
+
+# 長さスペクトル監査（ウィンドウ付きクリップド長多重集合）
+eig = lambda_len(P_trunc[1], window=(0.0, tau))
 ```
 
 ---
 
-## 設定ファイル（`run.yaml`）
-
-1 つのファイルで、窓・tau・オペ・δ台帳・ゲート条件を管理。成果物はチェックサムで相互リンク。
+## 設定（`run.yaml`）— v16.0 スキーマの要点
 
 ```yaml
 meta:
-  name: "demo-v15.0"
-  seed: 42
-  version: "15.0"
+  name: "demo-v16.0"
+  seed: 1337
+  version: "16.0"
   author: "your-name"
 
 data:
   input: "data/example.h5"
-  backend: "bars"          # bars | chain
+  backend: "bars"       # bars | chain
   degrees: [0, 1]
 
-windows:                   # 右開区間（MECE）
+windows:
+  # 右開区間; MECE（相互排他かつ完全）; ウィンドウ被覆は監査される
   - label: "w0"
     range: [0.0, 0.5)
   - label: "w1"
@@ -178,204 +230,274 @@ windows:                   # 右開区間（MECE）
 
 truncation:
   tau: 0.15
-  lift: "C_tau"
-  reflector: "T_tau"
+  lift: "C_tau"         # フィルタ付き持ち上げ（f.q.i. まで）
+  reflector: "T_tau"    # パーシステンスでの正確な切り詰め
+
+overlap_checks:
+  local_equiv: true      # 切り詰め後の局所同値（予算内）
+  cech_ext1_ok: true     # オーバーラップ上の Čech–Ext¹ 無サイクル性
+  stability_band_ok: true
+
+spectral_policy:
+  order: "ascending"     # 必須（v16.0）
+  norm: "op"             # "op" または "fro"（必須）
+spectral_bounds:
+  lambda_min: 1.0e-8
+  lambda_max: 1.0e+3
+  lip_tol: 0.02
 
 operations:
-  policy:
-    type: "mixed"          # deletion | inclusion | mixed
-    beta: 0.9
-    M_tau: "auto"
-    s: 2
   steps:
     - type: "deletion"
       op: "dirichlet_restriction"
-      args: {nodes: [1, 5, 7]}
-    - type: "inclusion"
-      op: "add_edges"
-      args: {pairs: [[2,3],[5,8]]}
+      args: { nodes: [1,5,7] }
+      delta: { alg: 0.000, disc: 0.002, meas: 0.001 }
+    - type: "epsilon"
+      op: "continuation"
+      args: { eps: 0.006 }
+      delta: { alg: 0.006, disc: 0.002, meas: 0.001 }
+    - type: "spec"
+      op: "mirror_transfer"
+      args: { delta_commutation: 0.010 }   # δ(i,τ)（Mirror×Collapse）
+      delta: { alg: 0.010, disc: 0.000, meas: 0.000 }
 
 spec:
-  enabled: true
-  items:
-    - name: "mirror_transfer"
-      hypotheses: ["nonexpansive_after_truncation", "delta_controlled_commutation"]
-      delta_budget: 0.01
-    - name: "projection_formula"
-      hypotheses: ["base_change_ok", "window_protocol_ok"]
-      delta_budget: 0.00
+  pf_bc_after_collapse: { enabled: true, delta_budget: 0.0 }
+  ab_soft_commuting:
+    enabled: true
+    eta: 0.02            # 許容誤差
+    fallback_order: ["birth_window", "length"]  # Δ_comm > η の場合
 
-gate:                      # B-Gate+ 条件
+gate:
   require:
     PH1_zero: true
-    Ext1_zero: true        # t-exact・振幅 <= 1 の範囲のみ評価
+    Ext1_zero: true       # 振幅<=1 のときのみ使用
     mu_zero: true
     nu_zero: true
     gap_tau_gt_sum_delta: true
+  safety_margin:
+    gap_tau: 0.03
 
 audit:
-  outputs: ["bars", "spec", "ext", "phi"]
+  outputs: ["bars", "spec", "ext", "phi", "Lambda_len"]
   checksums: "sha256"
   restart: "summability"
+
+length_spectrum:
+  degree: 1
+  tau: 0.15
+  audit: "hash"         # 小規模例では固有値を保存可
 
 output:
   dir: "out/artifacts"
   overwrite: false
 ```
 
+キー追加（v16.0）:
+- `overlap_checks`（Overlap Gate — local_equiv, cech_ext1_ok, stability_band_ok）
+- `spectral_policy.order="ascending"` と `norm="op"|"fro"`（必須）
+- `spectral_bounds` と `lip_tol`
+- `length_spectrum`（`Lambda_len` 監査）
+- ステップ毎の δ 台帳；安全余裕の `gap_tau`
+- `eta` とフォールバック順序付き A/B ソフト可換
+
 ---
 
 ## ワークフローと例
 
-### 1) 窓プロトコル
+### 1) ウィンドウ化プロトコル（切り詰め後）
 
-- 必ず `T_tau` 適用後に比較:
-  - 窓ごとに t を評価
-  - persistence 化
-  - `T_tau` 適用
-  - 写像比較と `(mu, nu)` 監査
+- 各右開ウィンドウに対して：
+  - パーシステンスを計算
+  - `T_tau` を適用
+  - 写像を比較、`(mu,nu)` を算出し、δ 台帳を監査
 
 ```bash
-akhdpst run examples/windowed/run.yaml
+akhdpst run examples/v16/windowed/run.yaml
 akhdpst audit out/artifacts --by-window
 ```
 
-### 2) Collapse ゲート
+### 2) Overlap Gate グルーイング（切り詰め後）
 
-- 条件:
-  - PH1(F)=0
-  - Ext1(R(F),k)=0（上記条件下で PH1(F)=0 から一方向）
-  - mu=0, nu=0
-  - gap_tau > sum(delta)
+- オーバーラップするウィンドウ毎の要件：
+  - 切り詰め後の局所同値（δ 予算内）
+  - Čech–Ext¹ 無サイクル性（次数 1）
+  - 安定性バンド条件（τ 付近の蓄積がない；`(mu,nu)=(0,0)`）
 
 ```bash
-akhdpst gate check --run run.yaml --window w0
+akhdpst gate overlap --run run.yaml --window w0,w1
 ```
 
-### 3) Spec パイプラインと監査
+### 3) τ スイープと安定性バンド
 
-- Spec の各ステップは collapse 後に非拡大であること。δ台帳に必ず記録。
+- τ グリッドで `(mu,nu)` を調べ、`(mu,nu)=(0,0)` が分割に安定なバンドを受理
 
 ```bash
-akhdpst run examples/spec/mirror.yaml
-akhdpst audit out/artifacts --show-delta-ledger
+akhdpst sweep tau --run run.yaml --degree 1 --grid "0.10:0.05:0.30"
+```
+
+### 4) PF/BC 崩壊後比較器 [Spec]
+
+- `Rf_*(A⊗f^*B)` と `Rf_*A ⊗ B` を同一ウィンドウで `T_tau` 後に比較
+
+```bash
+akhdpst compare pf-bc --run run.yaml --window w0 --tau 0.15
+```
+
+### 5) A/B ソフト可換 [Spec]
+
+- Δ_comm ≤ η をテスト；不合格ならフォールバック順序を採用し、Δ_comm を δ^{alg} として記録
+
+```bash
+akhdpst compare ab --run run.yaml --reflectors length birth_window --eta 0.02
+```
+
+### 6) 長さスペクトル監査（Lambda_len）
+
+- ウィンドウ付きクリップド長多重集合を計算し、ハッシュ/固有値を保存
+
+```bash
+akhdpst audit lambda-len --dir out/artifacts --degree 1 --tau 0.15
 ```
 
 ---
 
-## 更新ポリシー（許可オペ）
+## 更新ポリシー（切り詰め後）
 
-collapse 後における経験則:
-
-| 種別 | 例 | collapse 後の保証 |
-| --- | --- | --- |
-| 削除型 | ディリクレ制限、主小行列、PSD Loewner 収縮、保守的平均化 | 窓付き persistence エネルギー・スペクトル指標の非増大 |
-| 包含型 | セル追加、境界条件緩和、ハンドル付加 | 非拡大（安定性のみ） |
+| 更新タイプ     | 例                                                                      | 保証（`T_tau` 後）                                                   |
+| ---           | ---                                                                     | ---                                                                  |
+| 削除型        | ディリクレ制限；主座小行列；PSD Loewner 収縮；保守的平均；ストップ追加 | ウィンドウ付きパーシステンスのエネルギーとスペクトル指標に対して非増加 |
+| ε‑連続変形    | 小さなホモトピー；インタリービングのシフト上限を満たす小ステップ         | 1‑Lipschitz（安定性）；ε を δ 台帳に記録                             |
+| 包含型        | セル追加；境界条件の緩和；領域拡大                                       | 非膨張（安定性のみ）                                                 |
 
 注意:
-- `L(C_tau F)` 上のスペクトル指標は f.q.i. 不変ではないため、`(beta, M(tau), s)` の固定ポリシーで運用
-- Spec は collapse 後の非拡大と δ台帳記録を必須とする
+- スペクトル指標は `L(C_tau F)` 上で計算され、f.q.i. の不変量ではありません。v16.0 では固定の `spectral_policy`（順序/ノルム）と境界を `run.yaml` に必須とします。
+- [Spec] 項目（PF/BC 比較器、Mirror/Transfer、A/B ポリシー、トロピカル系）は δ を台帳に記録し、ウィンドウ毎に B–Gate⁺ を通過する必要があります。
 
 ---
 
 ## 監査と成果物
 
-実行ごとに再現可能な成果物を出力し、相互にチェックサムでリンクします。
-
-例のディレクトリ構成:
-
 ```
 out/artifacts/
   bars/
-    w0_degree1_trunc.json
-    w1_degree1_trunc.json
+    w0_deg1_trunc.json
+    w1_deg1_trunc.json
   spec/
     ledger_w0.json
     ledger_w1.json
   ext/
-    Rw0_ext1.txt
+    w0_ext1.txt
   phi/
-    maps_w0_degree1.h5
+    maps_w0_deg1.h5         # 比較写像; (mu,nu); iso_tail フラグ
+  lambda_len/
+    w0_deg1_tau015.json     # 固有値またはハッシュ
   run.yaml
   audit_summary.json
   checksums.txt
 ```
 
-- `bars/`: 窓・次数ごとのトランケーション後バーコード
-- `spec/`: δ台帳と仮定チェック
-- `ext/`: Ext 監査（該当時）
-- `phi/`: 比較写像と `(mu, nu)` のレポート
-- `audit_summary.json`: ゲート判定と診断の集約
+- `bars/`: ウィンドウ/次数毎の切り詰めバーコード
+- `spec/`: δ 台帳（alg/disc/meas）＋ [Spec] 監査結果
+- `ext/`: Ext¹ サマリ（振幅 ≤ 1 の場合のみ適格）
+- `phi/`: 比較写像；`(mu,nu)`；`phi_iso_tail` の状態
+- `lambda_len/`: クリップド長多重集合（固有値またはハッシュ）
+- `audit_summary.json`: ゲート結果；オーバーラップ検査；安定性バンド
 - `checksums.txt`: すべての成果物の SHA256
 
 ---
 
-## コマンド（CLI）
+## コマンドリファレンス（CLI）
 
 ```bash
-# 実行
+# 設定に従って実行
 akhdpst run run.yaml
 
-# 監査
+# 既存の実行ディレクトリを監査
 akhdpst audit out/artifacts
 
-# B-Gate+ 判定（窓ごと）
+# Overlap Gate チェック
+akhdpst gate overlap --run run.yaml --window w0,w1
+
+# ウィンドウ毎の B–Gate+
 akhdpst gate check --run run.yaml --window w0
 
-# バーコードの簡易可視化
-akhdpst viz bars --dir out/artifacts --degree 1
+# τ スイープと安定性バンド
+akhdpst sweep tau --run run.yaml --degree 1 --grid "0.10:0.05:0.30"
 
-# 塔診断
-akhdpst diag tower --dir out/artifacts --degree 0
+# PF/BC 崩壊後比較器
+akhdpst compare pf-bc --run run.yaml --window w0 --tau 0.15
+
+# A/B ソフト可換テスト
+akhdpst compare ab --run run.yaml --reflectors length birth_window --eta 0.02
+
+# タワー診断の出力
+akhdpst diag tower --dir out/artifacts --degree 1
+
+# 長さスペクトル監査
+akhdpst audit lambda-len --dir out/artifacts --degree 1 --tau 0.15
 ```
 
 ---
 
-## Python API（抜粋）
+## Python API リファレンス（抜粋）
 
 ```python
 from akhdpst.core import T_tau, C_tau
-from akhdpst.gate import collapse_admissible, b_gate_plus
-from akhdpst.audit import audit_tower, summarize_audit
-from akhdpst.spec import run_spec_pipeline
+from akhdpst.gate import collapse_admissible, b_gate_plus, overlap_gate_check
+from akhdpst.tower import audit_tower, detect_stability_band
+from akhdpst.compare import pf_bc_compare_after_collapse, ab_soft_commute
+from akhdpst.length import lambda_len
 
-# persistence レベルの正確トランケーション
-P_trunc = T_tau(P, tau=0.2)
+# Overlap Gate
+ok_overlap = overlap_gate_check(run="run.yaml", windows=["w0","w1"])
 
-# フィルタ持ち上げ（f.q.i. まで）
-F_trunc = C_tau(F, tau=0.2)
-
-# ゲート（Ext の一方向ブリッジを内部使用）
-ok_gate = collapse_admissible(
-    F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True
+# B–Gate+（ウィンドウ）
+ok_bgate = b_gate_plus(
+    window="w0",
+    ph1_zero=True,
+    ext1_zero=True,
+    mu=0, nu=0,
+    gap_tau=0.025,
+    delta_sum=0.011
 )
-ok_bgate = b_gate_plus(window="w0", mu=0, nu=0, gap_tau=0.05, delta_sum=0.01)
 
-# 塔診断
-mu, nu = audit_tower(tower=[F0, F1, F2, F_inf], tau=0.2, degrees=[0,1])
+# Mirror/Transfer（δ 制御可換）
+ok_mirror = ab_soft_commute(
+    M=P_trunc[1], A="length", B="birth_window", eta=0.02, fallback=True
+)
 
-# Spec パイプライン（collapse 後非拡大、δ台帳必須）
-spec_out = run_spec_pipeline(F, items=[...], tau=0.2, ledger=ledger)
+# PF/BC 比較器
+ok_pfbc = pf_bc_compare_after_collapse(
+    obj_left="Rf_*(A⊗f^*B)", obj_right="Rf_*A ⊗ B",
+    window=("w0", [0.0, 0.5]), tau=0.15
+)
+
+# τ の安定性バンド検出
+bands = detect_stability_band(tower=[...], degree=1, tau_sweep=[0.1,0.15,0.2])
+
+# 長さスペクトル（固有値/ハッシュ）
+L = lambda_len(P_trunc[1], window=(0.0, 0.15))  # eigs または hash
 ```
 
 ---
 
 ## ロードマップ
 
-- 形式化スタブと証明（Lean/Coq）: 反射・診断・ゲート
-- tau スイープと安定帯の自動検出
-- 大規模バーコード/鎖複体の GPU・並列化
-- 窓監査・δ台帳可視化ノートブック
-- PDE・Fukaya などの Spec 契約拡充（action フィルタ支援）
+- 自動 τ スイープとバンド検出（堅牢な細分化；バンド単位ゲーティング）
+- Overlap Gate の拡充（ナーブ API；単体タイプ別の受理）
+- より豊富な Spec モジュール（数論/ラングランズ、PDE、Fukaya）と δ 制御
+- 形式化の拡張（Lean/Coq）：`T_tau`、`(mu,nu)`、ゲート、PF/BC 輸送、A/B ポリシー
+- ノートブック雛形（ウィンドウ別監査、δ 台帳/オーバーラップ可視化）
 
 ---
 
 ## コントリビュート
 
-Issue / PR 歓迎です:
-- コアと [Spec] の分離をコード・ドキュメントで明確に
-- Spec 追加は「collapse 後非拡大・δ台帳記録」を満たすこと
-- 最小例と `examples/`・`tests/` の更新を同梱
+Issue と PR を歓迎します:
+- Core と [Spec] を明確に区別（コード/ドキュメント）
+- [Spec] 項目は「切り詰め後非膨張チェック + δ 台帳記録」を必須
+- 最小例とテスト（T7, T10, T11, T13, T14, T15）を追加
 
 開発コマンド:
 
@@ -388,36 +510,39 @@ mypy akhdpst
 
 ---
 
-## 引用・参考文献
+## 引用と参考文献
 
-研究成果で AK-HDPST v15.0 を使用する場合は引用をお願いします。
+研究で AK–HDPST v16.0 を使用する場合は以下を引用してください:
 
 ```
-AK–HDPST v15.0: Exact Truncation, Collapse Gate, and Auditable Spec Extensions
+AK–HDPST v16.0: Windowed Collapse, Overlap Gate, PF/BC After-Collapse, and Auditable Pipelines
 Authors: ...
 Year: 2025
 URL: https://github.com/your-org/ak-hdpst
 ```
 
-主要参考:
-- Crawley-Boevey (2015): pointwise finite-dimensional persistence modules の分解
-- Chazal, de Silva, Glisse, Oudot (2016): persistence modules とバーコードの構造・安定性
+基礎文献:
+- Crawley‑Boevey (2015): Decomposition of pointwise finite‑dimensional persistence modules
+- Chazal, de Silva, Glisse, Oudot (2016): Structure and stability of persistence modules and barcodes
 
 ---
 
 ## ライセンス
 
-MIT License（`LICENSE` を参照）。
+本プロジェクトは MIT ライセンスで公開されています。詳細は `LICENSE` を参照してください。
 
 ---
 
-## 付録: 用語チートシート
+## 付録：用語チートシート
 
-- 構成可能 1D persistence: 有界窓で有限臨界集合・各点有限次元
-- `T_tau`: 長さ <= tau のバーを削除する正確反射、1-Lipschitz
-- `C_tau`: `T_tau` のフィルタ持ち上げ（f.q.i. まで）、`P_i(C_tau F) ~ T_tau(P_i F)`
-- Collapse ゲート: PH1(F)=0 かつ Ext1(R(F),k)=0（上記条件下で一方向のみ使用）
-- B-Gate+: PH1=0、Ext1=0（適用域のみ）、mu=nu=0、gap_tau > sum(delta)
-- `(mu, nu)`: collapse 後の比較写像の核・余核の generic 次元合計。極限の見えない失敗を検出
-- 窓プロトコル: t -> persistence -> T_tau -> compare（右開・非重複の MECE 窓）
-- [Spec]: collapse 後非拡大の拡張。δ台帳に記録し、塔診断で監査
+- 構成可能 1D パーシステンス：有限の臨界集合；有界ウィンドウでの点ごと有限次元
+- `T_tau`：長さ ≤ τ のバーを削除する正確な切り詰め；冪等；1‑Lipschitz
+- `C_tau`：`T_tau` のフィルタ付き持ち上げ（f.q.i. まで）；`P_i(C_tau F) ≅ T_tau(P_i F)`
+- B–Gate⁺：PH1=0；Ext1=0（振幅 ≤ 1 のときのみ）；`(mu,nu)=(0,0)`；`gap_tau > Σ delta`
+- Overlap Gate：崩壊後の局所から大域のグルーイング；オーバーラップ上の Čech–Ext¹；安定性バンド；δ オーバーラップ予算
+- `(mu, nu)`：切り詰め後の比較写像における核/余核の一般繊維次元；非零なら Type IV
+- 安定性バンド：`(mu,nu)=(0,0)` が τ 範囲でスイープに安定
+- PF/BC 比較器：同一ウィンドウ/τ で `T_tau` 適用後に PF/BC を比較
+- A/B ソフト可換：Δ_comm ≤ η をテスト；不合格ならフォールバックし、Δ_comm を δ^{alg} として記録
+- Lambda_len：ウィンドウ付きクリップド長作用素；切り詰め後の同型不変
+```

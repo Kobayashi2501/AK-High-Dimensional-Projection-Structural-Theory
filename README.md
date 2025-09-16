@@ -1,22 +1,40 @@
-# AK-HDPST v15.0 — AK High-Dimensional Projection Structural Theory
+# AK–HDPST v16.0 — AK High-Dimensional Projection Structural Theory
 
 Two-layer, auditable proof framework for functorial collapse via higher-dimensional projections and controlled obstruction removal.
 
 - Core: machine-checkable statements in 1D constructible persistence over a field
-- [Spec]: safe extensions under explicit, auditable hypotheses, non-expansive after truncation
+- [Spec]: safe, non-expansive-after-truncation extensions with explicit, auditable hypotheses
 
 Repository status: research framework with reference APIs, run protocol, and audit artifacts. Strong guarantees are confined to the Core scope below.
 
+Simple flow (measurement order):
+t  →  persistence `P_i`  →  truncation `T_tau`  →  compare/audit
+```
+
 ---
 
-## Key ideas at a glance
+## What’s new in v16.0 (vs v15.0)
 
-- Exact truncation `T_tau` deletes all bars of length <= tau; 1-Lipschitz for interleavings/bottleneck distance
-- Filtered lift `C_tau` exists up to filtered quasi-isomorphism (f.q.i.) with `P_i(C_tau F) ~ T_tau(P_i F)`
-- Collapse gate: use only the one-way implication PH1(F)=0 => Ext1(R(F),k)=0 under t-exact, amplitude <= 1
-- Tower diagnostics: kernel/cokernel metrics `(mu, nu)` on comparison maps detect invisible limit failures
-- Update policy: deletion-type are non-increasing after truncation; inclusion-type are non-expansive (stability-only)
-- Reproducibility: windowed protocol, delta-ledger, B-Gate+ safety margin, versioned artifacts
+- Windowed infrastructure
+  - Overlap Gate upgraded (windowed, post-collapse gluing; Čech–Ext¹ acyclicity on overlaps; δ-budgets on overlaps)
+  - Window Stack (WinFib) as a Grothendieck-fibration-style bookkeeping scaffold
+  - Stability bands: τ-sweep and band detection for tower audits; robust band-based gating
+- Safety and auditing
+  - B–Gate⁺ safety margin per window; Restart/Summability to paste certificates globally
+  - δ-ledger standardized and layered: algorithmic (incl. Mirror–Collapse and A/B residuals), discretization, measurement
+  - Canonical run schema fields: overlap_checks, spectral_policy (ascending order; op/fro norm), spectral_bounds, Lambda_len audit, phi_iso_tail
+- Diagnostics and comparators
+  - Tower diagnostics (μ, ν) formalized for kernels/cokernels after truncation; invisible Type IV failures (finite-level OK, limit fails)
+  - PF/BC after-collapse comparator (projection formula/base change evaluated post `T_tau` on windows)
+  - A/B soft-commuting policy for non-nested torsion reflectors with additive Δ_comm budgets
+- Quantitative structures
+  - Length spectrum operator `Lambda_len` (windowed clipped-length multiset; isomorphism-invariant after truncation)
+  - Tropical/weak-group collapse tools [Spec]: windowed energy dominance contracts; group-action proxies on bar-basis
+- Domain hooks [Spec]
+  - Fukaya action-filtration pipeline (continuation 1-Lipschitz; stop addition deletion-type; tower stability with (μ, ν))
+  - Three-layer (Gal → Trans → Funct) Langlands-style gates with windowed layer kernels and PF/BC audits
+- Formal test suite (IMRN/AiM-ready)
+  - T14 Overlap Gate gluing; T15 Length spectrum audit; T7 Saturation gate; T10 A/B tests; T13 δ-budget additivity; T11 Restart/Summability
 
 ---
 
@@ -24,6 +42,7 @@ Repository status: research framework with reference APIs, run protocol, and aud
 
 - Overview
 - Scope and guarantees
+- What’s in Core (provable) vs [Spec] (auditable)
 - Concepts and components
 - Installation
 - Quickstart (CLI and Python API)
@@ -31,89 +50,107 @@ Repository status: research framework with reference APIs, run protocol, and aud
 - Workflows and examples
 - Update policy (allowed operations)
 - Auditing and artifacts
+- Command reference
+- Python API reference (selected)
 - Roadmap
 - Contributing
 - Citing and references
 - License
+- Appendix: Terms cheat sheet
 
 ---
 
 ## Overview
 
-AK-HDPST v15.0 is a proof-oriented framework that separates:
-- Core: what is proved and guaranteed (constructible 1D persistence over a field), and
-- [Spec]: what is permitted as an extension under explicit, auditable hypotheses.
+AK–HDPST v16.0 is a proof-oriented framework that cleanly separates:
+- Core: proved, machine-checkable guarantees in constructible 1D persistence over a field, and
+- [Spec]: operational extensions that are non-expansive after truncation and fully audited (δ-ledger, overlap gluing, stability bands).
 
-All comparisons are performed after truncation by `T_tau`, following the windowed protocol:
-t -> persistence -> T_tau -> compare
+All comparisons follow the windowed, single-layer protocol (post-truncation):
+t → persistence `P_i` → `T_tau` → compare/audit
 
-This keeps stability guarantees tight and measurable and makes failures detectable via `(mu, nu)` on towers.
+This ensures metric stability, transparent failure modes (e.g., Type IV), and reproducible pipelines.
 
 ---
 
-## Scope and guarantees
+## Scope and guarantees (Core)
 
 Strong claims are limited to:
 - One-parameter, constructible persistence over a field k
-- Exact Serre reflector `T_tau` removing bars of length <= tau; 1-Lipschitz
-- Filtered lift `C_tau` up to f.q.i. with `P_i(C_tau F) ~ T_tau(P_i F)`
-- One-way bridge only: PH1(F)=0 implies Ext1(R(F),k)=0 under t-exact realization with amplitude <= 1
-- Tower diagnostics `(mu, nu)` computed from kernels/cokernels of comparison maps after truncation
+- Exact Serre reflector `T_tau` (deletes bars of length ≤ τ); exact, idempotent, 1‑Lipschitz (interleaving/bottleneck)
+- Filtered lift `C_tau` up to filtered quasi-isomorphism (f.q.i.) with `P_i(C_tau F) ≅ T_tau(P_i F)`
+- One-way bridge only: `PH1(F)=0 ⇒ Ext1(R(F), k)=0` under a t‑exact realization with amplitude ≤ 1 (no converse)
+- Tower diagnostics `(mu, nu)` from kernels/cokernels of comparison maps after truncation; detect invisible limit failures (Type IV)
+- Windowed gating: B–Gate⁺ (PH1/Ext1/(μ,ν)/safety margin) and Overlap Gate (post-collapse local-to-global)
 
-We do not assert PH1 <-> Ext1 in general. No claims about BSD, RH, or Navier–Stokes.
+Not claimed:
+- No global equivalence `PH1 ⇔ Ext1`
+- No statements about BSD, RH, or Navier–Stokes beyond [Spec]-level protocols
+- No beyond-constructible or multi-parameter guarantees
+
+---
+
+## What’s in Core vs [Spec]
+
+Core (provable):
+- Exact truncation `T_tau` and 1‑Lipschitz stability
+- Filtered lift `C_tau` up to f.q.i.
+- One-way PH1 ⇒ Ext1 (amplitude ≤ 1)
+- Tower diagnostics `(mu,nu)`, τ-sweeps, stability bands
+- B–Gate⁺ (safety margin) and Overlap Gate (Čech–Ext¹ on overlaps)
+- Restart/Summability to paste windowed certificates into global ones
+- Length spectrum correctness (clipped-length multiset; isomorphism invariance after truncation)
+
+[Spec] (auditable, non-expansive after truncation):
+- PF/BC after-collapse comparator (proper/smooth + field coeffs)
+- Mirror/Transfer with δ‑controlled commutation (natural 2‑cell; additive and post‑processing non‑increasing)
+- A/B soft‑commuting policy for non‑nested reflectors (Δ_comm to δ‑ledger)
+- Tropical/weak-group collapse proxies
+- Three-layer Langlands gates (Gal/Trans/Funct)
+- Fukaya realization with action filtration (continuation 1‑Lipschitz; stops deletion‑type)
 
 ---
 
 ## Concepts and components
 
 - `T_tau` (exact truncation)
-  - Exact reflective localization that deletes bars of length <= tau
-  - 1-Lipschitz for interleaving/bottleneck distance in the constructible 1D range
-
+  - Exact reflective localization that deletes bars of length ≤ τ
+  - Idempotent; 1‑Lipschitz for interleaving/bottleneck
 - `C_tau` (filtered lift, up to f.q.i.)
-  - Filtered chain-level lift, unique up to filtered quasi-isomorphism
-  - Satisfies degreewise `P_i(C_tau F) ~ T_tau(P_i F)`
-
-- Collapse gate and one-way bridge
-  - `CollapseAdmissible(F)` holds if PH1(F)=0 and Ext1(R(F),k)=0
-  - Proven implication used: PH1(F)=0 => Ext1(R(F),k)=0, under t-exact, amplitude <= 1
-
+  - Chain-level lift with `P_i(C_tau F) ≅ T_tau(P_i F)`
+- Collapse gate (B–Gate⁺)
+  - On each window: PH1(F)=0; Ext1(R(F),k)=0 (eligible only under amplitude ≤ 1); μ=ν=0; safety margin `gap_tau > Σ delta`
+- Overlap Gate (post-collapse)
+  - Local equivalence (after truncation) on overlaps; Čech–Ext¹ acyclicity; δ-budget on overlap; stability-band check
 - Tower diagnostics
-  - For a directed system `{F_n} -> F_infty`, define comparison maps after truncation
-  - `(mu, nu)` are sums of dimensions of kernels/cokernels across degrees
-  - `(mu, nu) != (0, 0)` witnesses limit failures not visible at finite levels
-
-- Update policy (post-truncation)
-  - Deletion-type: non-increasing for windowed persistence energies and spectral indicators
-  - Inclusion-type: non-expansive (stability-only)
-  - Spectral indicators are controlled by a fixed policy `(beta, M(tau), s)`; not invariants up to f.q.i.
-
-- [Spec] layer
-  - Pipelines (e.g., degeneration, arithmetic towers, tropical/mirror, Langlands-flavored, PDE regularization) are permitted only as non-expansive after truncation and audited by `(mu, nu)`
-  - Derived/sheaf-theoretic and symplectic/Fukaya realizations included only with explicit projection-formula/base-change or action-filtration hypotheses
+  - Comparison map after `T_tau`: `(mu, nu)` = generic fiber dims of ker/coker; Type IV when `(mu,nu)≠(0,0)`
+- Stability bands
+  - τ-sweep; band detection; robust gating over contiguous τ ranges with `(mu,nu)=(0,0)`
+- PF/BC after-collapse comparator [Spec]
+  - Compute PF/BC objectwise in t; transport to persistence; apply `T_tau`; compare on windows
+- Mirror/Transfer commutation [Spec]
+  - Natural 2‑cell `Mirror ∘ C_tau ⇒ C_tau ∘ Mirror` with uniform δ(i,τ); additive along pipelines; post‑processing non‑increasing
+- A/B soft‑commuting [Spec]
+  - For non‑nested reflectors; test Δ_comm ≤ η; else fallback order and log Δ_comm to δ‑ledger
+- Length spectrum operator `Lambda_len`
+  - Windowed clipped-length eigenvalues (unordered multiset) equal clipped barcode lengths; invariant under isomorphism after truncation
 
 ---
 
 ## Installation
-
-This repository ships a reference Python package and CLI.
 
 ```bash
 # 1) Clone
 git clone https://github.com/your-org/ak-hdpst.git
 cd ak-hdpst
 
-# 2) Create environment (recommended)
+# 2) Create environment
 python -m venv .venv
-source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
 # 3) Install
-pip install -e ".[all]"
+pip install -e ".[all]"     # extras: [viz], [lean], [coq]
 ```
-
-Optional extras:
-- `.[viz]` for visualization backends
-- `.[lean]` or `.[coq]` to install stubs for formalization workflows
 
 ---
 
@@ -123,61 +160,69 @@ Optional extras:
 
 ```bash
 # Prepare a run configuration
-cp examples/minimal/run.yaml ./run.yaml
+cp examples/v16/minimal/run.yaml ./run.yaml
 
-# Execute the pipeline
+# Execute the pipeline (windowed, post-collapse)
 akhdpst run run.yaml
 
-# Inspect audit summary
+# Inspect gate verdicts and δ-ledger per window
 akhdpst audit out/artifacts
 ```
 
 ### Minimal Python API
 
 ```python
-from akhdpst.core import T_tau, C_tau, collapse_admissible
-from akhdpst.audit import audit_tower
-from akhdpst.io import load_filtered_complex
+from akhdpst.core import T_tau, C_tau
+from akhdpst.gate import collapse_admissible, b_gate_plus
+from akhdpst.tower import audit_tower, detect_stability_band
+from akhdpst.compare import pf_bc_compare_after_collapse
+from akhdpst.length import lambda_len
 
-# Load a filtered chain complex
-F = load_filtered_complex("data/example.h5")
+# Load a filtered chain complex or per-degree persistence
+F = ...  # user load
 
-# Truncate at tau
+# Truncate at tau (persistence and filtered lift)
 tau = 0.15
-F_tau = C_tau(F, tau)  # chain-level lift (up to f.q.i.)
-P_tau = {i: T_tau(F.persistence(i), tau) for i in [0,1,2]}
+P_trunc = {i: T_tau(F.persistence(i), tau) for i in [0,1]}
+F_trunc = C_tau(F, tau)  # up to f.q.i.
 
-# Check collapse gate (one-way use)
-ok = collapse_admissible(F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True)
-print("CollapseAdmissible =", ok)
+# Gate check (one-way bridge used only with t-exact, amplitude<=1)
+ok_gate = collapse_admissible(
+    F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True
+)
 
-# Tower audit
-tower = [F_t for F_t in ...]  # user-provided directed system
-mu, nu = audit_tower(tower, tau=tau)
-print("mu =", mu, "nu =", nu)
+# Tower diagnostics (per tau); stability bands
+mu, nu = audit_tower(tower=[F0, F1, F2, F_inf], tau=tau, degrees=[0,1])
+bands = detect_stability_band(tower=[F0, F1, F2, F_inf], degree=1, tau_sweep=[0.1,0.15,0.2])
+
+# PF/BC after-collapse comparator (windowed, post T_tau)
+ok_pfbc = pf_bc_compare_after_collapse(
+    obj_left="Rf_*(A⊗f^*B)", obj_right="Rf_*A ⊗ B",
+    window=("w0", [0.0, 0.5]), tau=tau
+)
+
+# Length spectrum audit (windowed clipped-length multiset)
+eig = lambda_len(P_trunc[1], window=(0.0, tau))
 ```
 
 ---
 
-## Configuration (`run.yaml`)
-
-A single file captures windows, tau, operations, delta-ledger, and gate conditions. All outputs carry cross-linked checksums for audit and reproducibility.
+## Configuration (`run.yaml`) — v16.0 schema highlights
 
 ```yaml
-# run.yaml
 meta:
-  name: "demo-v15.0"
-  seed: 42
-  version: "15.0"
+  name: "demo-v16.0"
+  seed: 1337
+  version: "16.0"
   author: "your-name"
 
 data:
-  input: "data/example.h5"     # filtered complex or persistence representation
-  backend: "bars"              # bars | chain
-  degrees: [0, 1]              # degrees for diagnostics
+  input: "data/example.h5"
+  backend: "bars"       # bars | chain
+  degrees: [0, 1]
 
 windows:
-  # Right-open intervals; non-overlapping; full coverage optional
+  # Right-open; MECE; window coverage is audited
   - label: "w0"
     range: [0.0, 0.5)
   - label: "w1"
@@ -185,136 +230,180 @@ windows:
 
 truncation:
   tau: 0.15
-  lift: "C_tau"                # chain-level lift (up to f.q.i.)
-  reflector: "T_tau"           # persistence-level exact truncation
+  lift: "C_tau"         # filtered lift (up to f.q.i.)
+  reflector: "T_tau"    # exact truncation at persistence
+
+overlap_checks:
+  local_equiv: true      # post-collapse equivalence up to budget
+  cech_ext1_ok: true     # Čech–Ext¹ acyclicity on overlaps
+  stability_band_ok: true
+
+spectral_policy:
+  order: "ascending"     # MANDATORY (v16.0)
+  norm: "op"             # "op" or "fro" (MANDATORY)
+spectral_bounds:
+  lambda_min: 1.0e-8
+  lambda_max: 1.0e+3
+  lip_tol: 0.02
 
 operations:
-  policy:                       # monotonicity and stability policy
-    type: "mixed"               # deletion | inclusion | mixed
-    beta: 0.9
-    M_tau: "auto"
-    s: 2
   steps:
     - type: "deletion"
       op: "dirichlet_restriction"
-      args: {nodes: [1, 5, 7]}
-    - type: "inclusion"
-      op: "add_edges"
-      args: {pairs: [[2,3],[5,8]]}
+      args: { nodes: [1,5,7] }
+      delta: { alg: 0.000, disc: 0.002, meas: 0.001 }
+    - type: "epsilon"
+      op: "continuation"
+      args: { eps: 0.006 }
+      delta: { alg: 0.006, disc: 0.002, meas: 0.001 }
+    - type: "spec"
+      op: "mirror_transfer"
+      args: { delta_commutation: 0.010 }   # δ(i,τ) (Mirror×Collapse)
+      delta: { alg: 0.010, disc: 0.000, meas: 0.000 }
 
 spec:
-  enabled: true
-  items:
-    - name: "mirror_transfer"
-      hypotheses: ["nonexpansive_after_truncation", "delta_controlled_commutation"]
-      delta_budget: 0.01
-    - name: "projection_formula"
-      hypotheses: ["base_change_ok", "window_protocol_ok"]
-      delta_budget: 0.00
+  pf_bc_after_collapse: { enabled: true, delta_budget: 0.0 }
+  ab_soft_commuting:
+    enabled: true
+    eta: 0.02            # tolerance
+    fallback_order: ["birth_window", "length"]  # if Δ_comm > η
 
 gate:
-  # B-Gate+ safety margin per window
   require:
     PH1_zero: true
-    Ext1_zero: true     # used only with t-exact realization, amplitude <= 1
+    Ext1_zero: true       # used only if amplitude<=1
     mu_zero: true
     nu_zero: true
     gap_tau_gt_sum_delta: true
+  safety_margin:
+    gap_tau: 0.03
 
 audit:
-  outputs: ["bars", "spec", "ext", "phi"]
+  outputs: ["bars", "spec", "ext", "phi", "Lambda_len"]
   checksums: "sha256"
-  restart: "summability"        # paste window certificates into global one
+  restart: "summability"
+
+length_spectrum:
+  degree: 1
+  tau: 0.15
+  audit: "hash"         # or store eigenvalues for small instances
 
 output:
   dir: "out/artifacts"
   overwrite: false
 ```
 
+Key schema additions (v16.0):
+- `overlap_checks` (Overlap Gate — local_equiv, cech_ext1_ok, stability_band_ok)
+- `spectral_policy.order="ascending"` and `norm="op"|"fro"` (mandatory)
+- `spectral_bounds` and `lip_tol`
+- `length_spectrum` (`Lambda_len` audit)
+- δ-ledger per step; `gap_tau` for safety margin
+- A/B soft-commuting with `eta` + fallback order
+
 ---
 
 ## Workflows and examples
 
-### 1) Windowed protocol
+### 1) Windowed protocol (post-collapse)
 
-- Always compare after truncation:
-  - For each window t-range
+- For each right-open window:
   - Compute persistence
   - Apply `T_tau`
-  - Compare maps and audit `(mu, nu)`
+  - Compare maps, compute `(mu,nu)`, and audit delta-ledger
 
 ```bash
-akhdpst run examples/windowed/run.yaml
+akhdpst run examples/v16/windowed/run.yaml
 akhdpst audit out/artifacts --by-window
 ```
 
-### 2) Collapse gate check
+### 2) Overlap Gate gluing (post-collapse)
 
-- Gate conditions:
-  - PH1(F)=0
-  - Ext1(R(F),k)=0 (one-way inference from PH1(F)=0 under t-exact, amplitude <= 1)
-  - mu=0 and nu=0 on towers
-  - gap_tau > sum(delta) in each window
+- Requirements per overlapping window:
+  - Post-collapse local equivalence up to δ-budget
+  - Čech–Ext¹ acyclicity holds (degree 1)
+  - Stability-band condition (no near‑τ accumulation; `(mu,nu)=(0,0)`)
 
 ```bash
-akhdpst gate check --run run.yaml --window w0
+akhdpst gate overlap --run run.yaml --window w0,w1
 ```
 
-### 3) Spec pipeline with audit
+### 3) τ‑sweep & stability bands
 
-- Spec steps must be non-expansive after truncation and must log delta to the ledger
+- Probe `(mu,nu)` across a τ grid; accept bands with `(mu,nu)=(0,0)` stable under refinement
 
 ```bash
-akhdpst run examples/spec/mirror.yaml
-akhdpst audit out/artifacts --show-delta-ledger
+akhdpst sweep tau --run run.yaml --degree 1 --grid "0.10:0.05:0.30"
+```
+
+### 4) PF/BC after-collapse comparator [Spec]
+
+- Compare `Rf_*(A⊗f^*B)` vs `Rf_*A ⊗ B` after `T_tau`, on the same window
+
+```bash
+akhdpst compare pf-bc --run run.yaml --window w0 --tau 0.15
+```
+
+### 5) A/B soft-commuting [Spec]
+
+- Test Δ_comm ≤ η; else fallback order and log Δ_comm as δ^{alg}
+
+```bash
+akhdpst compare ab --run run.yaml --reflectors length birth_window --eta 0.02
+```
+
+### 6) Length spectrum audit (Lambda_len)
+
+- Compute windowed clipped-length multiset and store hash/eigs
+
+```bash
+akhdpst audit lambda-len --dir out/artifacts --degree 1 --tau 0.15
 ```
 
 ---
 
-## Update policy (allowed operations)
+## Update policy (after truncation)
 
-The following rule-of-thumb holds after truncation:
-
-| Update type | Examples | Guarantee after truncation |
-| --- | --- | --- |
-| Deletion-type | Dirichlet restriction; principal submatrix; PSD Loewner contraction; conservative averaging | Non-increasing (monotone) for windowed persistence energies and spectral indicators |
-| Inclusion-type | Add cells; relax boundary conditions; attach handles | Non-expansive (stability-only) |
+| Update type   | Examples                                                                  | Guarantee (post `T_tau`)                                             |
+| ---           | ---                                                                       | ---                                                                   |
+| Deletion-type | Dirichlet restriction; principal submatrix; PSD Loewner contraction; conservative averaging; stop addition | Non-increasing (monotone) for windowed persistence energies and spectral indicators |
+| ε‑continuation| Small homotopies; small steps satisfying interleaving shift bound         | 1‑Lipschitz (stability); record ε in δ‑ledger                         |
+| Inclusion-type| Add cells; relax boundary conditions; domain enlargement                  | Non-expansive (stability only)                                        |
 
 Notes:
-- Spectral indicators on `L(C_tau F)` are not f.q.i.-invariants; they are controlled via the fixed policy `(beta, M(tau), s)`.
-- Keep all Spec steps in the non-expansive regime and account for deltas in the ledger.
+- Spectral indicators are computed on `L(C_tau F)`; they are not f.q.i.-invariants. v16.0 mandates a fixed `spectral_policy` (ordering/norm) + bounds in `run.yaml`.
+- [Spec] items (PF/BC comparator, Mirror/Transfer, A/B policy, tropical tools) must log δ to the ledger and pass B–Gate⁺ per window.
 
 ---
 
 ## Auditing and artifacts
 
-All runs produce a reproducible set of artifacts with cross-linked hashes.
-
-Directory layout (example):
-
 ```
 out/artifacts/
   bars/
-    w0_degree1_trunc.json
-    w1_degree1_trunc.json
+    w0_deg1_trunc.json
+    w1_deg1_trunc.json
   spec/
     ledger_w0.json
     ledger_w1.json
   ext/
-    Rw0_ext1.txt
+    w0_ext1.txt
   phi/
-    maps_w0_degree1.h5
+    maps_w0_deg1.h5         # comparison maps; (mu,nu); iso_tail flag
+  lambda_len/
+    w0_deg1_tau015.json     # eigenvalues or hash
   run.yaml
   audit_summary.json
   checksums.txt
 ```
 
-- `bars/` contains truncated barcodes per window and degree
-- `spec/` contains delta-ledger entries and hypotheses checks
-- `ext/` contains Ext-related summaries where applicable
-- `phi/` contains serialized comparison maps and `(mu, nu)` reports
-- `audit_summary.json` aggregates gate outcomes and diagnostics
-- `checksums.txt` lists SHA256 sums for all artifacts
+- `bars/`: truncated barcodes per window/degree
+- `spec/`: δ-ledger (alg/disc/meas) + [Spec] audit results
+- `ext/`: Ext¹ summaries (eligible only under amplitude ≤ 1)
+- `phi/`: comparison maps; `(mu,nu)`; `phi_iso_tail` status
+- `lambda_len/`: clipped-length multiset (eigs or hash)
+- `audit_summary.json`: gate outcomes; overlap checks; stability bands
+- `checksums.txt`: SHA256 sums of all artifacts
 
 ---
 
@@ -327,14 +416,26 @@ akhdpst run run.yaml
 # Audit an existing run directory
 akhdpst audit out/artifacts
 
-# Check B-Gate+ conditions per window
+# Overlap Gate check
+akhdpst gate overlap --run run.yaml --window w0,w1
+
+# B–Gate+ per window
 akhdpst gate check --run run.yaml --window w0
 
-# Visualize truncated barcodes (ASCII)
-akhdpst viz bars --dir out/artifacts --degree 1
+# τ‑sweep and stability bands
+akhdpst sweep tau --run run.yaml --degree 1 --grid "0.10:0.05:0.30"
+
+# PF/BC after-collapse comparator
+akhdpst compare pf-bc --run run.yaml --window w0 --tau 0.15
+
+# A/B soft-commuting test
+akhdpst compare ab --run run.yaml --reflectors length birth_window --eta 0.02
 
 # Print tower diagnostics
-akhdpst diag tower --dir out/artifacts --degree 0
+akhdpst diag tower --dir out/artifacts --degree 1
+
+# Length spectrum audit
+akhdpst audit lambda-len --dir out/artifacts --degree 1 --tau 0.15
 ```
 
 ---
@@ -343,49 +444,62 @@ akhdpst diag tower --dir out/artifacts --degree 0
 
 ```python
 from akhdpst.core import T_tau, C_tau
-from akhdpst.gate import collapse_admissible, b_gate_plus
-from akhdpst.audit import audit_tower, summarize_audit
-from akhdpst.spec import run_spec_pipeline
+from akhdpst.gate import collapse_admissible, b_gate_plus, overlap_gate_check
+from akhdpst.tower import audit_tower, detect_stability_band
+from akhdpst.compare import pf_bc_compare_after_collapse, ab_soft_commute
+from akhdpst.length import lambda_len
 
-# Exact truncation at persistence layer
-P_trunc = T_tau(P, tau=0.2)
+# Overlap Gate
+ok_overlap = overlap_gate_check(run="run.yaml", windows=["w0","w1"])
 
-# Filtered lift (up to f.q.i.)
-F_trunc = C_tau(F, tau=0.2)
-
-# Gate checks (one-way bridge used internally; t_exact and amplitude flags required)
-ok_gate = collapse_admissible(
-    F, realization="Db(k-mod)", t_exact=True, amplitude_leq_1=True
+# B–Gate+ (windowed)
+ok_bgate = b_gate_plus(
+    window="w0",
+    ph1_zero=True,
+    ext1_zero=True,
+    mu=0, nu=0,
+    gap_tau=0.025,
+    delta_sum=0.011
 )
-ok_bgate = b_gate_plus(window="w0", mu=0, nu=0, gap_tau=0.05, delta_sum=0.01)
 
-# Tower diagnostics
-mu, nu = audit_tower(tower=[F0, F1, F2, F_inf], tau=0.2, degrees=[0,1])
+# Mirror/Transfer (δ‑controlled commutation)
+ok_mirror = ab_soft_commute(
+    M=P_trunc[1], A="length", B="birth_window", eta=0.02, fallback=True
+)
 
-# Spec pipeline (non-expansive after truncation; delta-ledger enforced)
-spec_out = run_spec_pipeline(F, items=[...], tau=0.2, ledger=ledger)
+# PF/BC comparator
+ok_pfbc = pf_bc_compare_after_collapse(
+    obj_left="Rf_*(A⊗f^*B)", obj_right="Rf_*A ⊗ B",
+    window=("w0", [0.0, 0.5]), tau=0.15
+)
+
+# Stability band detection for τ
+bands = detect_stability_band(tower=[...], degree=1, tau_sweep=[0.1,0.15,0.2])
+
+# Length spectrum eigenvalues/hash
+L = lambda_len(P_trunc[1], window=(0.0, 0.15))  # eigs or hash
 ```
 
 ---
 
 ## Roadmap
 
-- Formalization stubs and proofs (Lean, Coq) for reflectors, diagnostics, and gates
-- Auto tau-sweep and stability-band detection
-- GPU/parallel backends for large barcodes and filtered complexes
-- Notebook templates for per-window audits and delta-ledger visualization
-- Expanded Spec contracts for PDE and Fukaya categories (action-filtration tooling)
+- Auto τ‑sweep and band detection (robust refinement; band‑wise gating)
+- Extended Overlap Gate tooling (nerve API; typed acceptance per simplex)
+- Richer spec modules (arithmetic/Langlands, PDE, Fukaya) with δ‑controls
+- Formalization expansions (Lean/Coq): `T_tau`, `(mu,nu)`, gates, PF/BC transport, A/B policy
+- Notebook templates (per-window audits, δ‑ledger/overlap visualization)
 
 ---
 
 ## Contributing
 
-We welcome issues and pull requests:
-- Keep Core and [Spec] separation explicit in code and docs
-- Add or extend Spec items only with non-expansive-after-truncation checks and delta-ledger entries
-- Include minimal examples and update `examples/` and `tests/`
+We welcome issues and PRs:
+- Keep Core vs [Spec] explicit (code/docs)
+- [Spec] items must include non‑expansive‑after‑truncation checks + δ‑ledger entries
+- Add minimal examples and tests (T7, T10, T11, T13, T14, T15)
 
-Development commands:
+Dev commands:
 
 ```bash
 pip install -e ".[dev]"
@@ -398,20 +512,18 @@ mypy akhdpst
 
 ## Citing and references
 
-If you use AK-HDPST v15.0 in research, please cite:
+If you use AK–HDPST v16.0 in research, please cite:
 
 ```
-AK–HDPST v15.0: Exact Truncation, Collapse Gate, and Auditable Spec Extensions
+AK–HDPST v16.0: Windowed Collapse, Overlap Gate, PF/BC After-Collapse, and Auditable Pipelines
 Authors: ...
 Year: 2025
 URL: https://github.com/your-org/ak-hdpst
 ```
 
-Related foundational references:
-- Crawley-Boevey (2015): Decomposition of pointwise finite-dimensional persistence modules
+Foundational references:
+- Crawley‑Boevey (2015): Decomposition of pointwise finite‑dimensional persistence modules
 - Chazal, de Silva, Glisse, Oudot (2016): Structure and stability of persistence modules and barcodes
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17059079.svg)](https://doi.org/10.5281/zenodo.17059079)
 
 ---
 
@@ -423,11 +535,13 @@ This project is released under the MIT License. See `LICENSE` for details.
 
 ## Appendix: Terms cheat sheet
 
-- Constructible 1D persistence: finite critical set; pointwise finite-dimensional on bounded windows
-- `T_tau`: exact truncation removing all bars of length <= tau; 1-Lipschitz
-- `C_tau`: filtered lift of `T_tau` up to f.q.i.; `P_i(C_tau F) ~ T_tau(P_i F)`
-- Collapse gate: PH1(F)=0 and Ext1(R(F),k)=0 (one-way implication used only under stated conditions)
-- B-Gate+: requires PH1=0, Ext1=0 (under conditions), mu=nu=0, and gap_tau > sum(delta)
-- `(mu, nu)`: sums of kernel/cokernel dimensions of comparison maps after truncation; detect invisible limit failures
-- Window protocol: t -> persistence -> T_tau -> compare; right-open, non-overlapping windows
-- [Spec]: extensions that are non-expansive after truncation; all deltas recorded in the ledger and audited by `(mu, nu)`
+- Constructible 1D persistence: finite critical set; p.f.d. on bounded windows
+- `T_tau`: exact truncation removing all bars of length ≤ τ; idempotent; 1‑Lipschitz
+- `C_tau`: filtered lift of `T_tau` up to f.q.i.; `P_i(C_tau F) ≅ T_tau(P_i F)`
+- B–Gate⁺: PH1=0; Ext1=0 (eligible only under amplitude ≤ 1); `(mu,nu)=(0,0)`; `gap_tau > Σ delta`
+- Overlap Gate: post‑collapse local-to-global gluing; Čech–Ext¹ on overlaps; stability band; δ‑overlap budget
+- `(mu, nu)`: generic fiber dims of ker/coker of comparison map after truncation; Type IV if nonzero
+- Stability band: τ‑range with `(mu,nu)=(0,0)` stable under sweep refinement
+- PF/BC comparator: PF/BC applied after `T_tau` on the same window/τ
+- A/B soft‑commuting: test Δ_comm ≤ η; else fallback and log Δ_comm as δ^{alg}
+- Lambda_len: windowed clipped-length operator; isomorphism‑invariant after truncation

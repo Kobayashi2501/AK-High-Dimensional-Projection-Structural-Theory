@@ -531,6 +531,7 @@ URL: https://github.com/your-org/ak-hdpst
 
 本プロジェクトは MIT ライセンスで公開されています。詳細は `LICENSE` を参照してください。
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17130577.svg)](https://doi.org/10.5281/zenodo.17130577)
 ---
 
 ## 付録：用語チートシート

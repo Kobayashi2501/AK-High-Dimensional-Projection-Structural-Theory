@@ -531,6 +531,7 @@ Foundational references:
 
 This project is released under the MIT License. See `LICENSE` for details.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17130577.svg)](https://doi.org/10.5281/zenodo.17130577)
 ---
 
 ## Appendix: Terms cheat sheet

@@ -849,6 +849,8 @@ URL: https://github.com/your-org/ak-ap   # placeholder
 
 This project is released under the MIT License. See `LICENSE` for details.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17874722.svg)](https://doi.org/10.5281/zenodo.17874722)
+
 ---
 
 ## Appendix: Terms cheat sheet

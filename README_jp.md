@@ -917,6 +917,8 @@ URL: https://github.com/your-org/ak-ap   # placeholder
 本プロジェクトは MIT License のもとで公開されています。  
 詳細は `LICENSE` ファイルを参照してください。
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17874722.svg)](https://doi.org/10.5281/zenodo.17874722)
+
 ---
 
 ## Appendix: 用語チートシート

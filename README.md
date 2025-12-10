@@ -843,6 +843,17 @@ AK_AP: Arithmetic Calibration Program for AK-OS
 URL: https://github.com/your-org/ak-ap   # placeholder
 ```
 
+## Archive / OLD versions
+
+The `OLD/` directory contains historical snapshots of AK–HDPST (v1.4–v16.0).
+They are kept **as an archive and cautionary record** of earlier, over-loaded
+or less-guarded designs.
+
+- Only **v17.0** and the AK_AP modules in the top-level tree should be
+  considered part of the current AK-OS design.
+- OLD versions may contain obsolete claims, broader scopes, or unchecked [Spec] layers.
+  They are preserved for transparency, not as recommended references.
+
 ---
 
 ## License

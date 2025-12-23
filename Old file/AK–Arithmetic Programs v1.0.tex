@@ -1,0 +1,3363 @@
+\RequirePackage[2023-11-01]{latexrelease}
+
+\documentclass[11pt]{article}
+
+% --- (NEW) Math alphabet reservation cut (must be BEFORE ams/bm) ---
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+
+% --- Encoding & Language ---
+% [XeLaTeX] utf8 はネイティブ対応なので inputenc は不要・非推奨
+% \usepackage[utf8]{inputenc} % <-- 削除
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% --- Core Math & Utilities (AMS first) ---
+\usepackage{amsmath,amssymb,amsthm,amsfonts,mathtools}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{changepage}
+\usepackage{amscd}
+\usepackage{textcomp}
+\usepackage{etoolbox} % for \forcsvlist
+\usepackage{enumitem}
+\usepackage{array}
+
+% --- Fonts (XeLaTeX でも利用可能な pdfLaTeX 系 Times セット) ---
+\usepackage{newtxtext,newtxmath}  % Times-like text & math
+\usepackage{inconsolata}          % Monospace for listings
+\DeclareTextFontCommand{\textttit}{\ttfamily\slshape} % monospace "italic-like"
+
+% --- Diagrams ---
+\usepackage{tikz, tikz-cd}
+\usetikzlibrary{
+  matrix, arrows.meta, cd, calc, positioning, quotes,
+  decorations.pathmorphing, decorations.markings,
+  shapes.misc, shapes.geometric, arrows, fit, backgrounds, fadings
+}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[all,cmtip]{xy}
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\theoremstyle{definition}
+\theoremstyle{remark}
+
+% --- Tables ---
+\usepackage{array,tabularx,booktabs}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% --- Monospace token helper (safe in math) ---
+\newcommand{\fname}[1]{\text{\texttt{#1}}}
+
+% --- Listings / Code ---
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  captionpos=b,
+  xleftmargin=1em,
+  columns=fullflexible,
+  upquote=true,
+  mathescape=false,
+  literate=*%
+    {∀}{{$\forall$}}1 {∃}{{$\exists$}}1
+    {→}{{$\to$}}1 {←}{{$\leftarrow$}}1 {⟶}{{$\longrightarrow$}}1 {⇒}{{$\Rightarrow$}}1 {⇔}{{$\Leftrightarrow$}}1 {↦}{{$\mapsto$}}1 {⥤}{{$\to$}}1
+    {α}{{$\alpha$}}1 {β}{{$\beta$}}1 {γ}{{$\gamma$}}1 {δ}{{$\delta$}}1 {ε}{{$\varepsilon$}}1
+    {λ}{{$\lambda$}}1 {μ}{{$\mu$}}1 {ν}{{$\nu$}}1 {π}{{$\pi$}}1 {τ}{{$\tau$}}1
+    {κ}{{$\kappa$}}1 {θ}{{$\theta$}}1 {η}{{$\eta$}}1 {φ}{{$\varphi$}}1
+    {ι}{{$\iota$}}1 {ρ}{{$\rho$}}1 {χ}{{$\chi$}}1 {ω}{{$\omega$}}1
+    {Γ}{{$\Gamma$}}1 {Δ}{{$\Delta$}}1 {Π}{{$\Pi$}}1 {Σ}{{$\Sigma$}}1 {Ω}{{$\Omega$}}1 {Λ}{{$\Lambda$}}1 {Φ}{{$\Phi$}}1 {Ψ}{{$\Psi$}}1
+    {ℕ}{{$\mathbb{N}$}}1 {ℤ}{{$\mathbb{Z}$}}1 {ℚ}{{$\mathbb{Q}$}}1 {ℝ}{{$\mathbb{R}$}}1
+    {≤}{{$\le$}}1 {≥}{{$\ge$}}1 {≠}{{$\ne$}}1 {∈}{{$\in$}}1 {⊆}{{$\subseteq$}}1
+    {∧}{{$\land$}}1 {∨}{{$\lor$}}1
+    {⪯}{{$\preceq$}}1 {⪰}{{$\succeq$}}1 {≡}{{$\equiv$}}1 {≅}{{$\cong$}}1 {⋙}{{$\ggg$}}1
+    {⊕}{{$\oplus$}}1 {⊗}{{$\otimes$}}1 {⊙}{{$\odot$}}1 {⊣}{{$\dashv$}}1 {⊢}{{$\vdash$}}1 {⊥}{{$\perp$}}1
+    {·}{{$\cdot$}}1 {∙}{{$\cdot$}}1 {⋅}{{$\cdot$}}1 {•}{{$\bullet$}}1
+    {・}{{$\cdot$}}1 {‧}{{$\cdot$}}1
+    {×}{{$\times$}}1 {⨯}{{$\times$}}1
+    {…}{{$\ldots$}}1 {–}{{--}}1 {—}{{---}}1 {∞}{{$\infty$}}1
+    {₁}{{$_1$}}1 {⁺}{{${}^{+}$}}1
+}
+
+% --- Math Operators ---
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\PH}{PH}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Collapse}{Collapse}
+\DeclareMathOperator{\Mot}{Mot}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\RHom}{RHom}
+\DeclareMathOperator{\HT}{HT}
+\DeclareMathOperator{\gdim}{gdim}
+
+% --- Minimal hyphenat compatibility (no package) ---
+\DeclareRobustCommand{\hyp}{\nobreakdash-} % "one\hyp way"
+\providecommand{\NoHyphens}[1]{\mbox{#1}}   % light-weight shim
+\providecommand{\nohyphens}[1]{\mbox{#1}}
+
+% --- General Macros ---
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\CollapseZone}{\mathfrak{C}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Sha}{\mathcal{X}}
+\newcommand{\CollapseCompatible}{\mathsf{CollapseCompatible}}
+\newcommand{\CollapseTypeOf}[1]{\operatorname{CollapseType}(#1)}
+\newcommand{\CollapseImage}{\operatorname{CollapseImage}}
+\newcommand{\CollapseEnergy}{\mathcal{E}_{\mathrm{Coll}}}
+\newcommand{\ptorsionfree}[1]{\ensuremath{#1}\nobreakdash-torsion-free}
+\newcommand{\Pers}{\mathsf{Pers}}
+\newcommand{\Vect}{\mathsf{Vect}}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\dq}{\textquotedbl}
+\newcommand{\rH}{\mathrm{H}}
+\newcommand{\timevar}{t}
+\newcommand{\T}{\mathsf{T}}
+\newcommand{\C}{\mathsf{C}}
+\newcommand{\Coll}{\mathsf{C}}
+\newcommand{\Rfun}{\mathcal{R}}
+
+\theoremstyle{plain}
+\theoremstyle{definition}
+
+\newcommand{\kk}{k}
+\newcommand{\xto}{\xrightarrow}
+\newcommand{\xtoH}{\xRightarrow{\ \simeq\ }}
+\newcommand{\xtoM}{\xRightarrow{\ \mono\ }}
+\newcommand{\mono}{\mathrm{mono}}
+\newcommand{\epi}{\mathrm{epi}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\PE}{\mathrm{PE}}
+\newcommand{\betti}{\beta}
+\newcommand{\CT}{C_{\tau}}
+\newcommand{\dint}{d_{\mathrm{int}}}
+
+% --- Theorem-like Environments ---
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{specification}[theorem]{Specification}
+\newtheorem{declaration}[theorem]{Declaration}
+\newtheorem{interpretation}[theorem]{Interpretation}
+% --- Unified notation ---
+\DeclareRobustCommand{\FiltCh}[1]{\mathsf{FiltCh}(#1)}
+\DeclareRobustCommand{\Perskft}{\Pers^{\mathrm{cons}}_{k}}
+\DeclareRobustCommand{\Pk}{\mathbf{P}}
+\DeclareRobustCommand{\Ttau}{\texorpdfstring{\ensuremath{\mathbf{T}_{\tau}}}{T\_\tau}}
+\DeclareRobustCommand{\Ctau}{\texorpdfstring{\ensuremath{C_{\tau}}}{C\_\tau}}
+\DeclareRobustCommand{\Dbplain}{D^{\mathrm{b}}}
+\DeclareRobustCommand{\Dbkmod}{D^{\mathrm{b}}(k\text{-mod})}
+\DeclareRobustCommand{\Db}{D^{\mathrm{b}}(k\text{-mod})}
+\DeclareRobustCommand{\muc}{\mu_{\mathrm{Collapse}}}
+\DeclareRobustCommand{\nuc}{\nu_{\mathrm{Collapse}}}
+\DeclareRobustCommand{\fqi}{\text{f.q.i.}}
+\DeclareRobustCommand{\LC}{\texorpdfstring{\ensuremath{\mathrm{(LC)}}}{(LC)}}
+\DeclareRobustCommand{\Qtest}{\{\,k[0]\,\}}
+\DeclareRobustCommand{\pos}[1]{\left(#1\right)_{+}}
+\DeclareRobustCommand{\Trop}{\texorpdfstring{\ensuremath{\operatorname{Trop}}}{Trop}}
+\DeclareRobustCommand{\Mirror}{\texorpdfstring{\ensuremath{\operatorname{Mirror}}}{Mirror}}
+\newcommand{\ProofBadge}{\textsf{\footnotesize[Proof]}}
+\newcommand{\SpecBadge}{\textsf{\footnotesize[Spec]}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\theoremstyle{definition}
+\theoremstyle{remark}
+
+% Macros
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\Vectk}{\mathsf{Vect}_k}
+\newcommand{\Dbk}{D^{\mathrm{b}}(k\text{-mod})}
+\newcommand{\Perscons}{\Pers^{\mathrm{cons}}_k}
+\newcommand{\Persft}{\Pers^{\mathrm{ft}}_k}
+\newcommand{\Crop}{\mathbf{W}}
+\newcommand{\Res}{\mathrm{Res}}
+\newcommand{\intdist}{d_{\mathrm{int}}}
+\newcommand{\Ecat}{\mathsf{E}_\tau}
+\newcommand{\Orth}{(\mathsf{E}_\tau)^{\perp}}
+\newcommand{\Len}{\Lambda_{\mathrm{len}}}
+\newcommand{\qand}{\quad\text{and}\quad}
+\newcommand{\qtext}[1]{\quad\text{#1}\quad}
+\newcommand{\ang}[1]{\langle #1\rangle}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\Trans}{\mathsf{Trans}}
+\newcommand{\Funct}{\mathsf{Funct}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\MECE}{\mathrm{MECE}}
+\newcommand{\clip}{\mathrm{clip}}
+\newcommand{\len}{\mathrm{len}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\Pfun}{\mathbf{P}}
+\newcommand{\Ufun}{\mathcal{U}}
+\newcommand{\win}{\ensuremath{\mathrm{win}}}
+\newcommand{\spec}{\ensuremath{\mathrm{spec}}}
+\newcommand{\disc}{\ensuremath{\mathrm{disc}}}
+\newcommand{\meas}{\ensuremath{\mathrm{meas}}}
+\newcommand{\tot}{\ensuremath{\mathrm{tot}}}
+
+% 注意：\int は「積分記号」
+\newcommand{\inter}{\ensuremath{\mathrm{int}}}
+\providecommand{\Cfun}[1]{\mathsf{C}_{#1}}
+\providecommand{\Tfun}[1]{\mathbf{T}_{#1}}
+\providecommand{\Ctau}{\Cfun{\tau}}
+\providecommand{\Csigma}{\Cfun{\sigma}}
+\providecommand{\Ttau}{\Tfun{\tau}}
+\providecommand{\Tsigma}{\Tfun{\sigma}}
+\providecommand{\intdist}{d_{\mathrm{int}}}
+\DeclareMathOperator{\coker}{coker}
+
+% --- safe stubs (preamble) ---
+\usepackage{amsmath,amssymb,mathtools}
+\providecommand{\LC}{\mathsf{LC}}
+\providecommand{\Gap}{\mathrm{Gap}}
+\providecommand{\Ttau}{\mathbf{T}_{\tau}}
+\providecommand{\Ctau}{\mathsf{C}_{\tau}}
+\providecommand{\Rfun}{\mathcal{R}}
+\providecommand{\Mirror}{\mathsf{Mirror}}
+\providecommand{\Funct}{\mathsf{Fun}}
+\providecommand{\muc}{\mu_{\mathrm{Collapse}}}
+\providecommand{\nuc}{\nu_{\mathrm{Collapse}}}
+\providecommand{\Gal}{\mathrm{Gal}}
+\providecommand{\Tr}{\mathrm{Tr}}
+\providecommand{\Fun}{\mathrm{Fun}}
+\providecommand{\alg}{\mathrm{alg}}
+\providecommand{\disc}{\mathrm{disc}}
+\providecommand{\meas}{\mathrm{meas}}
+\providecommand{\Defect}{\mathsf{Defect}}
+
+% --- Over/underfull mitigation ---
+\usepackage{microtype}
+\emergencystretch=2em
+
+% --- Hyperlinks (load ONCE, near the end) ---
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{xurl}
+\urlstyle{tt}
+\def\UrlBreaks{\do\/\do\_\do\.\do\-}
+
+\usepackage{tabularx,booktabs,array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% --- Clever references (after hyperref) ---
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+
+% --- Float / page control ---
+\usepackage{placeins}
+
+% ======================================================
+% === Paste-artifact guard: robust \n handling (HEAVY) ===
+% ======================================================
+\providecommand{\n}{\unskip\space}
+\makeatletter
+\newcommand{\patchn}[1]{\expandafter\def\csname n#1\endcsname{\unskip\space #1}}
+\forcsvlist{\patchn}{Hence,Therefore,Thus,Then,Proof,Remark,Theorem,Proposition,Lemma,Corollary,
+Definition,Example,Declaration,Specification,Spec,Appendix,Section,Subsection,We,In,Let,Under,
+Given,Assuming,Assumption,Fix,If,When,Where,While,For,From,By,On,Off,Also,Moreover,Conversely,
+Equivalently,Finally,Next,First,Second,Third,Note,Notation,Convention,Claim,Case,Step,Algorithm,
+Figure,Table,Thm,Prop,Lem,Cor,Def,Ex,Rem,Eq,Eqn,Ch,Chap,PF,BC,AK,NS,HT,PH}
+\forcsvlist{\patchn}{hence,therefore,thus,then,proof,remark,theorem,proposition,lemma,corollary,
+definition,example,declaration,specification,spec,appendix,section,subsection,we,in,let,under,
+given,assuming,assumption,fix,if,when,where,while,for,from,by,on,off,also,moreover,conversely,
+equivalently,finally,next,first,second,third,note,notation,convention,claim,case,step,algorithm,
+figure,table,thm,prop,lem,cor,def,ex,rem,eq,eqn,ch,chap,pf,bc,ak,ns,ht,ph}
+\patchn{Proof)}\patchn{Remark)}\patchn{Theorem)}\patchn{Lemma)}\patchn{Corollary)}
+\newcommand{\patchnletter}[1]{\expandafter\def\csname n#1\endcsname{\unskip\space #1}}
+\@tfor\@tempa:=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\do{%
+  \expandafter\patchnletter\@tempa}
+\makeatother
+
+% ---------- Font fallback ----------
+\makeatletter
+\AtBeginDocument{%
+  \@ifpackageloaded{stmaryrd}{\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}}{}%
+}
+\makeatother
+
+
+% ---------- 本文・見出し・しおりの Unicode → TeX 変換 ----------
+\usepackage{newunicodechar}
+\newunicodechar{Σ}{\texorpdfstring{\ensuremath{\Sigma}}{Sigma}}
+\newunicodechar{Γ}{\texorpdfstring{\ensuremath{\Gamma}}{Gamma}}
+\newunicodechar{Δ}{\texorpdfstring{\ensuremath{\Delta}}{Delta}}
+\newunicodechar{Π}{\texorpdfstring{\ensuremath{\Pi}}{Pi}}
+\newunicodechar{τ}{\texorpdfstring{\ensuremath{\tau}}{tau}}
+\newunicodechar{ν}{\texorpdfstring{\ensuremath{\nu}}{nu}}
+\newunicodechar{κ}{\texorpdfstring{\ensuremath{\kappa}}{kappa}}
+\newunicodechar{θ}{\texorpdfstring{\ensuremath{\theta}}{theta}}
+\newunicodechar{η}{\texorpdfstring{\ensuremath{\eta}}{eta}}
+\newunicodechar{φ}{\texorpdfstring{\ensuremath{\varphi}}{phi}}
+\newunicodechar{π}{\texorpdfstring{\ensuremath{\pi}}{pi}}
+\newunicodechar{ε}{\texorpdfstring{\ensuremath{\varepsilon}}{epsilon}}
+\newunicodechar{δ}{\texorpdfstring{\ensuremath{\delta}}{delta}}
+\newunicodechar{ℝ}{\texorpdfstring{\ensuremath{\mathbb{R}}}{R}}
+\newunicodechar{ℤ}{\texorpdfstring{\ensuremath{\mathbb{Z}}}{Z}}
+\newunicodechar{ℕ}{\texorpdfstring{\ensuremath{\mathbb{N}}}{N}}
+\newunicodechar{≤}{\texorpdfstring{\ensuremath{\le}}{<=}}
+\newunicodechar{≥}{\texorpdfstring{\ensuremath{\ge}}{>=}}
+\newunicodechar{≠}{\texorpdfstring{\ensuremath{\ne}}{\string!=}}
+\newunicodechar{∈}{\texorpdfstring{\ensuremath{\in}}{in}}
+\newunicodechar{⊆}{\texorpdfstring{\ensuremath{\subseteq}}{subseteq}}
+\newunicodechar{∨}{\texorpdfstring{\ensuremath{\lor}}{or}}
+\newunicodechar{∧}{\texorpdfstring{\ensuremath{\land}}{and}}
+\newunicodechar{⪯}{\texorpdfstring{\ensuremath{\preceq}}{preceq}}
+\newunicodechar{⪰}{\texorpdfstring{\ensuremath{\succeq}}{succeq}}
+\newunicodechar{≡}{\texorpdfstring{\ensuremath{\equiv}}{equiv}}
+\newunicodechar{≅}{\texorpdfstring{\ensuremath{\cong}}{cong}}
+\newunicodechar{⊣}{\texorpdfstring{\ensuremath{\dashv}}{dashv}}
+\newunicodechar{⊥}{\texorpdfstring{\ensuremath{\perp}}{perp}}
+\newunicodechar{⊕}{\texorpdfstring{\ensuremath{\oplus}}{oplus}}
+\newunicodechar{⊙}{\texorpdfstring{\ensuremath{\odot}}{odot}}
+\newunicodechar{⋅}{\texorpdfstring{\ensuremath{\cdot}}{.}}
+\newunicodechar{⟶}{\texorpdfstring{\ensuremath{\longrightarrow}}{->}}
+\newunicodechar{⥤}{\texorpdfstring{\ensuremath{\to}}{->}}
+\newunicodechar{⋙}{\texorpdfstring{\ensuremath{\ggg}}{>>>}}
+\newunicodechar{∞}{\texorpdfstring{\ensuremath{\infty}}{infty}}
+\newunicodechar{∀}{\texorpdfstring{\ensuremath{\forall}}{forall}}
+\newunicodechar{∃}{\texorpdfstring{\ensuremath{\exists}}{exists}}
+\newunicodechar{₁}{\texorpdfstring{$_1$}{_1}}
+\newunicodechar{⁺}{\texorpdfstring{\textsuperscript{+}}{+}}
+\newunicodechar{Č}{\v C}
+\newunicodechar{č}{\v c}
+\newunicodechar{Š}{\v S}
+\newunicodechar{š}{\v s}
+\newunicodechar{Ž}{\v Z}
+\newunicodechar{ž}{\v z}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{§}{\S}
+\newunicodechar{’}{'}
+\newunicodechar{“}{``}
+\newunicodechar{”}{''}
+
+\title{AK–Arithmetic Programs v1.0\\
+\Large Version 17.0: Collapse-Based Calibration for Weil RH over Finite Fields and Fermat's Last Theorem}
+\author{\textbf{Atsushi Kobayashi} \quad {\small (with ChatGPT Research Partner)}}
+\date{December 2025}
+\begin{document}
+
+\maketitle
+
+
+
+\begin{abstract}
+This document presents the \textbf{Arithmetic Calibration Program} for the AK High-Dimensional Projection Structural Theory (AK--HDPST v17.0).
+Before deploying the High-Dimensional Projection Search (HDPS) engine on open problems such as the Navier--Stokes equations, we must validate its diagnostic machinery against established mathematical truths.
+To this end, we construct formal realizations of two ``Closed World'' arithmetic landscapes: the moduli space of varieties over finite fields ($M_{\mathrm{Weil}}$) and the deformation space of semistable elliptic curves over $\mathbb{Q}$ ($M_{\mathrm{FLT}}$).
+
+Incorporating the classical theorems of Deligne and Wiles (together with their extensions) as \textbf{Core-Input Axioms}, we demonstrate that the AK \emph{Unified Collapse Contract (UCC)} faithfully reproduces the topological structure of these validity spaces.
+Specifically, the system identifies the Finite-Field Riemann Hypothesis as a global \textbf{``Plain of Truth''} (vanishing defect potential) and Fermat's Last Theorem as a \textbf{``Global Obstruction''} (a structurally empty Frey Locus detected via Type~IV failures).
+These results serve as an \emph{epistemic certification} of the $\delta$-ledger and the Type~IV detector, thereby formally authorizing the transition of the AK--HDPST platform from arithmetic calibration to ``Open World'' exploration of the Millennium Prize Problems.
+\end{abstract}
+
+
+
+% ------------------------------------------------------------
+% Part I : Arithmetic AK Core
+% ------------------------------------------------------------
+
+\section{Chapter 1: Arithmetic AK Perspective and Problem Statements}
+\label{ch:arith-perspective}
+
+% Safe macro: usable in text and math
+\newcommand{\AKverdict}{\textsf{AKVerdict}}
+
+This chapter fixes the basic perspective, notation, and problem statements
+for the arithmetic part of AK--HDPST v17.0.
+We explain how the existing collapse machinery is used as a calibration
+device for two deep and already-resolved arithmetic problems:
+the finite-field Riemann hypothesis (the Weil conjectures in the form
+proved by Deligne) and Fermat's Last Theorem (FLT).
+Throughout, we are careful to separate three levels:
+
+\begin{itemize}[leftmargin=2.5em]
+  \item \emph{Classical truth} in arithmetic geometry and number theory
+        (Weil/Deligne, Wiles and successors).
+  \item The \emph{AK collapse core}, which is the same constructible
+        persistence and derived-category infrastructure as in the global
+        v17.0 document.
+  \item The \emph{\AKverdict{}}, i.e.\ the output of an AK-based
+        decision procedure once we have embedded an arithmetic problem
+        into the collapse framework.
+\end{itemize}
+
+The purpose of this part is not to reprove classical theorems, but to
+check that, once the arithmetic data are embedded into AK--HDPST,
+the resulting \AKverdict{} is compatible with those theorems.
+This gives a ``true-side calibration'' for later speculative applications
+(such as the Navier--Stokes case study).
+
+\subsection{AK--HDPST v17.0 in the background}
+
+We briefly recall the standing scope of AK--HDPST v17.0 used in this part.
+The full details are given in Part~I of the main document; here we record
+only what is needed to make arithmetic sense.
+
+\begin{declaration}[Standing scope]\label{dec:scope}
+Unless explicitly stated otherwise, the following assumptions are in force.
+\begin{enumerate}[label=(S\arabic*), leftmargin=2.5em]
+  \item \textbf{Coefficients.}
+  We work over a fixed field \(k\) of characteristic \(0\) (or of
+  sufficiently large positive characteristic when explicitly allowed),
+  and all persistence modules take values in \(\Vect_k\).
+
+  \item \textbf{Persistence layer.}
+  The collapse core operates in the one-parameter constructible
+  persistence category \(\Perscons\).
+  All equalities and stability estimates at the persistence level are
+  formulated inside this category.
+
+  \item \textbf{Realization layer.}
+  When required, persistence data are realized in the bounded derived
+  category \(\Dbk\) by a fixed \(t\)-exact realization functor of
+  amplitude \(\leq 1\).
+  We never leave \(\Dbk\) at the level of provable statements.
+
+  \item \textbf{Collapse machinery.}
+  We use the same exact bar-deletion reflector \(\Ttau\) on persistence
+  and its filtered lift \(\Ctau\) (defined up to filtered quasi-isomorphism),
+  the Unified Collapse Contract (UCC), the tower diagnostics
+  \(\muc\) and \(\nuc\), and the failure landscape (Types~I--IV) as in
+  the v17.0 core.
+
+  \item \textbf{Definable parameter spaces.}
+  Arithmetic parameter spaces such as \(M_{\mathrm{Weil}}\) and
+  \(M_{\mathrm{FLT}}\) are treated as definable sets in a suitable
+  Denef--Pas language, as in Appendix~Q.
+  All windows and policies used in UCC are required to respect these
+  definability guard-rails.
+\end{enumerate}
+\end{declaration}
+
+In particular, all \emph{Core} statements in this arithmetic part remain
+within the same categorical and homological framework; we only change the
+\emph{input data} and the interpretation of the collapse diagnostics.
+Any claims about arithmetic objects that go beyond this scope are marked
+as \SpecBadge{} and treated as part of the Spec layer.
+
+\subsection{Two classical arithmetic problems}
+
+We now state the arithmetic problems that we will use to calibrate AK.
+We only need the rough form of the statements; detailed background is
+deferred to Appendices~A and~B.
+
+\subsubsection*{Finite-field Riemann hypothesis (Weil/Deligne)}
+
+Let \(X\) be a smooth projective variety over a finite field
+\(\mathbb{F}_q\).
+Its zeta function is
+\[
+  Z(X,t)
+  = \exp\Bigl(
+      \sum_{n\ge 1}
+      \frac{\#X(\mathbb{F}_{q^n})}{n} t^n
+    \Bigr).
+\]
+The Weil conjectures, proved in full generality by Deligne, assert that
+\(Z(X,t)\) is a rational function and that its reciprocal zeros and poles
+have absolute values \(q^{-i/2}\) in degree \(i\).
+For the purposes of this part we isolate the finite-field Riemann
+hypothesis component.
+
+\begin{declaration}[Finite-field RH, classical version]\label{dec:ff-rh}
+Let \(X/\mathbb{F}_q\) be smooth and projective.
+For each integer \(i\ge 0\), the eigenvalues \(\alpha\) of the geometric
+Frobenius on the \(i\)th \(\ell\)-adic cohomology group
+\(H^i_{\textnormal{\textup{\'et}}}(X_{\overline{\mathbb{F}}_q},\mathbb{Q}_\ell)\)
+satisfy \(\lvert \alpha\rvert = q^{i/2}\) under any complex embedding.
+We refer to this property as \emph{finite-field RH for
+\((X,i)\)}.
+\end{declaration}
+
+We will collectively denote by \(M_{\mathrm{Weil}}\) the parameter space
+consisting of isomorphism classes of such pairs \((X,i)\), or suitable
+variants (e.g.\ restricted to curves) when convenient.
+
+\subsubsection*{Fermat's Last Theorem}
+
+Fermat's Last Theorem (FLT), now a theorem due to Wiles and subsequent
+work, states that for any integer exponent \(n \ge 3\) there is no
+non-trivial solution to the Diophantine equation
+\[
+  x^n + y^n = z^n
+\]
+in non-zero integers \(x,y,z\).
+From the AK perspective, the key point is that the Wiles proof proceeds
+through the modularity of certain elliptic curves.
+
+\begin{declaration}[Fermat's Last Theorem, classical version]\label{dec:flt}
+For every integer \(n \ge 3\), there are no non-zero integers
+\(x,y,z\) satisfying \(x^n + y^n = z^n\).
+Equivalently, the Diophantine equation \(x^n+y^n=z^n\) has no non-trivial
+integral solutions.
+\end{declaration}
+
+We will denote by \(M_{\mathrm{FLT}}\) a parameter space encoding the
+relevant arithmetic data for FLT (exponent, associated elliptic curves,
+levels, conductors, and so on); a precise definition is given in
+Chapter~\ref{ch:param}.
+
+\subsection{Embedding arithmetic data into AK}
+
+The arithmetic programs in this part are based on the following principle:
+to each parameter \(\theta\) in an arithmetic parameter space
+\(M_{\mathrm{arith}}\) we associate a persistence object
+\(F_\theta \in \Perscons\),
+constructed from cohomological or Galois data, and then apply the usual
+collapse machinery to \(F_\theta\).
+
+\begin{definition}[Arithmetic AK configuration]\label{def:arith-config}
+An \emph{arithmetic AK configuration} consists of:
+\begin{enumerate}[label=(C\arabic*), leftmargin=2.5em]
+  \item A parameter \(\theta\) in a fixed arithmetic parameter space
+        \(M_{\mathrm{arith}}\) (e.g.\ \(\theta=(X,i)\) or \(\theta\) in
+        \(M_{\mathrm{FLT}}\)).
+  \item A functorial assignment of a persistence object
+        \(F_\theta \in \Perscons\), constructed from arithmetic data
+        (cohomology, Galois representations, etc.).
+  \item A choice of collapse threshold \(\tau > 0\),
+        a quantale-valued defect functional
+        \(\Defect_\tau(F_\theta)\in V\),
+        and a UCC policy (windows, gates, and after-collapse comparison).
+        In arithmetic applications, \(\Defect_\tau\) typically accounts for
+        spectral-radius deviations, numerical approximation errors for
+        Frobenius eigenvalues, and truncation errors along arithmetic towers,
+        with these contributions recorded in a \(\delta\)-ledger as in the
+        v17.0 core.
+\end{enumerate}
+We write \((\theta,F_\theta,\tau,V,\Defect_\tau)\) for such a
+configuration when we want to emphasize all components.
+\end{definition}
+
+The \emph{AK program} for a given arithmetic problem is then a
+prescription that, for each admissible parameter \(\theta\),
+constructs an arithmetic AK configuration and applies the collapse
+diagnostics to produce a decision.
+
+\subsection{The notion of an AK verdict}
+
+To state the main calibration statements, we need a precise notion of
+what it means for AK to ``judge'' an arithmetic instance.
+
+\begin{definition}[AK verdict]\label{def:ak-verdict}
+Fix an arithmetic parameter space \(M_{\mathrm{arith}}\) and an AK
+program as in Definition~\ref{def:arith-config}.
+An \emph{AK verdict} for this program is a function
+\[
+  \AKverdict \colon M_{\mathrm{arith}}
+  \longrightarrow \{\mathsf{Valid},\ \mathsf{Obstructed},\ \mathsf{Inconclusive}\}
+\]
+with the following properties.
+\begin{enumerate}[label=(V\arabic*), leftmargin=2.5em]
+  \item (\emph{Valid.})
+  We set \(\AKverdict(\theta)=\mathsf{Valid}\) if the collapse diagnostics
+  applied to \(F_\theta\) satisfy the UCC constraints with no Type~IV
+  failure and with defect potential \(\Defect_\tau(F_\theta)\) below a
+  fixed acceptance threshold.
+  Intuitively, \(\theta\) lies in a \emph{Plain} region of the validity
+  map.
+
+  \item (\emph{Obstructed.})
+  We set \(\AKverdict(\theta)=\mathsf{Obstructed}\) if there
+  is a certified Type~IV failure or a collapse obstruction that cannot be
+  attributed to numerical noise as accounted for in the \(\delta\)-ledger.
+  Intuitively, \(\theta\) lies in a \emph{Peak} region.
+
+  \item (\emph{Inconclusive.})
+  In all remaining cases (e.g.\ when the diagnostics do not terminate, or
+  the defect potential sits in a gray zone that cannot be resolved within
+  the chosen policy), we set
+  \(\AKverdict(\theta)=\mathsf{Inconclusive}\).
+  Intuitively, \(\theta\) lies in a \emph{Noise} region or in an
+  unresolved ridge.
+\end{enumerate}
+\end{definition}
+
+In this part we will design AK programs for the finite-field RH and FLT
+such that, \emph{assuming} the classical results (Weil/Deligne and Wiles),
+the AK verdict matches the known truth on the relevant parameter spaces.
+We stress that this is a \emph{calibration exercise}: we do not attempt to
+derive Weil/Deligne or Wiles from the AK axioms alone.
+
+\subsection{Calibration goals and structure of the arithmetic part}
+
+We can now formulate the two main calibration goals of this part.
+They are deliberately stated as \emph{AK--Perspective} declarations,
+not as new theorems in arithmetic.
+
+\begin{declaration}[AK--Perspective: finite-field RH calibration]\label{dec:ak-weil-goal}
+Let \(M_{\mathrm{Weil}}\) be a parameter space for smooth projective
+varieties (or curves) over finite fields, and let
+\(\AKverdict_{\mathrm{Weil}}\) be the AK verdict associated
+to the Weil program defined in Part~II.
+Assume the finite-field Riemann hypothesis in the classical sense
+(Declaration~\ref{dec:ff-rh}) for all parameters in \(M_{\mathrm{Weil}}\).
+Then the AK program can be arranged so that
+\[
+  \AKverdict_{\mathrm{Weil}}(\theta)
+  = \mathsf{Valid}
+  \quad\text{for all }\theta\in M_{\mathrm{Weil}}.
+\]
+In other words, under classical finite-field RH, the AK validity map on
+\(M_{\mathrm{Weil}}\) has no obstructed peaks: all points lie in the Plain
+region.
+\end{declaration}
+
+\begin{declaration}[AK--Perspective: FLT calibration]\label{dec:ak-flt-goal}
+Let \(M_{\mathrm{FLT}}\) be a parameter space encoding the relevant data
+for Fermat-type equations and their associated elliptic curves, and let
+\(\AKverdict_{\mathrm{FLT}}\) be the AK verdict associated
+to the FLT program defined in Part~III.
+Assume the classical Fermat's Last Theorem (Declaration~\ref{dec:flt}) and
+the needed modularity results as external input.
+Then the AK program can be arranged so that
+\[
+  \AKverdict_{\mathrm{FLT}}(\theta)
+  \in \{\mathsf{Obstructed},\ \mathsf{Inconclusive}\}
+  \quad\text{for all }\theta\in M_{\mathrm{FLT}},
+\]
+and, more precisely, every hypothetical counterexample parameter is classified as
+\(\mathsf{Obstructed}\).
+In particular, an \(\mathsf{Obstructed}\) outcome reflects a structural
+incompatibility with the modularity and Galois constraints encoded in the
+arithmetic AK configuration (and ultimately inherited from the classical
+modularity theorems), rather than a numerical failure or truncation artefact.
+Equivalently, the AK validity map on \(M_{\mathrm{FLT}}\) has no Plain
+cell corresponding to a genuine FLT counterexample.
+\end{declaration}
+
+These declarations are the targets of Parts~II and~III.
+They express the idea that, once the arithmetic objects are embedded into
+\(\Perscons\) and processed by the collapse machinery, the AK picture of
+the arithmetic world is consistent with the known theorems: the finite-field
+RH looks uniformly regular (no peaks), while FLT looks uniformly obstructed
+(no Plain solutions).
+
+\begin{remark}[Role of AK in arithmetic calibration]
+Declarations~\ref{dec:ak-weil-goal} and~\ref{dec:ak-flt-goal} should be
+read carefully.
+They do \emph{not} claim new arithmetic results; rather, they specify how
+AK--HDPST v17.0 behaves when fed arithmetic data whose classical behavior
+is already known.
+The point is that the collapse infrastructure is sensitive enough to
+distinguish between a ``globally regular'' situation (finite-field RH) and
+a ``no-solution'' situation (FLT) on purely structural grounds.
+This calibration justifies, at least conceptually, the later use of the
+same machinery in settings where the classical truth is not yet known.
+\end{remark}
+
+\subsection{Outline of the arithmetic AK programs}
+
+For the reader's convenience we summarize the content of the subsequent
+chapters.
+
+\begin{itemize}[leftmargin=2.5em]
+  \item Chapter~2 defines the parameter spaces \(M_{\mathrm{Weil}}\) and
+        \(M_{\mathrm{FLT}}\) and the associated one-parameter filtrations,
+        in a way compatible with the Denef--Pas and UCC guard-rails.
+
+  \item Chapter~3 describes the arithmetic version of the Unified Collapse
+        Contract, including the choice of quantale \(V\), the
+        \(\delta\)-ledger in the arithmetic context, and the interpretation
+        of Type~I--IV failures in towers arising from field extensions or
+        modular levels.
+
+  \item Chapter~4 explains how the tower diagnostics \(\muc,\nuc\) behave
+        in arithmetic towers, and how they will be used in the Weil and
+        FLT programs.
+
+  \item Part~II (Chapters~5--8) develops the AK program for finite-field
+        RH: realization of Frobenius spectra, the corresponding collapse
+        contract, the validity map on \(M_{\mathrm{Weil}}\), and the
+        behavior of the HDPS engine on this space.
+
+  \item Part~III (Chapters~9--11) develops the AK program for FLT:
+        realization via elliptic curves and Galois representations,
+        diagnostics for hypothetical counterexamples, and the resulting
+        validity map on \(M_{\mathrm{FLT}}\).
+
+  \item Appendices~A--E collect the classical arithmetic background and
+        the technical details of the arithmetic realizations and the
+        relation between AK verdicts and mathematical truth.
+\end{itemize}
+
+This completes the conceptual setup needed for the arithmetic calibration
+of AK--HDPST v17.0.
+
+
+
+% ------------------------------------------------------------
+% Part I : Arithmetic AK Core
+% ------------------------------------------------------------
+
+\section{Chapter 2: Arithmetic Parameter Spaces and Filtrations}
+\label{ch:arith-param}
+
+This chapter defines the geometric and arithmetic domains over which the
+AK--HDPST engine operates.
+To apply the collapse machinery of the v17.0 core, we must rigorously
+specify the \emph{parameter spaces} \(\mathcal{M}\) (where the Hunter
+agents search) and the \emph{filtrations} (which define the time axis
+\(t\) for persistence).
+
+We adopt the Denef--Pas formalism to ensure that these spaces are
+compatible with the definability guard-rails established in
+Appendix~Q of the v17.0 core.
+This guarantees that event counts are finite on definable windows and
+that the overlap and gate policies used in the UCC can be implemented as
+decidable procedures.
+
+% ------------------------------------------------------------
+\subsection{2.1. The Weil Parameter Space \texorpdfstring{\(M_{\mathrm{Weil}}\)}{M\_Weil}}
+\label{sec:M-weil}
+
+The target of the finite-field Riemann hypothesis calibration is a
+moduli-type parameter space of smooth projective varieties over finite
+fields.
+
+\begin{definition}[Weil parameter space \(M_{\mathrm{Weil}}\)]
+The parameter space \(M_{\mathrm{Weil}}\) is the disjoint union over
+prime powers \(q = p^r\) and dimensions \(d \ge 1\) of isomorphism
+classes of pairs
+\[
+  M_{\mathrm{Weil}}
+  \;:=\;
+  \bigsqcup_{q, d}
+  \Bigl\{
+    (X,\mathbb{F}_q)
+    \;\Big|\;
+    X \text{ is a smooth projective variety of dimension } d
+    \text{ over } \mathbb{F}_q
+  \Bigr\}.
+\]
+For operational purposes (Hunter traversal), we stratify
+\(M_{\mathrm{Weil}}\) by invariants such as genus \(g\) (for curves) or
+Betti numbers (for higher dimensions), and we view discrete parameters
+(like coefficients of defining equations in an affine patch) as elements
+in the residue field sort of an underlying Denef--Pas structure.
+\end{definition}
+
+\begin{specification}[Definability of \(M_{\mathrm{Weil}}\)]
+We fix a Denef--Pas structure
+\(\mathfrak{S} = (\mathrm{VF},\mathrm{RF},\mathrm{VG})\)
+where \(\mathrm{RF}\) represents a finite field (or its algebraic
+closure) and \(\mathrm{VG}\) encodes discrete valuations.
+For any bounded subset of \(M_{\mathrm{Weil}}\) (for example, curves of
+fixed genus \(g\) over \(\mathbb{F}_{p^k}\) with \(k \le K\)), we choose
+coordinates that identify this subset with a definable set in
+\(\mathrm{RF}^N \times \mathrm{VG}^M\).
+In particular, any constructible function on such a bounded subset (such
+as the defect potential \(\Defect_\tau\) or a spectral indicator) has
+only finitely many level sets within any UCC window.
+\end{specification}
+
+The detailed arithmetic and geometric background for
+\(M_{\mathrm{Weil}}\) (including possible restrictions to curves or to
+fixed dimension) is collected in Appendix~A.
+
+% ------------------------------------------------------------
+\subsection{2.2. The FLT Parameter Space \texorpdfstring{\(M_{\mathrm{FLT}}\)}{M\_FLT}}
+\label{sec:M-flt}
+
+For Fermat's Last Theorem, the parameter space must capture both the
+underlying Diophantine data and the associated geometric objects
+(Frey curves and their Galois representations).
+It is convenient to separate a \SpecBadge{}--level configuration space
+for \emph{hypothetical} counterexamples from a more canonical geometric
+moduli space.
+
+\begin{specification}[Hypothetical FLT configuration]\label{spec:flt-config}
+A \emph{hypothetical FLT configuration} is a tuple
+\(\theta = (p,A,B,C,E)\) with the following components:
+\begin{itemize}[leftmargin=2.5em]
+  \item \(p \ge 3\) is a prime exponent.
+  \item \((A,B,C) \in \mathbb{Z}^3\setminus\{(0,0,0)\}\) is a triple of
+        integers satisfying \(A^p + B^p + C^p = 0\) and \(\gcd(A,B,C)=1\).
+  \item \(E\) is the associated Frey elliptic curve over \(\mathbb{Q}\),
+        e.g.
+        \[
+          E_{A,B,C} \colon
+          y^2 = x(x-A^p)(x+B^p).
+        \]
+\end{itemize}
+From the classical point of view (assuming Fermat's Last Theorem),
+no such integer triple exists for \(p\ge 3\), so this configuration
+space is empty.
+In the AK perspective, however, it is useful as a \emph{formal} target
+for the Hunter in ``counterexample-search mode'': any hypothetical
+counterexample would determine such a configuration and hence a point in
+the geometric parameter space described below.
+\end{specification}
+
+\begin{definition}[FLT parameter space \(M_{\mathrm{FLT}}\)]
+The parameter space \(M_{\mathrm{FLT}}\) is defined as a moduli-type
+space of semistable elliptic curves \(E/\mathbb{Q}\) equipped with a
+mod-\(p\) Galois representation \(\bar{\rho}_{E,p}\) satisfying the
+local and global conditions that appear in the Wiles--Ribet strategy
+(unramified outside a prescribed finite set of primes and with ``too
+little'' ramification at \(p\)).
+Formally, we view \(M_{\mathrm{FLT}}\) as a disjoint union
+\[
+  M_{\mathrm{FLT}}
+  \;\simeq\;
+  \bigsqcup_{p \ge 3}
+  \bigl\{
+    (E,\bar{\rho}_{E,p}) \text{ semistable, modular of weight }2
+    \text{ with the prescribed local behavior}
+  \bigr\}/\!\sim,
+\]
+and we require that each hypothetical FLT configuration
+\(\theta = (p,A,B,C,E_{A,B,C})\) as in
+Specification~\ref{spec:flt-config}, when it exists, determines a point
+of \(M_{\mathrm{FLT}}\) via the associated Frey curve.
+\end{definition}
+
+\begin{specification}[Definability of \(M_{\mathrm{FLT}}\)]
+Within a fixed bounded range of conductors, levels, and primes \(p\),
+the space \(M_{\mathrm{FLT}}\) can be modeled as a definable subset of a
+Denef--Pas structure by coding the coefficients of Weierstrass models
+and local Galois data into residue-field and value-group sorts.
+As in the Weil case, this ensures that the UCC windows and gate
+conditions are compatible with definability and that the Hunter's
+search over \(M_{\mathrm{FLT}}\) can be organized into finitely many
+cells on any bounded region.
+\end{specification}
+
+\begin{remark}[Search mode and hypothetical obstructions]
+In the AK framework, \(M_{\mathrm{FLT}}\) is treated as a space of
+\emph{hypothetical obstructions}.
+The Hunter's goal, in counterexample search mode, is to locate a point
+\(\theta\in M_{\mathrm{FLT}}\) that passes the basic arithmetic
+well-posedness checks (B--Gate\(^{+}\)) but triggers Type~IV diagnostics
+when modularity and Galois constraints are imposed.
+Assuming the classical modularity theorems and FLT, no such point exists,
+and the AK verdict for every hypothetical counterexample parameter is
+\(\mathsf{Obstructed}\) (as formulated in
+Declaration~\ref{dec:ak-flt-goal} of Chapter~\ref{ch:arith-perspective}).
+\end{remark}
+
+The detailed arithmetic background for \(M_{\mathrm{FLT}}\), including
+its link to modular forms and Iwasawa theory, is summarized in
+Appendix~B.
+
+% ------------------------------------------------------------
+\subsection{2.3. Filtration strategies (defining ``time'')}
+\label{sec:arith-filtrations}
+
+To embed these static arithmetic objects into the dynamic world of
+persistence \(\Perscons\), we must define a filtration parameter
+\(t \in \mathbb{R}\).
+We describe \SpecBadge{}--level filtration schemes for both
+\(M_{\mathrm{Weil}}\) and \(M_{\mathrm{FLT}}\), chosen to be compatible
+with the UCC and the deletion-type policies emphasized in the v17.0 core.
+
+\subsubsection{Weil: Frobenius-orbit filtration}
+
+For \((X,\mathbb{F}_q)\in M_{\mathrm{Weil}}\), the underlying topology
+of \(X\) is static, but the arithmetic action of Frobenius
+\(\mathrm{Fr}_q\) induces a natural discrete dynamical system.
+We use this to define a filtration that encodes the Frobenius orbit
+structure in a persistence-friendly way.
+
+\begin{definition}[Frobenius filtration schema]\label{def:frob-filtration}
+Let \((X,\mathbb{F}_q)\in M_{\mathrm{Weil}}\), and fix an
+\(\ell\)-adic sheaf \(\mathcal{E}\) on \(X\) (for example, the constant
+sheaf \(\mathbb{Q}_\ell\)).
+We informally write \(H^i(X)\) for the \(i\)-th \(\ell\)-adic cohomology
+group \(H^i_{\mathrm{\acute{e}t}}(X_{\overline{\mathbb{F}}_q},\mathbb{Q}_\ell)\),
+equipped with the Frobenius endomorphism
+\(\phi = \mathrm{Fr}_q\).
+The Frobenius filtration schema associates to \((X,\mathbb{F}_q)\) a
+filtered object \(F_{\mathrm{Weil}}\) whose persistence in degree \(i\)
+encodes the behavior of the iterates \(\phi^k\) for \(k\ge 1\).
+
+Concretely, one convenient model is given by the mapping-torus
+construction:
+\begin{align*}
+  V_t
+  \;:=\;
+  \bigoplus_{0 \le k \le \lfloor t \rfloor} H^i(X)\cdot T^k
+  \Big/
+  \bigl\langle v\cdot T - \phi(v) \mid v \in H^i(X) \bigr\rangle,
+  \qquad t \ge 0,
+\end{align*}
+with structure maps \(V_s \to V_t\) for \(s\le t\) given by inclusion of
+summands.
+The resulting persistence module
+\(\mathbf{P}_i(F_{\mathrm{Weil}})\) lies in \(\Perscons\) and is
+constructed functorially in \((X,\mathbb{F}_q)\).
+\end{definition}
+
+\begin{specification}[Spectral interpretation]
+In this schema, the eigenvalues \(\alpha\) of \(\phi\) on \(H^i(X)\) are
+encoded in the bar decomposition of \(\mathbf{P}_i(F_{\mathrm{Weil}})\).
+Roughly speaking, eigenvalues with \(|\alpha| = q^{w/2}\) correspond to
+controlled ``oscillatory'' behavior whose persistence signature is
+captured by the spectral indicators introduced in the v17.0 core.
+This is the mechanism by which the finite-field Riemann hypothesis is
+translated into a collapse-friendly regularity statement for
+\(\mathbf{P}_i(F_{\mathrm{Weil}})\).
+\end{specification}
+
+\subsubsection{FLT: Iwasawa-tower filtration}
+
+For \(E \in M_{\mathrm{FLT}}\), a natural time axis is given by the depth
+in a cyclotomic \(\mathbb{Z}_p\)-extension, aligning with the Iwasawa
+interface in Appendix~R of the v17.0 core.
+
+\begin{definition}[Iwasawa filtration schema]\label{def:iwasawa-filtration}
+Fix a prime \(p\ge 3\) and let \(\{K_n\}_{n\ge 0}\) denote the layers of
+the cyclotomic \(\mathbb{Z}_p\)-extension of \(\mathbb{Q}\).
+For an elliptic curve \(E\in M_{\mathrm{FLT}}\), we define a filtered
+complex \(F_{\mathrm{FLT}}\) by setting, for \(t\ge 0\),
+\[
+  F_{\mathrm{FLT}}^t
+  \;:=\;
+  \text{Selmer complex of \(E\) over } K_{\lfloor t \rfloor},
+\]
+with transition maps induced by corestriction (norm) as we pass from
+\(K_{n'}\) down to \(K_n\) for \(n' > n\).
+The resulting persistence modules
+\(\mathbf{P}_i(F_{\mathrm{FLT}})\) provide the input to the collapse
+machinery in the FLT program.
+\end{definition}
+
+\begin{specification}[Deletion-type behavior in the Iwasawa tower]
+From the AK point of view, we treat the transition maps
+\(F_{\mathrm{FLT}}^{t'} \to F_{\mathrm{FLT}}^t\) for \(t' > t\) as
+\emph{deletion-type} operations in the sense of the v17.0 core:
+they can annihilate Selmer or class-group classes (shortening bars) but
+are not allowed to create new stable classes ex nihilo inside a fixed
+UCC window.
+This monotonicity assumption is encoded at the Spec layer and is crucial
+for bringing the Convergence Manager (Appendix~J of the core) to bear on
+arithmetic towers.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{2.4. The arithmetic realization functor \texorpdfstring{\(\mathfrak{P}\)}{P}}
+\label{sec:embedding-functor}
+
+We consolidate the above constructions into a single realization functor
+from arithmetic parameter spaces to the filtered-chain world used by the
+collapse core.
+
+\begin{specification}[Arithmetic realization functor \(\mathfrak{P}\)]
+\label{spec:arith-realization}
+There exists a realization functor
+\[
+  \mathfrak{P} \colon
+  M_{\mathrm{arith}}
+  \longrightarrow
+  \FiltCh{k},
+\]
+defined on a disjoint union
+\(M_{\mathrm{arith}} := M_{\mathrm{Weil}} \sqcup M_{\mathrm{FLT}}\),
+with the following properties, compatible with the Unified Collapse
+Contract (UCC):
+
+\begin{enumerate}[label=(R\arabic*), leftmargin=2.5em]
+  \item \textbf{Constructibility.}
+  For any \(\theta \in M_{\mathrm{arith}}\), the associated persistence
+  modules \(\mathbf{P}_i(\mathfrak{P}(\theta))\) lie in \(\Perscons\).
+  In particular, they have only finitely many critical values in any
+  bounded window \([0,\tau]\).
+
+  \item \textbf{Lipschitz stability.}
+  Small deformations of \(\theta\) in \(M_{\mathrm{arith}}\) (for example,
+  \(p\)-adic perturbations of coefficients of defining equations or
+  Weierstrass models, within a fixed definable cell) induce
+  \(d_{\mathrm{int}}\)-small deformations of the corresponding
+  persistence modules.
+  This ensures that the UCC low-pass and window policies apply without
+  modification.
+
+  \item \textbf{\(\tau\)-exactness.}
+  After realization into \(\Dbk\), the complexes
+  \(\mathfrak{P}(\theta)\) satisfy the amplitude and \(t\)-exactness
+  assumptions required for the PH\(_1\Rightarrow\Ext^1\) bridge in the
+  v17.0 core on each fixed UCC window.
+\end{enumerate}
+\end{specification}
+
+\begin{remark}[Operational usage in \texttt{run.yaml}]
+In a practical run, the arithmetic AK mode is specified in the
+\texttt{run.yaml} manifest, for example:
+\begin{lstlisting}[language={},basicstyle=\ttfamily\small]
+realization:
+  mode: "arith"
+  type: "Weil_Frobenius"   # or "FLT_Iwasawa"
+  parameters:
+    q: ...
+    dim: ...
+    p: ...
+\end{lstlisting}
+The AK core then invokes \(\mathfrak{P}\) to construct the filtered
+complex \(F\), applies the collapse \(\Ttau\), updates the
+\(\delta\)-ledger, and finally produces an \AKverdict{} as in
+Definition~\ref{def:ak-verdict}.
+\end{remark}
+
+This completes the description of the arithmetic parameter spaces and
+filtration schemes.
+In the next chapters we specialize these constructions to the finite-field
+Riemann hypothesis calibration (Part~II) and to the FLT calibration
+(Part~III), tracking carefully which parts remain in the Core and which
+reside in the Spec layer.
+
+
+
+\section{Chapter 3: Collapse Contract in the Arithmetic Setting}
+\label{ch:arith-collapse}
+
+This chapter refines the Unified Collapse Contract (UCC) of the v17.0
+core to the arithmetic domain.
+Starting from the realization functor
+\(\mathfrak{P} : M_{\mathrm{arith}} \to \FiltCh{k}\) of
+Chapter~\ref{ch:arith-param}, we specify how the generic collapse
+machinery \((\Ttau,\Defect_\tau,V)\) is instantiated to handle
+arithmetic noise.
+
+The guiding philosophy is that \emph{arithmetic noise}---such as finite
+submodules in Iwasawa theory, or non-dominant spectral terms in zeta
+functions---should correspond to \emph{short bars} in the associated
+persistence modules.
+The reflector \(\Ttau\) then acts as a rigorous low-pass filter that
+separates this noise from the essential arithmetic content (ranks,
+characteristic ideals, weights, spectral radii).
+
+% ------------------------------------------------------------
+\subsection{3.1. Arithmetic UCC policy}
+\label{sec:arith-ucc}
+
+We do \emph{not} change the definition of \(\Ttau\) or the UCC at the
+core level.
+Instead, we specify how \(\Ttau\) is \emph{interpreted} in the two
+arithmetic modes.
+
+\begin{specification}[Arithmetic interpretation of the collapse \(\Ttau\)]
+\label{spec:arith-Ttau}
+Let \(\theta \in M_{\mathrm{arith}}\) and
+\(F = \mathfrak{P}(\theta) \in \FiltCh{k}\) be its realization.
+The global collapse operator \(\Ttau\) of the v17.0 core acts on the
+persistence modules \(\mathbf{P}_i(F)\in\Perscons\).
+In arithmetic mode we interpret its effect as follows:
+\begin{itemize}[leftmargin=2.5em]
+  \item \textbf{FLT / Iwasawa mode.}
+  Bars of length \(\le \tau\) in \(\mathbf{P}_i(F_{\mathrm{FLT}})\) are
+  treated as ``short-lived'' classes that fail to survive \(\tau\)
+  steps in the Iwasawa tower.
+  Heuristically, these are expected to correspond to finite
+  \(p\)-primary torsion submodules or transient Selmer classes.
+  By choosing \(\tau\) above the expected noise scale, the contribution
+  of such classes to collapse diagnostics is removed.
+
+  \item \textbf{Weil / Frobenius mode.}
+  For \((X,\mathbb{F}_q)\in M_{\mathrm{Weil}}\) realized via the
+  Frobenius mapping-torus schema
+  (Definition~\ref{def:frob-filtration}), bars whose behavior is
+  controlled by unstable or transient eigen-components (e.g.\ small
+  Jordan blocks, rapidly decaying modes) are shortened below \(\tau\)
+  and hence deleted by \(\Ttau\).
+  Persistent contributions from eigenvalues on the expected RH circle
+  \(|\alpha| = q^{w/2}\) are designed to survive the truncation.
+\end{itemize}
+In both modes, the meaning of ``short'' is governed by the same UCC
+window policy as in Part~I; only the arithmetic interpretation of
+short-lived bars changes.
+\end{specification}
+
+\begin{specification}[Arithmetic after-collapse policy]
+\label{spec:arith-after-collapse}
+In the arithmetic AK programs, all higher-level arithmetic invariants
+used for decision-making are computed only \emph{after} collapse.
+More precisely, for a fixed degree \(i\) and window \([0,\tau]\), any
+invariant of interest is evaluated on \(\Ttau \mathbf{P}_i(F)\), not on
+\(\mathbf{P}_i(F)\) itself.
+Symbolically, for a measurement functor \(\mathrm{Meas}\) we write
+\begin{equation}
+  \mathrm{ArithInv}_i(\theta;\tau)
+  \;:=\;
+  \mathrm{Meas}\!\left(
+    \Ttau \bigl( \mathbf{P}_i(\mathfrak{P}(\theta)) \bigr)
+  \right).
+\end{equation}
+Examples of such invariants (depending on the program) include:
+ranks of Selmer-type groups, Iwasawa \(\lambda,\mu\)-indicators,
+Newton polygon slopes, or quantale-valued defect norms
+\(\Defect_\tau(\theta)\in V\).
+This enforces the ``after-collapse only'' policy of Chapter~1 in the
+arithmetic setting, and prevents finite-layer arithmetic noise from
+triggering spurious Type~IV failures.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{3.2. Choice of quantale \texorpdfstring{\(V\)}{V}}
+\label{sec:arith-quantale}
+
+The quantale \(V\) underlying the defect potential must reflect the
+structure of arithmetic discrepancies.
+In this chapter we describe two standard choices, tailored to the FLT /
+Iwasawa and Weil modes respectively; in implementation these can be
+combined via the product construction of Appendix~S.
+
+\subsubsection{Valuation quantale (FLT / Iwasawa mode)}
+
+In the \(p\)-adic setting, errors arising in control theorems are finite
+abelian \(p\)-groups, and their ``size'' is naturally measured by
+\(p\)-adic valuation or \(\mathbb{Z}_p\)-length.
+
+\begin{definition}[Valuation quantale \(V_{\mathrm{val}}\)]
+\label{def:V-val}
+Let
+\[
+  V_{\mathrm{val}} := \bigl([0,\infty], +, 0, \le \bigr)
+\]
+with the usual order and monoidal operation given by addition.
+Given a finite \(p\)-primary \(\mathbb{Z}_p\)-module \(M\), we define
+\[
+  \mathrm{size}_p(M)
+  \;:=\;
+  v_p(\# M)
+  \;=\;
+  \mathrm{length}_{\mathbb{Z}_p}(M)
+  \;\in\; [0,\infty].
+\]
+For infinite \(p\)-primary modules we set \(\mathrm{size}_p(M) = \infty\),
+which is interpreted as an immediate gate failure in the AK diagnostics.
+Extensions of finite \(p\)-primary modules correspond to additive
+accumulation of length in \(V_{\mathrm{val}}\).
+\end{definition}
+
+\subsubsection{Spectral quantale (Weil mode)}
+
+In the complex-analytic setting, discrepancies are measured in terms of
+deviation of Frobenius eigenvalues from the expected RH circle and from
+equidistribution.
+
+\begin{definition}[Spectral quantale \(V_{\mathrm{spec}}\)]
+\label{def:V-spec}
+Let
+\[
+  V_{\mathrm{spec}}
+  :=
+  \bigl(
+    [0,\infty] \times [0,\pi],\ \oplus,\ (0,0),\ \preceq
+  \bigr),
+\]
+with:
+\begin{itemize}[leftmargin=2.5em]
+  \item monoidal operation
+  \(\ (a_1,\theta_1)\oplus(a_2,\theta_2)
+      := (a_1 + a_2,\ \min\{\pi,\theta_1+\theta_2\})\),
+  \item product order
+  \((a_1,\theta_1)\preceq(a_2,\theta_2)\) if and only if
+  \(a_1\le a_2\) and \(\theta_1\le \theta_2\).
+\end{itemize}
+For a Frobenius eigenvalue \(\alpha\) on \(H^i(X)\), with conjectural
+weight \(w\) and norm \(q\), we define:
+\begin{align*}
+  \delta_r(\alpha)
+  &:= \bigl|\log|\alpha| - \tfrac{w}{2}\log q\bigr|,\\
+  \delta_\theta(\alpha)
+  &:= \text{an angle deviation in }[0,\pi]\text{ associated with }\alpha.
+\end{align*}
+The pair \((\delta_r(\alpha),\delta_\theta(\alpha))\in V_{\mathrm{spec}}\)
+is then used as the basic spectral defect associated to \(\alpha\).
+Aggregation of defects over all eigenvalues in a given window proceeds
+via the monoidal operation \(\oplus\).
+\end{definition}
+
+\begin{remark}[Product quantales and mixed modes]
+\label{rem:product-quantale}
+For programs that simultaneously monitor \(p\)-adic and spectral
+discrepancies (for example, where a Weil calibration and an Iwasawa
+calibration run jointly), we use the product quantale
+\(V = V_{\mathrm{val}}\times V_{\mathrm{spec}}\) with componentwise
+operations.
+This is compatible with the general quantale product construction of
+Appendix~S and with the global defect potential
+\(\Defect_\tau : M_{\mathrm{arith}} \to V\).
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{3.3. Arithmetic \texorpdfstring{\(\delta\)}{delta}-ledger}
+\label{sec:arith-ledger}
+
+We now describe how standard arithmetic operations are mapped into the
+\(\delta\)-ledger components
+\((\delta^{\alg},\delta^{\disc},\delta^{\meas})\) of the v17.0 core.
+This gives the precise interface between arithmetic error sources and
+the AK auditor.
+
+\begin{declaration}[Arithmetic \(\delta\)-ledger schema]
+\label{dec:arith-ledger}
+Let \(U\) be a single step in an arithmetic pipeline in Proof or Hunter
+mode (for example, level raising, descent, passage along an Iwasawa
+tower, Frobenius iteration).
+We associate to \(U\) a triple
+\((\delta^{\alg},\delta^{\disc},\delta^{\meas})\in V^3\) as follows.
+
+\begin{enumerate}[label=(L\arabic*), leftmargin=2.5em]
+  \item \textbf{Algebraic defect \(\delta^{\alg}\): control-theorem term.}\\
+  In Iwasawa-theoretic transitions between an infinite module \(X_\infty\)
+  and finite layers \(X_n\), control theorems provide maps with finite
+  kernel and cokernel.
+  We record these deviations explicitly:
+  \[
+    \delta^{\alg}(U)
+    \;:=\;
+    \mathrm{size}_p(\ker U)
+    \;+\;
+    \mathrm{size}_p(\mathrm{coker}\,U)
+    \;\in\; V_{\mathrm{val}},
+  \]
+  and embed this into the full quantale \(V\) via the canonical
+  inclusion \(V_{\mathrm{val}}\hookrightarrow V\).
+
+  \item \textbf{Discretization defect \(\delta^{\disc}\): truncation and approximation.}\\
+  This component records deterministic approximation errors, such as:
+  \begin{itemize}
+    \item finite-degree truncation of \(p\)-adic power series
+          (e.g.\ computations modulo \(p^N\)),
+    \item truncation of Euler products or zeta integrals at a finite
+          cutoff,
+    \item finite-dimensional approximations to cohomology or spectral
+          decompositions.
+  \end{itemize}
+  Bounds on \(\delta^{\disc}\) are derived from explicit analytic or
+  algebraic error estimates and are encoded as elements of \(V\).
+
+  \item \textbf{Measurement defect \(\delta^{\meas}\): heuristic noise.}\\
+  This term is reserved for inherently probabilistic or heuristic
+  components, such as:
+  \begin{itemize}
+    \item probabilistic primality tests,
+    \item heuristic class number estimates,
+    \item sampling-based spectral statistics.
+  \end{itemize}
+  In \emph{Proof mode}, the policy is \(\delta^{\meas}\equiv 0\):
+  such steps are forbidden.
+  In \emph{Hunter / exploration mode}, \(\delta^{\meas}\) may be
+  non-zero but must remain bounded by a user-specified budget in
+  \texttt{run.yaml}, and cannot be used to certify core
+  theorems---only to guide the search.
+\end{enumerate}
+The total defect attached to a composite pipeline is then accumulated
+via the monoidal structure on \(V\), as in Appendix~S.
+\end{declaration}
+
+% ------------------------------------------------------------
+\subsection{3.4. Bridge policy and arithmetic interpretation}
+\label{sec:arith-bridge-policy}
+
+The core bridge \(\PH_1 \Rightarrow \Ext^1\) (Appendix~C) admits a
+natural arithmetic interpretation when applied to filtrations arising
+from elliptic curves, Selmer complexes, and Frobenius actions.
+In this section we record the interpretation and the safety policies
+governing its use.
+
+\begin{specification}[Arithmetic bridge interpretation (\SpecBadge)]
+\label{spec:arith-bridge}
+Let \(\theta \in M_{\mathrm{arith}}\), and let
+\(F_\theta = \mathfrak{P}(\theta)\) be its realization.
+On any fixed UCC window \([0,\tau]\) where the hypotheses of
+Appendix~C (constructibility, amplitude \(\le 1\), \(t\)-exactness) are
+satisfied, we use the following dictionary:
+
+\begin{itemize}[leftmargin=2.5em]
+  \item In FLT/Iwasawa mode, the condition
+        \(\PH_1(\Ctau F_\theta) \approx 0\) is interpreted as
+        ``no persistent Selmer-type classes'' in the given window:
+        after collapse, all candidate extension classes die within the
+        noise scale~\(\tau\).
+
+  \item In the same setting, the vanishing
+        \(\Ext^1(\Rfun(\Ctau F_\theta),k) \approx 0\) is read as
+        ``no cohomological obstructions in the corresponding
+        Galois/Selmer complex'' on that window
+        (e.g.\ no non-trivial classes in an appropriate
+        \(H^1\)-group).
+
+  \item In Weil mode, the disappearance of \(\PH_1(\Ctau F_\theta)\)
+        is interpreted as the absence of persistent topological cycles
+        induced by Frobenius, while \(\Ext^1\)-vanishing reflects the
+        triviality of certain extension data in the realized
+        cohomological categories.
+\end{itemize}
+These interpretations belong to the \SpecBadge{} layer: they provide a
+conceptual dictionary between the topological collapse diagnostics and
+arithmetic invariants, but they do not assert new arithmetic theorems
+beyond the one-way bridge proved in the v17.0 core.
+\end{specification}
+
+\begin{specification}[Safety restrictions on bridge usage]
+\label{spec:arith-bridge-safety}
+In order to avoid overreaching beyond the v17.0 core, the arithmetic
+programs obey the following rules when using the bridge:
+
+\begin{enumerate}[label=(B\arabic*), leftmargin=2.5em]
+  \item \textbf{Forward usage only in Core.}\\
+  The one-way implication
+  \[
+    \PH_1(\Ctau F_\theta) = 0
+    \;\Longrightarrow\;
+    \Ext^1(\Rfun(\Ctau F_\theta),k) = 0
+  \]
+  proved in the core (under the hypotheses of Appendix~C) is always
+  admissible in the Core layer.
+
+  \item \textbf{Reverse usage requires explicit certification.}\\
+  Any use of a reverse implication
+  \(\Ext^1 = 0 \Rightarrow \PH_1 = 0\) must be explicitly marked as
+  \SpecBadge{} and justified by an additional certification of the
+  window (for example, \(E_1\)-degeneracy or a spectral sequence
+  collapse proven independently).
+  Such steps do not enter the Core proof ledger.
+
+  \item \textbf{Motivic extrapolation is Spec-only.}\\
+  Interpretations involving motivic cohomology, higher \(K\)-groups, or
+  non-abelian extensions lie completely in the \SpecBadge{} layer and
+  are isolated from the UCC-based Core logic.
+  They may guide Hunter search and program design, but cannot be used to
+  close a Core-level theorem.
+\end{enumerate}
+In particular, while conjectures such as the Iwasawa Main Conjecture
+suggest deeper two-way bridges, AK--HDPST v17.0 deliberately restricts
+itself to the proven one-way implications at the Core level.
+\end{specification}
+
+
+
+\section{Chapter 4: Tower Diagnostics and Failure Types in Arithmetic Towers}
+\label{ch:arith-tower}
+
+This chapter defines how the AK--HDPST engine diagnoses the asymptotic behavior of arithmetic systems.
+While Chapter~3 dealt with individual objects, arithmetic proofs (both Weil and FLT) fundamentally rely on the behavior of objects through infinite extensions---\emph{arithmetic towers}.
+
+We apply the tower machinery of the v17.0 core (Appendix~D and~J) to these settings.
+The central tool is the \emph{Comparison Map} $\phi_{i,\tau}$ evaluated \emph{after collapse}, and its obstruction indices $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}})$.
+This formalism unifies the treatment of ``asymptotic stability'' (Weil) and ``control theorems'' (Iwasawa/FLT).
+
+% ------------------------------------------------------------
+\subsection{4.1. Arithmetic Towers and Their Limits}
+\label{sec:arith-towers}
+
+We specify the concrete directed systems $(F_n)_{n \in \mathbb{N}}$ and their limits $F_\infty$ for our two calibration targets.
+
+\begin{definition}[The Weil Tower: Extension of Scalars]
+Let $(X, \mathbb{F}_q) \in M_{\mathrm{Weil}}$. The natural tower is formed by the constant field extensions $\mathbb{F}_{q^n}$.
+\begin{itemize}
+    \item \textbf{Finite Layers ($F_n$):} The realization of $X$ over $\mathbb{F}_{q^n}$. The Frobenius action $\mathrm{Fr}_q$ iterates $n$ times.
+    \item \textbf{Limit ($F_\infty$):} The realization of $X$ over the algebraic closure $\overline{\mathbb{F}}_q$.
+    \item \textbf{AK Perspective:} This is a \emph{colimit} system in persistence. The comparison map $\phi_{i,\tau}$ asks: ``Is the persistence of the geometric limit completely determined by the persistence of the finite layers (after truncation)?''
+\end{itemize}
+\end{definition}
+
+\begin{definition}[The FLT Tower: Iwasawa Levels]
+Let $E \in M_{\mathrm{FLT}}$. The tower corresponds to the layers $K_n$ of the cyclotomic $\mathbb{Z}_p$-extension $\mathbb{Q}_\infty / \mathbb{Q}$.
+\begin{itemize}
+    \item \textbf{Finite Layers ($F_n$):} Selmer complexes over $K_n$.
+    \item \textbf{Limit ($F_\infty$):} The Selmer complex over $K_\infty$, understood operationally as the \emph{direct limit of the Pontryagin duals} of the finite-level Selmer groups, so that the tower is presented to the AK Core as a filtered colimit.
+    \item \textbf{AK Perspective:} This is typically an \emph{inverse limit} system in arithmetic algebra, which we pass to a directed system of duals (or an equivalent filtered colimit of cohomology) via Pontryagin duality. The comparison map $\phi_{i,\tau}$ then checks the validity of \emph{Control Theorems} in this colimit presentation.
+\end{itemize}
+\end{definition}
+
+
+\begin{specification}[Standard Comparison Map $\phi_{i,\tau}$]
+For any arithmetic tower $\mathcal{T} = \{F_n \to F_\infty\}$, the AK Core computes the canonical map (Appendix~D):
+\[
+  \phi_{i,\tau}(\mathcal{T}) : \quad
+  \varinjlim_{n} \mathbf{T}_\tau \big( \mathbf{P}_i(F_n) \big)
+  \ \longrightarrow \
+  \mathbf{T}_\tau \big( \mathbf{P}_i(F_\infty) \big).
+\]
+\textbf{Policy.} All terms are truncated by $\mathbf{T}_\tau$ \emph{before} comparison. This ensures that finite arithmetic noise (which may grow with $n$) does not cloud the asymptotic structural diagnosis.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{4.2. Interpreting \texorpdfstring{$(\mu, \nu)$}{(mu, nu)} in Arithmetic}
+\label{sec:arith-mu-nu}
+
+The kernel and cokernel of $\phi_{i,\tau}$ yield the diagnostics $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}})$.
+We map these topological defects to arithmetic concepts.
+
+\begin{remark}[Meaning of $\mu_{\mathrm{Collapse}}$: The Ghost Kernel]
+A value $\mu_{\mathrm{Collapse}} > 0$ means there are persistent classes in the finite layers (surviving $\tau$-collapse) that \emph{vanish} or become invisible in the limit $F_\infty$.
+\begin{itemize}
+    \item \textbf{Iwasawa Context:} This detects a failure (or weakening) of a Control Theorem. If finite layers contain systematic torsion that is killed in the limit (kernel of restriction), and if this torsion is ``long-lived'' enough to survive $\mathbf{T}_\tau$, it registers as $\mu_{\mathrm{Collapse}} > 0$.
+    \item \textbf{Policy:} Under standard Iwasawa Control Theorem hypotheses, the kernel is finite. Thus, for $\tau$ sufficiently large (or via the $\delta$-ledger accounting of Appendix~R), we expect $\mu_{\mathrm{Collapse}} \to 0$ in the calibrated regimes.
+\end{itemize}
+\end{remark}
+
+\begin{remark}[Meaning of $\nu_{\mathrm{Collapse}}$: The Phantom Cokernel]
+A value $\nu_{\mathrm{Collapse}} > 0$ means the limit $F_\infty$ contains persistent features that are \emph{not} generated by any finite layer $F_n$.
+\begin{itemize}
+    \item \textbf{Weil Context:} Heuristically, this would correspond to a ``transcendental'' cycle in $X_{\overline{\mathbb{F}}_q}$ that is never defined over any finite extension $\mathbb{F}_{q^n}$. In the classical theory of smooth projective varieties over finite fields (rationality of zeta functions, comparison isomorphisms), such phenomena are not expected to occur.
+    \item \textbf{FLT Context:} A ``phantom'' Selmer class that exists only at infinity but restricts to zero at every finite level; in practice, standard control statements aim to rule this out in the calibration regime.
+\end{itemize}
+\end{remark}
+
+\begin{remark}[Separation from the Classical Iwasawa $\mu$]
+We reiterate the warning from Appendix~R: $\mu_{\mathrm{Collapse}}$ is \textbf{not} the classical Iwasawa $\mu$-invariant (which measures the size of a module). The index $\mu_{\mathrm{Collapse}}$ measures the \emph{defect of the limit transition}.
+A tower can have a large classical Iwasawa $\mu$-invariant but perfect control ($\mu_{\mathrm{Collapse}} = 0$), and conversely.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{4.3. The Failure Landscape (Type I--IV)}
+\label{sec:arith-failure}
+
+We classify the possible outcomes of an AK audit on an arithmetic parameter $\theta$.
+The labels mirror those of the global v17.0 Core, specialized to the arithmetic setting.
+
+\begin{definition}[Arithmetic Failure Types]
+When B-Gate$^{+}$ or the Overlap Gate fails for $\theta$, we classify the failure as follows:
+
+\begin{itemize}
+    \item \textbf{Type I (Topological): $\mathrm{PH}_1 \neq 0$.}
+    A robust bar persists after collapse.
+    \begin{itemize}
+        \item \emph{Weil (Interpretation).} A Type~I failure would correspond, in a Weil calibration thought experiment, to the detection of an eigenvalue $\alpha$ strictly off the circle $|\alpha| = q^{w/2}$---i.e.\ a configuration that would behave like a counterexample to the finite-field Riemann Hypothesis.
+        \item \emph{FLT (Interpretation).} Similarly, a Type~I failure in the FLT program would behave like a non-trivial persistent Selmer class associated with a hypothetical solution $(A,B,C)$---a configuration that would act as a counterexample to FLT if it were realized in the classical setting.
+    \end{itemize}
+
+    \item \textbf{Type II (Categorical): $\Ext^1 \neq 0$.}
+    The object fails to split or trivialize in the derived category, even if $\mathrm{PH}_1 = 0$. In the arithmetic calibration programs, this would signal a subtle extension-level obstruction beyond the reach of purely homological persistence.
+
+    \item \textbf{Type III (Instability): Budget Overflow.}
+    Numerical noise ($\delta^{\mathrm{disc}}$) or commutation errors ($\Delta_{\mathrm{comm}}$) exceed the safety gap. This indicates that the chosen resolution/precision is insufficient. It is a failure of the computational pipeline, not necessarily evidence for or against the underlying arithmetic conjecture.
+
+    \item \textbf{Type IV (Essential Singularity): $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}) \neq (0,0)$.}
+    \textbf{The critical tower failure.} The finite layers suggest validity (collapse) in each bounded window, but the limit object refuses to collapse.
+    \begin{itemize}
+        \item This represents an ``infinite descent'' or ``blow-up'' scenario where the arithmetic object degenerates asymptotically in the tower.
+        \item In the context of FLT, finding a Type~IV failure in a hypothetical search regime would correspond to a system of points that locally mimics a modular form at all finite levels but fails to assemble into a global modular object (a failure of modularity lifting) in the limit.
+    \end{itemize}
+\end{itemize}
+\end{definition}
+
+% ------------------------------------------------------------
+\subsection{4.4. Conclusion: The Common Foundation}
+\label{sec:arith-tower-conclusion}
+
+Chapters~\ref{ch:arith-param}, \ref{ch:arith-collapse}, and~\ref{ch:arith-tower} have established the \textbf{Arithmetic AK Core}.
+We have:
+\begin{enumerate}
+    \item Defined the space and time (arithmetic parameter spaces and filtrations).
+    \item Defined the laws of motion (collapse contract, quantales, and the arithmetic $\delta$-ledger).
+    \item Defined the instrumentation (tower diagnostics and failure types).
+\end{enumerate}
+
+With this common foundation, Part~II can now run the machinery on the Weil calibration program, demonstrating that the AK--verdict aligns with the known \emph{Valid} outcome.
+This serves as a system-level calibration before turning to the hypothetical counterexample space for FLT.
+
+
+
+% ------------------------------------------------------------
+% Part II : AK Program for Weil Conjectures / Finite-Field RH
+% ------------------------------------------------------------
+\part{AK Program for Finite-Field Riemann Hypothesis (Calibration)}
+\label{part:weil}
+
+\section{Chapter 5: Zeta Functions, Frobenius Spectra, and AK Realizations}
+\label{ch:weil-realization}
+
+This chapter bridges the classical arithmetic geometry of varieties over finite fields with the AK--HDPST topological machinery.
+Our goal is to construct the \emph{AK Realization} of the Weil Conjectures, transforming the spectral properties of the Frobenius endomorphism into a Persistence/Collapse problem.
+
+We rely on the parameter space $M_{\mathrm{Weil}}$ (Chapter~2) and the Spectral Quantale $V_{\mathrm{spec}}$ (Chapter~3).
+The central object constructed here is the \textbf{Frobenius Defect Potential} $\Phi^{\mathrm{Weil}}_\tau$, which serves as the objective function for the Hunter agents in the subsequent calibration.
+
+% ------------------------------------------------------------
+\subsection{5.1. The Weil Zeta Function (Classical Core)}
+\label{sec:weil-zeta}
+
+We briefly review the classical definitions to fix the target for our realization functor $\mathfrak{P}$.
+
+\begin{definition}[Zeta Function]
+Let $X$ be a smooth projective variety of dimension $d$ over $\mathbb{F}_q$. The zeta function is defined as the formal power series:
+\[
+  Z(X, t) \ := \ \exp\left( \sum_{n=1}^{\infty} \frac{\# X(\mathbb{F}_{q^n})}{n} t^n \right).
+\]
+\end{definition}
+
+\begin{theorem}[Rationality and Spectral Decomposition (Dwork, Grothendieck)]
+The zeta function is a rational function. Specifically, via $\ell$-adic cohomology, it admits the factorization:
+\[
+  Z(X, t) \ = \ \prod_{i=0}^{2d} P_i(t)^{(-1)^{i+1}}, \qquad P_i(t) \ = \ \det\left( \mathrm{Id} - t \cdot \mathrm{Fr}_q^* \mid H^i_{\text{\'{e}t}}(X_{\overline{\mathbb{F}}_q}, \mathbb{Q}_\ell) \right).
+\]
+Here, $P_i(t) \in \mathbb{Z}[t]$ (independent of $\ell$) and factorizes over $\mathbb{C}$ as $\prod_{j=1}^{b_i} (1 - \alpha_{ij}t)$.
+\end{theorem}
+
+\begin{declaration}[The Target: Finite-Field RH]
+The AK calibration targets the third Weil conjecture (Deligne's Theorem):
+\[
+  |\alpha_{ij}| \ = \ q^{i/2} \quad \text{for all } 1 \le j \le b_i.
+\]
+In the AK framework, any deviation from this equality is interpreted as a \textbf{Type~I Topological Failure} (a persistent feature with the "wrong" lifetime scaling).
+\end{declaration}
+
+% ------------------------------------------------------------
+\subsection{5.2. AK Realization: From Frobenius to Persistence}
+\label{sec:weil-ak-realization}
+
+We specify the functor $\mathfrak{P}: M_{\mathrm{Weil}} \to \FiltCh{k}$ defined conceptually in Chapter~2, focusing on how it encodes the spectrum.
+
+\begin{specification}[Frobenius Mapping Torus Realization]
+Let $V^i = H^i_{\text{\'{e}t}}(X, \mathbb{Q}_\ell)$ and $\phi = \mathrm{Fr}_q^*$.
+We construct a filtered chain complex $F_{\mathrm{Weil}}$ whose homology in degree $i$ approximates the \emph{polylogarithmic filtration} of the Frobenius action.
+
+Conceptually, the persistence module $\mathbf{P}_i(F_{\mathrm{Weil}})$ tracks the eigenspaces of $\phi$.
+For a time parameter $s \in \mathbb{R}_{\ge 0}$, we define the filtration such that a class $v \in V^i$ with $\phi(v) = \alpha v$ persists with a ``lifetime'' or ``scaling factor'' related to $\log_q |\alpha|$.
+
+\textbf{Operational Construction (for numerical/AI auditing):}
+Instead of literally implementing infinite-dimensional mapping tori, the AK Core uses the \textbf{Spectral Indicators} (Chapter~11) directly on the linear operator $\phi$.
+\begin{enumerate}
+    \item \textbf{Input:} The matrix representation of $\mathrm{Fr}_q^*$ on $H^i(X)$ (computed via point counting or cohomological algorithms).
+    \item \textbf{AK Object:} A persistence surrogate where the ``bar length'' $\beta(\alpha)$ for an eigenvalue $\alpha$ is normalized to:
+    \[
+      \beta(\alpha) \ := \ \frac{2 \log |\alpha|}{\log q}.
+    \]
+    \item \textbf{Target:} Under RH, we expect $\beta(\alpha) \equiv i$ (the cohomological degree).
+\end{enumerate}
+\end{specification}
+
+\begin{remark}[After-Collapse Policy consistency]
+By applying $\mathbf{T}_\tau$ (with $\tau$ adapted to the numerical precision of the eigenvalue computation), we filter out:
+\begin{itemize}
+    \item Numerical noise in the eigenvalue approximation ($\delta^{\mathrm{meas}}$).
+    \item Artifacts from finite-field extensions if approximating $H^i$ via bounded towers.
+\end{itemize}
+Only the stable eigenvalues $\alpha_{ij}$ constitute the ``persistent homology'' of this arithmetic setup.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{5.3. The Defect Potential \texorpdfstring{$\Phi^{\mathrm{Weil}}_\tau$}{Phi\_Weil}}
+\label{sec:weil-defect}
+
+We define the scalar field that the Hunter agents will explore. In this calibration setting, we know theoretically that the potential is zero everywhere, but the system must verify this.
+
+\begin{definition}[Frobenius Defect Potential]
+For a parameter $\theta = (X, \mathbb{F}_q) \in M_{\mathrm{Weil}}$, let $\{\alpha_{ij}\}$ be the set of Frobenius eigenvalues in degree $i$ recovered from $\mathbf{T}_\tau \mathbf{P}_i(\mathfrak{P}(\theta))$.
+Using the Spectral Quantale $V_{\mathrm{spec}}$ (Chapter~3), we define the defect:
+\[
+  \Phi^{\mathrm{Weil}}_\tau(\theta) \ := \ \sum_{i=0}^{2d} \sum_{j=1}^{b_i} \left| \log |\alpha_{ij}| - \frac{i}{2} \log q \right|^2.
+\]
+(Alternatively, using the $V_{\mathrm{spec}}$ norm notation: $\|\Sigma\delta_{\mathrm{spec}}\|_V$.)
+\end{definition}
+
+\begin{interpretation}[Regime Classification]
+Based on $\Phi^{\mathrm{Weil}}_\tau(\theta)$, the AK Core classifies the point $\theta$:
+\begin{itemize}
+    \item \textbf{Plain (Valid):} $\Phi \le \delta^{\mathrm{disc}}$ (pure numerical noise). This corresponds to RH holding true.
+    \item \textbf{Ridge (Noise):} $\delta^{\mathrm{disc}} < \Phi < \lambda_{\mathrm{sing}}$. (Not expected in Weil context if algorithms are correct; indicates potential code error or extreme numerical instability).
+    \item \textbf{Peak (Counterexample):} $\Phi \ge \lambda_{\mathrm{sing}}$. A definitive violation of the Riemann Hypothesis weights.
+\end{itemize}
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{5.4. Integration with the Gate Cascade}
+\label{sec:weil-gate}
+
+The validation of a terrain cell $W \subset M_{\mathrm{Weil}}$ proceeds via the standard Gate Cascade (Chapter~1/9), specialized for spectral data.
+
+\begin{specification}[B-Gate$^+$ for Weil]
+On a window $W$ (e.g., a family of curves $C_\lambda$ over $\mathbb{F}_q$), the gate checks:
+\begin{enumerate}
+    \item \textbf{Persistence Check:} Are the Betti numbers $b_i$ constant on $W$? (No bifurcation).
+    \item \textbf{Spectral Check:} Is $\Phi^{\mathrm{Weil}}_\tau(x) \approx 0$ for all sampled $x \in W$?
+    \item \textbf{Budget Check:} Is the deviation attributable to the logged $\delta^{\mathrm{disc}}$ (e.g., floating-point precision of eigenvalue solver)?
+\end{enumerate}
+If passed, the AK Core issues a certificate: ``$W \subset Z_{\mathrm{Valid}}$''.
+\end{specification}
+
+\begin{remark}[The Calibration Logic]
+In the subsequent chapters, we will simulate the Hunter traversing $M_{\mathrm{Weil}}$.
+Because Deligne's theorem is true, the Hunter will find \emph{no} descent directions (gradients of $\Phi$ will be noise-dominated) and \emph{no} Peaks.
+The Map of Validity will consist of a single, global ``Plain of Truth.''
+This trivial behavior is exactly the \textbf{calibration signal} we seek: it confirms that the AK diagnostics $(\mu, \nu, \Phi)$ correctly identify a regular, obstruction-free arithmetic world.
+\end{remark}
+
+
+
+% ------------------------------------------------------------
+% Part II : AK Program for Weil Conjectures / Finite-Field RH
+% ------------------------------------------------------------
+\part{AK Program for Finite-Field Riemann Hypothesis (Calibration)}
+\label{part:weil}
+
+\section{Chapter 6: Collapse Contract and the Finite-Field Riemann Hypothesis}
+\label{ch:weil-contract}
+
+This chapter operationalizes the Unified Collapse Contract (UCC) for the Weil Conjectures.
+Having defined the defect potential $\Phi^{\mathrm{Weil}}_\tau$ in Chapter~\ref{ch:weil-realization}, we now specify the acceptance criteria---the \emph{Spectral UCC}---that the AK Core uses to certify a terrain cell $W \subset M_{\mathrm{Weil}}$ as \emph{Valid}.
+
+This is a \emph{calibration exercise}: we utilize the known truth of Deligne's theorem to tune the sensitivity of the AK $\delta$-ledger.
+If the system is correctly calibrated, the ``Plain of Truth'' (Valid region) must cover the entire parameter space $M_{\mathrm{Weil}}$.
+
+% ------------------------------------------------------------
+\subsection{6.1. The Spectral UCC: Filtering via \texorpdfstring{$\mathbf{T}_\tau$}{T\_tau}}
+\label{sec:weil-spectral-ucc}
+
+In the standard AK theory, $\mathbf{T}_\tau$ deletes short bars.
+In the spectral realization of the Weil conjectures, this translates to filtering out eigenvalues that violate the weight constraints or arise from numerical noise.
+
+\begin{definition}[Spectral Truncation $\mathbf{T}_\tau^{\mathrm{spec}}$]
+Let $F$ be the Frobenius realization of a variety $X$.
+The operator $\mathbf{T}_\tau^{\mathrm{spec}}$ acts on the detected spectrum $\sigma(\mathrm{Fr}_q)$ as follows:
+\begin{itemize}
+  \item \textbf{Input:} A set of approximate eigenvalues $\{\tilde{\alpha}_j\}$ and a tolerance width $\varepsilon(\tau)$ derived from the $\tau$-scale.
+  \item \textbf{Filter:} An eigenvalue $\tilde{\alpha}$ is \emph{retained} (considered a persistent feature) if and only if it lies within distance $\varepsilon(\tau)$ of the circle
+  \[
+    |z| \;=\; q^{w/2}
+  \]
+  for some integer weight $w \in \{0,\dots,2d\}$.
+  \item \textbf{Collapse:} Eigenvalues falling into the ``spectral gap'' (far from any integer-weight circle) are treated as transient noise and annihilated (mapped to zero persistence).
+\end{itemize}
+\end{definition}
+
+\begin{specification}[The Spectral Collapse Condition]
+A parameter $\theta \in M_{\mathrm{Weil}}$ satisfies the \emph{Spectral UCC} at scale $\tau$ if, after applying $\mathbf{T}_\tau^{\mathrm{spec}}$:
+\begin{enumerate}
+  \item \textbf{Betti Stability (No Spurious Contribution):}
+  The surviving spectrum yields Betti numbers that agree with those of $X$;
+  in particular, no spurious Betti contribution is created by numerical noise or truncation.
+  \item \textbf{Defect Vanishing:}
+  The renormalized defect potential vanishes within the allowed budget:
+  \[
+    \mathbf{T}_\tau^{\mathrm{spec}}\bigl(\Phi^{\mathrm{Weil}}_\tau(\theta)\bigr)
+    \;\approx\; 0
+    \quad \text{(within the total budget $\Sigma\delta$).}
+  \]
+\end{enumerate}
+\end{specification}
+
+
+% ------------------------------------------------------------
+\subsection{6.2. The Arithmetic \texorpdfstring{$\delta$}{delta}-Ledger}
+\label{sec:weil-ledger}
+
+Since we cannot compute with infinite precision, the condition $\Phi^{\mathrm{Weil}}_\tau = 0$ is never met exactly in a digital simulation.
+We map the specific error sources of arithmetic geometry into the AK $\delta$-ledger (Appendix~G/S) to distinguish ``numerical non-zero'' from a genuine ``topological counterexample.''
+
+\begin{declaration}[Weil Ledger Entries]
+For a computation on a window $W \subset M_{\mathrm{Weil}}$:
+
+\begin{enumerate}
+  \item \textbf{Discretization Defect ($\delta^{\mathrm{disc}}$):}
+  Arises from approximating the cohomology $H^i(X)$ or the zeta function $Z(X,t)$.
+  \begin{itemize}
+    \item \emph{Source:} Finite truncation of the point-counting series
+    \(
+      N_r = \#X(\mathbb{F}_{q^r})
+    \)
+    (e.g.\ using only $r \le R$).
+    \item \emph{Bound:} Analytic number theory gives tail bounds of the form
+    \(
+      |\text{tail}| \le C \cdot q^{-R/2}
+    \)
+    for an explicit constant $C$ depending on $X$.
+    \item \emph{Entry:} We record a bound
+    \(
+      \delta^{\mathrm{disc}} \simeq C \cdot q^{-R/2}.
+    \)
+  \end{itemize}
+
+  \item \textbf{Measurement Defect ($\delta^{\mathrm{meas}}$):}
+  Arises from the floating-point or $p$-adic precision of the eigensolver.
+  \begin{itemize}
+    \item \emph{Source:} Computing eigenvalues of a large sparse matrix over $\mathbb{C}$ or $\mathbb{C}_p$.
+    \item \emph{Entry:} The solver tolerance (e.g.\ $10^{-12}$) or the $p$-adic truncation order.
+  \end{itemize}
+
+  \item \textbf{Algebraic Defect ($\delta^{\mathrm{alg}}$):}
+  \begin{itemize}
+    \item \emph{Source:} None in the smooth projective case: we assume $X$ is smooth and projective, so no extra algebraic correction terms appear from resolutions.
+    \item \emph{Entry:} $\delta^{\mathrm{alg}} := 0$ for smooth $X$.
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Pass Condition:} B-Gate$^+$ accepts the point $\theta$ if
+\[
+  \Phi^{\mathrm{Weil}}_\tau(\theta)
+  \;\le\;
+  \delta^{\mathrm{disc}} \oplus \delta^{\mathrm{meas}},
+\]
+where $\oplus$ is the aggregation operation in the Spectral Quantale $V_{\mathrm{spec}}$.
+\end{declaration}
+
+% ------------------------------------------------------------
+\subsection{6.3. The Calibration Theorem (AK--Perspective)}
+\label{sec:weil-calibration-thm}
+
+We now formalize the goal of this Part: establishing that the AK machinery correctly identifies the ``truth'' when provided with correct data.
+
+\begin{theorem}[AK--Weil Consistency]\label{thm:ak-weil-consistency}
+Assume the classical theorems of Weil (1949), Dwork (1960), Grothendieck et al.\ (1960s), and Deligne (1974).
+Construct the AK realization $\mathfrak{P}(\theta)$ for any $\theta \in M_{\mathrm{Weil}}$ as per Chapter~\ref{ch:weil-realization}.
+Then:
+\begin{enumerate}
+  \item \textbf{Universal Validity:}
+  For any scale $\tau > 0$ and any window $W$, the defect potential satisfies
+  \[
+    \Phi^{\mathrm{Weil}}_\tau(\theta) \;=\; 0
+    \qquad \text{(mathematically, i.e.\ before numerical truncation).}
+  \]
+  \item \textbf{No Type IV Failures:}
+  For the extension tower $\mathbb{F}_{q^n}$,
+  the tower diagnostics satisfy
+  \[
+    \bigl(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}\bigr)
+    \;=\;
+    (0,0).
+  \]
+  \item \textbf{AK Verdict:}
+  In the ideal (non-numerical) regime, the system outputs
+  \[
+    \AKverdict(\theta) \;=\; \mathsf{Valid}
+    \quad \text{for all } \theta \in M_{\mathrm{Weil}}.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Logic of the Calibration]
+This is not a proof of the Weil conjectures.
+It is a proof that \emph{AK--HDPST is a faithful observer} when the input arithmetic world already satisfies the conjectures.
+
+\begin{itemize}
+  \item Deligne's theorem implies that all eigenvalues $\alpha_{ij}$ lie exactly on the circles
+  \(
+    |\alpha_{ij}| = q^{i/2}.
+  \)
+  Hence the radial deviation term in $\Phi^{\mathrm{Weil}}_\tau$ is identically zero.
+  \item Rationality (Dwork/Grothendieck) and the cohomological formalism imply that the Betti numbers are already realized over finite extensions, and no new persistent features appear at the algebraic closure.
+  Thus the comparison map for the tower has trivial kernel and cokernel after collapse, giving
+  \(
+    \mu_{\mathrm{Collapse}} = \nu_{\mathrm{Collapse}} = 0.
+  \)
+  \item Therefore, the AK gate cascade, operating strictly on $\mathbf{T}_\tau$-collapsed data and with an error budget dominated by $(\delta^{\mathrm{disc}},\delta^{\mathrm{meas}})$, must pass every point $\theta$ when numerical defects are abstracted away.
+\end{itemize}
+\end{proof}
+
+% ------------------------------------------------------------
+\subsection{6.4. Epistemological Status: Calibration vs.\ Proof}
+\label{sec:weil-epistemology}
+
+It is vital to distinguish the role of this chapter from the Navier--Stokes application (Appendix~NS).
+
+\begin{remark}[The Calibration Paradigm]
+\begin{itemize}
+  \item \textbf{In Navier--Stokes (Future):}
+  We do not know if regularity holds.
+  We use AK--HDPST to \emph{discover} the Map of Validity.
+  The system may output $\mathsf{Obstructed}$ (Type~IV) on some regions.
+  \item \textbf{In Weil (Here):}
+  We know regularity (finite-field RH) holds.
+  We use the known truth to \emph{debug and calibrate} the AK--HDPST parameters (e.g.\ quantale sensitivity, choice of $\tau$, window size, and ledger thresholds).
+\end{itemize}
+If the AK Core were to report a ``Peak'' (counterexample) in $M_{\mathrm{Weil}}$ under this assumption, it would signify a bug in the implementation of the realization functor $\mathfrak{P}$ or in the numerical solver, not a disproof of the finite-field Riemann Hypothesis.
+This asymmetry is the defining feature of a calibration test.
+\end{remark}
+
+
+
+\section{Chapter 7: Validity Map on \texorpdfstring{$M_{\mathrm{Weil}}$}{M\_Weil}}
+\label{ch:weil-validity-map}
+
+In this chapter, we assemble the local diagnostics of the previous chapters into a global geometric structure: the \emph{Validity Map}.
+For the Weil calibration, this map serves as a ``control experiment.'' 
+Since the Finite-Field Riemann Hypothesis is a proven theorem, the Validity Map must exhibit a specific, trivial topology: it should be devoid of essential singularities.
+
+This chapter defines the terrain regions---\emph{Plain}, \emph{Ridge}, and \emph{Peak}---specifically for the spectral data of Frobenius, establishing the reference standard for what a ``solved'' arithmetic problem looks like to the AK--HDPST engine.
+
+% ------------------------------------------------------------
+\subsection{7.1. Definition of the Map \texorpdfstring{$\mathcal{V}_\tau$}{V\_tau}}
+\label{sec:weil-map-def}
+
+The Validity Map is not just a function but a stratification of the parameter space based on the AK verdict.
+
+\begin{definition}[The Spectral Validity Map]
+Fix a collapse scale $\tau > 0$ and a $\delta$-ledger budget $\mathcal{B}$.
+The \emph{Validity Map} on $M_{\mathrm{Weil}}$ is the assignment
+\[
+  \mathcal{V}_\tau : M_{\mathrm{Weil}} \longrightarrow \{\mathsf{Plain}, \mathsf{Ridge}, \mathsf{Peak}\}
+\]
+determined by the value of the defect potential $\Phi^{\mathrm{Weil}}_\tau(\theta)$ and the tower diagnostics $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}})$ relative to the budget.
+\end{definition}
+
+\begin{specification}[Classification Criteria]
+For a parameter $\theta \in M_{\mathrm{Weil}}$ with defect $\Phi = \Phi^{\mathrm{Weil}}_\tau(\theta)$:
+
+\begin{enumerate}
+  \item \textbf{Plain (The Valid Region $Z_{\mathrm{Valid}}$):}
+  \[
+    \Phi \le \delta^{\mathrm{disc}} \oplus \delta^{\mathrm{meas}}
+    \quad \text{AND} \quad
+    (\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}) = (0, 0).
+  \]
+  The point satisfies the Spectral UCC within the allocated noise budget.
+
+  \item \textbf{Ridge (The Noise Region $Z_{\mathrm{Noise}}$):}
+  \[
+    \delta^{\mathrm{disc}} \oplus \delta^{\mathrm{meas}} < \Phi < \lambda_{\mathrm{sing}}
+    \quad \text{OR} \quad
+    (\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}) \text{ indeterminate/unstable}.
+  \]
+  The point is ambiguous. In the Weil context, this signifies numerical instability (e.g.\ insufficient $p$-adic or floating-point precision) rather than a genuine counterexample.
+
+  \item \textbf{Peak (The Singular Region $Z_{\mathrm{Sing}}$):}
+  \[
+    \Phi \ge \lambda_{\mathrm{sing}}
+    \quad \text{OR} \quad
+    (\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}) \neq (0, 0) \text{ robustly}.
+  \]
+  The point is a certified obstruction: a Type~I or Type~IV failure.
+\end{enumerate}
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{7.2. Topography of the Calibration Space}
+\label{sec:weil-topography}
+
+We now state what the map \emph{looks like} under the assumption of classical truth.
+
+\begin{theorem}[The Plain of Truth]\label{thm:weil-plain}
+Assume the validity of Deligne's Theorem (Riemann Hypothesis for varieties over finite fields).
+Then, for any ``ideal'' AK implementation (where $\delta^{\mathrm{meas}} \to 0$ and $\delta^{\mathrm{disc}}$ is handled by exact analytic bounds),
+\[
+  Z_{\mathrm{Valid}} \ = \ M_{\mathrm{Weil}},
+  \qquad
+  Z_{\mathrm{Sing}} \ = \ \emptyset.
+\]
+Geometrically, the Validity Map is a single connected component of type $\mathsf{Plain}$.
+\end{theorem}
+
+\begin{corollary}[Empty Peak Condition]
+Under the same assumptions, there are no ``mountains'' in $M_{\mathrm{Weil}}$.
+The Defect Potential $\Phi^{\mathrm{Weil}}_\tau$ is globally minimized at (structurally) zero everywhere.
+Any observed gradient $\nabla \Phi$ in a numerical simulation is purely an artifact of the variation in $\delta^{\mathrm{disc}}$ (for instance, bounds getting tighter or looser as dimension or genus changes), not an intrinsic arithmetic feature.
+\end{corollary}
+
+% ------------------------------------------------------------
+\subsection{7.3. The Global Certificate}
+\label{sec:weil-certificate}
+
+Since the Peak region is empty, the Mapper agent can construct a trivial covering.
+
+\begin{definition}[Global Certificate for Weil]
+A \emph{Global Certificate} is a directed acyclic graph (DAG) of verified cells covering $M_{\mathrm{Weil}}$.
+For the Weil program, this graph is structurally trivial:
+\begin{itemize}
+  \item \textbf{Nodes:} Cells $W_\alpha$ covering $M_{\mathrm{Weil}}$ (for example, stratified by genus or dimension).
+  \item \textbf{Edges:} Overlap passes showing consistency of Betti numbers between neighboring cells.
+  \item \textbf{State:} All nodes are colored \textcolor{green!50!black}{\textbf{GREEN}} (Valid).
+\end{itemize}
+\end{definition}
+
+\begin{remark}[Contrast with FLT]
+In Part~III (FLT), the certificate will look radically different.
+We expect $Z_{\mathrm{Valid}}$ to coincide with the locus of modular elliptic curves, while the ``hypothetical'' part of $M_{\mathrm{FLT}}$ corresponding to Frey curves of putative solutions is mapped to $Z_{\mathrm{Sing}}$ (or excluded entirely by B-Gate$^+$).
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{7.4. AK--Perspective: The Ideal Model for NSE}
+\label{sec:weil-nse-link}
+
+This chapter establishes the ``Gold Standard'' for the Navier--Stokes investigation (Appendix~NS).
+
+\begin{remark}[The Calibration Lesson]
+The Weil Calibration teaches us that:
+\begin{enumerate}
+  \item \textbf{Regularity manifests as flatness.}
+  A problem with global regularity (like the Weil setting) appears to the AK engine as a featureless plain where $\Phi \approx 0$ everywhere.
+
+  \item \textbf{Budgets matter.}
+  Even on the Plain of Truth, $\Phi$ is never exactly zero in a computer.
+  The distinction between $Z_{\mathrm{Valid}}$ and $Z_{\mathrm{Sing}}$ relies entirely on the rigorous derivation of the budget
+  $\delta^{\mathrm{disc}} \oplus \delta^{\mathrm{meas}}$ (Chapter~6).
+\end{enumerate}
+When we tackle Navier--Stokes, we will search for the same kind of flatness.
+If we find a region where $\Phi$ rises above the budget and cannot be flattened by the Lifter, we have found a singularity.
+If we find only flatness (up to budget), we have evidence in favor of regularity.
+\end{remark}
+
+
+
+\section{Chapter 8: HDPS Hunter/Mapper on the Weil Side (Conceptual Execution)}
+\label{ch:weil-execution}
+
+This chapter describes the dynamic execution of the AK--HDPST agents on the Weil parameter space.
+Unlike static proofs, the HDPS engine operates as a \emph{search process}.
+In this calibration setting, we simulate a ``Hostile Audit'' where the Hunter agent actively tries (and fails) to disprove the Riemann Hypothesis.
+
+The inability of the Hunter to find a gradient of ascent in the Defect Potential $\Phi^{\mathrm{Weil}}_\tau$ serves as the \textbf{empirical validation} of the entire AK framework.
+
+% ------------------------------------------------------------
+\subsection{8.1. The Hunter's Protocol: Seeking Gradients}
+\label{sec:weil-hunter-protocol}
+
+The Hunter agent is configured with an aggressive optimization policy.
+
+\begin{specification}[Hunter Policy $\mathcal{H}_{\mathrm{Weil}}$]
+\begin{itemize}
+  \item \textbf{Objective Function:} Maximize the defect potential $\Phi^{\mathrm{Weil}}_\tau(\theta)$.
+  \item \textbf{Action Space:}
+  \begin{itemize}
+    \item \emph{Continuous:} Perturb coefficients of the defining polynomial equations in $\mathbb{Z}_p$ or finite field lifts.
+    \item \emph{Discrete:} Jump between fiber dimensions, genera, or primes $q$.
+  \end{itemize}
+  \item \textbf{Stopping Condition:}
+  \begin{itemize}
+    \item \emph{Success (Counterexample):} Find $\theta$ where $\Phi^{\mathrm{Weil}}_\tau(\theta) > \lambda_{\mathrm{sing}}$.
+    \item \emph{Failure (Regularity):} Explore $N$ steps without finding any direction where
+    \[
+      \|\nabla \Phi^{\mathrm{Weil}}_\tau(\theta)\| \cdot \Delta \theta \;>\; \delta^{\mathrm{friction}}
+    \]
+    for some fixed friction threshold $\delta^{\mathrm{friction}}$ in the error budget.
+  \end{itemize}
+\end{itemize}
+\end{specification}
+
+\begin{definition}[Quantale Friction]
+The $\delta$-ledger budget imposes an effective ``friction'' on the search landscape.
+If the estimated gain in defect potential is dominated by numerical noise, i.e.
+\[
+  \|\nabla \Phi^{\mathrm{Weil}}_\tau(\theta)\| \cdot \Delta \theta \ \le \ \delta^{\mathrm{meas}},
+\]
+the Hunter considers the terrain locally flat and refuses to move.
+This prevents the AI from chasing ``phantom gradients'' created by floating-point or $p$-adic rounding errors.
+\end{definition}
+
+% ------------------------------------------------------------
+\subsection{8.2. Execution Log: The Null Gradient}
+\label{sec:weil-execution-log}
+
+We present a conceptual trace of the Hunter operating on $M_{\mathrm{Weil}}$ under the assumption of classical truth (Deligne).
+
+\begin{example}[Hunter Trace: Project Weil-Audit]
+\begin{verbatim}
+[INIT]  Target: Weil Conjectures (Finite Fields)
+[CONF]  Quantale: V_spec | Tau: 1e-4 | Ledger: Conservative
+[START] Spawning Hunter-01 at random seed (Genus=5, q=49) ...
+
+[STEP 1] Computing Zeta Function Z(X, t)...
+         > Eigenvalues: All within 1e-12 of |z| = q^{w/2}.
+         > Phi_tau: 1.2e-13 (<< delta_disc).
+         > Status: PLAIN.
+
+[STEP 2] Attempting Gradient Ascent (Deforming coefficients)...
+         > Perturbation: c_0 -> c_0 + epsilon.
+         > New Phi_tau: 1.3e-13.
+         > Gradient: ~0 (Masked by friction).
+         > Action: REJECT move (No ascent detected).
+
+[STEP 3] Jump Strategy (Hyper-elliptic locus)...
+         > Checking singular fibers...
+         > (Resolution of singularities applied automatically via P_fun)
+         > Phi_tau: 5.5e-14.
+         > Status: PLAIN.
+
+... [10,000 steps later] ...
+
+[END]   Hunter-01 stalled. No ascent direction found.
+        Max Phi observed: 2.1e-13 (Budget: 1.0e-6).
+        Coverage: 98% of strata sampled.
+        Peaks found: 0.
+\end{verbatim}
+\end{example}
+
+\begin{remark}[The Meaning of Silence]
+The Hunter's failure to move significantly away from $\Phi^{\mathrm{Weil}}_\tau \approx 0$ confirms that the manifold $M_{\mathrm{Weil}}$ is ``hydrostatically stable'' with respect to the Unified Collapse Contract.
+There are no pockets of high defect energy for the Hunter to exploit.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{8.3. The Mapper's Job: Trivial Covering}
+\label{sec:weil-mapper}
+
+While the Hunter searches for peaks, the Mapper aggregates the validated paths into the Global Certificate.
+
+\begin{theorem}[Structure of the Weil Map]
+Under the calibration assumption, the output of the Mapper is a \emph{Trivial Homotopy Type} certificate.
+\begin{enumerate}
+  \item \textbf{Connectivity:} All sampled cells $\{W_\alpha\}$ are connected via overlap passes.
+  \item \textbf{Uniformity:} Every cell label is $\mathsf{Valid}$.
+  \item \textbf{No Type IV Boundaries:} There are no internal boundaries where the tower diagnostics $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}})$ jump from $(0,0)$ to non-zero values.
+\end{enumerate}
+This structure is the AK--HDPST definition of a \emph{Solved Regular Problem}.
+\end{theorem}
+
+% ------------------------------------------------------------
+\subsection{8.4. Calibration Sign-off}
+\label{sec:weil-signoff}
+
+This concludes the Weil Calibration Program (Part~II).
+
+\begin{declaration}[System Readiness]
+The successful reconstruction of the ``Plain of Truth'' on $M_{\mathrm{Weil}}$ confirms:
+\begin{enumerate}
+  \item \textbf{$\mathfrak{P}$ is Faithful:} The realization functor captures the spectral rigidity of Frobenius.
+  \item \textbf{$\delta$-Ledger is Tuned:} The thresholds for $\delta^{\mathrm{disc}}$ and $\delta^{\mathrm{meas}}$ are loose enough to absorb numerical noise, but tight enough to not mask potential (hypothetical) $O(1)$ violations.
+  \item \textbf{UCC is Robust:} The collapse operator $\mathbf{T}_\tau$ correctly identifies the stable Betti numbers despite noise and discretization.
+\end{enumerate}
+\textbf{Verdict:} The AK--HDPST engine is calibrated. We are authorized to proceed to Part~III (Fermat's Last Theorem), where we expect to encounter a strictly different topology (Global Obstruction).
+\end{declaration}
+
+
+
+% ------------------------------------------------------------
+% Part III : AK Program for Fermat's Last Theorem (FLT)
+% ------------------------------------------------------------
+\part{AK Program for Fermat's Last Theorem (Global Obstruction)}
+\label{part:flt}
+
+\section{Chapter 9: FLT, Elliptic Curves, and Modularity -- AK Setup}
+\label{ch:flt-setup}
+
+This chapter initiates the final major calibration target: the framework established by Wiles and Taylor for proving Fermat's Last Theorem (FLT).
+Our objective is not to reprove FLT, but to translate the classical proof structure---especially the mechanism that rules out counterexamples---into the language of the AK Core.
+This calibration establishes the AK system's ability to diagnose a \emph{Global Obstruction}, where a seemingly valid region is shown to be structurally empty.
+
+% ------------------------------------------------------------
+\subsection{9.1. The Classical FLT Statement and the Frey Connection}
+\label{sec:flt-classical}
+
+\begin{theorem}[Fermat's Last Theorem]\label{thm:FLT-classical}
+There are no positive integers \(A, B, C\) satisfying the equation
+\[
+  A^n + B^n = C^n
+\]
+for any integer exponent \(n \ge 3\).
+\end{theorem}
+
+\begin{remark}[The Wiles Strategy]\label{rmk:wiles-strategy}
+The proof, completed by Wiles and Taylor, relies on linking a hypothetical solution \((A, B, C)\) to a structural impossibility: the existence of a \emph{Frey elliptic curve} \(E_{A,B,C}\) that is simultaneously forced to be modular and non-modular.
+
+At a high level, three classical components are combined:
+\begin{enumerate}
+    \item \textbf{Frey/Ribet:}
+    From a would-be solution \((A,B,C,n)\) one constructs a Frey curve \(E_{A,B,C}\) whose associated Galois representation has properties incompatible with modularity at the target level (Ribet's theorem).
+    \item \textbf{Modularity:}
+    Every elliptic curve over \(\mathbb{Q}\) is modular (Taniyama--Shimura--Weil / Wiles--Taylor).
+    \item \textbf{Contradiction:}
+    The same object \(E_{A,B,C}\) is forced, by construction, to be non-modular and, by the global theorem, to be modular.
+\end{enumerate}
+The AK program rephrases this ``no-place-to-live'' phenomenon as a global obstruction in the parameter space.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{9.2. The FLT Parameter Space \texorpdfstring{$M_{\mathrm{FLT}}$}{M\_FLT}}
+\label{sec:flt-param-space}
+
+We now recall and refine the FLT parameter space introduced in Chapter~\ref{sec:M-flt}.
+There, \(M_{\mathrm{FLT}}\) was defined in terms of semistable elliptic curves over \(\mathbb{Q}\) with restricted ramification and specific mod-\(p\) representations.
+For the AK program, it is convenient to work with an augmented version that remembers the exponent.
+
+\begin{definition}[FLT Parameter Space \(M_{\mathrm{FLT}}\)]
+We let \(M_{\mathrm{FLT}}\) denote the space of parameters \(\theta = (E, n)\), where:
+\begin{itemize}
+    \item \(n \ge 3\) is an integer exponent;
+    \item \(E\) is an elliptic curve over \(\mathbb{Q}\), equipped with its structural invariants (minimal discriminant, conductor \(N\), and the associated \(\ell\)-adic representations).
+\end{itemize}
+Abusing notation slightly, we view \(E\) as ranging over the moduli described in Chapter~\ref{sec:M-flt}, and we simply attach the tag \(n\) as an additional discrete coordinate.
+\end{definition}
+
+\begin{definition}[Frey Locus \(L_{\mathrm{Frey}}\)]
+The \emph{Frey locus} \(L_{\mathrm{Frey}} \subset M_{\mathrm{FLT}}\) is the subset of parameters
+\[
+  \theta = (E_{A,B,C}, n)
+\]
+that arise from hypothetical solutions \((A,B,C,n)\) of the Fermat equation via the Frey construction.
+\end{definition}
+
+\begin{remark}[AK Perspective on \(L_{\mathrm{Frey}}\)]
+The set \(L_{\mathrm{Frey}}\) represents the \emph{singular target region} that the Hunter must ultimately certify as empty.
+A point \(\theta \in L_{\mathrm{Frey}}\) is conjecturally characterized by a deep structural defect: the associated Galois representation \(\rho_{E,n}\) would have to exhibit a specific Type~IV obstruction (failure of modularity lifting) that prevents its persistence data from collapsing in the way mandated by the Unified Collapse Contract.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{9.3. AK Realization: Galois Representation to Persistence}
+\label{sec:flt-ak-realization}
+
+We now describe the realization functor
+\[
+  \mathfrak{P}_{\mathrm{FLT}} : M_{\mathrm{FLT}} \longrightarrow \mathsf{FiltCh}(k)
+\]
+which maps arithmetic data to the persistent homology framework.
+
+\begin{specification}[Galois Representation Realization \(\mathfrak{P}_{\mathrm{FLT}}\)]
+Let \(\theta = (E, n) \in M_{\mathrm{FLT}}\).
+The AK realization is based on the \(\ell\)-adic Galois representations attached to \(E\):
+\[
+  \rho_{E,\ell} : \mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q}) \longrightarrow \mathrm{GL}_2(\mathbb{Z}_\ell).
+\]
+The construction proceeds schematically as follows:
+\begin{enumerate}
+    \item \textbf{Input Complex:}
+    Start from the \(\ell\)-adic Tate module \(T_\ell(E)\), together with the Galois action and the local decomposition of inertia at primes dividing the conductor \(N\).
+    This data is assembled into a cochain complex whose cohomology computes the relevant Selmer groups.
+    \item \textbf{Persistence Module \(\mathbf{P}(\theta)\):}
+    Consider the cyclotomic tower \(K_n \subset K_\infty\) used in Iwasawa theory.
+    The \(\ell\)-adic Selmer group \(\mathrm{Sel}_\ell(E/K_\infty)\) is obtained as an inverse limit of finite-level cohomology groups.
+    Passing to the Pontryagin duals yields compact \(\Lambda\)-modules for which the inverse limit becomes a direct limit.
+    The \emph{Iwasawa Alignment} (Appendix~D/R) then converts this dualized direct-limit structure into a directed system whose image under \(\mathfrak{P}_{\mathrm{FLT}}\) lies in \(\Perscons\).
+    \item \textbf{Bridge Target:}
+    On this persistent object, the key diagnostic is the \emph{extension obstruction index} \(\mu_{\mathrm{Ext}}\), extracted from an \(\Ext^1\)-group that controls the deformation theory of \(\rho_{E,\ell}\) (cf.\ deformation ring \(R\) and Hecke algebra \(\mathbb{T}\)).
+\end{enumerate}
+The detailed cochain-level implementation is deferred to Appendix~\ref{appendix:ak-flt-realization}.
+\end{specification}
+
+\begin{remark}[Iwasawa Alignment and Tower Diagnostics]
+The tower structure associated with \(\theta\) is the cyclotomic \(\mathbb{Z}_p\)-extension \(K_n \to K_\infty\) considered in Chapter~\ref{ch:arith-tower}.
+The persistence module \(\mathbf{P}(\theta)\) records the size and growth behavior of \(\mathrm{Sel}_\ell(E/K_\infty)\), classically analyzed via the Iwasawa \(\mu\)- and \(\lambda\)-invariants.
+In the AK framework, the same information is probed by the tower diagnostics \((\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}})\) applied to the comparison map \(\phi_{i,\tau}\) of the Selmer complexes, checking the validity of the Control Theorems after collapse.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{9.4. The Ext/PH Bridge and Modularity}
+\label{sec:flt-bridge}
+
+The core of the Wiles--Taylor argument is the alignment
+\[
+  R \ \cong \ \mathbb{T},
+\]
+between a deformation ring \(R\) (Galois side) and a Hecke algebra \(\mathbb{T}\) (modular side).
+AK--HDPST encodes this alignment as a bridge between topological persistence and extension groups.
+
+\begin{definition}[Extension Obstruction \(\mu_{\mathrm{Ext}}\)]
+Let \(C_\theta\) be a deformation complex associated with \(\rho_{E,\ell}\), and let
+\[
+  E^1_\theta \ := \ \Ext^1\bigl( \mathcal{R}(C_\theta), k \bigr)
+\]
+be the corresponding first extension group in the realization category.
+We define the \emph{extension obstruction index} \(\mu_{\mathrm{Ext}}(\theta)\) as a numerical invariant extracted from \(E^1_\theta\).
+For the Core v17.0 implementation, one may take, for example,
+\[
+  \mu_{\mathrm{Ext}}(\theta)
+  \ := \
+  \dim_k E^1_\theta
+\]
+whenever \(E^1_\theta\) is finite-dimensional, or more generally the length of \(E^1_\theta\) as a module over the relevant Iwasawa algebra.
+Refinements of this choice, and the precise normalization used in the \(\delta\)-ledger, are specified in Appendix~\ref{appendix:ak-flt-realization}.
+\end{definition}
+
+\begin{declaration}[Bridge Condition for Modularity]\label{dec:bridge-modularity}
+In the AK design, we \emph{encode} modularity of \(E\) by the bridge condition
+\[
+  \mu_{\mathrm{Ext}}(\theta) \ \approx \ \mu_{\mathrm{Collapse}}(\theta) \ \approx \ 0,
+\]
+evaluated in a suitable error budget.
+Conceptually:
+\begin{itemize}
+    \item \(\mu_{\mathrm{Collapse}}(\theta) \approx 0\) expresses that the tower diagnostics for the Selmer complexes exhibit no Type~IV failure (good control in the Iwasawa sense).
+    \item \(\mu_{\mathrm{Ext}}(\theta) \approx 0\) expresses that the deformation problem has no essential extension obstruction: the map \(R \to \mathbb{T}\) behaves as an isomorphism within the prescribed tolerances.
+\end{itemize}
+This bridge condition is part of the \textbf{[Spec]} layer: it formalizes, inside AK--HDPST, how the classical \(R \cong \mathbb{T}\) alignment is reflected in the persistence/Ext diagnostics; it does not assert any new theorem beyond the established modularity results.
+\end{declaration}
+
+\begin{remark}[FLT as a Global Obstruction Scenario]
+If a solution \((A,B,C,n)\) to Fermat's equation existed, the associated Frey curve \(E_{A,B,C}\) would yield a parameter \(\theta \in L_{\mathrm{Frey}}\) for which the classical strategy predicts an incompatibility between the Galois and modular descriptions.
+In the AK picture, this incompatibility is interpreted as the \emph{requirement} that some diagnostic (such as \(\mu_{\mathrm{Collapse}}\) or \(\mu_{\mathrm{Ext}}\)) must register a robust failure.
+The subsequent chapters analyze this scenario abstractly: under the assumption of the classical modularity theorems, the AK verdict forces the Frey locus to be structurally empty.
+\end{remark}
+
+
+
+\section{Chapter 10: Collapse Diagnostics and Would-Be Solutions of FLT}
+\label{ch:flt-diagnostics}
+
+In this chapter, we define the diagnostic protocol for checking hypothetical solutions to the Fermat equation.
+The AK--HDPST engine operates in \emph{Counterexample Search Mode} (Hunter).
+We describe how a hypothetical Frey curve $E_{A,B,C}$ would manifest as a specific topological anomaly—a \textbf{Type~IV Essential Singularity}—and how the Wiles--Taylor theorem, imported as a Core-Input, certifies that such anomalies cannot exist in the arithmetic landscape.
+
+% ------------------------------------------------------------
+\subsection{10.1. Anatomy of a Would-Be Solution (The Frey Obstruction)}
+\label{sec:flt-would-be}
+
+Suppose, for the sake of the search algorithm, that a parameter $\theta = (E_{A,B,C}, n) \in L_{\mathrm{Frey}}$ exists.
+How does the AK auditor perceive this object?
+
+\begin{definition}[The Frey Profile]
+A \emph{Would-Be Solution} is a persistence object $P_\theta = \mathfrak{P}_{\mathrm{FLT}}(\theta)$ satisfying:
+\begin{enumerate}
+    \item \textbf{Local Validity (Type I/II Pass):}
+    It is semistable (square-free conductor $N$) and has good reduction properties locally.
+    The local B-Gate$^+$ checks pass: $\Phi_{\mathrm{local}} \approx 0$.
+    \item \textbf{Global Discrepancy (Type IV Fail):}
+    It exhibits a \emph{Modularity Gap}.
+    The Galois representation $\rho_\theta$ constructed from $P_\theta$ cannot be matched to any Hecke eigenform $f$ of weight~$2$ and the level predicted by Ribet's level-lowering (in particular, level~$2$ in the classical FLT scenario).
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Type~IV Diagnosis via $\mu_{\mathrm{Ext}}$]
+In the language of Chapter~\ref{ch:arith-tower}, this discrepancy manifests as a divergence in a bridge index.
+Ribet's theorem implies that if $E_{A,B,C}$ exists, its associated deformation ring $R$ is ``too large'' compared to the relevant Hecke algebra $\mathbb{T}$ at level~$2$ (whose cusp-form sector is trivial).
+At the \textbf{[Spec]} layer, we summarize this by a scalar index
+\[
+  \mu_{\mathrm{Ext}}(\theta)
+  \ := \
+  \dim_k \ker\!\bigl(R \longrightarrow \mathbb{T}_{\mathrm{level}=2}\bigr)
+  \ \gg \ 0,
+\]
+where $k$ is a fixed residue field.
+Conceptually, this represents an infinite tower of deformations that finds no modular ground to land on—a model Type~IV singularity in the FLT setting.
+Precise implementation details of $\mu_{\mathrm{Ext}}$ are deferred to Appendix~D.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{10.2. The UCC Protocol on the Frey Locus}
+\label{sec:flt-ucc-check}
+
+We formalize the check performed by the AK Core when the Hunter proposes a candidate $\theta$.
+
+\begin{specification}[The Modularity Gate Check]
+For a candidate $\theta \in M_{\mathrm{FLT}}$, the system computes the \emph{Modularity Potential} $\Psi(\theta)$:
+\[
+  \Psi(\theta) \ := \
+  \inf_{f \in \mathcal{S}_2(\Gamma_0(N))}
+  \text{dist}_{\mathrm{Galois}}\bigl(\rho_\theta, \rho_f\bigr),
+\]
+where the distance is measured in the quantized $\delta$-ledger metric (matching traces of Frobenius at a controlled set of primes).
+
+\textbf{The Ribet Constraint.}
+If $\theta \in L_{\mathrm{Frey}}$, classical theory (Ribet) forces $\Psi(\theta)$ to be evaluated against forms of level~$2$.
+Since $\mathcal{S}_2(\Gamma_0(2)) = 0$, there are no such forms, and we interpret this as
+\[
+  \Psi(\theta) \ \longrightarrow \ \infty
+  \qquad\text{(structural mismatch).}
+\]
+Thus, any candidate in the Frey Locus triggers a massive violation of the Unified Collapse Contract (UCC) once modularity is enforced.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{10.3. Wiles--Taylor as External Core-Input}
+\label{sec:flt-core-input}
+
+The AK system does not prove Wiles' theorem from scratch.
+It accepts it as a boundary condition for the validity map.
+
+\begin{declaration}[External Input: The Modularity Theorem]
+The AK Core accepts the following statement as a Core-Input for the FLT calibration:
+\begin{quote}
+    For every semistable elliptic curve $E/\mathbb{Q}$, the Modularity Potential $\Psi(E)$ is zero (i.e., $E$ is modular).
+\end{quote}
+Formally, this implies that the bridge isomorphism $R \cong \mathbb{T}$ holds for all valid parameters in the sense of the Modularity Program.
+\end{declaration}
+
+\begin{theorem}[Collapse of the Frey Locus]
+Under the External Input (Wiles--Taylor) and the Ribet Constraint:
+\begin{enumerate}
+    \item Any valid geometric object $E$ must satisfy $\Psi(E) = 0$.
+    \item Any object in the Frey Locus $L_{\mathrm{Frey}}$ must satisfy $\Psi(E) = \infty$.
+\end{enumerate}
+Consequently, the intersection of the set of valid geometric objects and the Frey Locus is empty:
+\[
+  Z_{\mathrm{Valid}} \cap L_{\mathrm{Frey}} \ = \ \emptyset.
+\]
+\end{theorem}
+
+% ------------------------------------------------------------
+\subsection{10.4. The AK Verdict: Structural Emptiness}
+\label{sec:flt-verdict}
+
+We summarize the system's output for the FLT program.
+
+\begin{definition}[AK Verdict for FLT]
+The validity map $\mathcal{V}_\tau$ on $M_{\mathrm{FLT}}$ assigns the status $\mathsf{Obstructed}$ to any parameter that fits the profile of a solution in the Frey Locus:
+\[
+  \theta \in L_{\mathrm{Frey}}
+  \quad\Longrightarrow\quad
+  \AKverdict(\theta) \ = \ \mathsf{Obstructed}.
+\]
+\end{definition}
+
+\begin{corollary}[No Valid Cells on the Frey Locus]
+When the Mapper agent attempts to build a Global Certificate for FLT counterexamples:
+\begin{itemize}
+    \item It queries the Frey Locus $L_{\mathrm{Frey}}$.
+    \item For every hypothetical point $\theta$, the B-Gate$^+$ (Modularity Check) returns \texttt{FAIL: Type~IV Obstruction}.
+    \item The set of valid cells covering $L_{\mathrm{Frey}}$ is the empty set.
+\end{itemize}
+Therefore, the AK Verdict at the global level is summarized as
+\[
+  \AKverdict(\mathrm{FLT}) \ = \ \mathsf{No\_Solution\_Exists},
+\]
+where this verdict is understood as a \emph{structural restatement} of the classical Wiles--Taylor theorem, not a new proof.
+\end{corollary}
+
+\begin{remark}[Comparison with Navier--Stokes]
+In the FLT case, the ``emptiness'' of the singular region is enforced by a theorem (Wiles--Taylor).
+In the Navier--Stokes case (Appendix~NS), the emptiness of the singular region (blow-up locus) is \emph{conjectural}.
+The AK--HDPST engine uses the same diagnostic machinery ($\mu, \nu$, Type~IV) for both:
+\begin{itemize}
+    \item FLT: We \emph{know} Type~IV is impossible for valid curves $\Rightarrow$ no solutions.
+    \item NSE: We \emph{test} whether Type~IV is realized for fluid flows $\Rightarrow$ regularity versus blow-up.
+\end{itemize}
+This highlights the utility of the FLT program as a calibration of the Type~IV detector.
+\end{remark}
+
+
+
+\section{Chapter 11: Validity Map on \texorpdfstring{$M_{\mathrm{FLT}}$}{M\_FLT}}
+\label{ch:flt-validity-map}
+
+This chapter concludes Part~III by assembling the global Validity Map $\mathcal{V}_\tau$ for the FLT parameter space.
+Unlike the Weil calibration (Part~II), where the map was a uniform ``Plain of Truth'', the FLT map is defined by a sharp \textbf{structural dichotomy}.
+
+We visualize the clash between the \emph{Frey Locus} (where solutions must live) and the \emph{Modular World} (where valid curves must live).
+The AK--HDPST engine confirms that, under the laws of the Unified Collapse Contract and the Wiles--Taylor Core-Input, these two territories are disjoint.
+The resulting map certifies the non-existence of solutions as a topological necessity of the calibration, rather than as a new proof.
+
+% ------------------------------------------------------------
+\subsection{11.1. Topography of the Exclusion}
+\label{sec:flt-map-def}
+
+We define the regions of the Validity Map based on the diagnostics of Chapter~\ref{ch:flt-diagnostics}.
+
+\begin{definition}[The FLT Validity Stratification]
+The map
+\[
+  \mathcal{V}_\tau : M_{\mathrm{FLT}} \longrightarrow
+  \{\mathsf{Valid}, \mathsf{Obstructed}\}
+\]
+partitions the space into:
+
+\begin{enumerate}
+    \item \textbf{The Modular Plain ($Z_{\mathrm{Valid}}$):}
+    The set of parameters $\theta = (E, n)$ where the Modularity Potential vanishes (within the $\delta$-ledger budget),
+\[
+  Z_{\mathrm{Valid}}
+  \ := \
+  \bigl\{ \theta \in M_{\mathrm{FLT}}
+    \mid \text{\emph{B-Gate}}^{+}(\theta) = \mathsf{PASS} \bigr\}.
+\]
+
+    By the Wiles--Taylor Core-Input, this contains all semistable elliptic curves over $\mathbb{Q}$.
+
+    \item \textbf{The Singular Target ($Z_{\mathrm{Target}} = L_{\mathrm{Frey}}$):}
+    The set of parameters derived from hypothetical Fermat solutions.
+    By the Ribet Constraint, every point here has $\Psi(\theta) = \infty$, and thus carries an active Type~IV obstruction:
+    \[
+      L_{\mathrm{Frey}}
+      \ \subset \
+      \{\theta \in M_{\mathrm{FLT}}
+        \mid \text{Type~IV Failure is active at }\theta\}.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[The Disjointness Certificate]
+Under the Wiles--Taylor Modularity Input and the Ribet Constraint, the central output of the FLT program is the emptiness of the intersection
+\[
+  Z_{\mathrm{Valid}} \cap L_{\mathrm{Frey}} \ = \ \emptyset.
+\]
+In the language of the Validity Map: the terrain in which a counterexample could theoretically exist is structurally designated as \textbf{Obstructed Territory}.
+\end{theorem}
+
+\begin{remark}
+This theorem is a structural restatement of the classical Wiles--Taylor argument in the language of AK--HDPST.
+It does not constitute a new proof of FLT, but rather a calibration statement: assuming Modularity and Ribet, the AK engine reconstructs the same exclusion picture at the level of its collapse diagnostics.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{11.2. Hunter Execution: The Null Search}
+\label{sec:flt-hunter-exec}
+
+We now describe the behaviour of the Hunter agent when it attempts to locate a valid point within the Frey Locus.
+
+\paragraph{Simulation (Hunter Trace: Project FLT-Counterexample).}
+
+\begin{verbatim}
+[INIT]  Target: Fermat's Last Theorem (Counterexample Search)
+[CONF]  Constraint: A^n + B^n = C^n (n >= 3)
+[START] Spawning Hunter-X...
+
+[ATTEMPT 1] Proposing solution (A,B,C) = (small integers)...
+         > Check: Arithmetic? FAIL (A^n + B^n != C^n).
+         > Action: REJECT (Pre-filter).
+
+[ATTEMPT k] Proposing hypothetical parameter theta_k in L_Frey...
+         > (Assume arithmetic equality holds for simulation)
+         > Constructing Frey curve E_k...
+         > Computing Modularity Potential Psi(E_k)...
+         > RIBET_ALARM: Level lowering requires weight-2 form at level 2.
+         > DATABASE_LOOKUP: dim S_2(Gamma_0(2)) = 0.
+         > Result: Psi(E_k) -> INFINITY.
+         > B-Gate Status: BLOCKED (Type IV Obstruction).
+         > Action: REJECT.
+
+[... Iterating over definable families of (A,B,C) ...]
+
+[END]   Hunter-X terminated.
+        Total Candidates Proposed: N (symbolic sweep).
+        Total Validated Frey Curves: 0.
+        Verdict: Search space is structurally empty.
+\end{verbatim}
+
+\begin{remark}
+The Hunter does not fail because it cannot find the ``right'' numbers.
+It fails because the \emph{gate} to the valid region is permanently locked against objects with the Frey profile.
+In AK terms, the Frey Locus is a region where Type~IV obstruction is hard-wired by the Modularity constraints.
+\end{remark}
+
+% ------------------------------------------------------------
+\subsection{11.3. AK--Perspective: From Calibration to Exploration}
+\label{sec:flt-perspective}
+
+This concludes the Arithmetic Calibration of AK--HDPST v17.0.
+We have demonstrated that the core machinery---persistence, collapse, $\delta$-ledgers, and gate diagnostics---can be aligned with the logical structure of two monumental achievements in mathematics:
+
+\begin{itemize}
+    \item \textbf{Weil Program (Part~II):} Validated the ability to recognize \emph{Global Regularity} (the Plain of Truth on $M_{\mathrm{Weil}}$).
+    \item \textbf{FLT Program (Part~III):} Validated the ability to recognize \emph{Global Obstruction} (the structurally empty Frey Locus on $M_{\mathrm{FLT}}$).
+\end{itemize}
+
+From the AK perspective, these two calibrations anchor the extremes of the Validity Map:
+one where every point is structurally valid, and one where the would-be singular region is structurally empty.
+
+% ------------------------------------------------------------
+\subsection{11.4. Grand Finale: The Bridge to Navier--Stokes}
+\label{sec:flt-nse-link}
+
+We now turn our gaze from the solved past to the open future.
+The apparatus that has been calibrated on the rigid crystalline structures of Number Theory is about to be deployed into the turbulent fluid of the Navier--Stokes Equations (Appendix~NS).
+
+\begin{declaration}[The Transition to Speculative Science]
+In the upcoming Appendix~NS (Navier--Stokes Case Study), the epistemic status of the AK--HDPST engine shifts to the \textbf{[Spec]} layer:
+
+\begin{enumerate}
+    \item \textbf{No External Truth:}
+    We no longer have a Deligne or Wiles theorem to guide us.
+    The map is \emph{terra incognita}.
+
+    \item \textbf{The Type~IV Question:}
+    The central question becomes:
+    \begin{quote}
+        Does the 3D Euler/Navier--Stokes flow admit a Type~IV singularity (blow-up)
+        analogous to the Frey obstruction, or is it protected by a Global Regularity
+        analogous to the Weil Conjectures?
+    \end{quote}
+
+    \item \textbf{The Energy--Collapse Hypothesis:}
+    To address this, the Modularity Potential is replaced by a Defect Potential
+    $\Phi_{\mathrm{NS}}$ derived from an Energy--Collapse inequality on suitable
+    persistence realizations of the flow.
+\end{enumerate}
+
+With the logic gates verified and the failure modes calibrated in arithmetic, the AK--HDPST v17.0 platform is now ready, at the \textbf{[Spec]} layer, to audit the Navier--Stokes Millennium Problem.
+\end{declaration}
+
+
+
+\section{Appendix A: Classical Weil/Deligne Background (Core-Input)}
+\label{app:weil-core}
+
+This appendix specifies the \textbf{Core-Input} from classical arithmetic geometry used to calibrate the AK system in Part~II.
+Within the AK--HDPST framework, these statements are treated not as conjectures to be proven, but as \emph{boundary conditions} that define the “Plain of Truth.”
+Any deviation from these laws observed by the Hunter agent is interpreted strictly as a bug in the implementation (e.g.\ numerical precision failure), not as a mathematical counterexample.
+
+% ------------------------------------------------------------
+\subsection{A.1. The Zeta Function of a Variety}
+\label{app:weil-zeta}
+
+Let $X$ be a smooth projective variety of dimension $d$ defined over a finite field $\mathbb{F}_q$ with $q$ elements.
+Let $N_n = \# X(\mathbb{F}_{q^n})$ be the number of rational points over the degree-$n$ extension.
+
+\begin{definition}[Weil Zeta Function]
+The zeta function $Z(X, t)$ is defined as the formal power series
+\[
+  Z(X, t)
+  \ := \
+  \exp\!\left( \sum_{n=1}^{\infty} N_n \frac{t^n}{n} \right)
+  \ \in \ \mathbb{Q}[[t]].
+\]
+\end{definition}
+
+This function encodes the Diophantine information of $X$ into a generating function.
+The Weil conjectures (1949) predicted its global structure.
+
+% ------------------------------------------------------------
+\subsection{A.2. Rationality and Cohomological Interpretation}
+\label{app:weil-rationality}
+
+The first major input is the rationality of the zeta function, proven by Dwork using $p$-adic analysis and interpreted cohomologically by Grothendieck and his school.
+
+\begin{theorem}[Rationality (Core-Input I)]\label{thm:weil-rationality}
+The function $Z(X, t)$ is a rational function of $t$.
+More precisely, there exist polynomials $P_i(t) \in \mathbb{Z}[t]$ such that
+\[
+  Z(X, t)
+  \ = \
+  \prod_{i=0}^{2d} P_i(t)^{(-1)^{i+1}},
+  \qquad
+  P_i(t)
+  \ = \
+  \det\!\bigl(\mathrm{Id} - t \cdot \mathrm{Fr}_q^* \mid H^i_{\text{\emph{\'{e}t}}}(X_{\overline{\mathbb{F}}_q}, \mathbb{Q}_\ell)\bigr).
+\]
+\end{theorem}
+
+\begin{interpretation}[AK–Mapping: Type~IV Stability (Heuristic)]
+In the AK framework, rationality is read as a \emph{finiteness constraint} on the associated persistence module.
+Informally:
+\begin{itemize}
+  \item If $Z(X,t)$ were to exhibit a natural boundary or essential singularity, the induced persistence module would display an unbounded cascade of new bars at finer and finer scales, corresponding to a \textbf{Type~IV (Essential Singularity)} failure.
+  \item The classical rationality theorem therefore functions, for AK, as a guarantee that the tower diagnostics $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}})$ vanish for any smooth projective $X$:
+  \[
+    \mu_{\mathrm{Collapse}}(X) = \nu_{\mathrm{Collapse}}(X) = 0.
+  \]
+\end{itemize}
+This is an \emph{interpretive bridge} rather than a new theorem: AK--HDPST is calibrated so that rationality corresponds to the absence of Type~IV failures.
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{A.3. The Riemann Hypothesis for Finite Fields (Deligne's Theorem)}
+\label{app:weil-rh}
+
+The deepest input, proven by Deligne, concerns the weights of the roots of the polynomials $P_i(t)$.
+
+\begin{theorem}[Riemann Hypothesis / Purity of Weights (Core-Input II)]\label{thm:weil-deligne}
+Factor the polynomial $P_i(t)$ over $\mathbb{C}$ as
+\[
+  P_i(t)
+  \ = \
+  \prod_{j=1}^{b_i} (1 - \alpha_{ij} t).
+\]
+Then for every $i \in \{0, \dots, 2d\}$ and every $j \in \{1, \dots, b_i\}$, the inverse root $\alpha_{ij}$ is an algebraic integer satisfying
+\[
+  |\alpha_{ij}| \ = \ q^{i/2}
+\]
+for any complex embedding $\iota : \overline{\mathbb{Q}} \hookrightarrow \mathbb{C}$.
+\end{theorem}
+
+\begin{interpretation}[AK–Mapping: Type~I Stability]
+This theorem specifies the \textbf{target spectrum} for the Hunter.
+\begin{itemize}
+  \item The “Plain of Truth” for degree $i$ is defined by the condition that all spectral features reconstructed from persistence behave as if their eigenvalues satisfy $|\alpha| = q^{i/2}$.
+  \item Any persistent feature whose effective scaling deviates from $q^{i/2}$ is registered as a \textbf{Type~I (Topological) Failure}.
+  \item Deligne's theorem guarantees that, in the classical setting, the set of such Type~I failures is empty.
+\end{itemize}
+Thus, the AK spectral defect potential $\Phi^{\mathrm{Weil}}_\tau$ is \emph{mathematically} zero on all of $M_{\mathrm{Weil}}$.
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{A.4. The Trace Formula and Betti Numbers}
+\label{app:weil-trace}
+
+To connect point-count data with spectral information, the AK system relies on the Lefschetz trace formula.
+
+\begin{theorem}[Grothendieck Trace Formula]\label{thm:trace-formula}
+The point counts $N_n$ are related to the eigenvalues of the Frobenius endomorphism $\mathrm{Fr}_q$ acting on the $\ell$-adic cohomology groups $H^i_{\text{\emph{\'{e}t}}}(X_{\overline{\mathbb{F}}_q}, \mathbb{Q}_\ell)$ by
+\[
+  \# X(\mathbb{F}_{q^n})
+  \ = \
+  \sum_{i=0}^{2d} (-1)^i \,
+  \mathrm{Tr}\bigl(\mathrm{Fr}_q^n \mid H^i_{\text{\emph{\'{e}t}}}(X_{\overline{\mathbb{F}}_q}, \mathbb{Q}_\ell)\bigr)
+  \ = \
+  \sum_{i=0}^{2d} (-1)^i \sum_{j=1}^{b_i} \alpha_{ij}^n.
+\]
+\end{theorem}
+
+\begin{specification}[AK–Input Data]
+The Hunter agent does not “see’’ the cohomology groups directly.
+Operationally it observes a finite prefix of the integer sequence
+\[
+  (N_1, N_2, \dots, N_K),
+\]
+from which it performs \emph{spectral recovery} (for example via Hankel-type constructions or lattice reduction) to approximate the eigenvalues $\{\alpha_{ij}\}$ and, hence, the polynomials $P_i(t)$.
+These recovered spectra are then fed into the spectral indicators and the defect potential $\Phi^{\mathrm{Weil}}_\tau$ defined in Part~II.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{A.5. Summary of Core Constraints}
+\label{app:weil-constraints}
+
+For the purpose of AK--HDPST v17.0, Part~II, we package the ``classical truth'' into a set of immutable constraints recorded in the $\delta$-ledger.
+
+\begin{declaration}[Axioms of the Weil Calibration]
+For any parameter $\theta \in M_{\mathrm{Weil}}$ corresponding to a smooth projective variety:
+\begin{enumerate}
+  \item \textbf{No Singularity:}
+    The associated persistence tower is finite-rank and exhibits no Type~IV failures:
+    \[
+      \mu_{\mathrm{Collapse}}(\theta) = 0, \qquad
+      \nu_{\mathrm{Collapse}}(\theta) = 0.
+    \]
+  \item \textbf{No Drift:}
+    The spectral defect potential is mathematically zero, and any non-zero value observed in computation must be accounted for by the $\delta$-ledger:
+    \[
+      \Phi^{\mathrm{Weil}}_\tau(\theta)
+      \ \le \
+      \delta^{\mathrm{disc}}(\theta) \oplus \delta^{\mathrm{meas}}(\theta).
+    \]
+  \item \textbf{Hard Integrality:}
+    The characteristic polynomials $P_i(t)$ have coefficients in $\mathbb{Z}$; no $p$-adic or floating drift is allowed in the Core-Input.
+\end{enumerate}
+Under these axioms, the Mapper is justified in coloring the entire parameter space $M_{\mathrm{Weil}}$ as \textsf{Valid} (green) \emph{a priori}; Part~II then serves to verify that the implemented AK pipeline indeed reproduces this trivial Validity Map.
+\end{declaration}
+
+
+
+\section{Appendix B: Classical FLT/Modularity Background (Core-Input)}
+\label{app:flt-core}
+
+This appendix specifies the arithmetic machinery underlying the FLT Calibration (Part~III).
+In the AK--HDPST framework, the proof of Fermat's Last Theorem is not reconstructed from scratch; rather, the logical structure of the Wiles--Taylor and Ribet theorems is imported as a set of \textbf{Core-Input Constraints} that define the topology of the Validity Map.
+
+The interaction between these inputs creates a “hard-wired obstruction’’ that forces the Hunter to reject any candidate parameter in the Frey Locus.
+
+% ------------------------------------------------------------
+\subsection{B.1. The Frey Curve Construction}
+\label{app:flt-frey}
+
+Let $p \ge 3$ be a prime (it suffices to prove FLT for prime exponents).
+Suppose there exists a non-trivial solution to the Fermat equation:
+\[
+  A^p + B^p = C^p,
+  \qquad
+  A, B, C \in \mathbb{Z} \setminus \{0\}, \quad \gcd(A,B,C)=1.
+\]
+Equivalently, one may write $A^p + B^p + C^p = 0$ with $C^p := - (A^p + B^p)$.
+After standard normalizations, we may assume
+\[
+  A \equiv -1 \pmod{4},
+  \qquad
+  B \equiv 0 \pmod{2}.
+\]
+
+\begin{definition}[Frey Curve]
+The \emph{Frey elliptic curve} associated to the solution $(A,B,C)$ is defined by the Weierstrass equation
+\[
+  E_{A,B,C}
+  : \quad
+  y^2 = x(x-A^p)(x+B^p).
+\]
+\end{definition}
+
+\begin{specification}[Arithmetic Profile (Core-Input)]
+Classical calculations establish the following invariants for $E_{A,B,C}$, up to powers of $p$ that do not affect the conductor:
+\begin{enumerate}
+  \item \textbf{Minimal Discriminant:}
+    \(
+      \Delta_{\min} \sim 2^{-8} (ABC)^{2p}.
+    \)
+  \item \textbf{Conductor:}
+    \(
+      N_{E} = 2 \prod_{q \mid ABC} q,
+    \)
+    in particular $N_E$ is square-free.
+  \item \textbf{Semistability:}
+    Since $N_E$ is square-free, $E_{A,B,C}$ is semistable.
+  \item \textbf{Torsion / Flatness at $p$:}
+    The $p$-torsion $E[p]$ arises from a finite flat group scheme over $\mathbb{Z}_p$, giving the “minimal at $p$’’ ramification profile used in Ribet’s theorem.
+\end{enumerate}
+This profile defines the \textbf{Frey Locus} $L_{\mathrm{Frey}}$ within the AK parameter space $M_{\mathrm{FLT}}$.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{B.2. Ribet's Theorem: The Structural Trap}
+\label{app:flt-ribet}
+
+The mechanism that prevents the Frey curve from existing inside the modular world is Ribet's level-lowering theorem.
+
+\begin{theorem}[Ribet's Theorem / Epsilon Conjecture (Core-Input III)]\label{thm:ribet}
+Let
+\[
+  \rho_{E,p} :
+  \mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})
+  \longrightarrow
+  \mathrm{GL}_2(\mathbb{F}_p)
+\]
+be the mod-$p$ Galois representation associated to the Frey curve $E_{A,B,C}$.
+If $E_{A,B,C}$ is modular of weight~$2$ and level~$N_E$, and if $\rho_{E,p}$ satisfies the standard local conditions (minimal at $p$), then $\rho_{E,p}$ must arise from a modular form $f$ of weight~$2$ and level
+\[
+  N_{\mathrm{reduced}} \ = \ 2.
+\]
+\end{theorem}
+
+\begin{interpretation}[AK--Mapping: The Vacuum Target]
+Ribet's theorem directs the Modularity Potential $\Psi(\theta)$ to verify compatibility against the space of cusp forms $S_2(\Gamma_0(2))$.
+However, an explicit dimension computation (via the genus of the modular curve $X_0(2)$) shows that
+\[
+  \dim_{\mathbb{C}} S_2(\Gamma_0(2)) \ = \ 0.
+\]
+Thus the target space for the “level-lowered’’ representation is the \textbf{empty set}.
+In AK terms, this creates an infinite barrier ($\Psi(\theta) \to \infty$) for any point in the Frey Locus that attempts to enter the Valid Region.
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{B.3. The Modularity Theorem (Wiles et al.)}
+\label{app:flt-wiles}
+
+The closure of the trap is the theorem that semistable elliptic curves \emph{must} be modular.
+
+\begin{theorem}[Modularity Lifting (Core-Input IV)]\label{thm:wiles-lifting}
+Let $E$ be a semistable elliptic curve over $\mathbb{Q}$, and let
+\(
+  \rho :
+  \mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})
+  \to \mathrm{GL}_2(\mathbb{Z}_\ell)
+\)
+be the associated $\ell$-adic Galois representation.
+Then $E$ is modular.
+More formally, there is a surjective ring homomorphism
+\[
+  R_{\rho} \twoheadrightarrow \mathbb{T}_{N_E},
+\]
+which is an isomorphism (complete intersection property), identifying the universal deformation ring of $\rho$ with the Hecke algebra at level $N_E$.
+\end{theorem}
+
+\begin{specification}[AK--Mapping: The Plain of Validity]
+This theorem is entered into the AK Core as the definition of the \textsf{Valid} state for semistable parameters:
+\[
+  \theta \in M_{\mathrm{FLT}}^{\mathrm{semistable}}
+  \ \implies \
+  \text{B-Gate}^+(\theta) = \mathsf{PASS}
+  \qquad
+  (\text{provided } \theta \notin L_{\mathrm{Frey}}).
+\]
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{B.4. Summary of Core Constraints for FLT}
+\label{app:flt-constraints}
+
+We synthesize these inputs into the $\delta$-ledger rules for Part~III.
+
+\begin{declaration}[Axioms of the FLT Calibration]
+For any parameter $\theta = (E, n) \in M_{\mathrm{FLT}}$:
+\begin{enumerate}
+  \item \textbf{Global Modularity (Wiles Input):}
+    If $E$ is semistable, it is modular.
+    In AK notation, the extension obstruction index satisfies
+    \[
+      \mu_{\mathrm{Ext}}(\theta) \ \approx \ 0
+      \qquad\text{for semistable } E.
+    \]
+
+  \item \textbf{Frey Incompatibility (Ribet + Level 2 Vacuum):}
+    If $\theta \in L_{\mathrm{Frey}}$ (i.e.\ $E$ is a Frey curve derived from a putative solution), then level-lowering forces
+    \[
+      \text{Target}(L_{\mathrm{Frey}})
+      \ \subset \
+      S_2(\Gamma_0(2))
+      \ = \ \{0\}.
+    \]
+    Thus the Modularity Potential is “infinitely large’’:
+    \(
+      \Psi(\theta) = \infty
+    \)
+    for any such $\theta$.
+
+  \item \textbf{Empty Intersection:}
+    Combining (1) and (2): a Frey curve is semistable, so it \emph{must} be modular (by Wiles), but it \emph{cannot} be modular (by Ribet plus the emptiness of level~2).
+    Therefore the parameter $\theta$ cannot exist as a valid arithmetic object.
+\end{enumerate}
+
+The AK verdict
+\[
+  \AKverdict(\theta) = \mathsf{Obstructed}
+  \qquad
+  \text{for } \theta \in L_{\mathrm{Frey}}
+\]
+is the system’s operational expression of this logical contradiction inside the Validity Map.
+\end{declaration}
+
+
+
+\section{Appendix C: AK--Weil Realization Details}
+\label{app:weil-realization-details}
+
+This appendix provides the technical specifications for the realization functor
+$\mathfrak{P}_{\mathrm{Weil}}$ and the associated spectral metrics used in Part~II.
+It bridges the gap between the abstract cohomological definitions (Appendix~A)
+and the numerical computations performed by the Hunter agent.
+
+% ------------------------------------------------------------
+\subsection{C.1. The Spectral Surrogate Construction}
+\label{app:weil-surrogate}
+
+While the conceptual realization involves a mapping torus of the Frobenius action,
+the operational implementation uses a \textbf{Spectral Surrogate}.
+This allows the AK Core to treat eigenvalues directly as persistence features.
+
+\begin{definition}[Spectral Surrogate]
+Let $\theta = (X, \mathbb{F}_q) \in M_{\mathrm{Weil}}$.
+Suppose the spectral recovery algorithm (from point counts $N_n$) yields a set of
+eigenvalues $\sigma = \{ \alpha_{ij} \}$ for the cohomology groups $H^i(X)$.
+We construct a \emph{Surrogate Persistence Module} $\mathbb{M}(\theta)$ consisting of a
+disjoint union of intervals (bars) $I_{ij}$:
+\[
+  \text{Barcode}(\mathbb{M}(\theta))
+  \ := \
+  \bigsqcup_{i=0}^{2d} \bigsqcup_{j=1}^{b_i} I_{ij},
+\]
+where the interval $I_{ij}$ is defined by
+\[
+  I_{ij} \ = \ [0, L_{ij}), \qquad
+  L_{ij} \ := \
+  \frac{1}{
+    \varepsilon + \bigl|
+      \log_q |\alpha_{ij}| - \tfrac{i}{2}
+    \bigr|
+  }.
+\]
+Here $\varepsilon > 0$ is a small regularization parameter.
+\end{definition}
+
+\begin{interpretation}[Persistence as Stability]
+\begin{itemize}
+  \item If $|\alpha_{ij}| = q^{i/2}$ (RH holds), the denominator becomes
+    $\varepsilon$, and the bar length $L_{ij} \approx 1/\varepsilon$ becomes very
+    large (high persistence).
+  \item If $|\alpha_{ij}| \neq q^{i/2}$ (RH violation), the denominator grows and
+    $L_{ij}$ becomes small (low persistence).
+  \item \textbf{AK Logic:}
+    The collapse operator $\mathbf{T}_\tau$ removes short bars. Thus,
+    “surviving collapse’’ in this surrogate model is equivalent to “being close
+    to the RH circle’’ in the sense of the spectral defect.
+\end{itemize}
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{C.2. The Spectral Quantale \texorpdfstring{$V_{\mathrm{spec}}$}{V\_spec}}
+\label{app:weil-quantale-details}
+
+We detail the internal structure of the quantale used to aggregate spectral defects.
+
+\begin{definition}[Quantale Structure]
+We work with
+\[
+  V_{\mathrm{spec}} \ = \ [0, \infty) \times [0, 2\pi],
+\]
+equipped with the order and aggregation used by the $\delta$-ledger.
+For an element $\delta = (\delta_r, \delta_\theta) \in V_{\mathrm{spec}}$:
+\begin{enumerate}
+  \item \textbf{Norm:}
+    \[
+      \|\delta\|_V
+      \ := \
+      \sqrt{\delta_r^2 + \omega \cdot \delta_\theta^2},
+    \]
+    where $\omega \ge 0$ is a weight tuning the sensitivity to angular
+    distribution (typically $\omega = 0$ for pure RH checks,
+    $\omega = 1$ for Sato--Tate–type statistics).
+  \item \textbf{Aggregation ($\oplus$):}
+    $\delta_1 \oplus \delta_2$ is defined component-wise, or by $L^2$-summation
+    of norms, depending on the \texttt{run.yaml} setting
+    (conservative vs.\ average case). In either policy, $\oplus$ is
+    commutative, associative, and monotone with respect to the underlying order.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Defect Potential Functional]
+The global potential $\Phi^{\mathrm{Weil}}_\tau(\theta)$ used in Part~II can be
+written explicitly as
+\[
+  \Phi^{\mathrm{Weil}}_\tau(\theta)
+  \ := \
+  \sum_{i,j}
+  \max\!\left(
+    0,\,
+    \Bigl|
+      \log_q |\alpha_{ij}| - \frac{i}{2}
+    \Bigr|
+    - \delta^{\mathrm{disc}}_i
+  \right)^2.
+\]
+The subtraction of $\delta^{\mathrm{disc}}_i$ represents the \textbf{Safe Zone}:
+radial deviations smaller than the discretization error are masked to zero and
+do not contribute to the potential.
+\end{definition}
+
+% ------------------------------------------------------------
+\subsection{C.3. Stability and Threshold Policies}
+\label{app:weil-thresholds}
+
+The calibration requires precise definitions of the “Safe Zone’’ boundaries.
+
+\begin{specification}[Discretization Error Bounds ($\delta^{\mathrm{disc}}$)]
+When recovering eigenvalues from $K$ point counts $(N_1, \dots, N_K)$, we use
+the following heuristic policy:
+\begin{enumerate}
+  \item \textbf{Unknown Count:}
+    The unknowns are (ultimately) the roots of the polynomials $P_i(t)$, whose
+    total degree is
+    \(
+      B := \sum_i b_i.
+    \)
+  \item \textbf{Sampling Requirement (Nyquist-Type):}
+    We require $K \ge B$ for algebraic identification of the zeta factors.
+  \item \textbf{Precision Propagation:}
+    If computation is done with $M$ bits (or decimal digits) of precision,
+    the error in roots propagates at scale $\sim 10^{-M/B}$.
+  \item \textbf{Policy (Heuristic Bound):}
+    \[
+      \delta^{\mathrm{disc}}(\theta)
+      \ := \
+      \frac{C \cdot q^{(d+1)K}}{10^{M}}
+      \qquad \text{[Spec: heuristic upper bound]},
+    \]
+    for a fixed constant $C$ chosen in the \texttt{run.yaml} profile.
+    If the observed defect stays below this threshold, the status of
+    $\theta$ is \textsf{Plain}.
+\end{enumerate}
+\end{specification}
+
+\begin{specification}[Singularity Threshold ($\lambda_{\mathrm{sing}}$)]
+To distinguish a numerical artifact from a “Counterexample’’ (Type~I Failure),
+we set
+\[
+  \lambda_{\mathrm{sing}}
+  \ := \
+  100 \cdot \delta^{\mathrm{disc}}(\theta).
+\]
+A defect $\Phi^{\mathrm{Weil}}_\tau(\theta)$ exceeding this value triggers a
+\textbf{Peak Alert}.
+Under the Core-Input (Deligne’s theorem), such a state is unreachable for
+mathematically valid data and therefore indicates an implementation or
+precision bug.
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{C.4. Operational Protocol for the Hunter}
+\label{app:weil-hunter-ops}
+
+The Hunter agent executes the following loop for a parameter $\theta$:
+
+\begin{enumerate}
+  \item \textbf{Compute:}
+    Calculate $N_r$ for $r = 1, \dots, K$.
+  \item \textbf{Solve:}
+    Recover candidate zeta factors and their roots $\{\alpha_{ij}\}$.
+  \item \textbf{Filter:}
+    Apply $\mathbf{T}_\tau^{\mathrm{spec}}$ (Definition~\ref{sec:weil-spectral-ucc}
+    in Chapter~6) to remove spectrally unstable eigenvalues.
+  \item \textbf{Measure:}
+    Compute the defect
+    $\Phi = \Phi^{\mathrm{Weil}}_\tau(\theta)$ as above.
+  \item \textbf{Check:}
+    \begin{itemize}
+      \item If $\Phi \le \delta^{\mathrm{disc}}(\theta)$:
+        return \texttt{VALID}.
+      \item If $\Phi > \delta^{\mathrm{disc}}(\theta)$:
+        re-run with higher precision (increase $M$ or $K$).
+      \item If $\Phi$ persists above $\delta^{\mathrm{disc}}(\theta)$ despite
+        increased precision:
+        flag the run as \texttt{BUG} (given the Core-Input that Deligne’s
+        theorem holds).
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section{Appendix D: AK--FLT Realization Details}
+\label{app:flt-realization-details}
+
+This appendix provides the technical specifications for the realization functor
+$\mathfrak{P}_{\mathrm{FLT}}$ and the bridge diagnostics used in Part~III.
+It details how the infinite towers of Iwasawa theory are mapped into the
+finite-type persistence modules of the AK Core, and how the “Modularity Gap’’
+is quantified.
+
+% ------------------------------------------------------------
+\subsection{D.1. From Iwasawa Modules to Persistence}
+\label{app:flt-iwasawa-map}
+
+Classical Iwasawa theory studies modules over the Iwasawa algebra
+$\Lambda \cong \mathbb{Z}_p[[T]]$.
+The AK Core, however, requires a filtration of vector spaces (or modules)
+indexed by a real parameter $t$ or a discrete level $k$.
+
+\begin{definition}[Pontryagin Duality Realization]
+Let $\theta = (E, n) \in M_{\mathrm{FLT}}$ and let
+$K_\infty / \mathbb{Q}$ be the cyclotomic $\mathbb{Z}_p$-extension.
+The primary object is the $p$-primary Selmer group
+$\mathrm{Sel}_p(E/K_\infty)$.
+This is a discrete module.
+To obtain a compact module suitable for structure theory, we take the
+Pontryagin dual:
+\[
+  X_\infty(E)
+  \ := \
+  \mathrm{Hom}_{\mathrm{cont}}\!\bigl(
+    \mathrm{Sel}_p(E/K_\infty),\ \mathbb{Q}_p/\mathbb{Z}_p
+  \bigr).
+\]
+Then $X_\infty(E)$ is a finitely generated $\Lambda$-module.
+\end{definition}
+
+\begin{specification}[The Functor $\mathfrak{P}_{\mathrm{FLT}}$]
+The realization functor constructs a persistence module $\mathbb{M}(\theta)$
+indexed by the tower level $k \in \mathbb{N}$
+(smoothed to $t \in \mathbb{R}_{\ge 0}$ in the AK engine):
+\begin{enumerate}
+  \item \textbf{Filtration:}
+    The filtration is defined by the duals of the restriction maps in the
+    Iwasawa tower.
+    For each $k \ge 0$ set
+    \[
+      \omega_k \ := \ (1+T)^{p^k} - 1, \qquad
+      X_k \ := \ X_\infty(E) / \omega_k X_\infty(E).
+    \]
+    The persistence module tracks the evolution of invariants such as
+    $\dim_{\mathbb{F}_p}(X_k \otimes \mathbb{F}_p)$ as $k \to \infty$.
+    Pontryagin dualization turns the inverse limit on the Selmer side into a
+    direct system $\{X_k\}_{k \ge 0}$ suitable for the AK colimit-based
+    tower diagnostics.
+
+  \item \textbf{Barcode Interpretation (Structure Theorem):}
+    Classically, the structure theorem gives an isomorphism of $\Lambda$-modules
+    \[
+      X_\infty(E)
+      \ \sim \
+      \Lambda^{\lambda}
+      \ \oplus \
+      \bigoplus_j \Lambda/(p^{\mu_j})
+      \ \oplus \
+      \bigoplus_i \Lambda/(f_i(T)).
+    \]
+    In the AK persistence language:
+    \begin{itemize}
+      \item The \textbf{$\lambda$-invariant} corresponds to the number of
+        \emph{infinite bars} in the persistence diagram (stable rank).
+      \item The \textbf{$\mu$-invariant} corresponds to bars that persist
+        “vertically’’ in the $p$-adic direction (torsion with unbounded growth).
+      \item The factors $\Lambda/(f_i(T))$ correspond to \emph{finite bars} of
+        length controlled by $\deg(f_i)$ (and the valuations of their roots).
+    \end{itemize}
+\end{enumerate}
+\end{specification}
+
+\begin{interpretation}[The Control Theorem as Collapse]
+Mazur’s Control Theorem asserts that the natural maps
+\[
+  X_\infty(E) / \omega_k X_\infty(E)
+  \longrightarrow
+  \mathrm{Sel}_p(E/K_k)^\vee
+\]
+have finite kernel and cokernel.
+In AK terms, this means that the comparison maps $\phi_{i,\tau}$ associated
+with the Iwasawa tower have trivial diagnostics
+$(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}) = (0,0)$
+\emph{after} the collapse operator $\mathbf{T}_\tau$ removes the finite
+error terms recorded in the $\delta$-ledger.
+Finite $p$-power deviations are interpreted as “short bars’’ and are deleted
+by $\mathbf{T}_\tau$.
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{D.2. The Extension Bridge Index \texorpdfstring{$\mu_{\mathrm{Ext}}$}{mu\_Ext}}
+\label{app:flt-bridge-index}
+
+This index quantifies the “Wiles Gap’’—the failure of the Galois deformation
+ring to align with the Hecke algebra.
+
+\begin{definition}[Tangent Space Obstruction]
+Let $\bar{\rho} = \rho_{E,p}$ be the residual representation.
+Let $R_{\Sigma}$ be the universal deformation ring (Galois side) and
+$\mathbb{T}_{\Sigma}$ the corresponding Hecke algebra (modular side).
+There is a canonical surjection
+$\pi : R_{\Sigma} \twoheadrightarrow \mathbb{T}_{\Sigma}$.
+Let $\mathfrak{m}_R$ and $\mathfrak{m}_{\mathbb{T}}$ denote the maximal ideals.
+We define the AK bridge index $\mu_{\mathrm{Ext}}$ via the tangent spaces:
+\[
+  \mu_{\mathrm{Ext}}(\theta)
+  \ := \
+  \dim_k
+    \frac{\mathfrak{m}_R}{\mathfrak{m}_R^2 + (p)}
+  \ - \
+  \dim_k
+    \frac{\mathfrak{m}_{\mathbb{T}}}{\mathfrak{m}_{\mathbb{T}}^2},
+\]
+where $k$ is the residue field.
+Informally, $\mu_{\mathrm{Ext}}$ measures the “extra directions’’ in the
+Galois deformation space that are not accounted for by modular forms.
+\end{definition}
+
+\begin{specification}[Operational Check]
+In the Hunter simulation:
+\begin{enumerate}
+  \item If $\theta \in Z_{\mathrm{Valid}}$ (modular case), then by the
+    Wiles--Taylor Core-Input we have $R_{\Sigma} \cong \mathbb{T}_{\Sigma}$,
+    so the tangent spaces agree and
+    \[
+      \mu_{\mathrm{Ext}}(\theta) \ \approx \ 0
+    \]
+    (up to the numerical tolerances recorded in the $\delta$-ledger).
+
+  \item If $\theta \in L_{\mathrm{Frey}}$ (Frey profile), then
+    the level-lowered Hecke algebra at level $2$ collapses to $0$
+    (Ribet + $\dim S_2(\Gamma_0(2)) = 0$), while the deformation ring
+    $R_{\Sigma}$ is still non-trivial.
+    At the level of the scalar summary, this is recorded as
+    \[
+      \mu_{\mathrm{Ext}}(\theta)
+      \ \gg \
+      \lambda_{\mathrm{sing}},
+    \]
+    i.e.\ it exceeds the singularity threshold in the quantale.
+    In the implementation log this may be tagged as
+    “\texttt{BRIDGE\_GAP := SATURATED}’’ rather than a literal infinity.
+\end{enumerate}
+\end{specification}
+
+% ------------------------------------------------------------
+\subsection{D.3. Stability and Threshold Policies for FLT}
+\label{app:flt-thresholds}
+
+Unlike the Weil calibration, where errors are analytic tails, FLT errors are
+discrete algebraic objects (finite $p$-groups, tangent-space dimensions).
+
+\begin{declaration}[The Discrete Ledger $\delta^{\mathrm{alg}}$]
+\begin{enumerate}
+  \item \textbf{Quantale:}
+    For algebraic defects we use a valuation-type quantale $V_{\mathrm{val}}$,
+    for example the ordered set of non-negative integers with addition.
+  \item \textbf{Control Error:}
+    The kernel and cokernel of the Control Theorem maps are recorded as
+    $\delta^{\mathrm{alg}}$.
+    For semistable curves with good ordinary reduction at $p$, these defects
+    are bounded constants independent of the tower level $k$.
+  \item \textbf{Threshold:}
+    We choose the Singularity Threshold $\lambda_{\mathrm{sing}}$ so that
+    \[
+      \text{finite $p$-groups}
+      \ \ll \
+      \lambda_{\mathrm{sing}}
+      \ \ll \
+      \text{genuinely unbounded growth (e.g. effective $\mu > 0$)}.
+    \]
+    This ensures that standard Iwasawa finite submodules are filtered out by
+    $\mathbf{T}_\tau$, while genuine structural failures (such as a non-zero
+    collapse index or a saturated bridge gap $\mu_{\mathrm{Ext}}$) trigger
+    the gate.
+\end{enumerate}
+\end{declaration}
+
+% ------------------------------------------------------------
+\subsection{D.4. Operational Protocol for the Hunter (FLT Mode)}
+\label{app:flt-hunter-ops}
+
+The Hunter agent executes the following loop when probing the Frey Locus:
+
+\begin{enumerate}
+  \item \textbf{Propose:}
+    Generate a triple $(A,B,C)$ and, when the arithmetic constraint
+    $A^n + B^n = C^n$ is (hypothetically) satisfied, construct the Frey curve
+    $E_{A,B,C}$.
+
+  \item \textbf{Realize:}
+    Compute the invariants of $\bar{\rho}_{E,p}$ (conductor $N$, traces $a_\ell$,
+    local conditions) and build the associated deformation problem.
+
+  \item \textbf{Target:}
+    Identify the target space of modular forms $S_2(\Gamma_0(N_{\mathrm{reduced}}))$
+    dictated by level lowering (Ribet Constraint).
+
+  \item \textbf{Bridge Check:}
+    \begin{itemize}
+      \item Estimate the bridge index $\mu_{\mathrm{Ext}}(\theta)$ (gap
+        between the Galois deformation ring and the Hecke algebra).
+      \item For Frey curves, $N_{\mathrm{reduced}} = 2$, so the target space
+        of cusp forms is zero and the effective gap exceeds
+        $\lambda_{\mathrm{sing}}$.
+      \item Result: the Modularity Gate reports a Type~IV obstruction for
+        every such $\theta$.
+    \end{itemize}
+
+  \item \textbf{Verdict:}
+    Record the path as \texttt{OBSTRUCTED} and prevent the corresponding cell
+    from entering the Validity Map as a \textsf{Valid} region.
+\end{enumerate}
+
+
+
+\section{Appendix E: AK--Verdict and Mathematical Truth}
+\label{app:ak-verdict-truth}
+
+This appendix concludes the Arithmetic Calibration program by defining the
+epistemological status of the ``AK Verdict.'' We address the fundamental
+question: \emph{What does it mean for the AK--HDPST engine to declare a
+parameter ``Valid'' or ``Obstructed''?}
+
+This establishes the logical foundation for transferring the machinery from the
+\textbf{Closed World} of Arithmetic Geometry (where Truth is known via Oracle)
+to the \textbf{Open World} of Partial Differential Equations (where Truth is
+unknown).
+
+% ------------------------------------------------------------
+\subsection{E.1. Two Modes of Operation: Calibration vs.\ Exploration}
+\label{app:modes-of-op}
+
+The AK--HDPST platform operates in two distinct epistemic modes.
+The distinction lies in the source of the ``Ground Truth.''
+
+\begin{definition}[Mode I: Calibration (Closed World)]
+\textbf{Context:} Part II (Weil) and Part III (FLT).
+\begin{itemize}
+  \item \textbf{Oracle:} We possess external theorems (Deligne, Wiles, Taylor,
+        Ribet) that serve as Core-Inputs.
+  \item \textbf{Goal:} To minimize the discrepancy between
+        $\AKverdict(\theta)$ and the oracle truth-value for $\theta$.
+  \item \textbf{Failure Meaning:} If AK reports a Peak where the Oracle says
+        Plain, it is a \textbf{System Bug} (precision error, logic flaw, or
+        incorrect realization).
+  \item \textbf{Success Criteria:} The reproduction of the known map topology
+        (a global Plain for Weil, structural exclusion of the Frey locus for
+        FLT) certifies the instrument's sensitivity.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Mode II: Exploration (Open World)]
+\textbf{Context:} Appendix~NS (Navier--Stokes) and future work (BSD, Langlands).
+\begin{itemize}
+  \item \textbf{Oracle:} None. The map is \emph{terra incognita}.
+  \item \textbf{Goal:} To generate the Validity Map $\mathcal{V}_\tau$ and
+        identify stable regions ($Z_{\mathrm{Valid}}$) versus singularity
+        candidates ($Z_{\mathrm{Sing}}$).
+  \item \textbf{Failure Meaning:} If AK reports a Peak (Type~IV), it is treated
+        as a \textbf{Discovery}: a candidate obstruction to be scrutinized by
+        rigorous analysis.
+  \item \textbf{Success Criteria:} The production of either a
+        \emph{Global Certificate} (evidence for regularity) or a
+        \emph{Certified Obstruction} (evidence for blow-up) that withstands
+        external mathematical checking.
+\end{itemize}
+\end{definition}
+
+% ------------------------------------------------------------
+\subsection{E.2. The Anatomy of an AK Verdict}
+\label{app:verdict-anatomy}
+
+We now state precisely what the output
+$\AKverdict(\theta) = \mathsf{Valid}$ signifies mathematically.
+
+\begin{declaration}[The White-Box Guarantee]
+An AK Verdict is not a ``black-box'' prediction (as in a generic classifier).
+It is a \textbf{computational certificate} composed of three verifiable traces:
+\begin{enumerate}
+  \item \textbf{The Persistence Trace:}
+    A record that the persistence barcode $B(\mathfrak{P}(\theta))$ contains
+    no bars violating the Collapse Contract (after $\mathbf{T}_\tau$
+    truncation).
+
+  \item \textbf{The $\delta$-Ledger Trace:}
+    A strict accounting showing that all deleted information had norm
+    $\|\cdot\|_V$ strictly below the allocated budget
+    (Discretization + Measurement + Algebraic defects).
+
+  \item \textbf{The Tower Trace:}
+    Evidence that the comparison maps $\phi_{i,\tau}$ in the defining tower
+    (Frobenius or Iwasawa) have trivial kernel and cokernel after collapse,
+    i.e.\ $(\mu_{\mathrm{Collapse}}, \nu_{\mathrm{Collapse}}) = (0,0)$ within
+    the $\delta$-ledger tolerances.
+\end{enumerate}
+Therefore, $\AKverdict(\theta) = \mathsf{Valid}$ means:
+\emph{Within resolution $\tau$ and budget $\delta$, no structural obstruction
+is detected by the AK Core.}
+\end{declaration}
+
+% ------------------------------------------------------------
+\subsection{E.3. The Justification for Navier--Stokes}
+\label{app:nse-justification}
+
+Why does the success in Number Theory justify the application to Fluid
+Dynamics? The link is the universality of the
+\textbf{Type~IV Singularity}.
+
+\begin{interpretation}[The Universal Structure of Failure]
+\begin{itemize}
+  \item In \textbf{FLT}, a counterexample would require a Galois
+        representation that is locally valid everywhere but fails to assemble
+        globally into a modular form.
+        This is a \textbf{coherence failure} across the Iwasawa tower and the
+        deformation/Hecke bridge.
+
+  \item In \textbf{NSE} (Navier--Stokes), a blow-up would require a velocity
+        field that is smooth on every finite scale but fails to extend
+        continuously to a limit time $T^*$.
+        This is a \textbf{continuation failure} along the time-direction tower.
+\end{itemize}
+The AK Core diagnoses both phenomena using the same algebraic tool:
+a non-vanishing limit defect, recorded as
+$\mu_{\mathrm{Collapse}} > 0$ (or a saturated bridge index).
+By calibrating the Type~IV detector on the hard-wired obstructions of FLT,
+we verify that the engine is capable of detecting subtle coherence failures.
+
+Thus, if the engine scans the Navier--Stokes parameter space and finds
+\emph{no} Type~IV failures above the $\delta$-budget, the evidence for
+regularity is structurally stronger than that of isolated numerical
+simulations: it is a statement about the \emph{global topology} of the
+Validity Map.
+\end{interpretation}
+
+% ------------------------------------------------------------
+\subsection{E.4. Final Authorization}
+\label{app:final-auth}
+
+\begin{declaration}[System Transition]
+The Arithmetic Calibration Programs (Part~II and Part~III) are hereby marked
+\texttt{COMPLETE}. The internal logic gates of the AK--HDPST v17.0 engine are
+certified against the Weil and FLT oracles.
+
+\textbf{Next Step:} The system is authorized to engage the
+\textbf{Navier--Stokes Case Study (Appendix NS)}.
+\begin{itemize}
+  \item \textbf{Active Conjecture:} Navier--Stokes Global Regularity.
+  \item \textbf{Search Strategy:} Disproof Mode (Hunter seeks violations of
+        the Energy--Collapse inequality / Type~IV signatures).
+  \item \textbf{Status:} \textsf{[Spec]} layer active (no external oracle).
+\end{itemize}
+\end{declaration}
+
+
+
+
+
+\end{document}

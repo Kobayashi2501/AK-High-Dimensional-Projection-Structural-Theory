@@ -392,7 +392,6 @@ For the arithmetic calibration program:
 ~~~text
 AK_AP v1.0.1: Arithmetic Programs for AK-OS (closed-world calibration)
 Repository / archive:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18029366.svg)](https://doi.org/10.5281/zenodo.18029366)
 ~~~
 
 ---
@@ -400,7 +399,7 @@ Repository / archive:
 ## License
 
 MIT (see `LICENSE`).
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18029366.svg)](https://doi.org/10.5281/zenodo.18029366)
 ---
 
 ## Appendix: Terms cheat sheet

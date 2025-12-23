@@ -338,7 +338,7 @@ Repository / archive:（URL または DOI を記載）
 ## ライセンス
 
 MIT（`LICENSE` 参照）。
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18029366.svg)](https://doi.org/10.5281/zenodo.18029366)
 ---
 
 ## 用語チートシート

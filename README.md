@@ -1,420 +1,1099 @@
-# AK–HDPST v17.0.1 — AK High-Dimensional Projection Structural Theory
+# AK–HDPST v18 — AK High-Dimensional Projection Structural Theory
 
-> **AK-OS v1.0.1: an operating system for high-dimensional mathematical exploration**  
-> **Core**: provable, 1D constructible persistence over a field  
-> **[Spec]**: auditable, post-truncation (non-expansive) extensions and search policies
+> **AK–HDPST v18: an auditable collapse-oriented proof interface framework**  
+> **Core**: windowed barcode evaluation over one-parameter constructible persistence  
+> **Interface**: external-domain conclusions require explicit soundness bridges  
+> **Platform**: search, AI assistance, proof stores, DAGs, and replay are audit infrastructure, not proof
 
-This repository contains **AK–HDPST v17.0.1**, positioned not as a “universal solver” for major conjectures, but as a **proof-oriented operating system (AK-OS)** for exploring them with explicit scope boundaries, budgets, and audit artifacts.
+This repository contains **AK–HDPST v18**, the repaired v18-series architecture of AK High-Dimensional Projection Structural Theory.
 
-A companion project, **AK_AP (Arithmetic Programs) v1.0.1**, provides **closed-world calibration** on arithmetic moduli spaces (finite-field “Weil world” and “FLT world”) under the same OS, using known theorems as **boundary inputs**.
+AK–HDPST v18 is **not** presented as a universal solver for major conjectures.
 
-**Strong guarantees are strictly confined to the Core scope.** Everything else must be explicitly marked **[Spec]** and audited.
+It is a structured framework for:
+
+- projecting external mathematical objects into Core-readable persistence data,
+- evaluating collapse through windowed and thresholded barcode profiles,
+- tracking tower failures through declared comparison artifacts,
+- separating Core verification from external-domain theorem claims,
+- managing AI-assisted search, proof candidates, bridge programs, proof stores, and reproducibility records.
+
+The central v18 principle is:
+
+```text
+Core pass does not imply an external theorem without a proved bridge.
+```
 
 ---
 
-## Repository file structure (as provided in this release)
+## Repository file structure
 
-~~~text
+```text
 .
-├─ OLD/                                  # Old files (kept as cautionary archive; may contain obsolete claims)
-│  └─ ...                                # historical snapshots (v1.x–v16.x)
-├─ AK–HDPST_v17.0.1/
-│  ├─ AK_HPDST_v17.0.1.tex               # XeLaTeX source (main paper)
-│  └─ AK_HPDST_v17.0.1.pdf               # compiled PDF (main paper)
-└─ AK–Arithmetic_Programs_v1.0.1/
-   ├─ AK–Arithmetic Programs v1.0.1.tex  # XeLaTeX source (companion)
-   └─ AK–Arithmetic Programs v1.0.1.pdf  # compiled PDF (companion)
-~~~
+├─ OLD/
+│  └─ ...                                  # historical snapshots; may contain obsolete claims
+├─ AK-HDPST_v18/
+│  ├─ AK_HDPST_v18.tex                     # XeLaTeX source
+│  └─ AK_HDPST_v18.pdf                     # compiled PDF
+├─ Appendices/
+│  ├─ Appendix_A_to_Z/
+│  ├─ Appendix_NS/
+│  ├─ Appendix_MS/
+│  └─ Appendix_AGI/
+├─ Companions/
+│  ├─ Companion_1_Arithmetic_Calibration.md
+│  └─ Companion_2_Execution_Reproducibility.md
+└─ README.md
+```
+
+Actual file names may vary depending on the release package.
 
 ---
 
-## AK-OS v1.0.1 manifesto
+## What v18 is
 
-### What this is
+AK–HDPST v18 is a repaired architecture built around strict claim separation.
 
-- **Not**: a claimed proof of any grand conjecture (Navier–Stokes, BSD, RH, FLT, Langlands, etc.).
-- **Is**: a **modular OS** for exploration, built around:
-  - an exact truncation operator `T_tau` (“bar deletion”)
-  - a filtered lift `C_tau` (defined up to filtered quasi-isomorphism)
-  - a **δ-ledger** for budget accounting (algorithmic / discretization / measurement)
-  - **tower diagnostics** `(mu_collapse, nu_collapse)` for invisible limit failures (Type IV)
-  - **windowed gates** (B–Gate⁺ / Overlap Gate) operating **after truncation**
-  - a search layer **HDPS** ([Spec]) that builds a **Map of Validity** on parameter spaces
+Every major statement should be classified as one of:
 
-### Core vs [Spec] (v17.0.1 contract)
+```text
+Core definition
+Core theorem
+Interface definition
+Bridge candidate
+Bridge theorem
+Spec
+Operational policy
+Search artifact
+Companion template
+Non-claim
+```
 
-- **Core**
-  - One-parameter, constructible persistence over a field `k`
-  - Exact truncation `T_tau`: delete bars of length `<= tau` (reflective localization), idempotent, 1-Lipschitz for the interleaving distance
-  - Filtered lift `C_tau` up to f.q.i., compatible with persistence:
-    - `P_i(C_tau F) ≅ T_tau(P_i F)` (at the persistence layer)
-  - One-way bridge (in `D^b(k-mod)` under amplitude `<= 1` and a t-exact realization):
-    - `PH1(F)=0  =>  Ext^1(R(F), k)=0`
-  - Tower diagnostics `(mu_collapse, nu_collapse)` computed **after truncation**, detecting Type IV failures
-  - Windowed proof policy with explicit budgets and audit outputs
+The purpose is to prevent the following invalid jump:
 
-- **[Spec]**
-  - Domain-specific realizations (arithmetic / PDE / Fukaya / Langlands, etc.), **guarded by Core**
-  - HDPS: Terrain Cells, Hunter / Mapper / Lifter agents, Map of Validity
-  - PF/BC after-collapse comparator, Mirror / Transfer, A/B soft-commuting policies
-  - Quantitative heuristics and exploration strategies
+```text
+high-dimensional projection
+  -> collapse-like behavior
+  -> external conjecture solved
+```
 
-**Rule**: every [Spec] component must be **post-truncation non-expansive** (in the project’s sense) and fully audited via δ-ledger entries and tower diagnostics.
+In v18, the valid route is stricter:
 
----
-
-## Core primitives (v17.0.1)
-
-### Truncation and lift
-
-- `T_tau`: exact truncation deleting barcode intervals of length `<= tau`
-- `C_tau`: filtered lift (up to filtered quasi-isomorphism), with
-  - `P_i(C_tau F) ≅ T_tau(P_i F)`
-
-### Collapse admissibility (Core)
-
-A basic Core predicate (used throughout the pipeline):
-
-- `CollapseAdmissible(F) := (PH1(F)=0) AND (Ext^1(R(F),k)=0)`
-
-The one-way bridge makes the Ext condition *dischargeable* from `PH1=0` under the stated hypotheses; no global converse is claimed.
-
-### Tower diagnostics and “tail isomorphism”
-
-v17.0.1 packages “absence of invisible limit obstruction” as:
-
-- `DiagZero := (mu_collapse, nu_collapse) = (0,0)`
-
-This is the canonical way the paper expresses “no Type IV / tail obstruction” on a certified window/cell.
-
-### B–Gate⁺ (after-collapse gate)
-
-**Definition (Core, windowed, after truncation):** on a right-open window `W=[u,u')` at threshold `tau`, **B–Gate⁺ passes** if:
-
-1. `PH1(C_tau F | W) = 0`
-2. `Ext^1(R(C_tau F | W), k) = 0` (eligibility checked)
-3. `DiagZero` (i.e., `(mu_collapse, nu_collapse)=(0,0)`)
-4. Budget check: `gap_tau > sum_delta` (δ-ledger)
-
-This is the project’s canonical “collapse contract” at the window level.
-
-### Overlap Gate (after-collapse coherence)
-
-For overlapping windows `W_a, W_b`, the Overlap Gate enforces (post-truncation) coherence on overlaps, with:
-
-- overlap distance bound (interleaving distance on cropped, truncated data) `<= sum_delta_ab`
-- budget margin `gap_tau > sum_delta_ab`
-- `DiagZero`
-
-The Overlap Gate is the mechanism used to paste window-local certificates into coherent global / multi-window artifacts.
+```text
+external object
+  -> declared realization
+  -> Core-readable persistence object
+  -> windowed evaluation
+  -> gate / diagnostic / ledger check
+  -> Core verdict
+  -> external theorem only if a bridge theorem is proved
+```
 
 ---
 
-## v17.0.1 positioning: from “solver” to “OS”
+## Core evaluation in v18
 
-### Why this pivot exists
+The central repaired Core object is the windowed, thresholded barcode evaluation:
 
-Earlier versions tried to unify multiple heavy domains at once. v17.x makes an explicit pivot:
+```text
+Eval(i, W, tau; F)
+  = T_bar_tau( W_W P_i(F) )
+```
 
-- **From**: “one gigantic framework that might prove everything”
-- **To**: a **proof-oriented OS** that cleanly separates
-  - what is proved and stable (**Core**),
-  - what is operational, domain-dependent, or heuristic (**[Spec]**),
-  - and what is uncertain (budgeted and audited).
+Informally:
 
-### What v17.0.1 adds on top of v17.0 (documentation-level)
+- `F` is a filtered or persistence-derived object.
+- `P_i(F)` is the degree `i` persistence profile.
+- `W_W` means restriction to a declared window `W`.
+- `T_bar_tau` deletes barcode intervals of length `<= tau`.
+- `Eval(i,W,tau;F)` is the repaired Core-visible profile.
 
-v17.0.1 is a **patch release** whose primary goal is **auditability and boundary clarity**:
+The preferred lightweight notation in this README is:
 
-- reference / label / cross-reference hygiene (duplicate labels and unresolved refs removed)
-- tightened “Core vs [Spec]” marking for statements that were previously easy to misread
-- minimum bibliographic anchors for “standard facts” (so reviewers can classify leaps vs citations)
-- canonicalization of “Type IV diagnostics” phrasing via `DiagZero`
-
-These are “trust-surface” upgrades: they improve third-party auditability without expanding the Core scope.
-
----
-
-## AK_AP (Arithmetic Programs) — v1.0.1 companion
-
-AK_AP is a companion program/paper that performs **closed-world calibration** on arithmetic moduli spaces using AK-OS.
-
-**Principle**: AK_AP does **not** claim new proofs of Deligne or Wiles–Taylor. Instead, those are treated as **boundary inputs** in a world where the truth is known, and the OS is tested for consistency and auditability:
-
-- `M_Weil`: finite-field Weil world (Deligne as boundary input)
-- `M_FLT`: FLT world / Frey data (Wiles–Taylor / modularity as boundary input)
-
-### Critical compatibility rule (v17.0.1)
-
-To remain consistent with AK-OS:
-
-- **B–Gate⁺ is reserved for the v17.0.1 Core definition** (windowed, post-truncation, budgeted, with `DiagZero`).
-- Any arithmetic-specific checks (e.g., defect potentials / modularity potentials) must be treated as **pre-gates** (sanity checks) or **[Spec] measurements**, logged to the δ-ledger, and must not silently redefine B–Gate⁺.
-
-If you publish AK_AP outputs, present them as:
-
-- “calibration / consistency evidence under declared budgets,” not as proofs.
+```text
+Eval_{i,W,tau}(F)
+```
 
 ---
 
-## How to read this project
+## Repaired Core primitives
 
-- **As mathematics**: treat Core as the only “theorem-grade” layer; treat [Spec] as auditable, implementation-dependent extensions.
-- **As software architecture**: view AK-OS as a pipeline OS for truncation-first stability, budget accounting, and failure diagnosis.
-- **As AI × human collaboration**: the OS is designed to make exploration reproducible and criticizable (run manifests + artifacts), not “mystical.”
+### 1. Windowed barcode evaluation
 
----
+```text
+Eval_{i,W,tau}(F)
+```
 
-## Run protocol (conceptual)
-
-All comparisons and decisions follow a post-truncation order:
-
-~~~text
-t  →  persistence P_i  →  truncation T_tau  →  compare / audit / gate / map_validity
-~~~
-
-Outputs are organized as auditable artifacts (barcodes, ledgers, diagnostics, checksums) so that third parties can rerun and criticize.
+This is the primary Core-readable object used for collapse evaluation.
 
 ---
 
-## Installation (illustrative; repository-dependent)
+### 2. Admissible representative
 
-~~~bash
-git clone https://github.com/your-org/ak-hdpst.git
-cd ak-hdpst
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e ".[all]"
-~~~
+```text
+C_{tau,W}F
+```
 
-> Note: the actual package layout and extras depend on the repository implementation.  
-> This README describes the OS and audit contract; code scaffolding may vary.
+This is not a global strict filtered lift.
+
+It is an admissible representative used only when the required compatibility and eligibility conditions are declared.
 
 ---
 
-## Quickstart (illustrative)
+### 3. Tower comparison artifact
 
-### Minimal CLI run
+```text
+phi_{i,W,tau}
+```
 
-~~~bash
-# Prepare a run configuration (example path)
-cp examples/v17.0.1/minimal/run.yaml ./run.yaml
+This replaces older informal “after-collapse comparison map” language.
 
-# Execute the windowed post-truncation pipeline
-akhdpst run run.yaml
+The intended schematic form is:
 
-# Inspect gate verdicts, tower diagnostics, and δ-ledger per window
-akhdpst audit out/artifacts --by-window
-~~~
-
-### Minimal Python API (illustrative)
-
-~~~python
-from akhdpst.core import T_tau, C_tau
-from akhdpst.gate import b_gate_plus
-from akhdpst.tower import audit_tower
-
-F = ...   # load filtered object / persistence
-tau = 0.15
-W = (0.0, 0.5)  # right-open in the protocol; represented here as a pair
-
-# Truncation at persistence level
-P1_trunc = T_tau(F.persistence(1), tau)
-
-# Filtered lift (up to f.q.i.)
-F_trunc = C_tau(F, tau)
-
-# Tower diagnostics (after truncation)
-mu, nu = audit_tower(tower=[...], tau=tau, degree=1)
-
-# Gate check (windowed)
-ok = b_gate_plus(
-    F=F,
-    window=W,
-    tau=tau,
-    mu=mu,
-    nu=nu,
-    gap_tau=0.03,
-    sum_delta=0.011,
-)
-~~~
+```text
+phi_{i,W,tau}:
+  ColimProfile_{i,W,tau}(F_bullet)
+    -> ApexProfile_{i,W,tau}(F_infty)
+```
 
 ---
 
-## Configuration (`run.yaml`) — v17.0.1 schema highlights (illustrative)
+### 4. Type IV diagnostics
 
-~~~yaml
+```text
+(mu_Collapse, nu_Collapse)
+```
+
+These are monitored tower diagnostics derived from the declared tower comparison artifact.
+
+A clean diagnostic state is written as:
+
+```text
+(mu_Collapse, nu_Collapse) = (0,0)
+```
+
+---
+
+### 5. Ledger budget
+
+```text
+Sigma_delta < gap_tau
+```
+
+This is the audit budget condition.
+
+It records whether accumulated defects remain below the declared gap.
+
+---
+
+## Core pass in v18
+
+A Core pass is a statement about the Core-readable object only.
+
+A typical v18 Core pass may require:
+
+```text
+Eval_{1,W,tau}(F) = 0
+```
+
+```text
+Ext^1 = 0 only in the eligible regime
+```
+
+```text
+(mu_Collapse, nu_Collapse) = (0,0)
+```
+
+```text
+Sigma_delta < gap_tau
+```
+
+```text
+required artifacts and manifest records are present
+```
+
+A Core pass does **not** automatically imply:
+
+```text
+Navier-Stokes regularity
+BSD
+ABC
+RH
+Iwasawa main conjecture
+Langlands theorem
+Fukaya or mirror theorem
+cryptographic security
+```
+
+Those require separate bridge theorems.
+
+---
+
+## Core vs Interface vs Spec
+
+### Core
+
+The Core layer contains theorem-grade internal statements about:
+
+- constructible one-parameter persistence,
+- windowed barcode evaluation,
+- threshold deletion,
+- admissible representatives,
+- eligible use of `Ext^1`,
+- tower diagnostics,
+- ledger budget checks,
+- gate verdicts,
+- manifest requirements.
+
+---
+
+### Interface
+
+The Interface layer defines how external domains may connect to the Core.
+
+Examples:
+
+- arithmetic interfaces,
+- Iwasawa tower interfaces,
+- Navier-Stokes interfaces,
+- mirror / categorical interfaces,
+- Fukaya-side interfaces,
+- cryptographic interfaces.
+
+An interface may define a route into the Core, but it does not prove an external theorem by itself.
+
+---
+
+### Spec
+
+`[Spec]` marks a proposed, exploratory, or conditional component.
+
+A `[Spec]` statement is not a theorem.
+
+```text
+[Spec] != theorem
+```
+
+---
+
+## Bridge discipline
+
+The most important v18 rule is:
+
+```text
+Bridge Program != Bridge Theorem
+```
+
+A bridge theorem is required whenever one wants to move from:
+
+```text
+Core-visible condition
+```
+
+to:
+
+```text
+external-domain conclusion
+```
+
+or from:
+
+```text
+external-domain structure
+```
+
+to:
+
+```text
+Core-readable behavior
+```
+
+A bridge candidate must remain marked as candidate or `[Spec]` until proved.
+
+---
+
+## Problem Interface Appendices
+
+The v18 appendices are not written as solved-problem appendices.
+
+They are **Problem Interface Appendices**.
+
+Their function is to specify:
+
+```text
+external source data
+realization route
+Core-readable target
+Eval_{i,W,tau}
+C_{tau,W}F if needed
+phi_{i,W,tau} if tower diagnostics are used
+ledger treatment
+bridge status
+explicit non-claims
+```
+
+---
+
+### Navier-Stokes appendices
+
+The Navier-Stokes appendices are organized as:
+
+```text
+NS-A: Exploration Protocol
+NS-B: Theoretical Soundness Layer
+NS-C: Proof-First Program
+```
+
+They do not prove Navier-Stokes regularity.
+
+Their purpose is to state what would be required before a Core pass could be interpreted as a PDE theorem.
+
+---
+
+### Arithmetic / MS appendices
+
+The arithmetic-facing appendices organize:
+
+```text
+arithmetic source data
+cyclotomic and Iwasawa towers
+congruence defects
+Selmer-like structures
+mirror / categorical comparison
+Fukaya-side calibration
+```
+
+They do not prove BSD, ABC, RH, or Iwasawa main conjectures.
+
+---
+
+### AGI / normalization appendices
+
+The AGI-facing appendices define normalization, platform, and interface behavior.
+
+They do not turn AI output into proof.
+
+---
+
+## Search / Platform layer
+
+Appendices U-Z define the Search / Platform layer.
+
+This layer supports:
+
+```text
+agents
+search protocols
+bridge programs
+validity maps
+certificate DAGs
+proof stores
+execution records
+reproducibility manifests
+```
+
+It does not enlarge the Core.
+
+---
+
+## Main non-confusion rules
+
+```text
+AI output != proof
+```
+
+```text
+Search result != theorem
+```
+
+```text
+Bridge Program != Bridge Theorem
+```
+
+```text
+Validity Map != proof
+```
+
+```text
+Certificate DAG != proof by existence
+```
+
+```text
+Proof Store storage != certification
+```
+
+```text
+Execution != proof
+```
+
+```text
+Replay pass != theorem validity
+```
+
+```text
+R5 reproducibility != theorem validity
+```
+
+```text
+Core pass != external theorem without a proved bridge
+```
+
+---
+
+## Companion documents
+
+### Companion 1: Arithmetic Calibration Companion
+
+Companion 1 provides operational templates for arithmetic calibration.
+
+It includes templates for:
+
+```text
+arithmetic source records
+cyclotomic tower calibration
+Iwasawa module calibration
+congruence defect records
+arithmetic ledgers
+Type IV proxy records
+bridge calibration records
+mirror / categorical calibration
+Fukaya-side calibration
+```
+
+Important rule:
+
+```text
+mu_Iw != mu_Collapse by default
+```
+
+Companion 1 is operational support, not an arithmetic theorem source.
+
+---
+
+### Companion 2: Execution / Reproducibility Companion
+
+Companion 2 provides execution and reproducibility templates.
+
+It includes templates for:
+
+```text
+run.yaml
+artifact_manifest.json
+eval.json
+ledger.json
+diagnostics.json
+gate.json
+proof_store_entry.json
+reproducibility_manifest.json
+verification records
+audit records
+R0-R5 reproducibility checklist
+```
+
+Important rule:
+
+```text
+Execution and reproducibility templates are operational aids, not proofs.
+```
+
+---
+
+## Conceptual run protocol
+
+A v18 execution should follow the repaired order:
+
+```text
+external data
+  -> realization
+  -> persistence profile
+  -> window restriction
+  -> threshold barcode deletion
+  -> Eval_{i,W,tau}
+  -> gate / diagnostic / ledger
+  -> manifest / proof-store / replay
+  -> Core verdict
+```
+
+External theorem interpretation requires an additional step:
+
+```text
+Core verdict
+  -> proved bridge theorem
+  -> external-domain conclusion
+```
+
+---
+
+## Suggested execution artifacts
+
+```text
+out/artifacts/
+  eval/
+    eval_W0_deg1_tau.json
+  representatives/
+    C_tau_W_F_record.json
+  diagnostics/
+    diagnostics_W0_deg1_tau.json
+  tower/
+    phi_i_W_tau.json
+  ledger/
+    ledger_W0.json
+  gate/
+    gate_W0.json
+  proof_store/
+    proof_store_entry.json
+  replay/
+    reproducibility_manifest.json
+  checksums/
+    checksums.txt
+```
+
+Artifact existence alone does not imply proof.
+
+---
+
+## Example `run.yaml` schema
+
+```yaml
 meta:
-  name: "demo-v17.0.1"
+  name: "demo-v18"
+  version: "18"
   seed: 1337
-  version: "17.0.1"
-  author: "your-name"
 
 data:
   input: "data/example.h5"
-  backend: "bars"       # bars | chain
+  backend: "bars"
   degrees: [0, 1]
 
 windows:
-  - label: "w0"
-    range: [0.0, 0.5)   # right-open; MECE; coverage audited
-  - label: "w1"
-    range: [0.5, 1.0)
+  - label: "W0"
+    range: "[0.0, 0.5)"
+  - label: "W1"
+    range: "[0.5, 1.0)"
 
-truncation:
+threshold:
   tau: 0.15
-  lift: "C_tau"
-  reflector: "T_tau"
+  deletion_policy: "delete bars of length <= tau"
+
+evaluation:
+  expression: "Eval_{i,W,tau}(F)"
+  records:
+    enabled: true
+    output: "out/artifacts/eval/"
+
+representative:
+  use_C_tau_W_F: false
+  record: null
+
+tower_diagnostics:
+  enabled: true
+  artifact: "phi_{i,W,tau}"
+  output: "out/artifacts/diagnostics/"
+
+ledger:
+  enabled: true
+  condition: "Sigma_delta < gap_tau"
+  gap_tau: 0.03
+  output: "out/artifacts/ledger/"
 
 gate:
+  type: "B-Gate+"
   require:
-    PH1_zero: true
-    Ext1_zero: true         # only used if eligibility holds (amplitude<=1 etc.)
-    DiagZero: true          # (mu_collapse, nu_collapse) = (0,0)
-    gap_tau_gt_sum_delta: true
-  safety_margin:
-    gap_tau: 0.03
+    Eval_1_zero: true
+    Ext1_zero_if_eligible: true
+    TypeIV_clean: true
+    budget_pass: true
 
 audit:
-  outputs: ["bars", "ledger", "tower", "gate", "checksums"]
+  outputs:
+    - "eval"
+    - "diagnostics"
+    - "ledger"
+    - "gate"
+    - "checksums"
   checksums: "sha256"
 
-output:
-  dir: "out/artifacts"
-  overwrite: false
-~~~
+non_claims:
+  - "Successful execution is not proof by itself."
+  - "Replay pass is not theorem validity."
+  - "Core pass does not imply external theorem without a proved bridge."
+```
 
 ---
 
-## Auditing and artifacts (conceptual)
+## Example `eval.json`
 
-~~~text
-out/artifacts/
-  bars/
-    w0_deg1_trunc.json
-    w1_deg1_trunc.json
-  ledger/
-    ledger_w0.json
-    ledger_w1.json
-  tower/
-    phi_maps_w0_deg1.json     # comparison maps; (mu,nu); tail flags
-  gate/
-    gate_w0.json
-    gate_w1.json
-  run.yaml
-  audit_summary.json
-  checksums.txt
-~~~
-
-- `bars/`: truncated barcodes per window / degree.
-- `ledger/`: δ-ledger per window (algorithmic / discretization / measurement).
-- `tower/`: comparison maps and diagnostics `(mu_collapse, nu_collapse)`; tail/isomorphism flags.
-- `gate/`: gate outcomes (B–Gate⁺, Overlap Gate where applicable).
-- `audit_summary.json`: rollups across windows.
-- `checksums.txt`: SHA256 sums for reproducibility.
+```json
+{
+  "evaluation": {
+    "id": "eval-0001",
+    "input_object": "F",
+    "degree": 1,
+    "window": "W0",
+    "threshold": "tau=0.15",
+    "expression": "Eval_{i,W,tau}(F)",
+    "barcode_policy": "delete bars of length <= tau",
+    "result": "zero / nonzero / pending",
+    "status": "candidate / computed / verified / failed",
+    "non_claims": [
+      "The existence of eval.json does not imply evaluation correctness.",
+      "Evaluation summary is not audit-sufficient without reconstructible data."
+    ]
+  }
+}
+```
 
 ---
 
-## Update policy (post-truncation)
+## Example `diagnostics.json`
 
-All monotonicity / stability claims are stated **after** truncation `T_tau`.
-
-| Update type    | Examples (illustrative)                                              | Guarantee (post `T_tau`)                                   |
-|---------------|-----------------------------------------------------------------------|------------------------------------------------------------|
-| Deletion-type | restrictions, conservative contractions, controlled averaging         | monotone non-increasing for selected post-trunc indicators |
-| ε-continuation| small homotopies under interleaving bounds                            | 1-Lipschitz stability; ε logged in δ-ledger                |
-| Inclusion-type| adding cells / enlarging domains                                      | stability-only (non-expansive), not monotone               |
-
-**Important note**: spectral indicators on realized chain-level objects are not f.q.i.-invariants; v17.0.1 therefore enforces a fixed policy and budgets (and logs any deviations).
-
----
-
-## What’s new in v17.0.1 (vs v16.x)
-
-### Conceptual
-
-- OS framing tightened: AK–HDPST is explicitly an **exploration OS** with provable Core guarantees.
-- HDPS and the Map of Validity remain **[Spec]** and must be audited.
-- Closed-world calibration via AK_AP is positioned as consistency testing, not proof.
-
-### Technical / audit-facing
-
-- Stronger separation of Core vs [Spec] claims in the writing.
-- Reference hygiene: duplicate labels and unresolved references removed.
-- Minimum bibliographic anchors for standard facts (improves third-party audit classification).
-- Canon phrasing for Type IV diagnostics via `DiagZero`.
+```json
+{
+  "diagnostics": {
+    "id": "diag-0001",
+    "diagnostic_type": "TypeIV",
+    "tower_artifact": "phi_{i,W,tau}",
+    "source_profile": "ColimProfile_{i,W,tau}(F_bullet)",
+    "target_profile": "ApexProfile_{i,W,tau}(F_infty)",
+    "mu_Collapse": "value_or_pending",
+    "nu_Collapse": "value_or_pending",
+    "verdict": "clean / obstructed / pending / failed",
+    "non_claims": [
+      "A Type IV proxy is not a monitored Type IV diagnostic.",
+      "A monitored diagnostic requires a declared phi_{i,W,tau} artifact."
+    ]
+  }
+}
+```
 
 ---
 
-## Roadmap (high level)
+## Example `ledger.json`
 
-- **Core**
-  - additional formalization (Lean / Coq): `T_tau`, `C_tau`, `(mu,nu)`, B–Gate⁺, Overlap Gate
-  - more automated τ-sweep and stability-band diagnostics with certified bounds
-
-- **[Spec]**
-  - HDPS tooling improvements: multi-resolution terrain cells; agent policies with explicit δ-budgets
-  - richer toy models with fully implemented validity maps
-  - domain adapters (arithmetic / PDE / symplectic) that respect Core constraints
+```json
+{
+  "ledger": {
+    "id": "ledger-0001",
+    "components": [
+      {
+        "symbol": "delta_disc",
+        "source": "discretization",
+        "value_or_bound": "declared"
+      },
+      {
+        "symbol": "delta_bridge",
+        "source": "bridge transfer",
+        "value_or_bound": "declared"
+      }
+    ],
+    "aggregate": {
+      "Sigma_delta": "computed_or_declared",
+      "gap_tau": "declared",
+      "condition": "Sigma_delta < gap_tau",
+      "result": "pass / fail / pending"
+    },
+    "non_claims": [
+      "The existence of ledger.json does not imply budget pass.",
+      "Budget pass does not replace B-Gate+ or diagnostics."
+    ]
+  }
+}
+```
 
 ---
 
-## Contributing (policy)
+## Example `gate.json`
 
-- Keep **Core vs [Spec] explicit** in docs and code.
-- Every [Spec] component must:
-  - include post-truncation non-expansiveness tests (as applicable), and
-  - log δ-ledger entries.
-- Prefer minimal, reproducible examples with auditable artifacts.
+```json
+{
+  "gate": {
+    "id": "gate-0001",
+    "type": "B-Gate+",
+    "clauses": [
+      {
+        "statement": "Eval_{1,W,tau}(F) = 0",
+        "result": "pass / fail / pending"
+      },
+      {
+        "statement": "Ext1 = 0 in eligible regime",
+        "result": "pass / fail / not_applicable / pending"
+      },
+      {
+        "statement": "Type IV diagnostics clean using phi_{i,W,tau}",
+        "result": "pass / fail / pending"
+      },
+      {
+        "statement": "Sigma_delta < gap_tau",
+        "result": "pass / fail / pending"
+      }
+    ],
+    "final_verdict": "pass / fail / pending / blocked",
+    "non_claims": [
+      "The existence of gate.json does not imply gate pass.",
+      "Clause-level support is required."
+    ]
+  }
+}
+```
 
 ---
 
-## Citing and references (templates)
+## What changed from v17.x to v18
 
-If you use AK–HDPST v17.0.1 in research, please cite:
+### Conceptual change
 
-~~~text
-AK–HDPST v17.0.1 / AK-OS v1.0.1:
-High-Dimensional Projection Structural Theory and an OS for collapse-based exploration.
+v17.x framed AK-HDPST as an exploration OS with Core / Spec separation.
 
-Authors: Atsushi Kobayashi, et al.
-Year: 2025
-Repository / archive: (insert URL or DOI)
-~~~
+v18 repairs and strengthens this into:
 
-Foundational references (non-exhaustive; illustrative):
+```text
+an auditable collapse-oriented proof interface framework
+```
 
-- T. Crawley-Boevey, *Decomposition of pointwise finite-dimensional persistence modules*, 2015.
-- F. Chazal, V. de Silva, M. Glisse, S. Oudot, *Structure and stability of persistence modules and barcodes*, 2016.
+The main shift is:
 
-For the arithmetic calibration program:
+```text
+from:
+  truncation-first exploration OS
 
-~~~text
-AK_AP v1.0.1: Arithmetic Programs for AK-OS (closed-world calibration)
-Repository / archive:
-~~~
+to:
+  windowed Core evaluation + explicit bridge discipline + proof governance
+```
+
+---
+
+### Core notation change
+
+Older language:
+
+```text
+T_tau
+C_tau
+after-collapse comparison map
+DiagZero
+```
+
+v18 preferred language:
+
+```text
+Eval_{i,W,tau}(F)
+C_{tau,W}F
+phi_{i,W,tau}
+(mu_Collapse, nu_Collapse) = (0,0)
+Sigma_delta < gap_tau
+```
+
+---
+
+### Claim-status change
+
+v18 requires explicit status separation:
+
+```text
+Core theorem
+Interface definition
+Bridge candidate
+Bridge theorem
+Spec
+Operational policy
+Search artifact
+Non-claim
+Companion template
+```
+
+---
+
+### Platform change
+
+v18 adds a clearer governance shell:
+
+```text
+Agent Semantics
+Hunter / Mapper / Lifter Protocols
+Bridge Programs
+Validity Map and Certificate DAG
+AI Platform and Proof Store
+Execution and Reproducibility Schema
+```
+
+---
+
+## Roadmap after v18
+
+The recommended next steps are not to add more broad appendices.
+
+The next work should focus on small, verifiable strengthening.
+
+---
+
+### Priority 1: AK v18 Claim Register
+
+Create a register of all claims, definitions, bridges, specs, and non-claims.
+
+```text
+Goal:
+  prevent Spec / theorem / bridge confusion
+```
+
+---
+
+### Priority 2: Core Micro-Theorem Pack
+
+Prove small Core results about:
+
+```text
+window restriction compatibility
+threshold deletion idempotence
+deletion-type monotonicity
+gap stability
+ledger-safe perturbation
+```
+
+---
+
+### Priority 3: Arithmetic Toy Bridge Pack
+
+Build a finite or toy Iwasawa-like tower and prove a small bridge:
+
+```text
+eventual tower stability
+  -> clean AK tower diagnostic
+```
+
+---
+
+### Priority 4: Iwasawa Interface Skeleton
+
+Prepare the real arithmetic route:
+
+```text
+Iwasawa tower
+Selmer complex
+p-adic structure
+Core-readable realization
+phi_{i,W,tau}
+mu_Iw / mu_Collapse separation
+```
+
+---
+
+### Priority 5: Bridge Theorem Workbench
+
+Create templates for promoting:
+
+```text
+Bridge Candidate -> Bridge Theorem
+```
+
+---
+
+### Priority 6: Minimal Formal Governance Core
+
+Formalize the governance layer first:
+
+```text
+Spec cannot be used as theorem
+Bridge Program cannot discharge Bridge Theorem
+Stored object is not verified object
+Core pass does not imply external theorem without bridge
+```
+
+---
+
+## Installation
+
+The following is illustrative.
+
+```bash
+git clone https://github.com/your-org/ak-hdpst.git
+cd ak-hdpst
+
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
+pip install -e ".[all]"
+```
+
+Actual package layout may vary.
+
+---
+
+## Quickstart
+
+The following commands are illustrative.
+
+```bash
+# Prepare a v18 run configuration
+cp examples/v18/minimal/run.yaml ./run.yaml
+
+# Execute a repaired evaluation / diagnostics / ledger pipeline
+akhdpst run run.yaml
+
+# Inspect Core-facing records
+akhdpst audit out/artifacts --by-window
+```
+
+---
+
+## Minimal Python API
+
+Illustrative only.
+
+```python
+from akhdpst.eval import eval_window_threshold
+from akhdpst.diagnostics import compute_typeIV
+from akhdpst.ledger import check_budget
+from akhdpst.gate import b_gate_plus
+
+F = load_filtered_object("data/example.h5")
+
+tau = 0.15
+W = (0.0, 0.5)
+degree = 1
+
+# Repaired windowed evaluation
+E = eval_window_threshold(F, degree=degree, window=W, tau=tau)
+
+# Declared tower diagnostic using phi_{i,W,tau}
+mu, nu = compute_typeIV(
+    tower="declared_tower",
+    degree=degree,
+    window=W,
+    tau=tau,
+    artifact="phi_i_W_tau.json"
+)
+
+# Ledger budget check
+budget_ok = check_budget(
+    sigma_delta=0.011,
+    gap_tau=0.030
+)
+
+# Gate check
+ok = b_gate_plus(
+    eval_1_zero=E.is_zero(),
+    ext1_zero_if_eligible=True,
+    typeIV_clean=(mu == 0 and nu == 0),
+    budget_ok=budget_ok
+)
+```
+
+---
+
+## Contributing policy
+
+Contributions should preserve v18 non-confusion rules.
+
+### Required
+
+- Mark claim status explicitly.
+- Separate Core, Interface, Bridge, Spec, and Operational claims.
+- Do not treat AI output as proof.
+- Do not treat stored artifacts as certified.
+- Do not treat reproducibility as theorem validity.
+- Use `Eval_{i,W,tau}`, `C_{tau,W}F`, and `phi_{i,W,tau}` consistently.
+- Include ledger treatment for defects.
+- Include non-claim clauses for examples and templates.
+
+### Not allowed
+
+```text
+Spec -> theorem without proof
+Bridge Program -> Bridge Theorem without proof
+Core pass -> external theorem without bridge
+Storage -> certification
+Replay pass -> theorem validity
+AI confidence -> proof
+```
+
+---
+
+## Citation template
+
+```text
+AK-HDPST v18:
+AK High-Dimensional Projection Structural Theory,
+an auditable collapse-oriented proof interface framework.
+
+Author: Atsushi Kobayashi
+Year: 2026
+Repository / DOI: insert URL or DOI
+```
 
 ---
 
 ## License
 
-MIT (see `LICENSE`).
----
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18029366.svg)](https://doi.org/10.5281/zenodo.18029366)
+```text
+MIT
+```
+
+See `LICENSE`.
+
 ---
 
-## Appendix: Terms cheat sheet
+## Terms cheat sheet
 
-- **Constructible 1D persistence**: finite critical set; pointwise finite-dimensional over bounded windows.
-- **`T_tau`**: exact truncation removing all bars of length `<= tau`; idempotent; 1-Lipschitz.
-- **`C_tau`**: filtered lift of `T_tau` up to filtered quasi-isomorphism; `P_i(C_tau F) ≅ T_tau(P_i F)`.
-- **`DiagZero`**: `(mu_collapse, nu_collapse)=(0,0)`; “no tail obstruction / no Type IV” on a window.
-- **B–Gate⁺ (Core)**: windowed after-collapse gate requiring:
-  - `PH1=0`,
-  - `Ext^1=0` (eligible; amplitude<=1 regime),
-  - `DiagZero`,
-  - budget margin `gap_tau > sum_delta`.
-- **Overlap Gate (Core)**: overlap coherence gate with distance bound, budget margin, and `DiagZero`.
-- **`(mu_collapse, nu_collapse)`**: tower diagnostics derived from comparison maps after truncation; non-zero signals invisible limit failure (Type IV).
-- **HDPS ([Spec])**: search layer building a Map of Validity (`Valid` / `Obstructed` / `Unknown`) under Core guards.
-- **δ-ledger**: budget accounting for algorithmic / discretization / measurement deviations.
+```text
+Eval_{i,W,tau}(F)
+  Windowed, thresholded barcode evaluation.
+
+C_{tau,W}F
+  Admissible representative used only under declared compatibility.
+
+phi_{i,W,tau}
+  Declared tower comparison artifact.
+
+mu_Collapse, nu_Collapse
+  Monitored Type IV tower diagnostics.
+
+Sigma_delta < gap_tau
+  Ledger budget condition.
+
+B-Gate+
+  Core gate using repaired evaluation, eligible Ext clause if invoked,
+  Type IV diagnostics, and ledger budget.
+
+Bridge Candidate
+  Proposed cross-layer implication, not yet theorem.
+
+Bridge Theorem
+  Proved cross-layer implication.
+
+Bridge Program
+  Proof-management program for bridge candidates, not theorem.
+
+Validity Map
+  Navigation and status map, not proof.
+
+Certificate DAG
+  Dependency structure, not proof by existence.
+
+Proof Store
+  Storage and registry infrastructure, not certification.
+
+Replay pass
+  Reproducibility result, not theorem validity.
+
+Spec
+  Explicitly non-theorem exploratory or conditional statement.
+```
+
+---
+
+## Final v18 statement
+
+AK-HDPST v18 should be read as:
+
+```text
+A framework for making collapse-based projection, persistence evaluation,
+tower diagnostics, bridge programs, and proof-management infrastructure
+auditable without confusing exploration, storage, execution, or Core pass
+with external theorem proof.
+```
+
+The shortest summary is:
+
+```text
+AK-HDPST v18 is not a universal solver.
+It is an auditable proof-interface framework for collapse-oriented exploration.
+```

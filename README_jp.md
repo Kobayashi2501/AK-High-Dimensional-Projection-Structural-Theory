@@ -9,6 +9,8 @@
 **リリース:** v19.0.0 - Threshold-Gap Metric Repair Release  
 **位置づけ:** 証明済みの内部Core、条件付きInterface、限定Toy Bridge、探索基盤、明示的Non-Claimから構成される研究フレームワーク
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21330904.svg)](https://doi.org/10.5281/zenodo.21330904)
+
 ---
 
 ## 1. 初学者向け概要

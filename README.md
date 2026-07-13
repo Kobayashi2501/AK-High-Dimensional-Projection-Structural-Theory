@@ -1,1100 +1,618 @@
-# AK–HDPST v18 — AK High-Dimensional Projection Structural Theory
+# AK-HPDST v19.0.0
 
-> **AK–HDPST v18: an auditable collapse-oriented proof interface framework**  
-> **Core**: windowed barcode evaluation over one-parameter constructible persistence  
-> **Interface**: external-domain conclusions require explicit soundness bridges  
-> **Platform**: search, AI assistance, proof stores, DAGs, and replay are audit infrastructure, not proof
+## AK High-Dimensional Projection Structural Theory
 
-This repository contains **AK–HDPST v18**, the repaired v18-series architecture of AK High-Dimensional Projection Structural Theory.
+> **A typed and auditable framework for projecting mathematical structures into persistence data, evaluating thresholded collapse, diagnosing failures, and controlling the route from internal evidence to external theorem claims.**
 
-AK–HDPST v18 is **not** presented as a universal solver for major conjectures.
+**Author:** Atsushi Kobayashi  
+**Release:** v19.0.0 — Threshold-Gap Metric Repair Release  
+**Status:** Research framework with a proved Core, conditional interfaces, toy bridges, search infrastructure, and explicit non-claims
 
-It is a structured framework for:
+---
 
-- projecting external mathematical objects into Core-readable persistence data,
-- evaluating collapse through windowed and thresholded barcode profiles,
-- tracking tower failures through declared comparison artifacts,
-- separating Core verification from external-domain theorem claims,
-- managing AI-assisted search, proof candidates, bridge programs, proof stores, and reproducibility records.
+## 1. Beginner's overview
 
-The central v18 principle is:
+AK-HPDST studies complicated mathematical structures by converting selected information into **persistent-homology profiles**, represented by barcodes.
+
+A barcode contains intervals (“bars”). Informally:
+
+- a long bar represents a feature that persists across a wide range;
+- a short bar represents a feature that disappears quickly;
+- an infinite bar represents a feature that survives indefinitely in the unwindowed profile.
+
+AK-HPDST does not simply delete short bars and declare success. It records:
+
+1. what external object was used;
+2. how it was converted into Core-readable persistence data;
+3. which window and threshold were selected;
+4. which bars were retained or deleted;
+5. whether the result is stable under the declared comparison error;
+6. whether representatives, morphisms, tower data, and other non-numerical evidence exist;
+7. which claim is proved, conditional, operational, speculative, rejected, or merely historical.
+
+The central safety rule is:
+
+> **A Core pass is not an external-domain theorem unless a separate Interface or Bridge Theorem has been proved.**
+
+---
+
+## 2. What AK-HPDST v19.0.0 can do
+
+Within its declared hypotheses and data types, v19.0.0 can:
+
+- convert suitable filtered objects into constructible one-parameter persistence profiles;
+- restrict a profile to a declared window before threshold processing;
+- delete finite bars whose lengths are at most a chosen threshold;
+- certify when that hard deletion is stable under a bottleneck-distance perturbation;
+- distinguish exact comparisons from metric comparisons;
+- record admissible filtered representatives of repaired persistence profiles;
+- derive a **one-way** degree-one implication from persistent vanishing to an `Ext^1` vanishing statement in the eligible realization regime;
+- compare a directed tower with its declared apex using an actual comparison morphism;
+- detect terminal-generic kernel and cokernel defects through Type IV diagnostics;
+- manage overlap, continuation, and restart records for local-to-global analysis;
+- classify failures into typed categories rather than reporting only “success” or “failure”;
+- generate immutable manifests, claim references, proof-object records, and replay data;
+- use human or AI search aggressively while keeping search output outside the proof verdict until independently verified.
+
+AK-HPDST is therefore best understood as a **proof-interface and certification architecture**, not as an automatic conjecture solver.
+
+---
+
+## 3. What AK-HPDST v19.0.0 does not claim
+
+This release does **not** prove, by itself:
+
+- the Navier–Stokes regularity problem;
+- the Riemann hypothesis;
+- the Birch and Swinnerton-Dyer conjecture;
+- the ABC conjecture;
+- an Iwasawa main conjecture;
+- a Langlands correspondence;
+- mirror symmetry or a Fukaya-category equivalence;
+- a cryptographic security theorem;
+- a universal equivalence between persistent homology and `Ext` groups.
+
+In particular, v19.0.0 does not assert the unconditional equivalence
+
+$$
+PH_1 = 0 \quad\Longleftrightarrow\quad \operatorname{Ext}^1 = 0.
+$$
+
+The currently proved Core direction is conditional and one-way:
+
+$$
+\operatorname{Eval}_{1,W,\tau}(F)=0
+\quad\Longrightarrow\quad
+\operatorname{Ext}^1\!\left(R(C_{\tau,W}F),k\right)=0,
+$$
+
+only when the admissible representative, realization, amplitude, and edge-eligibility requirements are satisfied.
+
+---
+
+## 4. The main processing flow
 
 ```text
-Core pass does not imply an external theorem without a proved bridge.
+External mathematical object
+        |
+        v
+Declared realization or extraction
+        |
+        v
+Core-readable filtered / persistence object
+        |
+        v
+Persistence profile P_i(F)
+        |
+        v
+Window restriction W_W P_i(F)
+        |
+        v
+Hard threshold deletion T^bar_tau
+        |
+        v
+Repaired evaluation Eval_{i,W,tau}(F)
+        |
+        +--> exact or metric-gap-certified comparison
+        +--> admissible representative / eligible Ext-edge
+        +--> overlap, continuation, and restart records
+        +--> tower comparison and Type IV diagnostics
+        |
+        v
+B-Gate+ and typed audit
+        |
+        v
+Core verdict: pass / reject / undefined / not_invoked
+        |
+        v
+External conclusion only through a proved Interface or Bridge Theorem
 ```
 
 ---
 
-## Repository file structure
+## 5. Minimal mathematical model
+
+### 5.1 Working persistence regime
+
+The Core works primarily with constructible one-parameter persistence modules over a field $k$:
+
+$$
+\operatorname{Pers}^{\mathrm{cons}}_k
+\subset
+[(\mathbb{R},\leq),\operatorname{Vect}_k].
+$$
+
+This restriction matters. Wild, uncontrolled, infinite-rank, or genuinely multiparameter data are not automatically Core-readable.
+
+### 5.2 Window-first evaluation
+
+For a filtered object $F$, degree $i$, right-open window $W=[u,u')$, and threshold $\tau>0$, define the pre-threshold profile
+
+$$
+B_{i,W}(F):=\mathcal{W}_W P_i(F),
+$$
+
+and the repaired evaluation
+
+$$
+\operatorname{Eval}_{i,W,\tau}(F)
+:=
+T^{\mathrm{bar}}_{\tau}\!\left(B_{i,W}(F)\right)
+=
+T^{\mathrm{bar}}_{\tau}\!\left(\mathcal{W}_W P_i(F)\right).
+$$
+
+The order is fixed:
+
+$$
+\text{persistence} \;\longrightarrow\; \text{window} \;\longrightarrow\; \text{threshold deletion}.
+$$
+
+Windowing and deletion do not commute in general.
+
+### 5.3 Hard threshold deletion
+
+For a barcode $B$,
+
+$$
+T^{\mathrm{bar}}_{\tau}(B)
+:=
+\{I\in B\mid \ell(I)>\tau\text{ or }\ell(I)=+\infty\}.
+$$
+
+Thus:
+
+- finite bars with $\ell(I)\leq\tau$ are deleted;
+- finite bars with $\ell(I)>\tau$ are retained;
+- infinite bars are retained before bounded-window clipping.
+
+The operation is idempotent:
+
+$$
+T^{\mathrm{bar}}_{\tau}
+T^{\mathrm{bar}}_{\tau}(B)
+=
+T^{\mathrm{bar}}_{\tau}(B).
+$$
+
+However, hard deletion is **not globally non-expansive** under the standard bottleneck metric.
+
+---
+
+## 6. The main v19 repair: threshold-gap-safe stability
+
+The major correction in v19.0.0 is the rejection of global non-expansiveness for positive-threshold hard deletion.
+
+Define threshold clearance by
+
+$$
+\operatorname{clear}_{\tau}(B)
+:=
+\inf_{I\in B_{\mathrm{fin}}}
+|\ell(I)-\tau|,
+$$
+
+with $\operatorname{clear}_{\tau}(B)=+\infty$ when $B$ has no finite bars.
+
+For a finite family $\mathcal{B}$,
+
+$$
+\operatorname{gap}_{\tau}(\mathcal{B})
+:=
+\min_{B\in\mathcal{B}}
+\operatorname{clear}_{\tau}(B).
+$$
+
+The repaired stability theorem is:
+
+> If $d_B(B,C)\leq\varepsilon$ and the finite bars of both $B$ and $C$ avoid the closed band $[\tau-\varepsilon,\tau+\varepsilon]$, then
+
+$$
+d_B\!\left(T^{\mathrm{bar}}_{\tau}B,T^{\mathrm{bar}}_{\tau}C\right)
+\leq
+\varepsilon.
+$$
+
+This is a **two-sided** certificate. Checking only one barcode is insufficient.
+
+A ledger-based metric comparison must also establish
+
+$$
+\operatorname{val}_B(\mathfrak d_{\mathrm{met}})
+<
+\operatorname{gap}_{\tau}(\mathcal{B}),
+$$
+
+where the scalarized ledger value is proved to upper-bound the actual bottleneck discrepancy used by the comparison.
+
+---
+
+## 7. Core components
+
+The following grouping is explanatory. It does not replace the formal chapter and appendix boundaries.
+
+### Core A — Persistence and barcode layer
+
+Creates the Core-readable persistence profile $P_i(F)$ and its barcode decomposition in the declared constructible one-parameter regime.
+
+**Purpose:** represent structural persistence in a form that can be windowed, compared, and audited.
+
+### Core B — Windowed projection layer
+
+Restricts the profile to a declared window:
+
+$$
+B_{i,W}(F)=\mathcal{W}_W P_i(F).
+$$
+
+**Purpose:** examine a controlled region rather than treating all scales as one undifferentiated object.
+
+**Important:** a bounded window may clip an infinite bar into a short finite bar.
+
+### Core C — Collapse layer
+
+Applies hard threshold deletion:
+
+$$
+\operatorname{Eval}_{i,W,\tau}(F)
+=
+T^{\mathrm{bar}}_{\tau}(B_{i,W}(F)).
+$$
+
+**Purpose:** remove finite bars at or below the threshold and retain the declared repaired profile.
+
+**Important:** this is a barcode-level operation by default, not a global exact functor on all morphisms.
+
+### Core D — Comparison and metric-safety layer
+
+Every consumed comparison uses exactly one runtime mode:
+
+- `exact` — an actual equality or persistence-profile isomorphism is proved;
+- `metric_gap_certified` — a bottleneck bound and two-sided threshold-gap record are supplied;
+- `not_compared` — no comparison inference belongs to the declared scope.
+
+**Purpose:** prevent an exact statement, an approximate statement, and an absent comparison from being confused.
+
+### Core E — Representative and Ext-edge layer
+
+An admissible representative $C_{\tau,W}F$ may represent the repaired profile in declared degrees. In the eligible regime, the degree-one Core vanishing can discharge an `Ext^1` clause:
+
+$$
+\operatorname{Eval}_{1,W,\tau}(F)=0
+\Longrightarrow
+\operatorname{Ext}^1\!\left(R(C_{\tau,W}F),k\right)=0.
+$$
+
+**Purpose:** connect persistence-level vanishing to a derived-category statement without claiming an unconditional equivalence.
+
+### Core F — Tower and Type IV diagnostic layer
+
+For a directed tower and declared apex, Type IV requires an actual comparison morphism
+
+$$
+\phi_{i,W,\tau}:
+\operatorname{ColimProfile}_{i,W,\tau}(F_{\bullet})
+\longrightarrow
+\operatorname{ApexProfile}_{i,W,\tau}(F_{\infty}).
+$$
+
+When terminal-tameness is established, define
+
+$$
+\mu_{i,W,\tau}
+:=
+\operatorname{tgdim}_W(\ker\phi_{i,W,\tau}),
+$$
+
+$$
+\nu_{i,W,\tau}
+:=
+\operatorname{tgdim}_W(\operatorname{coker}\phi_{i,W,\tau}).
+$$
+
+A clean monitored state is
+
+$$
+(\mu_{\mathrm{Collapse}},\nu_{\mathrm{Collapse}})=(0,0).
+$$
+
+This excludes monitored terminal-generic kernel and cokernel defects. It does not automatically prove that the whole comparison morphism is an isomorphism.
+
+### Core G — Gate, failure, and audit layer
+
+`B-Gate+` combines the required clauses without cancellation.
+
+A pass may require:
+
+1. degree-one repaired vanishing;
+2. valid comparison-mode records;
+3. eligible `Ext^1` vanishing when the Ext clause is invoked;
+4. Type IV either `not_invoked` by scope or `certified_zero` with valid artifacts;
+5. a passing metric budget for metric comparisons;
+6. all required non-scalar obligations;
+7. a complete and consistent manifest with admissible claim use.
+
+A favorable numerical margin cannot repair a missing representative, morphism, eligibility record, proof artifact, or claim-status record.
+
+---
+
+## 8. Failure taxonomy
+
+Failures are nonexclusive. One run may have several failure types.
+
+| Type | Meaning | Typical example |
+|---|---|---|
+| Type I | Topological failure | $\operatorname{Eval}_{1,W,\tau}(F)\neq 0$ |
+| Type II | Categorical failure in the eligible regime | Invoked and well-typed $\operatorname{Ext}^1\neq 0$ |
+| Type III | Operational, metric, representative, or functorial failure | Missing gap record, invalid comparison, missing morphism, undefined required diagnostic |
+| Type IV | Tower-level terminal-generic obstruction | $(\mu_{\mathrm{Collapse}},\nu_{\mathrm{Collapse}})\neq(0,0)$ |
+| Type V | Claim-status, provenance, or manifest failure | A Spec, AI output, rejected claim, or incomplete record is reported as theorem evidence |
+
+Missing evidence is normally `undefined`; it must not be silently encoded as zero or pass.
+
+---
+
+## 9. Claim discipline
+
+Every meaningful statement must be read at its registered strength.
+
+Common roles include:
+
+- Core definition;
+- Core theorem or lemma;
+- metric-repair theorem;
+- operational policy;
+- Interface definition or theorem;
+- Bridge candidate, Bridge Program, or Bridge Theorem;
+- toy bridge theorem;
+- Search artifact;
+- Companion template;
+- Spec;
+- explicit non-claim;
+- deprecated or rejected claim.
+
+The governing rules are:
+
+```text
+Registration is not proof.
+Spec is not theorem.
+Bridge Program is not Bridge Theorem.
+AI output is not proof.
+Execution is not proof.
+Replayability is not mathematical truth.
+Core pass is not an external theorem without a proved transport theorem.
+```
+
+When a source, register, summary, or implementation disagrees, the weaker safe interpretation governs until a new immutable repair is issued.
+
+---
+
+## 10. Document architecture
+
+### Main — Chapters 1–8
+
+The Main document defines the release-wide contract:
+
+1. scope, claim discipline, and metric-repair contract;
+2. barcode metrics, threshold deletion, and gap-safe stability;
+3. windowed evaluation, comparison records, and representatives;
+4. eligible realization and the one-way $PH_1\Rightarrow\operatorname{Ext}^1$ edge;
+5. failure taxonomy and Type IV diagnostics;
+6. window logic, overlap, $\kappa$-Restart, and record-level gluing;
+7. typed audit semantics and Core sovereignty;
+8. Core closure and the external Interface boundary.
+
+### Foundation Appendices A–G
+
+- **A:** barcode metric and threshold-gap repair;
+- **B:** filtered representatives;
+- **C:** eligible realization and canonical Ext-edge;
+- **D:** tower diagnostics and terminal-generic Type IV defects;
+- **E:** windows, overlaps, restart, and gluing;
+- **F:** typed obligations, statuses, and dependency closure;
+- **G:** canonical manifest schema, proof objects, and replayability.
+
+### Technical Extension Appendices H–N
+
+These develop advisory indicators, discretization, measurement, controlled commutation, transfer ledgers, quantale semantics, and higher-categorical extensions. They do not silently enlarge the proved Core.
+
+### Problem Interface Appendices
+
+These specify how external domains may attempt to enter the Core:
+
+- arithmetic, cyclotomic, Iwasawa, congruence, mirror, and Fukaya-facing interfaces;
+- normalization interfaces;
+- Navier–Stokes exploration, soundness, and proof-first programs.
+
+An interface defines a typed route. It is not an external theorem unless the required transport theorem is proved.
+
+### Search / Platform Appendices U–Z
+
+These govern:
+
+- human, AI, tool, and platform agents;
+- Hunter / Mapper / Lifter search workflows;
+- Bridge Programs;
+- validity maps and certificate DAGs;
+- proof stores;
+- execution and reproducibility schemas.
+
+Search is proposer-side by default. Core verdicts are verifier-side.
+
+### Claim Register, CM, TB, and Companion
+
+- **CR-v19:** canonical claim identity, status, permitted use, and repair ancestry;
+- **CM-v19:** reusable Core micro-theorems at their exact proved strength;
+- **TB-v19:** deliberately restricted toy bridge theorems;
+- **Companion:** operational calibration and execution templates, not theorem sources.
+
+---
+
+## 11. Repository guide
+
+A typical v19.0.0 release package is organized as follows:
 
 ```text
 .
-├─ OLD/
-│  └─ ...                                  # historical snapshots; may contain obsolete claims
-├─ AK-HDPST_v18/
-│  ├─ AK_HDPST_v18.tex                     # XeLaTeX source
-│  └─ AK_HDPST_v18.pdf                     # compiled PDF
-├─ Appendices/
-│  ├─ Appendix_A_to_Z/
-│  ├─ Appendix_NS/
-│  ├─ Appendix_MS/
-│  └─ Appendix_AGI/
-├─ Companions/
-│  ├─ Companion_1_Arithmetic_Calibration.md
-│  └─ Companion_2_Execution_Reproducibility.md
-└─ README.md
+├─ README.md
+├─ AK_HPDST_v19_0_0_Part__Main.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part_II__Foundation_Appendices.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part_III__Technical_Extension_Appendices.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part__IV__Problem_Interface_Appendices.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part__V__Search_Platform_Appendices.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part__Claim_Register.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part__CM.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part__TB.pdf
+├─ AK_HPDST_v19_0_0_Appendix_Part__Companion.pdf
+└─ OLD/
+   └─ historical materials — non-normative and potentially incorrect
 ```
 
-Actual file names may vary depending on the release package.
+Actual paths may vary by package or branch. The versioned source artifact and Claim Register control the normative identity.
 
 ---
 
-## What v18 is
+## 12. Recommended reading order
 
-AK–HDPST v18 is a repaired architecture built around strict claim separation.
+For a first reading:
 
-Every major statement should be classified as one of:
+1. this README;
+2. Main Chapter 1 — scope and safety rules;
+3. Main Chapter 8 — what is actually proved and what remains conditional;
+4. Main Chapters 2–3 — windowing, threshold deletion, and metric repair;
+5. Main Chapters 4–5 — Ext-edge and tower diagnostics;
+6. Appendix A — detailed proof of threshold-gap-safe stability;
+7. CR-v19 — exact claim status and permitted use;
+8. other appendices according to the target domain.
 
-```text
-Core definition
-Core theorem
-Interface definition
-Bridge candidate
-Bridge theorem
-Spec
-Operational policy
-Search artifact
-Companion template
-Non-claim
-```
-
-The purpose is to prevent the following invalid jump:
-
-```text
-high-dimensional projection
-  -> collapse-like behavior
-  -> external conjecture solved
-```
-
-In v18, the valid route is stricter:
-
-```text
-external object
-  -> declared realization
-  -> Core-readable persistence object
-  -> windowed evaluation
-  -> gate / diagnostic / ledger check
-  -> Core verdict
-  -> external theorem only if a bridge theorem is proved
-```
+For implementation or audit work, also read Appendices F, G, U, Y, Z, and the Companion.
 
 ---
 
-## Core evaluation in v18
+## 13. A small conceptual example
 
-The central repaired Core object is the windowed, thresholded barcode evaluation:
+Suppose a windowed barcode has finite bar lengths
 
-```text
-Eval(i, W, tau; F)
-  = T_bar_tau( W_W P_i(F) )
-```
+$$
+0.08,\quad 0.21,\quad 0.73
+$$
 
-Informally:
+and choose $\tau=0.20$.
 
-- `F` is a filtered or persistence-derived object.
-- `P_i(F)` is the degree `i` persistence profile.
-- `W_W` means restriction to a declared window `W`.
-- `T_bar_tau` deletes barcode intervals of length `<= tau`.
-- `Eval(i,W,tau;F)` is the repaired Core-visible profile.
+Hard deletion removes the $0.08$ bar and retains the $0.21$ and $0.73$ bars.
 
-The preferred lightweight notation in this README is:
+However, the $0.21$ bar lies very close to the threshold. If a comparison error could change its length across $0.20$, the retained/deleted classification is not robust.
 
-```text
-Eval_{i,W,tau}(F)
-```
+Therefore AK-HPDST asks for both:
+
+1. a certified discrepancy bound $\varepsilon$;
+2. a two-sided threshold gap larger than that bound.
+
+The calculation is not interpreted as stable merely because the software produced a barcode.
 
 ---
 
-## Repaired Core primitives
+## 14. Why the `OLD/` directory is retained
 
-### 1. Windowed barcode evaluation
+The historical materials are intentionally preserved as **repair ancestry and a warning against claim inflation**.
 
-```text
-Eval_{i,W,tau}(F)
-```
+Some old documents may contain obsolete, unsupported, or overstrong formulations, including unconditional readings of
 
-This is the primary Core-readable object used for collapse evaluation.
+$$
+PH_1=0=\operatorname{Ext}^1
+$$
 
----
+or an unrestricted equivalence between the two sides.
 
-### 2. Admissible representative
+These statements are **not normative in v19.0.0**.
 
-```text
-C_{tau,W}F
-```
+The `OLD/` directory exists to show:
 
-This is not a global strict filtered lift.
+- which claims were previously overextended;
+- why the present one-way eligible bridge is narrower;
+- why rejected claims must remain visible rather than being silently erased;
+- how immutable repair ancestry supports mathematical and audit accountability.
 
-It is an admissible representative used only when the required compatibility and eligibility conditions are declared.
-
----
-
-### 3. Tower comparison artifact
-
-```text
-phi_{i,W,tau}
-```
-
-This replaces older informal “after-collapse comparison map” language.
-
-The intended schematic form is:
-
-```text
-phi_{i,W,tau}:
-  ColimProfile_{i,W,tau}(F_bullet)
-    -> ApexProfile_{i,W,tau}(F_infty)
-```
+Do not use `OLD/` material as current theorem evidence. Cite the v19.0.0 source and its Claim Register entry instead.
 
 ---
 
-### 4. Type IV diagnostics
+## 15. AI and automated search
+
+AK-HPDST allows AI systems and automated tools to:
+
+- propose realizations, windows, thresholds, and bridge candidates;
+- search for counterexamples;
+- rank proof routes;
+- generate formalization candidates;
+- build maps, DAGs, manifests, and replay records;
+- critique or audit candidate arguments.
+
+But the semantic boundary is strict:
 
 ```text
-(mu_Collapse, nu_Collapse)
+Generation != verification
+Retrieval != verification
+Consensus != proof
+Compilation != theorem validity
+Storage != certification
+Replay != mathematical truth
 ```
 
-These are monitored tower diagnostics derived from the declared tower comparison artifact.
-
-A clean diagnostic state is written as:
-
-```text
-(mu_Collapse, nu_Collapse) = (0,0)
-```
+An AI-generated statement becomes usable evidence only after it is converted into the required verifier-side object and passes the applicable mathematical and audit checks.
 
 ---
 
-### 5. Ledger budget
+## 16. Versioning and citation discipline
 
-```text
-Sigma_delta < gap_tau
-```
+When referring to an AK-HPDST result, record at least:
 
-This is the audit budget condition.
+- theory version and document revision;
+- exact source artifact;
+- theorem, definition, or Claim UID;
+- complete hypotheses and monitored scope;
+- comparison mode;
+- required artifact identities;
+- repair ancestry when applicable.
 
-It records whether accumulated defects remain below the declared gap.
-
----
-
-## Core pass in v18
-
-A Core pass is a statement about the Core-readable object only.
-
-A typical v18 Core pass may require:
-
-```text
-Eval_{1,W,tau}(F) = 0
-```
-
-```text
-Ext^1 = 0 only in the eligible regime
-```
-
-```text
-(mu_Collapse, nu_Collapse) = (0,0)
-```
-
-```text
-Sigma_delta < gap_tau
-```
-
-```text
-required artifacts and manifest records are present
-```
-
-A Core pass does **not** automatically imply:
-
-```text
-Navier-Stokes regularity
-BSD
-ABC
-RH
-Iwasawa main conjecture
-Langlands theorem
-Fukaya or mirror theorem
-cryptographic security
-```
-
-Those require separate bridge theorems.
+A later summary, README, diagram, or software implementation does not replace the theorem statement in the canonical source.
 
 ---
 
-## Core vs Interface vs Spec
+## 17. Final interpretation
 
-### Core
+AK-HPDST v19.0.0 provides a disciplined answer to the question:
 
-The Core layer contains theorem-grade internal statements about:
+> **How can a complex mathematical object be projected into a simpler persistence-based representation, processed by a controlled collapse operation, and then evaluated without confusing evidence, approximation, computation, and proof?**
 
-- constructible one-parameter persistence,
-- windowed barcode evaluation,
-- threshold deletion,
-- admissible representatives,
-- eligible use of `Ext^1`,
-- tower diagnostics,
-- ledger budget checks,
-- gate verdicts,
-- manifest requirements.
+Its central contribution is not a claim that every problem collapses. Its contribution is an architecture that makes the following distinctions explicit and auditable:
 
----
+- projection versus preservation;
+- short-bar deletion versus stable deletion;
+- exact equality versus metric control;
+- persistence vanishing versus derived vanishing;
+- local profile agreement versus tower-level agreement;
+- search output versus theorem evidence;
+- Core certification versus external mathematical truth.
 
-### Interface
-
-The Interface layer defines how external domains may connect to the Core.
-
-Examples:
-
-- arithmetic interfaces,
-- Iwasawa tower interfaces,
-- Navier-Stokes interfaces,
-- mirror / categorical interfaces,
-- Fukaya-side interfaces,
-- cryptographic interfaces.
-
-An interface may define a route into the Core, but it does not prove an external theorem by itself.
-
----
-
-### Spec
-
-`[Spec]` marks a proposed, exploratory, or conditional component.
-
-A `[Spec]` statement is not a theorem.
-
-```text
-[Spec] != theorem
-```
-
----
-
-## Bridge discipline
-
-The most important v18 rule is:
-
-```text
-Bridge Program != Bridge Theorem
-```
-
-A bridge theorem is required whenever one wants to move from:
-
-```text
-Core-visible condition
-```
-
-to:
-
-```text
-external-domain conclusion
-```
-
-or from:
-
-```text
-external-domain structure
-```
-
-to:
-
-```text
-Core-readable behavior
-```
-
-A bridge candidate must remain marked as candidate or `[Spec]` until proved.
-
----
-
-## Problem Interface Appendices
-
-The v18 appendices are not written as solved-problem appendices.
-
-They are **Problem Interface Appendices**.
-
-Their function is to specify:
-
-```text
-external source data
-realization route
-Core-readable target
-Eval_{i,W,tau}
-C_{tau,W}F if needed
-phi_{i,W,tau} if tower diagnostics are used
-ledger treatment
-bridge status
-explicit non-claims
-```
-
----
-
-### Navier-Stokes appendices
-
-The Navier-Stokes appendices are organized as:
-
-```text
-NS-A: Exploration Protocol
-NS-B: Theoretical Soundness Layer
-NS-C: Proof-First Program
-```
-
-They do not prove Navier-Stokes regularity.
-
-Their purpose is to state what would be required before a Core pass could be interpreted as a PDE theorem.
-
----
-
-### Arithmetic / MS appendices
-
-The arithmetic-facing appendices organize:
-
-```text
-arithmetic source data
-cyclotomic and Iwasawa towers
-congruence defects
-Selmer-like structures
-mirror / categorical comparison
-Fukaya-side calibration
-```
-
-They do not prove BSD, ABC, RH, or Iwasawa main conjectures.
-
----
-
-### AGI / normalization appendices
-
-The AGI-facing appendices define normalization, platform, and interface behavior.
-
-They do not turn AI output into proof.
-
----
-
-## Search / Platform layer
-
-Appendices U-Z define the Search / Platform layer.
-
-This layer supports:
-
-```text
-agents
-search protocols
-bridge programs
-validity maps
-certificate DAGs
-proof stores
-execution records
-reproducibility manifests
-```
-
-It does not enlarge the Core.
-
----
-
-## Main non-confusion rules
-
-```text
-AI output != proof
-```
-
-```text
-Search result != theorem
-```
-
-```text
-Bridge Program != Bridge Theorem
-```
-
-```text
-Validity Map != proof
-```
-
-```text
-Certificate DAG != proof by existence
-```
-
-```text
-Proof Store storage != certification
-```
-
-```text
-Execution != proof
-```
-
-```text
-Replay pass != theorem validity
-```
-
-```text
-R5 reproducibility != theorem validity
-```
-
-```text
-Core pass != external theorem without a proved bridge
-```
-
----
-
-## Companion documents
-
-### Companion 1: Arithmetic Calibration Companion
-
-Companion 1 provides operational templates for arithmetic calibration.
-
-It includes templates for:
-
-```text
-arithmetic source records
-cyclotomic tower calibration
-Iwasawa module calibration
-congruence defect records
-arithmetic ledgers
-Type IV proxy records
-bridge calibration records
-mirror / categorical calibration
-Fukaya-side calibration
-```
-
-Important rule:
-
-```text
-mu_Iw != mu_Collapse by default
-```
-
-Companion 1 is operational support, not an arithmetic theorem source.
-
----
-
-### Companion 2: Execution / Reproducibility Companion
-
-Companion 2 provides execution and reproducibility templates.
-
-It includes templates for:
-
-```text
-run.yaml
-artifact_manifest.json
-eval.json
-ledger.json
-diagnostics.json
-gate.json
-proof_store_entry.json
-reproducibility_manifest.json
-verification records
-audit records
-R0-R5 reproducibility checklist
-```
-
-Important rule:
-
-```text
-Execution and reproducibility templates are operational aids, not proofs.
-```
-
----
-
-## Conceptual run protocol
-
-A v18 execution should follow the repaired order:
-
-```text
-external data
-  -> realization
-  -> persistence profile
-  -> window restriction
-  -> threshold barcode deletion
-  -> Eval_{i,W,tau}
-  -> gate / diagnostic / ledger
-  -> manifest / proof-store / replay
-  -> Core verdict
-```
-
-External theorem interpretation requires an additional step:
-
-```text
-Core verdict
-  -> proved bridge theorem
-  -> external-domain conclusion
-```
-
----
-
-## Suggested execution artifacts
-
-```text
-out/artifacts/
-  eval/
-    eval_W0_deg1_tau.json
-  representatives/
-    C_tau_W_F_record.json
-  diagnostics/
-    diagnostics_W0_deg1_tau.json
-  tower/
-    phi_i_W_tau.json
-  ledger/
-    ledger_W0.json
-  gate/
-    gate_W0.json
-  proof_store/
-    proof_store_entry.json
-  replay/
-    reproducibility_manifest.json
-  checksums/
-    checksums.txt
-```
-
-Artifact existence alone does not imply proof.
-
----
-
-## Example `run.yaml` schema
-
-```yaml
-meta:
-  name: "demo-v18"
-  version: "18"
-  seed: 1337
-
-data:
-  input: "data/example.h5"
-  backend: "bars"
-  degrees: [0, 1]
-
-windows:
-  - label: "W0"
-    range: "[0.0, 0.5)"
-  - label: "W1"
-    range: "[0.5, 1.0)"
-
-threshold:
-  tau: 0.15
-  deletion_policy: "delete bars of length <= tau"
-
-evaluation:
-  expression: "Eval_{i,W,tau}(F)"
-  records:
-    enabled: true
-    output: "out/artifacts/eval/"
-
-representative:
-  use_C_tau_W_F: false
-  record: null
-
-tower_diagnostics:
-  enabled: true
-  artifact: "phi_{i,W,tau}"
-  output: "out/artifacts/diagnostics/"
-
-ledger:
-  enabled: true
-  condition: "Sigma_delta < gap_tau"
-  gap_tau: 0.03
-  output: "out/artifacts/ledger/"
-
-gate:
-  type: "B-Gate+"
-  require:
-    Eval_1_zero: true
-    Ext1_zero_if_eligible: true
-    TypeIV_clean: true
-    budget_pass: true
-
-audit:
-  outputs:
-    - "eval"
-    - "diagnostics"
-    - "ledger"
-    - "gate"
-    - "checksums"
-  checksums: "sha256"
-
-non_claims:
-  - "Successful execution is not proof by itself."
-  - "Replay pass is not theorem validity."
-  - "Core pass does not imply external theorem without a proved bridge."
-```
-
----
-
-## Example `eval.json`
-
-```json
-{
-  "evaluation": {
-    "id": "eval-0001",
-    "input_object": "F",
-    "degree": 1,
-    "window": "W0",
-    "threshold": "tau=0.15",
-    "expression": "Eval_{i,W,tau}(F)",
-    "barcode_policy": "delete bars of length <= tau",
-    "result": "zero / nonzero / pending",
-    "status": "candidate / computed / verified / failed",
-    "non_claims": [
-      "The existence of eval.json does not imply evaluation correctness.",
-      "Evaluation summary is not audit-sufficient without reconstructible data."
-    ]
-  }
-}
-```
-
----
-
-## Example `diagnostics.json`
-
-```json
-{
-  "diagnostics": {
-    "id": "diag-0001",
-    "diagnostic_type": "TypeIV",
-    "tower_artifact": "phi_{i,W,tau}",
-    "source_profile": "ColimProfile_{i,W,tau}(F_bullet)",
-    "target_profile": "ApexProfile_{i,W,tau}(F_infty)",
-    "mu_Collapse": "value_or_pending",
-    "nu_Collapse": "value_or_pending",
-    "verdict": "clean / obstructed / pending / failed",
-    "non_claims": [
-      "A Type IV proxy is not a monitored Type IV diagnostic.",
-      "A monitored diagnostic requires a declared phi_{i,W,tau} artifact."
-    ]
-  }
-}
-```
-
----
-
-## Example `ledger.json`
-
-```json
-{
-  "ledger": {
-    "id": "ledger-0001",
-    "components": [
-      {
-        "symbol": "delta_disc",
-        "source": "discretization",
-        "value_or_bound": "declared"
-      },
-      {
-        "symbol": "delta_bridge",
-        "source": "bridge transfer",
-        "value_or_bound": "declared"
-      }
-    ],
-    "aggregate": {
-      "Sigma_delta": "computed_or_declared",
-      "gap_tau": "declared",
-      "condition": "Sigma_delta < gap_tau",
-      "result": "pass / fail / pending"
-    },
-    "non_claims": [
-      "The existence of ledger.json does not imply budget pass.",
-      "Budget pass does not replace B-Gate+ or diagnostics."
-    ]
-  }
-}
-```
-
----
-
-## Example `gate.json`
-
-```json
-{
-  "gate": {
-    "id": "gate-0001",
-    "type": "B-Gate+",
-    "clauses": [
-      {
-        "statement": "Eval_{1,W,tau}(F) = 0",
-        "result": "pass / fail / pending"
-      },
-      {
-        "statement": "Ext1 = 0 in eligible regime",
-        "result": "pass / fail / not_applicable / pending"
-      },
-      {
-        "statement": "Type IV diagnostics clean using phi_{i,W,tau}",
-        "result": "pass / fail / pending"
-      },
-      {
-        "statement": "Sigma_delta < gap_tau",
-        "result": "pass / fail / pending"
-      }
-    ],
-    "final_verdict": "pass / fail / pending / blocked",
-    "non_claims": [
-      "The existence of gate.json does not imply gate pass.",
-      "Clause-level support is required."
-    ]
-  }
-}
-```
-
----
-
-## What changed from v17.x to v18
-
-### Conceptual change
-
-v17.x framed AK-HDPST as an exploration OS with Core / Spec separation.
-
-v18 repairs and strengthens this into:
-
-```text
-an auditable collapse-oriented proof interface framework
-```
-
-The main shift is:
-
-```text
-from:
-  truncation-first exploration OS
-
-to:
-  windowed Core evaluation + explicit bridge discipline + proof governance
-```
-
----
-
-### Core notation change
-
-Older language:
-
-```text
-T_tau
-C_tau
-after-collapse comparison map
-DiagZero
-```
-
-v18 preferred language:
-
-```text
-Eval_{i,W,tau}(F)
-C_{tau,W}F
-phi_{i,W,tau}
-(mu_Collapse, nu_Collapse) = (0,0)
-Sigma_delta < gap_tau
-```
-
----
-
-### Claim-status change
-
-v18 requires explicit status separation:
-
-```text
-Core theorem
-Interface definition
-Bridge candidate
-Bridge theorem
-Spec
-Operational policy
-Search artifact
-Non-claim
-Companion template
-```
-
----
-
-### Platform change
-
-v18 adds a clearer governance shell:
-
-```text
-Agent Semantics
-Hunter / Mapper / Lifter Protocols
-Bridge Programs
-Validity Map and Certificate DAG
-AI Platform and Proof Store
-Execution and Reproducibility Schema
-```
-
----
-
-## Roadmap after v18
-
-The recommended next steps are not to add more broad appendices.
-
-The next work should focus on small, verifiable strengthening.
-
----
-
-### Priority 1: AK v18 Claim Register
-
-Create a register of all claims, definitions, bridges, specs, and non-claims.
-
-```text
-Goal:
-  prevent Spec / theorem / bridge confusion
-```
-
----
-
-### Priority 2: Core Micro-Theorem Pack
-
-Prove small Core results about:
-
-```text
-window restriction compatibility
-threshold deletion idempotence
-deletion-type monotonicity
-gap stability
-ledger-safe perturbation
-```
-
----
-
-### Priority 3: Arithmetic Toy Bridge Pack
-
-Build a finite or toy Iwasawa-like tower and prove a small bridge:
-
-```text
-eventual tower stability
-  -> clean AK tower diagnostic
-```
-
----
-
-### Priority 4: Iwasawa Interface Skeleton
-
-Prepare the real arithmetic route:
-
-```text
-Iwasawa tower
-Selmer complex
-p-adic structure
-Core-readable realization
-phi_{i,W,tau}
-mu_Iw / mu_Collapse separation
-```
-
----
-
-### Priority 5: Bridge Theorem Workbench
-
-Create templates for promoting:
-
-```text
-Bridge Candidate -> Bridge Theorem
-```
-
----
-
-### Priority 6: Minimal Formal Governance Core
-
-Formalize the governance layer first:
-
-```text
-Spec cannot be used as theorem
-Bridge Program cannot discharge Bridge Theorem
-Stored object is not verified object
-Core pass does not imply external theorem without bridge
-```
-
----
-
-## Installation
-
-The following is illustrative.
-
-```bash
-git clone https://github.com/your-org/ak-hdpst.git
-cd ak-hdpst
-
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-
-pip install -e ".[all]"
-```
-
-Actual package layout may vary.
-
----
-
-## Quickstart
-
-The following commands are illustrative.
-
-```bash
-# Prepare a v18 run configuration
-cp examples/v18/minimal/run.yaml ./run.yaml
-
-# Execute a repaired evaluation / diagnostics / ledger pipeline
-akhdpst run run.yaml
-
-# Inspect Core-facing records
-akhdpst audit out/artifacts --by-window
-```
-
----
-
-## Minimal Python API
-
-Illustrative only.
-
-```python
-from akhdpst.eval import eval_window_threshold
-from akhdpst.diagnostics import compute_typeIV
-from akhdpst.ledger import check_budget
-from akhdpst.gate import b_gate_plus
-
-F = load_filtered_object("data/example.h5")
-
-tau = 0.15
-W = (0.0, 0.5)
-degree = 1
-
-# Repaired windowed evaluation
-E = eval_window_threshold(F, degree=degree, window=W, tau=tau)
-
-# Declared tower diagnostic using phi_{i,W,tau}
-mu, nu = compute_typeIV(
-    tower="declared_tower",
-    degree=degree,
-    window=W,
-    tau=tau,
-    artifact="phi_i_W_tau.json"
-)
-
-# Ledger budget check
-budget_ok = check_budget(
-    sigma_delta=0.011,
-    gap_tau=0.030
-)
-
-# Gate check
-ok = b_gate_plus(
-    eval_1_zero=E.is_zero(),
-    ext1_zero_if_eligible=True,
-    typeIV_clean=(mu == 0 and nu == 0),
-    budget_ok=budget_ok
-)
-```
-
----
-
-## Contributing policy
-
-Contributions should preserve v18 non-confusion rules.
-
-### Required
-
-- Mark claim status explicitly.
-- Separate Core, Interface, Bridge, Spec, and Operational claims.
-- Do not treat AI output as proof.
-- Do not treat stored artifacts as certified.
-- Do not treat reproducibility as theorem validity.
-- Use `Eval_{i,W,tau}`, `C_{tau,W}F`, and `phi_{i,W,tau}` consistently.
-- Include ledger treatment for defects.
-- Include non-claim clauses for examples and templates.
-
-### Not allowed
-
-```text
-Spec -> theorem without proof
-Bridge Program -> Bridge Theorem without proof
-Core pass -> external theorem without bridge
-Storage -> certification
-Replay pass -> theorem validity
-AI confidence -> proof
-```
-
----
-
-## Citation template
-
-```text
-AK-HDPST v18:
-AK High-Dimensional Projection Structural Theory,
-an auditable collapse-oriented proof interface framework.
-
-Author: Atsushi Kobayashi
-Year: 2026
-Repository / DOI: insert URL or DOI
-```
-
----
-
-## License
-
-```text
-MIT
-```
-
-See `LICENSE`.
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20078142.svg)](https://doi.org/10.5281/zenodo.20078142)
-
----
-
-## Terms cheat sheet
-
-```text
-Eval_{i,W,tau}(F)
-  Windowed, thresholded barcode evaluation.
-
-C_{tau,W}F
-  Admissible representative used only under declared compatibility.
-
-phi_{i,W,tau}
-  Declared tower comparison artifact.
-
-mu_Collapse, nu_Collapse
-  Monitored Type IV tower diagnostics.
-
-Sigma_delta < gap_tau
-  Ledger budget condition.
-
-B-Gate+
-  Core gate using repaired evaluation, eligible Ext clause if invoked,
-  Type IV diagnostics, and ledger budget.
-
-Bridge Candidate
-  Proposed cross-layer implication, not yet theorem.
-
-Bridge Theorem
-  Proved cross-layer implication.
-
-Bridge Program
-  Proof-management program for bridge candidates, not theorem.
-
-Validity Map
-  Navigation and status map, not proof.
-
-Certificate DAG
-  Dependency structure, not proof by existence.
-
-Proof Store
-  Storage and registry infrastructure, not certification.
-
-Replay pass
-  Reproducibility result, not theorem validity.
-
-Spec
-  Explicitly non-theorem exploratory or conditional statement.
-```
-
----
-
-## Final v18 statement
-
-AK-HDPST v18 should be read as:
-
-```text
-A framework for making collapse-based projection, persistence evaluation,
-tower diagnostics, bridge programs, and proof-management infrastructure
-auditable without confusing exploration, storage, execution, or Core pass
-with external theorem proof.
-```
-
-The shortest summary is:
-
-```text
-AK-HDPST v18 is not a universal solver.
-It is an auditable proof-interface framework for collapse-oriented exploration.
-```
+That separation is the foundation of the v19.0.0 release.

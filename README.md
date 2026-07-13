@@ -8,6 +8,8 @@
 **Release:** v19.0.0 - Threshold-Gap Metric Repair Release  
 **Status:** Research framework with a proved internal Core, conditional interfaces, restricted toy bridges, search infrastructure, and explicit non-claims
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21330904.svg)](https://doi.org/10.5281/zenodo.21330904)
+
 ---
 
 ## 1. Beginner's overview

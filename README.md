@@ -8,7 +8,7 @@
 **Release:** v20.0.0 - Finite Proof Compression, Higher Obstruction Bridges, and Problem Demonstration Release
 **Status:** Public research release with a conservative v20 Core, finite detector theorems, higher Ext interfaces, exact Known-Theorem Recovery tracks, and v20-dependent HT and UB research appendices
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21330904.svg)](https://doi.org/10.5281/zenodo.21330904)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21664462.svg)](https://doi.org/10.5281/zenodo.21664462)
 
 ---
 

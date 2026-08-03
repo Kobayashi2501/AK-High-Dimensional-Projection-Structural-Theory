@@ -8,7 +8,7 @@
 **リリース:** v20.0.0 - Finite Proof Compression, Higher Obstruction Bridges, and Problem Demonstration Release
 **状態:** 保守的に拡張されたv20 Core、有限検出器定理、高次Extインターフェース、Exact Known-Theorem Recovery、ならびにv20依存のAppendix HT・UBを含む公開研究リリース
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21664462.svg)](https://doi.org/10.5281/zenodo.21664462)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21716780.svg)](https://doi.org/10.5281/zenodo.21716780)
 
 ---
 

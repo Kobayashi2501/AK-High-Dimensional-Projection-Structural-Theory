@@ -11,6 +11,8 @@
 **Status:** Canonical v21.0.0 source-controlled research corpus; final Claim Register included  
 **Repository format:** PDF research corpus, with a standalone Kernel Paper for first reading
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21831104.svg)](https://doi.org/10.5281/zenodo.21831104)
+
 ---
 
 ## Start here

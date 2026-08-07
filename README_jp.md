@@ -1,643 +1,950 @@
-# AK-HPDST v20.0.0
+# AK-HPDST v21.0.0
 
-## AK高次元射影構造理論
+## AK高次元射影構造理論  
+## AK High-Dimensional Projection Structural Theory
 
-> 複雑な数学的対象から有限かつ再構成可能な証明情報を抽出し、ホモロジー・導来圏・スペクトル系列・塔・逆極限などを通して情報を安全に輸送し、欠損を監査したうえで外部数学の結論へReturnするための、型付き・監査可能・欠損認識型の数学的フレームワーク。
+> 複雑な数学的対象を制御された「構造的な影」へ射影し、有限観測を証明可能な有限証拠へ変換し、実際の有限図式を再構成・大域化し、最後に証明された強度だけを元の数学領域へReturnするための、型付き数学フレームワーク。
 
-**著者:** Atsushi Kobayashi
-**リリース:** v20.0.0 - Finite Proof Compression, Higher Obstruction Bridges, and Problem Demonstration Release
-**状態:** 保守的に拡張されたv20 Core、有限検出器定理、高次Extインターフェース、Exact Known-Theorem Recovery、ならびにv20依存のAppendix HT・UBを含む公開研究リリース
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21716780.svg)](https://doi.org/10.5281/zenodo.21716780)
-
----
-
-## 1. 初学者向け概要
-
-AK-HPDSTは、複雑な数学的対象に含まれる情報を、次の順序で扱う理論です。
-
-1. 元の数学的対象から、監視したい情報を選び出す。
-2. それを持続ホモロジー、フィルター付き複体、有限証明書などのCore可読形式へ変換する。
-3. 有限化・圧縮・比較・高次障害・極限操作を通して情報を輸送する。
-4. 途中で失われた情報や未証明の接続を、欠損として明示する。
-5. すべての必要条件が満たされた場合にのみ、元の数学分野の結論へ戻す。
-
-AK-HPDSTは、有限個の計算結果、AIが生成した証明案、長く安定して見える数列、正常に終了したプログラム実行を、それだけで数学定理とは認めません。
-
-中心的な安全原則は次です。
-
-```text
-AK内部でのpass != 外部数学の定理
-
-ただし、実現・比較・有限から無限への還元・Returnの
-すべての矢印が証明されている場合を除く。
-```
-
-v20.0.0が扱う基本的な問いは、次のように表せます。
-
-```text
-外部数学の命題を有限かつ型付きの証拠へ変換し、
-情報を暗黙に失わずに複数の数学的構成を通過させ、
-元の意味へ監査可能な形で戻すことができるか。
-```
-
-したがってAK-HPDSTは、あらゆる難問を自動的に解く万能解法ではありません。
-
-本理論は、証明圧縮、証明輸送、欠損診断、Return、監査を一つの体系として扱うための数学的アーキテクチャです。
+**著者:** Atsushi Kobayashi  
+**理論バージョン:** v21.0.0  
+**リリーステーマ:** Finite Globalization, Unified Bridge Calculus, and Certificate Complexity  
+**主要数学アーキテクチャ:** `Core-P + Core-DG`  
+**ステータス:** v21.0.0 正典・source-controlled research corpus / Final Claim Register収録  
+**リポジトリ形式:** 全文PDF。最初に読むための独立したKernel Paperを収録
 
 ---
 
-## 2. 専門的Summary
+## はじめに読むもの
 
-v20 Coreは主として、体 `k` 上の構成可能な一変数持続加群、および監視対象のホモロジーがCore可読となる有限型フィルター付き対象を扱います。
+最短で全体像をつかむ場合は、次の順序を推奨します。
 
-フィルター付き対象 `F`、次数 `n`、窓 `W`、閾値 `tau` に対し、標準評価は次です。
+1. [Kernel Paper](<AK_HPDST_v21_0_0_Kernel_Paper_Projection_Reaudited(1).pdf>)  
+   v21の数学的エッセンスを約50ページに圧縮した独立論文です。
+2. [Main Chapters 1--10](<AK_HPDST_v21_0_0_Part1_Main.pdf>)  
+   v21の一般理論・定理・型・Bridge/Returnの正典です。
+3. [Final Claim Register](<AK_HPDST_v21_0_0_Appendix_Part12_Claim_Register.pdf>)  
+   定理ID、所有権、migration、source binding、使用可能強度を管理します。
 
-```text
-B(n, W; F) = Window(W, P_n(F))
-
-Eval(n, W, tau; F)
-    = T_bar(tau, B(n, W; F))
-```
-
-処理順序は固定されます。
-
-```text
-persistence -> window -> threshold deletion
-```
-
-v20は外部定理へ至る経路を、次の独立した義務へ分解します。
-
-```text
-外部ソースの意味
-    -> 目的に忠実な実現
-    -> Core可読プロファイル
-    -> 有限検出証明書
-    -> 必要に応じた高次障害輸送
-    -> 必要に応じた有限から無限への還元
-    -> Return定理
-    -> 外部結論
-```
-
-後段の成功は、前段で欠けた矢印を補償しません。
-
-v19からv20への主な拡張は次です。
-
-* 完全な有限検出証明書
-* family-relativeな証明圧縮と最小証明書解析
-* 制御されない有限検出に対するno-go定理
-* 明示的な適格性の下での高次数 `PH_n -> Ext^n` 輸送
-* terminal Type IV診断とtransient defectの分離
-* 有限から無限への厳密な還元記録
-* benchmark quarantineを備えたKnown-Theorem Recovery
-* AI、検索、プラットフォーム、証明オブジェクトのproof-firstガバナンス
-
-また、v20を基礎とする二つの研究Appendixを含みます。
-
-* **Appendix HT:** 高次輸送、合成、欠損、Returnを統合する数学的輸送層
-* **Appendix UB:** 12件の検証済み数学的成功事例を収録した統合Bridge検証層
-
-HTとUBはv20研究体系を大幅に拡張しますが、凍結されたv20 Coreを暗黙に書き換えたり、自動的に拡張したりするものではありません。
+**最初の数学的読解にはKernel Paperを推奨します。**  
+ただし、v21の完全な定理文、仮定、証明、Interface、Validation、運用境界については、Mainおよび各Appendixが正典です。
 
 ---
 
-## 3. AK-HPDST v20.0.0で可能になったこと
+## 目次
 
-宣言された仮定、対象クラス、証明書、artifact要件の範囲内で、v20.0.0は次を実行できます。
-
-* 適切なフィルター付き対象からwindow-first持続プロファイルを構成する。
-* 短い有限barをhard thresholdによって削除する。
-* 二側threshold-gap条件により、hard deletion後の安定性を証明する。
-* 有限観察と完全な有限証明書を区別する。
-* 検出器が適用されたstageを固定し、repaired profileのzero/nonzeroを認証する。
-* detector soundnessとdetector completenessを別の定理として扱う。
-* family-relativeなcertificate sizeとminimal stencilを評価する。
-* 一様な有限検出器が存在しない条件をno-go定理として示す。
-* 適格なdegree-`n` realizationの下で、repaired vanishingを`Ext^n` vanishingへ輸送する。
-* zero-reflectionを使用する場合、その自然性とfaithfulnessを別途証明させる。
-* objectの類似ではなく、実際のmorphismを用いてtowerを比較する。
-* terminal/cofinal defectと、長いtransient defect・短いinterior defectを分離する。
-* overlap、coverage、continuation、Restartを備えた局所検出atlasを構成する。
-* exact comparison、metric-gap-certified comparison、有効なnot-comparedを区別する。
-* inverse limit、direct limit、completion、derived limit、apex agreementを個別に監査する。
-* 既知定理を、循環のないInterface-Core-Reduction-Return経路で正確な強度に回収する。
-* source binding、claim status、failure route、artifact identity、repair ancestryを保存する。
-* AI、proof assistant、検索agent、計算toolを利用しつつ、それらへ自動的な定理権限を与えない。
-
-AK-HPDSTが問うのは、単に次ではありません。
-
-```text
-計算結果はzeroだったか。
-```
-
-次の事項をまとめて問います。
-
-```text
-何を評価したのか。
-有限試験は完全だったか。
-どのprofile stageで適用されたか。
-何の情報を捨てたか。
-比較はexactかmetricか。
-有限結果は本当に無限対象を支配するか。
-どの強度で外部数学へReturnできるか。
-```
+- [1. AK-HPDSTとは何か](#1-ak-hpdstとは何か)
+- [2. v20とv21の違い](#2-v20とv21の違い)
+- [3. 最短の入口 Kernel Paper](#3-最短の入口-kernel-paper)
+- [4. Dual-Coreアーキテクチャ](#4-dual-coreアーキテクチャ)
+- [5. P2DG Interface](#5-p2dg-interface)
+- [6. v21におけるCollapse](#6-v21におけるcollapse)
+- [7. 有限観測と有限証明は違う](#7-有限観測と有限証明は違う)
+- [8. 有限証明には明確なno-go境界がある](#8-有限証明には明確なno-go境界がある)
+- [9. finite-to-infinite reduction](#9-finite-to-infinite-reduction)
+- [10. record globalizationとobject globalization](#10-record-globalizationとobject-globalization)
+- [12. Unified Bridgeとtyped Return](#12-unified-bridgeとtyped-return)
+- [16. v21 Kernelで数学的に際立つ結果](#16-v21-kernelで数学的に際立つ結果)
+- [19. Known-Theorem Recovery](#19-known-theorem-recovery)
+- [22. AI・探索・proof engineering](#22-ai探索proof-engineering)
+- [27. v21が主張しないこと](#27-v21が主張しないこと)
+- [33. Repository Guide](#33-repository-guide)
+- [34. 推奨読解ルート](#34-推奨読解ルート)
+- [41. 最終的な位置づけ](#41-最終的な位置づけ)
 
 ---
 
-## 4. v20.0.0が主張しないこと
+## 1. AK-HPDSTとは何か
 
-本リリース単独では、次を証明しません。
-
-* リーマン予想
-* Birch and Swinnerton-Dyer予想
-* ABC予想
-* 一般的なIwasawa Main Conjecture
-* 一般Leopoldt予想
-* 一般Tachikawa予想
-* 3次元Navier-Stokes方程式の無条件大域正則性
-* Clay問題級のNavier-Stokes解決
-* Langlands対応
-* homological mirror symmetryまたはFukaya圏同値
-* 一般的な暗号安全性定理
-* persistenceとderived obstruction groupの普遍的同値
-* 制御されない右無限窓または多変数データに対する普遍有限検出器
-
-特に、v20は無条件に次を主張しません。
+AK-HPDSTは、数学の多くの領域に共通して現れる次の構造的問題を扱います。
 
 ```text
-PH_n = 0 <-> Ext^n = 0
+高次元・非局所・無限・複雑な数学対象を、
+制御可能な数学的shadowへ射影し、
+
+有限証拠によって必要な性質を認証し、
+
+失われていない構造を実際の数学対象として再構成・大域化し、
+
+証明された強度だけを元の数学領域へ戻せるか？
 ```
 
-標準的な高次障害方向は、より限定的です。
+v21の基本経路は次です。
 
 ```text
-Eval(n, W, tau; F) = 0
-    -> Ext^n(A_n(F), k) = 0
+high-dimensional source X
+    |
+    | typed / purpose-faithful structural projection
+    v
+structured shadow F_X = R_AK(X)
+    |
+    | persistence / filtration / finite observation
+    v
+finite Collapse certificate
+    |
+    | P2DG reconstruction
+    v
+actual finite diagram
+    |
+    | coherence + effective descent
+    v
+global mathematical object
+    |
+    | typed Bridge / Return
+    v
+source-domain conclusion E_sigma(X)
 ```
 
-この含意を使用できるのは、degree-`n` realization、representative、edge extractor、cohomology identification、naturality、artifact packageがすべて有効な場合に限られます。
+AKにおける **projection（射影）** は構造的な意味です。
 
-逆向きの含意には、別途証明されたzero-reflectionまたはfaithfulness theoremが必要です。
+必ずしも、
+
+```text
+線形射影
+幾何学的な低次元化
+topological dimensionの減少
+global faithful functor
+```
+
+を意味しません。
+
+有効なAK射影には、少なくとも次を宣言する必要があります。
+
+```text
+source class
+source側で知りたいfeature
+observable / shadow
+variance
+coefficient
+使用する含意の方向
+information-loss profile
+preservation / reflection theorem
+failure boundary
+```
+
+したがって、射影された対象は元の対象そのものではありません。
+
+それは、
+
+```text
+目的に対して制御された structured shadow
+```
+
+です。
+
+AK理論の中心的な非対称性は次です。
+
+```text
+Projectionは構造的な影を取り出す。
+
+Returnだけが、
+認証された結論を元のsource domainへ戻す。
+```
+
+この
+
+```text
+Projection
+    -> Collapse
+    -> Reconstruction / Globalization
+    -> Return
+```
+
+が、AK高次元射影構造理論の根本概念です。
 
 ---
 
-## 5. v20の基本処理フロー
+## 2. v20とv21の違い
+
+v20は主として、
 
 ```text
-外部数学的対象
-        |
-        v
-source statementとimmutable source binding
-        |
-        v
-目的に忠実な実現または一変数抽出
-        |
-        v
-Core可読なfiltered objectまたはpersistence object
-        |
-        v
-windowed profile B(n, W; F)
-        |
-        v
-hard threshold deletion T_bar(tau)
-        |
-        v
-repaired evaluation Eval(n, W, tau; F)
-        |
-        +--> 完全な有限検出証明書
-        +--> exact / metric-gap-certified comparison
-        +--> admissible representative
-        +--> eligible higher Ext edge
-        +--> terminal / transient defect analysis
-        +--> atlas / overlap / continuation / Restart
-        +--> finite-to-infinite reduction / apex agreement
-        |
-        v
-typed B-Gate+ audit
-        |
-        v
-internal status: pass / reject / undefined / not_invoked
-        |
-        v
-proved Return theoremがある場合のみ外部結論
+finite proof compression
+higher obstruction transport
+finite-to-infinite reduction
+typed external Return
 ```
 
-図上で矢印が隣接していること、同じfilenameであること、複数AIが同意したこと、数値列が収束して見えること、コンパイルが成功したことだけでは、矢印は成立しません。
+を整備したreleaseでした。
+
+v21は、v20の完全なlower baselineを保守的に継承した上で、第二の数学Coreを追加し、**有限証拠から実際の有限数学構造、さらに大域対象へ進む経路**を正面から構築します。
+
+v21のstable architectureは、
+
+```text
+Core-P + Core-DG
+```
+
+です。
+
+ただし `+` は、
+
+```text
+二つのCoreが型付きInterfaceで連携する
+```
+
+という意味です。
+
+次を意味しません。
+
+```text
+Core-P = Core-DG
+
+Core-PからCore-DGが自動的に再構成される
+
+Core-DGからCore-Pが自動的に復元される
+
+categorical product / coproduct / equivalence
+```
+
+v21の主要鎖は、
+
+```text
+persistent certificate
+    -> finite diagram
+    -> global object
+    -> external Return
+```
+
+です。
+
+**各矢印は独立した定理を必要とします。**
+
+概念的には、
+
+```text
+v20:
+有限の認証済み証拠
+    -> 外部数学へのproof transport
+
+v21:
+有限の認証済み証拠
+    -> exact finite mathematical structure
+    -> effective globalization
+    -> target-relative external Return
+```
+
+への進化です。
 
 ---
 
-## 6. v20における主要な数学的進展
+## 3. 最短の入口: Kernel Paper
 
-### 6.1 有限観察と有限証明の分離
-
-有限個のsample、rank、critical value、map、数値出力があるだけでは、有限証明にはなりません。
-
-有限検出証明書は、必要に応じて次を含みます。
-
-* 正確なsource profileとsource stage
-* endpointまたはgerm convention
-* detector soundness
-* detector zero-completeness
-* birth、germ、stencil、coverageのexhaustiveness
-* family membership
-* 独立に与えられたexcess boundまたはmesh bound
-* immutable artifactとreplay情報
-
-必要な証拠が欠ける場合、statusは次です。
+v21全体は非常に大きいため、最初に次を読むことを推奨します。
 
 ```text
-undefined
+AK_HPDST_v21_0_0_Kernel_Paper_Projection_Reaudited(1).pdf
 ```
 
-次へ自動変換されることはありません。
-
-```text
-zero
-pass
-not_invoked
-```
-
-### 6.2 証明圧縮とMinCert
-
-v20は証明圧縮を、宣言されたfamilyに対する数学的問題として扱います。
-
-```text
-MinCert(family, W, tau)
-```
-
-は、情報クラス、endpoint policy、critical-data rule、coverage theorem、uniform lower-bound sourceが固定された後にのみ意味を持ちます。
-
-既にbarcode全体を知った一対象について、後から全barを列挙することは、非自明な証明圧縮とはみなしません。
-
-### 6.3 右無限領域のno-go境界
-
-追加構造がない場合、birth位置が無制限に右へ移動し得るfamilyを、一様な有限検出器で完全に認証することはできません。
-
-右無限領域で有限証明を行うには、たとえば次が必要です。
-
-* finite-birth theorem
-* eventual constancy
-* global support bound
-* compactness
-* finite-state reduction
-* 有効なfinite-to-infinite theorem
-
-### 6.4 高次障害edge
-
-v20は、明示されたeligible packageの下で、degree-one edgeを高次数へ拡張します。
-
-標準方向は次です。
-
-```text
-repaired PH_n vanishing
-    -> Ext^n vanishing
-```
-
-detector valueを人工的に複体へ配置しただけでは、自然なPH-Ext Bridgeにはなりません。
-
-外部数学的意味を持たせるには、独立したrealization theoremが必要です。
-
-### 6.5 terminal defectとtransient defectの分離
-
-実際のcomparison morphismに対し、terminal Type IVはcofinalなkernel/cokernel behaviorを監視します。
-
-```text
-(mu_Collapse, nu_Collapse) = (0, 0)
-```
-
-が意味するのは、宣言されたterminal scopeで一般的欠損が検出されなかったことです。
-
-それだけでは次を意味しません。
-
-* long transient defectが存在しない
-* short interior defectが存在しない
-* kernelまたはcokernelが完全にzero
-* comparison morphismが全面的なisomorphism
-
-そのためv20では、full defect profileとstage-correct transient detectorを別に用意します。
-
-### 6.6 有限から無限への還元
-
-長く安定して見える有限prefix、反復パターン、数値収束だけでは、無限定理になりません。
-
-有効な還元には次が必要です。
-
-* actual directed system
-* transition morphisms
-* finite witnessまたはstabilization theorem
-* genuine colimit、inverse limit、completion、authorized source object
-* apex
-* comparison morphism
-* apex agreement theorem
-* 必要に応じた`lim^1`、compactness、derived obstruction
-
----
-
-## 7. v20のKnown-Theorem Recovery
-
-v20では、既知定理をsource上の正確な強度で回収するための制御された仕組みを導入しました。
-
-benchmark theoremは構成経路から隔離されます。
-
-benchmarkの結論、証明、最終定数、結論から得られるwitnessを、realizationやcertificateへ混入することはできません。
-
-最終Compact Claim Registerでは、二つのexact-strength recovery trackと、G16 release gateのpassが記録されています。
-
-### 7.1 Iwasawa growth recovery
-
-Iwasawa trackは、登録されたprecursor packageに相対して、Iwasawa 1959 Theorem 4のcharacteristic-growth clauseを回収します。
-
-回収されるtail formulaは次です。
-
-```text
-c(n; A) = lambda(A) * n + mu(A) * p^n + constant
-```
-
-十分大きい`n`に対して成立します。
-
-経路は次を分離します。
-
-* source-side module structure inputs
-* p-primary realization
-* signed defect profile
-* bounded-window Core certification
-* finite-to-infinite tail reduction
-* exact Return
-* quarantined benchmarkとの独立比較
-
-このtrackは、Iwasawa Main Conjectureや、別のarithmetic interfaceを必要とするclass-number theoremを証明しません。
-
-### 7.2 fixed-exponent Serrin recovery
-
-Navier-Stokes trackは、宣言された3次元unforced Leray-Hopf regimeにおいて、次のstrict-subcritical implicationを回収します。
-
-```text
-u in L^6_t L^6_x
-    -> interior regularity
-```
-
-source theoremの結論は最終Returnまで隔離されます。
-
-これは既知criterionのexact recoveryであり、新しい解析的正則性証明でも、無条件大域正則性でもありません。
-
----
-
-## 8. Appendix HT - Higher Transfer and Unified Bridge Composition
-
-Appendix HTは、旧HC、PE、SS、RL、IW/Returnの内容を、一つの数学的輸送アーキテクチャへ統合したv20依存のsuccessor research appendixです。
-
-役割は次です。
-
-```text
-AK Core = 何を証明として認証できるか
-HT      = 認証された情報をどのように輸送・合成するか
-```
-
-### 8.1 HTの五つの輸送層
-
-#### HC - Homological Compression
-
-HCは、filtered dataまたはhomological dataを圧縮するときに、宣言されたpersistence情報をどこまで保護できるかを扱います。
-
-次を区別します。
-
-* homology preservation
-* persistence-module preservation
-* barcode preservation
-* representative preservation
-* exactnessとfunctoriality
-
-#### PE - Persistence-Ext Reconstruction
-
-PEは、有限persistence情報からExt情報を再構成するinterfaceを扱います。
-
-主な対象は次です。
-
-* complete finite stencil
-* Ext signature
-* Moebius reconstruction
-* barcode Return
-* object Return
-* morphism enhancement
-* reconstruction boundary
-
-#### SS - Spectral-Sequence Transfer
-
-SSは次を型付きで制御します。
-
-* pagewise information
-* differential
-* filtration
-* edge map
-* extension ambiguity
-* abutment Return
-
-spectral sequenceが存在するだけでは、degenerationは仮定されません。
-
-#### RL - Inverse Systems and Derived Limits
-
-RLは次を分離します。
-
-* finite-stage compatibility
-* direct / inverse limit
-* `lim^1`などのderived-limit defect
-* completion
-* apex agreement
-* external Return
-
-#### IW / Return Theory - Native Target Comparison
-
-Return Theoryは、圧縮または変換された証拠から、元の数学的targetへ戻ることの意味を定義します。
-
-Returnは単なる逆写像ではありません。
-
-Return strengthの例は次です。
-
-* scalar Return
-* ideal-level Return
-* module-level Return
-* object-level Return
-* derived Return
-* regularized / leading-term Return
-
-弱いReturnが、強いReturnへ暗黙に昇格することはありません。
-
-### 8.2 HTの統合合成
-
-HTは、共通interface record、unified defect stack、status precedence、conditional composition theoremを与えます。
-
-全体経路は次の形です。
+Kernel PaperではAK理論を、
 
 ```text
 source
-  -> compression
-  -> persistence / Ext reconstruction
-  -> spectral-sequence transfer
-  -> inverse-limit control
-  -> native Return
+-> structural projection
+-> repaired finite certificate
+-> finite diagram reconstruction
+-> finite diagrammatic globalization
+-> typed Return
 ```
 
-最終結論の強度は、経路中で証明された最も弱い矢印によって制限されます。
+として整理しています。
 
-HTは、従来別々に扱われてきた数学技法を、同じ型付き輸送系へ統合します。
+また、現在のv21 Kernelの中で数学的に重要な結果を抽出しています。
 
-ただし、すべての外部問題に対して全経路が自動的に存在するとは主張しません。
+主なものは、
+
+- hard threshold deletionに対するsharp threshold-gap stability
+- reduced image上のexact zero separation
+- family-relative finite certificate complexity
+- exact lower boundとfinite-detection no-go
+- endpoint-complete persistenceのfinite Mobius reconstruction
+- coordinate rank-query modelでのexact query complexity
+- finite-state inverse limit reconstruction
+- `lim^1 = 0` の有限認証
+- projective generatorによるzero reflection
+- cone detection
+- finite Morita reconstruction
+- finite Alexandrov realization
+- effective finite descent
+- target-relative Bridge / Return composition
+- reject / undefinedのcausal localization
+
+です。
+
+推奨順序は、
+
+```text
+README
+  -> Kernel Paper
+  -> Main Chapters 1--10
+  -> Foundation / DG
+  -> HT / UB
+  -> source-specific appendices
+```
+
+です。
 
 ---
 
-## 9. Appendix UB - Unified Bridge Validation Library
+## 4. Dual-Coreアーキテクチャ
 
-Appendix UBは、BridgeおよびReturn構成を実際の数学で検証するためのv20依存validated case libraryです。
+### 4.1 Core-P: Persistence Certificate Core
 
-役割は次です。
+Core-Pは、v20で修復されたPersistence Coreをv21で保守的に継承・強化したものです。
 
-```text
-HT = 再利用可能な輸送アーキテクチャ
-UB = 実行済み数学検証とregression library
-```
-
-再精査版ではVC7Lを独立事例として数えるため、12件の成功事例を含みます。
-
-### 9.1 有限再構成とdescent
-
-UBは次を検証します。
-
-* box-decomposable persistence dataのfinite rank probeによるexact reconstruction
-* 宣言されたadditive scalar-probe class内でのminimality
-* finite poset上のenriched projective probeによるobject/morphism reconstruction
-* kernel、cokernel、exact sequence、Yoneda class、complex、cone、derived triangleのReturn
-* finite Alexandrov space上のstrict object descentとderived descent
-* principal-good cover上のfinite Cech hypercohomology
-
-### 9.2 周期的homological obstruction
-
-UBは、宣言されたself-injective settingにおけるfinite-degree projectivity detectionを検証します。
-
-対象には次が含まれます。
-
-* truncated-cycle self-injective Nakayama algebra
-* finite syzygy permutationを持つrepresentation-finite self-injective algebra
-* periodic self-injective setting
-* finite twist orbit setting
-* 一部のrepresentation-infinite periodic family
-
-これらはspecial-class result、known-theory recovery、またはrefinementであり、一般Tachikawa予想を解決するものではありません。
-
-### 9.3 GaloisとLeopoldt Return
-
-UBは次を検証します。
-
-* `S_3` Leopoldt kernelのfixed-subfield dataからの再構成
-* proper subfieldによる有限zero certificate
-* Frobenius groupおよびodd-dihedral defect propagation
-* 明示的totally real cubic field、`p = 61`に対するp-adic regulator nonvanishing
-* その`S_3` Galois closureへのLeopoldt vanishing Return
-
-これは一般Leopoldt予想の証明ではありません。
-
-### 9.4 finite-state inverse limit
-
-宣言されたfinite-state towerに対し、UBは次を検証します。
+stableな標準scopeは、
 
 ```text
-inverse limit = period monodromyのstable image
-lim^1 = 0
+field上のconstructible one-parameter persistence
+finite-dimensional monitored data
 ```
 
-さらに次の有限証明書を与えます。
+です。
 
-* zero inverse limit
-* apex agreement
-* derived inverse limit
-* acyclicity
-* derived limitのquasi-isomorphism
-
-finite-state hypothesisは必須です。
-
-### 9.5 p-adic L-functionとIwasawa theory
-
-UBは次のchainを検証します。
+filtered object `F`、homological degree `n`、window `W`、threshold `tau` に対し、標準評価順序は、
 
 ```text
-compatible finite group-ring data
-    <-> bounded measure
-    <-> Iwasawa algebra element
-    <-> power series
-    -> finite-character specialization
+P_n(F)
+  -> Window_W(P_n(F))
+  -> T_bar_tau(Window_W(P_n(F)))
 ```
 
-さらに次を含みます。
+です。
 
-* finite-precision recovery bound
-* branchwise Mellin evaluation
-* pseudomeasureとpole処理
-* certified nonvanishingとvaluation record
-* finite cyclotomic obstruction scan
-* 宣言されたsquare-presented classにおけるexact finite-layer growth formula
-* 宣言されたcyclotomic-singular cyclic classにおけるrankとreduced torsion formula
-* Bockstein leading-term certificate
-
-これらは一般Main Conjecture、explicit reciprocity、multivariable/noncommutative Iwasawa growth theoremを証明するものではありません。
-
-### 9.6 analytic compactnessとcontinuation
-
-UBは、宣言されたSerrin boundの下で、approximation dataからregularityへ至る完全な条件付き経路を検証します。
+簡易表記では、
 
 ```text
-energy / time-derivative bound
-    -> compactness
-    -> strong local convergence
-    -> nonlinear defect removal
-    -> finite Serrin time atlas
-    -> regularity / uniqueness / continuation
+B(n,W;F) = Window_W(P_n(F))
+
+Eval(n,W,tau;F) = T_bar_tau(B(n,W;F))
 ```
 
-未解決の無条件stepは、任意weak solutionに対するglobal Serrin boundの生成です。
+となります。
 
-### 9.7 UBが実証したこと
+順序は固定されています。
 
-UBは、使用したすべての古典定理が新規であるとは主張しません。
+```text
+persistence
+    -> window
+    -> hard threshold deletion
+```
 
-UBの主要な数学的実証は、一つの共通proof-transport architectureが、次の複数分野で実際に閉じることです。
+Core-Pには次が含まれます。
 
-* persistence theory
-* representation theory
-* homological algebra
-* descent / derived category
-* Galois / p-adic arithmetic
-* inverse limit / Iwasawa theory
-* analytic compactness / PDE continuation
+- constructible persistenceとbarcode decomposition
+- hard finite-bar threshold deletion
+- sharp threshold-gap-safe transport
+- repaired zero / nonzero certification
+- finite detector soundness
+- finite detector completeness
+- certificate complexity
+- lower bounds
+- higher obstruction / Ext edge
+- actual morphismに基づくType IV diagnostics
+- transient defect separation
+- detector atlas
+- overlap / coverage / Restart
+- finite-state / Noetherian / theorem-certified finite-to-infinite reduction
+
+### thresholdに関する重要境界
+
+hard positive-threshold deletionは、一般には、
+
+```text
+global exact Serre localization
+globally non-expansive endofunctor
+universally functorial exact operation
+```
+
+ではありません。
+
+安全なmetric transportは概略、
+
+```text
+d_B(B,C) <= epsilon
+
+かつ
+
+B,Cのどのfinite barの長さも
+[tau - epsilon, tau + epsilon]
+に入らない
+
+なら
+
+d_B(T_bar_tau(B), T_bar_tau(C)) <= epsilon
+```
+
+という二側threshold-gap条件のもとで成立します。
+
+gap条件は実装上の便宜ではなく、定理の仮定です。
 
 ---
 
-## 10. Core、HT、UBの関係
+### 4.2 Core-DG: Finite Diagram and Globalization Core
 
-三つの層は異なる役割を持ちます。
+Core-DGはv21でstable Coreへ追加された主要数学層です。
+
+標準scopeは、
 
 ```text
-AK v20 Core
-    = 許容されるobject、certificate、status、gate、audit rule
-
-Appendix HT
-    = 再利用可能なtransport、composition、defect、Return architecture
-
-Appendix UB
-    = validated mathematical caseとregression test
+finite small category / finite poset
+finite-dimensional diagram over a field
+bounded complex
+actual natural transformation
+actual chain map
+finite projective generator
+finite-dimensional Morita algebra
+finite Alexandrov space
+effective finite descent
 ```
 
-HTとUBは論理的に接続されていますが、同一ではありません。
+です。
 
-* HTは再利用可能なtransfer principleを述べます。
-* UBはそれが実際に閉じた数学的事例を記録します。
-* UBの成功事例が自動的に普遍的HT theoremになることはありません。
-* HT interfaceが存在するだけで、外部問題が証明されることはありません。
-* HT・UBはいずれも凍結されたv20 Coreを暗黙に変更しません。
+finite category `P` と field `k` に対して、
+
+```text
+Diag_P(k) = Fun(P, Vect_fd(k))
+```
+
+を考えます。
+
+Core-DGでは、
+
+- finite category presentation
+- relations
+- variance
+- abelian finite-diagram category
+- representable projectives
+- finite projective generator
+- Yoneda reconstruction
+- derived zero reflection
+- coneによるmorphism-isomorphism detection
+- finite Morita reconstruction
+- finite Alexandrov realization
+- strict finite sheaf descent
+- strict bounded-complex descent
+- separately certified derived descent
+- global zero / isomorphism certificate
+- model-relative global certificate complexity
+
+を扱います。
+
+重要な原則は、
+
+```text
+same objectwise data
+    != same diagram
+
+equal rank table
+    != actual morphisms
+
+objectwise isomorphism
+    != natural isomorphism
+
+pairwise overlap equivalence
+    != cocycle
+
+descent readiness
+    != effective descent
+```
+
+です。
+
+Core-DGは、このような「暗黙に同一視されやすい構造差」を数学的に分離するために存在します。
 
 ---
 
-## 11. Failureとstatus semantics
+## 5. P2DG Interface
 
-標準atomic statusは次です。
+v21では、Persistence dataとfinite categorical structureを同一視しません。
+
+Persistence-to-Diagram Interface、略して `P2DG` を独立した定理-bearing handoffとして扱います。
+
+必要に応じてP2DG recordは、
+
+```text
+finite grid / category
+objects
+actual morphisms
+relations
+variance
+coefficients
+endpoint conventions
+exactness profile
+reflection profile
+information-preservation profile
+terminal policy
+supported conclusion strengths
+artifacts
+prohibited stronger readings
+```
+
+を保持します。
+
+endpoint-completeなfinite one-parameter persistence classでは、適切なfinite gridに制限することで、finite linear-quiver representationへ移すことができます。
+
+complete rank table
+
+```text
+r(i,j) = rank(V_i -> V_j)
+```
+
+からinterval multiplicityをfinite Mobius inversionで復元できます。
+
+coordinate rank-query modelでは、comparable pairsすべてのrankを読むことが、unrestricted interval-multiplicity familyのexact reconstructionに必要十分です。
+
+しかし、
+
+```text
+rank table != arbitrary enriched diagram
+
+barcode != natural transformation
+
+scalar probe != morphism reconstruction
+```
+
+です。
+
+morphismやcategory structureまで戻す場合には、enriched probeとactual relation dataが必要です。
+
+---
+
+## 6. v21におけるCollapse
+
+AK-HPDSTにおける **Collapse** は、一つの万能scalarではありません。
+
+また単に、
+
+```text
+何かが0になった
+```
+
+という一種類の主張でもありません。
+
+Collapse型の結論には、例えば次があります。
+
+```text
+repaired persistence zero
+finite detector zero
+higher Ext obstruction zero
+kernel defect zero
+cokernel defect zero
+terminal Type IV zero
+transient defect absence
+diagram-probe zero
+descent-coherence success
+global object zero
+source-domain predicate
+```
+
+これらは自動的に同一ではありません。
+
+例えば、
+
+```text
+repaired persistence zero
+    != automatically Ext zero
+
+terminal Type IV clean
+    != full kernel/cokernel zero
+
+local repaired zero
+    != global object zero
+
+global internal zero
+    != external theorem
+```
+
+です。
+
+一つのstageから別のstageへ強い結論を移すには、独立したpromotion theoremが必要です。
+
+この型付きCollapse calculusは、v21の重要な特徴です。
+
+---
+
+## 7. 有限観測と有限証明は違う
+
+AKの中心原則の一つは、
+
+```text
+finite data != finite certificate
+```
+
+です。
+
+有限個の、
+
+- rank
+- value
+- sample
+- endpoint
+- bar
+- local object
+- overlap map
+- numerical approximation
+
+が得られたからといって、それだけでglobal statementの証明にはなりません。
+
+finite certificate modelでは、少なくとも、
+
+```text
+information model
+query model
+encoding model
+verification model
+```
+
+を宣言します。
+
+概略、
+
+```text
+M = (I, Q, E, V)
+```
+
+です。
+
+またv21では、証明コストを一つの数値へ潰しません。
+
+典型的には、
+
+```text
+cost(Pi) = (q, b, t, a)
+```
+
+として、
+
+```text
+q = query count
+b = encoding / bit size
+t = verification work
+a = artifact footprint
+```
+
+を区別します。
+
+有限のachievable familyでは、最小certificateは単一最小値ではなくPareto frontierとして表現されます。
+
+例えば、
+
+```text
+query数は少ないがartifactが大きい
+
+artifactは小さいがverification costが高い
+```
+
+というtrade-offをそのまま保持できます。
+
+---
+
+## 8. 有限証明には明確なno-go境界がある
+
+AK-HPDSTは、
+
+```text
+どんな無限問題にも有限certificateが存在する
+```
+
+とは仮定しません。
+
+例えば、retained barのbirthが任意に右へ移動できるfamilyでは、有限回で停止するdetectorは、最後に観測した位置より右で初めて現れるbarを見逃せます。
+
+したがって、
+
+```text
+uncontrolled right-unbounded birth family
+    -> no uniform finite exact detector
+```
+
+です。
+
+有限から無限へ進むには、例えば次の追加構造が必要です。
+
+```text
+finite-state reduction
+eventual constancy
+Noetherian stabilization
+global support bound
+compactness
+recurrence theorem
+derived-limit theorem
+certified apex agreement
+```
+
+長く安定して見えるfinite prefixは、それだけではinfinite theoremではありません。
+
+---
+
+## 9. finite-to-infinite reduction
+
+v21は、
+
+```text
+finite observation
+finite certificate
+finite pattern
+actual infinite target
+```
+
+を区別します。
+
+typed finite-state inverse towerでは、適切な仮定のもとでstable partを有限transition dataから復元できます。
+
+代表的には、
+
+```text
+inverse_limit(V_n) ~= stable_image(T^e)
+
+lim^1(V_n) = 0
+```
+
+です。
+
+重要なのは式だけではありません。
+
+完全なrouteでは、
+
+```text
+actual tower
+bonding maps
+variance
+period / state record
+stable-image witness
+derived-limit conditions
+apex
+apex comparison map
+apex-agreement theorem
+```
+
+を識別する必要があります。
+
+これにより、
+
+```text
+多数のfinite layerが一致した
+```
+
+ことを、
+
+```text
+infinite targetが証明された
+```
+
+と誤読することを防ぎます。
+
+---
+
+## 10. record globalizationとobject globalization
+
+v21は二種類のglobalizationを明確に区別します。
+
+### Record globalization
+
+local certificate recordをまとめ、global record-level predicateを証明することです。
+
+ここでは、
+
+```text
+cover
+overlap
+coverage
+Restart
+consistency
+```
+
+などを使います。
+
+### Object globalization
+
+実際のglobal mathematical objectを構成することです。
+
+こちらには、
+
+```text
+actual local objects
+actual transition / overlap maps
+cocycle
+必要ならhigher coherence
+effectivity theorem
+target equivalence strength
+```
+
+が必要です。
+
+つまり、
+
+```text
+glued evidence != descended object
+```
+
+です。
+
+この区別はv20からv21への本質的な強化です。
+
+---
+
+## 11. Finite MoritaとAlexandrov globalization
+
+finite category `P` に対して、linearized representablesの直和
+
+```text
+G_P = direct_sum_{p in P} P_p
+```
+
+をfinite projective generatorとして用います。
+
+これにより、
+
+- zero reflection
+- cone detection
+- enriched reconstruction
+- finite Morita equivalence
+
+を扱います。
+
+finite posetについては、diagramをupper Alexandrov space上のsheafとして実現します。
+
+actual overlap mapsとstrict cocycleがあれば、finite object descentとbounded-complex descentを行えます。
+
+ただし、
+
+```text
+finite-dimensional category algebra
+    != automatically semisimple
+
+zero reflection
+    != automatically thick generation
+
+pairwise local isomorphism
+    != descent datum
+```
+
+です。
+
+---
+
+## 12. Unified Bridgeとtyped Return
+
+genericなBridge / Return calculusの正典はMain Chapter 9であり、Appendix HTがその研究spineとexpanded proofを担います。
+
+一つのrouteは、単なる文章上の含意列ではありません。
+
+typed proof DAGとして、各nodeが少なくとも、
+
+```text
+input type
+output type
+hypotheses
+variance
+coefficients
+comparison mode
+supported target strengths
+failure route
+artifacts
+```
+
+を持ちます。
+
+完全routeは概略、
+
+```text
+source
+  -> realization
+  -> Core-P
+  -> optional P2DG
+  -> Core-DG
+  -> optional spectral / derived / tower transfer
+  -> descent / rigidity
+  -> final target-specific Return
+```
+
+です。
+
+最終Returnは、**必要なすべてのcomponentが支える強度以下**でのみ有効です。
+
+Return targetの例は、
+
+```text
+predicate
+numerical invariant
+barcode / object class
+actual object
+actual morphism
+exact sequence
+quasi-isomorphism
+derived equivalence
+pseudo-isomorphism
+determinant
+ideal
+regularized / partial target
+```
+
+です。
+
+一般に、
+
+```text
+weaker Return
+    -> stronger Return
+```
+
+は成立しません。
+
+強度を上げるには、rigidity、conservativity、reconstruction、comparisonなどの独立定理が必要です。
+
+---
+
+## 13. Returnはprojectionの自動逆写像ではない
+
+非常に重要な点です。
+
+```text
+Return != automatic inverse of projection
+```
+
+AK projectionは情報を意図的に捨てることがあります。
+
+それでも、目的とするsource predicateについて十分である可能性があります。
+
+したがって、
+
+```text
+source predicateをReturnできる
+```
+
+ことと、
+
+```text
+source object全体を復元できる
+```
+
+ことは別です。
+
+例えば、
+
+```text
+predicate Return
+    != source-object reconstruction
+
+determinant Return
+    != module reconstruction
+
+local-system Return
+    != constant-object Return
+
+derived equivalence
+    != preferred presentation
+```
+
+です。
+
+v21ではReturn targetそのものが定理の一部です。
+
+---
+
+## 14. failure semanticsとnon-compensation
+
+atomic verifier statusは、
 
 ```text
 pass
@@ -646,324 +953,1412 @@ undefined
 not_invoked
 ```
 
-それぞれ意味が異なります。
+です。
 
-* `pass`: invoked requirementがすべて証明済みまたは正当にdischargeされた。
-* `reject`: 型付けされたinvoked conditionが偽であることが証明された。
-* `undefined`: 必要な証拠、typing、source identity、objectが欠けている。
-* `not_invoked`: immutable scope上、そのclauseが対象外である。
-
-典型的failure routeには次があります。
-
-* topological repaired-profile failure
-* categorical / higher-Ext failure
-* metric / comparison / coverage / Restart failure
-* terminal Type IV defect
-* transient interior defect
-* finite-to-infinite / apex failure
-* Return-strength mismatch
-* source contamination / benchmark circularity
-* claim / provenance / artifact / manifest failure
-
-一つの良好な数値marginによって、欠けたnon-scalar obligationを修復することはできません。
-
----
-
-## 12. Claimとaudit discipline
-
-すべてのstatementは、登録された強度でのみ使用されます。
-
-代表的roleは次です。
-
-* Core definition
-* Core theorem / lemma
-* Core micro-theorem
-* Interface theorem
-* Bridge candidate
-* Bridge Program
-* Bridge Theorem
-* toy bridge theorem
-* Search artifact
-* operational policy
-* successor-release candidate
-* Spec
-* explicit non-claim
-* deprecated / rejected claim
-
-主要原則は次です。
+意味は異なります。
 
 ```text
-Registration != proof
-Finite data != finite certificate
-Soundness != completeness
-Realization != Return
-Finite prefix != infinite reduction
-Terminal zero != full defect zero
-Characteristic ideal != exact module
-Pseudo-isomorphism != isomorphism
-Derived equivalence != preferred presentation
-AI output != proof
-Compilation != theorem validity
-Replay != mathematical truth
-Manifest completeness != mathematical truth
+pass:
+    invokedされた全義務が満たされた
+
+reject:
+    well-typedな必要条件が偽であることが確認された
+
+undefined:
+    必要な証拠、型、source identity、theorem edgeが欠けている
+
+not_invoked:
+    immutable scope上、その条件を使用していない
 ```
 
-最終Compact Claim Registerは、すべての定理本文やhashを重複掲載せず、canonical source locator、permitted use、evidence status、release-critical recovery claimを記録します。
+target-indexed Bridge resultは別の型です。
+
+```text
+reject
+undefined
+obstructed
+partial_return
+regularized_return
+return
+```
+
+数学的に証明されたnonzero obstructionは、missing evidenceではありません。
+
+また、
+
+```text
+別条件の成功
+大きなmetric reserve
+AI agentの多数一致
+大量のsearch coverage
+successful compilation
+successful replay
+manifest closure
+```
+
+によって、欠けた数学的矢印を補うことはできません。
+
+これが **non-compensation principle** です。
 
 ---
 
-## 13. 文書アーキテクチャ
+## 15. Proof-DAG sovereignty
 
-### Main - Chapter 1から8
+v21のtheorem-bearing routeはdependency-completeなtarget sliceとして管理されます。
 
-Mainはv20 release contractを定義します。
+finite dependencyではacyclic proof DAGを用います。
 
-1. scope、claim discipline、finite-certificate rule
-2. threshold-gap metric repairとrepaired-zero transport
-3. finite detector calculusとproof compression
-4. higher obstruction edge
-5. terminal / transient defect analysis
-6. window、atlas、coverage、continuation、Restart
-7. typed audit semanticsとmanifest governance
-8. Core closure、problem demonstration、finite-to-infinite reduction、Return boundary
+countable / infinite dependencyでは、追加で、
 
-### Foundation Appendix AからG
+```text
+well-founded rank
+```
 
-* **A:** barcode metric、threshold-gap repair、zero transport
-* **B:** finite detector certificate、representative、proof compression
-* **C:** eligible higher Ext edge、zero-reflection boundary
-* **D:** tower diagnostic、terminal / transient defect
-* **E:** window、overlap、coverage、atlas、Restart
-* **F:** typed obligation、status、failure route、non-compensation
-* **G:** manifest、dependency closure、proof object、semantic replay、release record
+または、
 
-### Appendix CM-v20
+```text
+separately certified finite-to-infinite reduction
+```
 
-finite detector、higher Ext、transient defect、Restart、exact reductionを含む再利用可能なCore micro-theorem packです。
+が必要です。
 
-### Appendix TB-v20
+workflow graphにcycleがあるというだけでは数学的意味は与えられません。
 
-意図的に制限されたtoy bridgeとcounterexampleのpackです。
+数学的cycleには、
 
-toy successは外部数学定理を意味しません。
+```text
+induction
+coinduction
+recursion
+fixed-point theorem
+mutual recursion theorem
+```
 
-### Technical Extension Appendix HからN
+などの独立した意味付けが必要です。
 
-次を扱います。
-
-* advisory spectral indicator
-* discretization / continuum transfer
-* measurement separation
-* controlled commutation
-* Mirror / Transfer comparison
-* quantale / ledger semantics
-* derived / sheaf / stack / multiparameter / higher-categorical extension discipline
-
-これらはCoreの周辺を拡張しますが、Coreを暗黙に拡大しません。
-
-### Problem Interface Appendix
-
-次のためのtyped interfaceを提供します。
-
-* arithmetic / Iwasawa structure
-* congruence / p-adic profile
-* categorical / Mirror / Fukaya-facing structure
-* normalization / realization
-* Navier-Stokes exploration / soundness / proof-first program
-
-### Search / Platform Appendix UからZ
-
-次を管理します。
-
-* human / AI / proof-assistant / tool / platform / hybrid agent
-* Hunter / Mapper / Lifter workflow
-* counterexample / certificate search
-* proof store / certificate DAG
-* source binding / benchmark quarantine
-* execution / replay / staleness / reproducibility
-
-### Appendix HT
-
-統合されたhigher-transferとReturn-composition appendixです。
-
-### Appendix UB
-
-再精査済み12-case validated bridge and Return libraryです。
-
-### Claim RegisterとCompanion
-
-* **CR-v20:** compact canonical claim governanceとrelease closure index
-* **Companion:** operational calibration templateとexample。定理sourceではありません。
+v21では、最終的にfailしたというだけでなく、必要な `reject` / `undefined` nodeのうち最も上流にあるcausal blockerを局在化する仕組みも導入しています。
 
 ---
 
-## 14. Repository guide
+## 16. v21 Kernelで数学的に際立つ結果
 
-典型的なv20.0.0 packageは次のように構成されます。
+v21の数学的内容を評価する際の主要landmarkです。
+
+### 16.1 Sharp threshold-gap repair
+
+hard threshold deletionはglobally non-expansiveではありません。
+
+しかしthreshold境界の両側に必要なgapがある場合、bottleneck stabilityが回復します。
+
+さらに、そのgap条件が必要であることをcounterexampleで確認します。
+
+### 16.2 Exact zero separation
+
+`tau`-reduced image上では、thresholdとbottleneck errorによってrepaired zero / nonzeroを分離できます。
+
+### 16.3 Family-relative certificate complexity
+
+有限証明complexityは、定理の絶対的な数値ではなく、information / query / verifier modelに相対的に定義されます。
+
+finite achievable familyではPareto frontierを持ちます。
+
+### 16.4 Private-witness lower bounds
+
+互いに独立したprivate witnessを持つfamilyでは、exact deterministic certificationに必要なquery lower boundを構成できます。
+
+### 16.5 Right-unbounded finite-detection no-go
+
+任意に右側へ遅れて初めて現れるfeatureを許すuncontrolled familyには、uniform finite detectorは存在しません。
+
+### 16.6 Finite Mobius reconstruction
+
+endpoint-complete finite persistenceはcomplete rank tableからfinite Mobius inversionで復元できます。
+
+### 16.7 Exact rank-query count
+
+`m + 1` 個のgrid verticesに対して、coordinate rank-query modelで必要十分なquery数は、
+
+```text
+N_m = (m + 1)(m + 2) / 2
+```
+
+です。
+
+### 16.8 Finite-state inverse-limit reconstruction
+
+typed finite-state inverse towerはstable imageから再構成でき、declared hypothesesのもとで `lim^1 = 0` とfinite apex-agreement testを得ます。
+
+### 16.9 Generator--cone--Morita package
+
+actual finite diagramsに対して、
+
+```text
+projective generator
+    -> zero reflection
+
+cone
+    -> isomorphism detection
+
+enriched probe
+    -> finite Morita reconstruction
+```
+
+を接続します。
+
+### 16.10 Effective finite descent
+
+actual local objects、actual maps、cocycle、effectivity theoremから、finite Alexandrov model上のglobal objectおよびbounded complexを構成します。
+
+### 16.11 Typed end-to-end Return
+
+source-domain conclusionは、要求されたtargetに必要なすべての数学nodeが、正しい型と強度で成立した場合にのみReturnされます。
+
+---
+
+## 17. Appendix HT: Higher Transfer and Unified Bridge Composition
+
+Appendix HTはMain Chapter 9周辺のresearch spineです。
+
+次の五つのtransfer familyを統合しています。
+
+```text
+HC = homological compression
+
+PE = persistence--Ext /
+     finite reconstruction and enhancement
+
+SS = spectral-sequence transfer
+
+RL = inverse/direct systems and derived limits
+
+IW/Return = target-specific Return architecture
+```
+
+役割は、
+
+```text
+Core-P / Core-DG
+    = 何が数学的にcertifyされたか
+
+HT
+    = そのcertified informationを
+      より大きな数学構造へどうtransportするか
+```
+
+です。
+
+HTでは、
+
+- homological compression下のprotected persistence
+- finite persistence / Ext reconstruction
+- finite-quiver reconstruction
+- enhanced morphism Return
+- spectral-sequence page-to-abutment transfer
+- extension ambiguity
+- inverse system / derived limit
+- coefficient / base-change route
+- regularized Return
+- target-relative strength
+- unified defect stack
+- composable Bridge DAG
+
+などを扱います。
+
+HTは強力なresearch-spineですが、内部に存在するすべてのconstructionが自動的にstable Coreへ昇格するわけではありません。
+
+---
+
+## 18. Appendix UB: reusable componentsと12のvalidation case
+
+Appendix UBは、再利用可能なBridge componentとvalidated Return portfolioです。
+
+含まれる主なcomponentは、
+
+- finite-generator / conservative realization
+- coefficient / base change / completion
+- finite-state reduction
+- Noetherian reduction
+- descent
+- Kunneth
+- duality
+- coherence
+- rigidity
+- determinant / Fitting-facing component
+- source-specific adapters
+
+です。
+
+12のsource-bound validation familyは、概ね、
+
+```text
+finite rank reconstruction
+enriched projective-probe reconstruction
+finite / periodic Tachikawa lanes
+Galois--Leopoldt defect reconstruction
+finite Alexandrov descent
+finite-state inverse limits
+Iwasawa / p-adic analytic interfaces
+Serrin compactness / continuation
+certified regulator calculation
+regular one-variable Iwasawa finite layers
+singular / Bockstein Iwasawa finite layers
+```
+
+を含みます。
+
+Validation successは、使用したtheoremをuniversal theoremへ昇格させません。
+
+各caseは、
+
+```text
+source class
+hypotheses
+target
+Return strength
+```
+
+の範囲でのみ有効です。
+
+---
+
+## 19. Known-Theorem Recovery
+
+AK-HPDSTは、**Known-Theorem Recovery** と **new theorem** を明確に分けます。
+
+Recovery trackでは、既知のbenchmark conclusionをproof constructionから隔離します。
+
+routeを独立に閉じた後でのみ、
+
+```text
+正しいknown theoremを
+正しいstrengthでReturnできたか
+```
+
+を比較します。
+
+v21 Final Claim Registerには、二つのexact-strength recovery trackが登録されています。
+
+### Iwasawa growth
+
+登録されたReturnは、declared precursor packageに相対的なIwasawa characteristic-growth clauseです。
+
+概略、
+
+```text
+c_n = mu * p^n + lambda * n + constant
+```
+
+をcertified tail上で回収します。
+
+これは一般Iwasawa main conjectureの証明ではありません。
+
+### Fixed-exponent Serrin criterion
+
+PDE側のrecoveryは、declared Leray--Hopf regimeにおける固定指数のstrict-subcritical implicationです。
+
+```text
+u in L^6_t L^6_x
+    -> interior regularity
+```
+
+を回収します。
+
+これはcriterion-level recoveryであり、3次元Navier--Stokesのunconditional global regularityを意味しません。
+
+---
+
+## 20. v21 Main validation portfolio
+
+Main Chapter 10ではpositive caseとnegative caseの両方を使ってarchitectureを検証します。
+
+v21 Main validation gateは、
+
+```text
+V1  v20 regression at exact registered strength
+
+V2  finite persistence reconstruction
+
+V3  enriched finite-diagram reconstruction
+
+V4  finite object-level and strict derived descent
+
+V5  finite-state inverse-limit and apex Return
+
+V6  complete external Return using Core-P + Core-DG
+
+V7  model-relative certificate upper / lower bounds
+
+V8  mandatory negative / no-go boundaries
+
+V9  artifact / replay / proof-DAG / manifest consistency
+```
+
+です。
+
+Main-bodyでは `V1--V9` がそれぞれdeclared strengthでpassしています。
+
+ただしこれは、
+
+```text
+AKのすべてのpossible routeがcompleteである
+```
+
+ことも、
+
+```text
+named open problemが解かれた
+```
+
+ことも意味しません。
+
+---
+
+## 21. Negative validationも数学である
+
+v21では、counterexampleとprohibited upgradeを副次的なものではなく、理論の主要出力として扱います。
+
+例えば、
+
+```text
+incomplete generator data
+    -> no full reconstruction
+
+pairwise local agreement
+    -> no higher coherence automatically
+
+finite prefix agreement
+    -> no infinite-target theorem
+
+local zero
+    -> no global zero without retained-feature coverage
+
+synthetic algebraic duality
+    -> no source-semantic Bridge automatically
+
+predicate Return
+    -> no source-object reconstruction
+```
+
+などです。
+
+AK-HPDSTは成功routeだけを探す理論ではありません。
+
+```text
+なぜその強い結論には到達できないのか
+```
+
+を、数学的に特定する理論でもあります。
+
+---
+
+## 22. AI・探索・proof engineering
+
+AK-HPDST v21には専用のSearch / Platform layerがあります。
+
+対象は、
+
+- human mathematician
+- AI system
+- proof assistant
+- theorem search
+- counterexample search
+- route search
+- proof-DAG construction
+- proof storage
+- semantic replay
+- reproducible execution
+
+です。
+
+platformは、
+
+```text
+source lanes
+adapters
+routes
+targets
+fallbacks
+consumers
+backends
+```
+
+の幅を広げることができます。
+
+しかし、
+
+```text
+pipeline width != theorem strength
+```
+
+です。
+
+AIに関する基本境界は、
+
+```text
+generation != verification
+
+consensus != proof
+
+search success != theorem
+
+self-review != independent verification
+
+formal wiring != source-faithful interpretation
+
+successful execution != mathematical truth
+
+replay != mathematical proof
+```
+
+です。
+
+AI-generated objectは、exact verifier-side schemaへ変換され、必要な数学的obligationを満たして初めてtheorem evidenceになります。
+
+---
+
+## 23. AI支援数学においてAKアーキテクチャが有効な理由
+
+現代の数学AIは、
+
+```text
+candidate lemma
+possible realization
+counterexample
+formalization draft
+proof route
+numerical evidence
+source match
+```
+
+を大量に生成できます。
+
+しかし重要なのは、generated stepがもっともらしいかどうかだけではありません。
+
+AKでは次を確認します。
+
+```text
+source / target typeは正しいか
+
+含意方向は正しいか
+
+必要なsemanticsは保存されているか
+
+finite observationはclaimed targetに対してcompleteか
+
+benchmark informationがpremiseへ逆流していないか
+
+invariantをobjectへ暗黙昇格していないか
+
+local dataをglobal dataへ暗黙昇格していないか
+
+finite evidenceをinfinite theoremへ暗黙昇格していないか
+```
+
+AK-HPDSTのAI上の位置づけは、
+
+```text
+AI automatically solves mathematics
+```
+
+ではなく、
+
+```text
+AI searches and proposes.
+
+Typed mathematics determines
+what the evidence actually proves.
+```
+
+です。
+
+---
+
+## 24. statusとresult sort
+
+v21には複数のstatus系があります。
+
+混同しないことが重要です。
+
+### Atomic verifier status
+
+```text
+pass
+reject
+undefined
+not_invoked
+```
+
+### P2DG readiness
+
+```text
+ready
+incomplete
+inconsistent
+not_invoked
+```
+
+### Handoff readiness
+
+例:
+
+```text
+descent_input_ready
+bridge_input_ready
+```
+
+これらは次のtheorem nodeを呼べるinput readinessであり、theorem conclusionではありません。
+
+### Type IV diagnostic status
+
+```text
+not_invoked
+undefined
+certified_zero
+obstructed
+```
+
+### Target-indexed Bridge result
+
+```text
+reject
+undefined
+obstructed
+partial_return
+regularized_return
+return
+```
+
+### Workflow / repository state
+
+```text
+compilation
+review
+migration
+registration
+replay
+publication
+package release
+```
+
+は別のlifecycleです。
+
+あるfieldのfavorable tokenを、別のfieldへコピーしてはいけません。
+
+---
+
+## 25. v21の重要な「非同一化」
+
+以下はv21を読む上での恒久的な原則です。
+
+```text
+registration != proof
+
+finite observation != finite certificate
+
+soundness != completeness
+
+persistence profile != finite diagram
+
+rank data != actual morphism
+
+record globalization != object globalization
+
+objectwise isomorphism != natural isomorphism
+
+pairwise overlap equivalence != cocycle
+
+descent readiness != descent effectivity
+
+finite prefix != infinite reduction
+
+terminal defect zero != full defect zero
+
+determinant / ideal Return != object Return
+
+pseudo-isomorphism != isomorphism
+
+derived equivalence != preferred presentation
+
+realization != Return
+
+validation != theorem premise
+
+AI output != proof
+
+replay != mathematical truth
+
+package integrity != theorem validity
+```
+
+これらの多くは単なる運用ruleではありません。
+
+v21には、それぞれを支える数学的境界、counterexample、またはnonpromotion theoremがあります。
+
+---
+
+## 26. v21で現在できること
+
+明示されたsource classと仮定の範囲で、v21は次を扱えます。
+
+- source structureからtyped Core-readable shadowを構成する
+- constructible one-parameter persistenceを解析する
+- repaired hard-threshold evaluationを行う
+- finite detectorでzero / nonzeroをcertifyする
+- model-relative certificate upper / lower boundを与える
+- uncontrolled familyにuniform finite detectorが存在しないことを証明する
+- endpoint-complete finite persistenceを再構成する
+- rank dataからinterval multiplicityを復元する
+- enriched probeからactual finite diagramを復元する
+- finite projective generatorでzero objectを検出する
+- coneでmorphismのisomorphismを検出する
+- finite Morita reconstructionを行う
+- finite-poset diagramをAlexandrov sheafとして実現する
+- strict finite object / bounded-complex descentを行う
+- actual coherenceとeffectivityがある場合にlocal dataをglobal objectへ大域化する
+- selected finite-state inverse limitを有限certificationする
+- homological / spectral / tower / coefficient / descent / rigidity componentをtyped Bridge DAGとして合成する
+- complete routeが支える強度だけをReturnする
+- missing evidenceや数学的failureを局在化する
+- arithmetic / representation-theoretic / PDE / categoricalなsource-specific routeをvalidationする
+- AI、proof assistant、proof store、semantic replayを数学的authorityと分離して利用する
+
+---
+
+## 27. v21が主張しないこと
+
+AK-HPDST v21.0.0単体は、次を証明していません。
+
+- Riemann hypothesis
+- Birch and Swinnerton-Dyer conjecture
+- ABC conjecture
+- general Iwasawa main conjecture
+- general Leopoldt conjecture
+- general Tachikawa conjecture
+- unconditional 3D Navier--Stokes regularity
+- Clay-level Navier--Stokes result
+- general Langlands correspondence
+- homological mirror symmetry
+- general Fukaya-category equivalence
+- unrestricted multiparameter persistence classification
+- arbitrary stack / hypersheaf descent
+- unrestricted `(infinity,1)`-categorical globalization
+- arbitrary unbounded-derived reconstruction
+- every infinite familyに対するuniversal finite detector
+- persistent homologyとExt群のuniversal equivalence
+
+また、
+
+```text
+PH_n = 0 <-> Ext^n = 0
+```
+
+を無条件では主張しません。
+
+必要なrealization、eligibility、reflection、Return theoremがある場合にのみ、指定された方向・強度で使用できます。
+
+同様に、
+
+```text
+successful AK internal certificate
+    != automatically external theorem
+```
+
+です。
+
+---
+
+## 28. Technical Extension layer
+
+Technical Extension Appendices H--Nは、stable Coreの周囲にある制御された研究拡張です。
+
+主な領域は、
+
+- spectral indicators
+- discretization / continuum transfer
+- measurement-level stability
+- controlled commutation
+- Mirror / Transfer comparison
+- quantale / defect-ledger semantics
+- derived extension
+- dg structure
+- sheaf / stack
+- multiparameter extension
+- stable / higher-categorical discipline
+
+です。
+
+ただし、
+
+```text
+derived
+stack
+stable
+coherent
+infinity-categorical
+hypercomplete
+```
+
+と書かれているだけでstable Coreへ昇格するわけではありません。
+
+Core-facing theorem evidenceとして使用するには、明示的なextraction / transport theoremが必要です。
+
+---
+
+## 29. Problem Interface layer
+
+Problem Interface Appendixは、外部数学領域をgeneric AK architectureへ接続します。
+
+v21のproblem-facing routeは概略、
+
+```text
+R_PI =
+(
+  source semantics,
+  realization,
+  Core-facing object / predicate,
+  external target,
+  selected route,
+  assumptions,
+  defects,
+  artifacts
+)
+```
+
+です。
+
+現在のsource-facing領域には、
+
+- finite abelian p-groups
+- cyclotomic / Iwasawa structure
+- congruence / p-adic profile
+- Mirror / categorical comparison
+- Fukaya-facing extension
+- normalization / resolution-assisted route
+- Navier--Stokes exploration / soundness / proof-first program
+
+があります。
+
+source-specific theoremはsource-specificのままです。
+
+別familyへ再利用するには、完全なtyped contractを保存するsubstitution theoremが必要です。
+
+---
+
+## 30. Search / Platform layer
+
+Appendices U--Zはproof engineering platformを構成します。
+
+```text
+U  Agent Semantics
+
+V  Hunter / Mapper / Lifter Search Protocols
+
+W  Bridge Programs
+
+X  Validity Map and Global Certificate DAG
+
+Y  AI Platform and Proof Store
+
+Z  Execution and Reproducibility Schema
+```
+
+v21 synchronizationではさらに、
+
+- semantic field map
+- target-local route slice
+- route resilience
+- compatible packet amalgamation
+- proof-store snapshot safety
+- deterministic parallel execution
+- cache admission
+- content-addressed proof closure
+- semantic replay
+- infrastructure non-compensation
+
+などを強化しています。
+
+---
+
+## 31. Companion layer
+
+Companionは、既にownerが存在する数学結果を運用schemaへ投影する層です。
+
+主に、
+
+- problem-interface calibration
+- route assembly
+- execution
+- storage
+- replay
+- audit
+- release handoff
+
+のtemplateを提供します。
+
+基本原則は、
+
+```text
+Companion completeness
+    != mathematical completeness
+```
+
+です。
+
+templateやpacketやexecutionが完全でも、Main / Appendixの数学ownerに存在しないtheoremは生成されません。
+
+---
+
+## 32. Claim Registerとcanonical authority
+
+Final Claim Registerは、
+
+```text
+AK_HPDST_v21_0_0_Appendix_Part12_Claim_Register.pdf
+```
+
+です。
+
+役割は、
+
+- canonical identity
+- migration
+- source binding
+- admissible use
+- target strength
+- failure semantics
+- theorem ownership
+- release closure
+
+の管理です。
+
+Claim Registerはregistrationによって数学を強化しません。
+
+大まかなauthorityは、
+
+```text
+Main Chapters 1--10
+    -> generic theorem statementsのcanonical owner
+
+Foundation A--G
+    -> Core-P expanded proofs / schemas
+
+Appendix DG
+    -> Core-DG / descent expanded proofs
+
+Appendix HT
+    -> higher-transfer / Return research spine
+
+Appendix UB
+    -> reusable components / validated cases
+
+Appendix CM
+    -> compact corollaries / consumer contracts
+
+Appendix TB
+    -> toy theorems / counterexamples / regressions
+
+Technical Extension H--N
+    -> bounded extension mathematics
+
+Problem Interface MS/NS
+    -> source-specific interfaces / Returns
+
+Search / Platform U--Z
+    -> proof infrastructure
+
+Companion
+    -> operational projection / handoff
+
+Claim Register
+    -> identity / admissible-use governance
+```
+
+です。
+
+source間に不一致がある場合、audited repairが行われるまでは、
+
+```text
+weakest source-supported type-correct reading
+```
+
+を採用します。
+
+---
+
+## 33. Repository Guide
+
+v21 repositoryは現在PDFベースです。
 
 ```text
 .
 |-- README.md
 |-- README_JA.md
-|-- AK_HPDST_v20_0_0_PartI__Main.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part_II__Foundation_Appendices.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part_III__Technical_Extension_Appendices.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part__IV__Problem_Interface_Appendices.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part__V__Search_Platform_Appendices.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part__Claim_Register.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part__CM.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part__TB.pdf
-|-- AK_HPDST_v20_0_0_Appendix_Part__Companion.pdf
-|-- AK_HPDST_v20_0_0_Appendeix_HT.pdf
-|-- AK_HPDST_v20_0_0_Appendeix_UB.pdf
-|-- source-binding and recovery-manifest files
-`-- OLD/
-   `-- historical materials - non-normative repair ancestry
+|
+|-- AK_HPDST_v21_0_0_Part1_Main.pdf
+|     Main Chapters 1--10
+|
+|-- AK_HPDST_v21_0_0_appendix_Part2_Foundation_Core_P_Verification_Appendices (1).pdf
+|     Foundation Appendices A--G
+|
+|-- AK_HPDST_v21_0_0_appendix_Part3_appendix_DG.pdf
+|     Finite Diagram and Globalization Foundation
+|
+|-- AK_HPDST_v21_0_0_Appendeix_Part4_appendix_HT.pdf
+|     Higher Transfer, Unified Bridge Composition, and Typed Return
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part5_Appendix_UB.pdf
+|     Universal Bridge Component Library and Validated Return Portfolio
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part6_Appendix_CM.pdf
+|     Core Corollary, Implementation Lemma, and Consumer-Contract Library
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part7_Appendix_TB.pdf
+|     Toy Bridge, Counterexample, and Regression Portfolio
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part8_Technical_Extension_Appendices.pdf
+|     Technical Extension Appendices H--N
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part9_Problem_Interface_Appendices.pdf
+|     Problem Interface Appendices MS / NS
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part10_Search_Platform_Appendices.pdf
+|     Search / Platform Appendices U--Z
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part11_Companion.pdf
+|     Calibration / execution / reproducibility / release handoff
+|
+|-- AK_HPDST_v21_0_0_Appendix_Part12_Claim_Register.pdf
+|     Final Claim Register
+|
+`-- AK_HPDST_v21_0_0_Kernel_Paper_Projection_Reaudited(1).pdf
+      standalone mathematical kernel / recommended entry point
 ```
 
-実際のfilenameやpathはpackageまたはrepository branchによって異なる場合があります。
+filenameは現在のrelease packageに合わせています。
 
-versioned source artifact、exact theorem locator、Claim Register、external package manifestがnormative identityを支配します。
+ただしcanonical theorem identityはfilenameの見た目ではなく、source documentとClaim Registerによって管理されます。
 
 ---
 
-## 15. 推奨読解順序
+## 34. 推奨読解ルート
 
-最初に読む場合は、次の順序を推奨します。
+### 34.1 最短のconceptual route
 
-1. 本README
-2. Main Chapter 1 - scopeとsafety rule
-3. Main Chapter 8 - release closureとexternal Return boundary
-4. Main Chapter 2、3 - metric repairとfinite proof compression
-5. Main Chapter 4、5 - higher Extとdefect separation
-6. Appendix A - threshold-gapとzero-transportの詳細証明
-7. Appendix B - finite detectorとMinCert theorem
-8. Final Claim Register
-9. Appendix HT - transportとReturn composition
-10. Appendix UB - validated success case
+```text
+1. README
+2. Kernel Paper
+3. Main Chapter 1
+4. Main Chapters 7, 9, 10
+5. Claim Register
+```
 
-Arithmetic / Iwasawaを読む場合は、MS-A、MS-B、source-binding file、Known-Theorem Recovery manifestも参照してください。
+AK理論とは何か、v21で何が変わったかを最短で理解するrouteです。
 
-Navier-Stokesを読む場合は、NS-A、NS-B、NS-C、Serrin source bindingも参照してください。
+### 34.2 Mathematical Kernel route
 
-AI、automation、proof platformを読む場合は、Appendix U、V、W、X、Y、Zも参照してください。
+```text
+1. Kernel Paper
+2. Main Chapters 2--7
+3. Foundation Appendices A--G
+4. Appendix DG
+5. Main Chapter 9
+```
+
+Persistence、certificate、reconstruction、Morita、descent、Returnを数学的に追うrouteです。
+
+### 34.3 Bridge / advanced homological route
+
+```text
+1. Kernel Paper
+2. Main Chapters 4--9
+3. Appendix DG
+4. Appendix HT
+5. Appendix UB
+```
+
+### 34.4 Arithmetic / Iwasawa route
+
+```text
+1. Kernel Paper
+2. Main Chapters 3--5 and 9
+3. Appendix HT
+4. Appendix UB
+5. Problem Interface MS
+6. Main Chapter 10
+7. Claim Register
+```
+
+### 34.5 Navier--Stokes route
+
+```text
+1. Main Chapter 9
+2. Problem Interface NS
+3. Appendix UBの該当validation
+4. Main Chapter 10
+5. Claim Register
+```
+
+### 34.6 AI / proof-platform route
+
+```text
+1. Main Chapters 1 and 8
+2. Main Chapter 9
+3. Search / Platform Appendices U--Z
+4. Companion
+5. Claim Register
+```
 
 ---
 
-## 16. 小さな概念例
+## 35. 小さな概念例
 
-有限検出器が複数点をsampleし、すべてzeroを返したとします。
+あるprogramがpersistence profileの有限個の点を評価し、すべて0だったとします。
 
-その観察だけでは、repaired persistence profileがzeroであるとは証明できません。
-
-AK-HPDSTは次を問います。
+AK-HPDSTは、それだけでは、
 
 ```text
-すべてのretained barは必ずstencilと交差するか。
-endpoint / germ conventionは正しく処理されたか。
-detectorはthreshold deletionの前後どちらに適用されたか。
-対象は宣言されたfamilyに属するか。
-meshは独立に証明されたexcess boundより小さいか。
-artifactは固定され、replay可能か。
+repaired profile = 0
 ```
 
-これらを完全性定理が保証した後にのみ、zero observationはfinite zero certificateになります。
+とは結論しません。
 
-無限towerについても同様です。
+次を確認します。
 
 ```text
-多数の安定して見える有限層
-    !=
-証明された無限極限
+どのprofile stageをsampleしたか？
+
+threshold deletionの前か後か？
+
+endpoint / right-germ conventionは正しいか？
+
+retained barがsampleを全て避ける可能性はないか？
+
+sourceはdeclared familyに属しているか？
+
+coverageは独立に証明されているか？
+
+そのfamilyにuniform finite detectorは存在するか？
+
+certificateを許されたstrengthだけで使用しているか？
 ```
 
-無限結論には、stabilization、compactness、completion、finite-state、derived-limit theorem、およびapex agreementが必要です。
+これらが定理によって閉じたとき、zero-looking observationは初めてtheorem-bearing zero certificateになります。
+
+さらにそのcertificateからdiagramを再構成する場合、
+
+```text
+actual mapsは復元されたか？
+
+category relationsはすべて含まれているか？
+
+varianceは固定されているか？
+
+objectwise reconstructionなのか
+fully faithful reconstructionなのか？
+```
+
+を確認します。
+
+globalizationする場合には、
+
+```text
+overlap mapsはactual mapsか？
+
+cocycleはあるか？
+
+effectivityは証明されているか？
+```
+
+を確認します。
+
+最後にsourceへReturnする前に、
+
+```text
+source realizationは
+要求するfeatureを本当にpreserve / reflectするか？
+
+requested Return strengthに十分なrigidityがあるか？
+
+final source-domain Return theoremが存在するか？
+```
+
+を確認します。
+
+この一連の流れが、v21におけるhigh-dimensional projection structural analysisの実践的意味です。
 
 ---
 
-## 17. AIと自動数学探索
+## 36. Return strengthが重要な理由
 
-AK-HPDSTは、AIおよび自動systemが次を行うことを認めます。
+あるprojectionがpersistent homologyの一つのdegreeしか観測していないとします。
 
-* realization / bridge candidateの提案
-* counterexample search
-* detector candidate生成
-* proof route ranking
-* formalization draft生成
-* dependency graph / manifest構築
-* computation replay
-* literature / source binding支援
+二つのsource objectがdegree-zero persistenceでは同じでも、degree oneでは異なることがあります。
 
-ただしsemantic boundaryは厳格です。
+この場合、
 
 ```text
-Generation != verification
-Search success != theorem
-Consensus != proof
-Self-review != independent verification
-Storage != certification
-Byte identity != semantic identity
-Formal syntax != source-faithful meaning
+observed predicate Return = valid
 ```
 
-AI-generated objectがtheorem evidenceになるには、正確なverifier-side schemaへ変換され、宣言されたauthorityとscope内で検証を通過しなければなりません。
+であっても、
 
-したがってAK-HPDSTは、高度な数学AIと共存しながら、proof statusについては保守的な体系です。
+```text
+full source-object reconstruction
+filtered quasi-isomorphism
+derived equivalence
+```
+
+は導けません。
+
+これは文章上の違いではありません。
+
+**information-loss boundaryの違い**です。
+
+そのためv21では、Return targetとstrengthをtheorem statementの一部として保持します。
 
 ---
 
-## 18. Versioningとcitation discipline
+## 37. Design philosophy
 
-AK-HPDSTの結果を引用する場合、少なくとも次を記録してください。
+AK-HPDSTはtheorem promotionについて意図的に保守的です。
 
-* theory versionとappendix version
-* exact source artifact
-* theorem、definition、local label、Claim UID
-* complete hypothesisとmonitored scope
-* comparison modeとdetector stage
-* 必要なsource bindingとartifact
-* Return strength
-* 必要に応じたrepair ancestry
+### Explicit information loss
 
-README、diagram、summary、AI生成説明、後続software implementationは、canonical theorem statementを置き換えません。
+projectionがglobally faithfulでなくても構いません。
 
-リリース全体を引用する場合は、上記Zenodo DOIと、使用したexact versionを明示してください。
+問題は、declared targetに対して十分かどうかです。
+
+### Exact local structure before globalization
+
+local valueやobject classは、actual mapやcoherenceの代用にはなりません。
+
+### Finite proof only through a theorem
+
+finite computationはsoundness / completeness / reconstruction theoremによって初めてfinite proofになります。
+
+### No hidden infinite extrapolation
+
+infinite conclusionにはfinite-to-infinite theoremが必要です。
+
+### Return is target-relative
+
+routeは、最も弱いnecessary componentが支えるstrengthを超えてReturnしません。
+
+### Counterexamples are structural information
+
+強い含意が失敗したなら、その失敗はload-bearing hypothesisを特定します。
+
+### AI is an agent, not theorem authority
+
+AIはsearch、proposal、transformation、formalization assistを行えます。
+
+theorem strengthを決めるのは数学的routeです。
 
 ---
 
-## 19. 最終的な解釈
+## 38. 現在のstable mathematical scope
 
-AK-HPDST v20.0.0が問うのは次です。
+v21 stable kernelが最も強いのは、概ね次の領域です。
 
 ```text
-複雑な数学命題を有限証拠へ圧縮し、
-複数の数学表現を通して輸送し、
-隠れた情報損失や障害を検査し、
-結論を誇張せずに元の数学分野へ戻すにはどうすべきか。
+one-parameter constructible persistence over a field
+
+finite certificate models
+
+finite categories / finite posets
+
+finite-dimensional diagrams
+
+bounded complexes
+
+finite projective generators
+
+finite Morita reconstruction
+
+finite Alexandrov descent
+
+certified finite-state / Noetherian reductions
+
+typed Bridge / Return composition
 ```
 
-v20は、すべての数学問題がcollapseによって自動解決できるとは主張しません。
-
-その貢献は、次を明確に分離するアーキテクチャにあります。
-
-* finite observationとfinite proof
-* detector soundnessとdetector completeness
-* compressionとpreservation
-* persistence vanishingとhigher derived vanishing
-* terminal cleanlinessとtransient cleanliness
-* finite-stage agreementとinfinite reduction
-* realizationとReturn
-* ideal / module / object / derived Return strength
-* AI generationとverifier authority
-* internal certificationとexternal mathematical truth
-
-Appendix HTは、これらの区別を統合されたtransport / Return calculusへ発展させます。
-
-Appendix UBは、12件のvalidated caseによって、複数の数学分野でこのarchitectureが実行可能であることを示します。
-
-v20研究体系は、次のように要約できます。
+このstable scopeの外側には、controlled research interfaceとして、
 
 ```text
-型付き欠損、明示的Return強度、監査可能な外部境界を備えた、
-有限証明圧縮および証明輸送アーキテクチャ。
+non-field coefficients
+spectral sequences
+dg / A_infinity structures
+sheaves / stacks
+multiparameter extraction
+higher coherence
+Iwasawa theory
+p-adic analysis
+Mirror / Fukaya-facing structures
+PDE compactness / continuation
+```
+
+があります。
+
+これらは自動的にstable-Core theoremではありません。
+
+---
+
+## 39. v21以降の研究方向
+
+v21はfinite globalizationとtyped Return architectureを大きく閉じました。
+
+一方で、次のより深い問題を露出させました。
+
+もはや中心課題は単に、
+
+```text
+shadowをどうcertifyするか？
+```
+
+ではありません。
+
+より本質的には、
+
+```text
+どのprojectionがtargetに必要な情報を保存するのか？
+
+何が失われるのか？
+
+失われた情報を補うために
+どのadditional probeが必要なのか？
+
+どのstrengthでsourceへReturnできるのか？
+```
+
+です。
+
+これは将来的なProjection--Return / observability理論につながります。
+
+v21 corpus内のsuccessor directionには、
+
+- finite-state certificate compiler
+- machine-checkable homotopy-coherent descent
+- controlled Noetherian base上のfinite Morita
+- compatible partial Returnのuniform calculus
+- determinant / Fitting-ideal Return
+- higher Bockstein reconstruction
+- source-specific rigidity
+- Iwasawa information-preservation
+- p-adic L-function Return
+- analytic / categorical applicationの拡張
+
+などがあります。
+
+これらはv21で完成済みの主張ではなく、後続研究programです。
+
+---
+
+## 40. Citation / source discipline
+
+AK-HPDST v21.0.0のtheoremを引用する場合、可能な限り次を記録してください。
+
+```text
+theory version
+source PDF
+chapter / appendix
+theorem / definition number
+Claim UID
+complete hypotheses
+source / target types
+comparison mode
+detector stage
+Return target / strength
+source bindings
+required artifacts
+```
+
+README、要約、diagram、生成説明、後続implementationはcanonical theorem statementの代用ではありません。
+
+Final Claim Registerはidentityとadmissible useを管理しますが、
+
+```text
+registration != proof
+```
+
+です。
+
+数学的sourceとproofが最終的な根拠です。
+
+---
+
+## 41. 最終的な位置づけ
+
+AK-HPDST v21.0.0は、一つの問いに要約できます。
+
+```text
+複雑な数学対象を
+制御されたshadowへ射影し、
+
+有限のcertified evidenceへ圧縮し、
+
+actual mathematical structureとして再構成し、
+
+coherenceを捏造することなくglobalizeし、
+
+証明した以上のことを言わずに
+元の数学領域へReturnするにはどうすればよいか？
+```
+
+v21の回答はDual-Core architectureです。
+
+```text
+Core-P
+    = robust finite persistence certification
+
+        +
+
+Core-DG
+    = exact finite diagram reconstruction
+      and finite globalization
+```
+
+これらを、
+
+```text
+finite-to-infinite reduction
+higher transfer
+coherence
+rigidity
+typed Bridge composition
+target-relative Return
+proof-DAG verification
+source / claim governance
+```
+
+によって接続します。
+
+AK-HPDST v21.0.0は、最終的には次のように位置づけられます。
+
+```text
+高次元・複雑・非局所なsource structureを
+目的相対的なstructured shadowへ射影し、
+
+有限証拠とactual mathematical structureを区別しながら
+再構成・大域化し、
+
+source-domain truthへ戻るために必要な
+数学的矢印を一つずつ明示する
+finite-proof and structural-projection architecture
+```
+
+そして、その中心原則は次です。
+
+```text
+A projected shadow may reveal the structure.
+
+Only a proved Return carries the theorem home.
+```
+
+日本語で言えば、
+
+```text
+射影された影は、構造を明らかにすることができる。
+
+しかし、その結論を元の数学対象へ持ち帰るのは、
+証明されたReturnだけである。
 ```

@@ -12,6 +12,8 @@
 **ステータス:** v21.0.0 正典・source-controlled research corpus / Final Claim Register収録  
 **リポジトリ形式:** 全文PDF。最初に読むための独立したKernel Paperを収録
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21831104.svg)](https://doi.org/10.5281/zenodo.21831104)
+
 ---
 
 ## はじめに読むもの

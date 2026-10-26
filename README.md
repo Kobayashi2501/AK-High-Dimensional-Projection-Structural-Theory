@@ -4,7 +4,7 @@
 **Finite Certificates, Structural Projection, Diagrammatic Globalization, Typed Returns, and Target-Driven Discovery**
 
 Author: **Atsushi Kobayashi**
-https://doi.org/10.5281/zenodo.23660443
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23660443.svg)](https://doi.org/10.5281/zenodo.23660443)
 ---
 
 ## Overview

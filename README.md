@@ -1,4 +1,3 @@
-```markdown
 # AK High-Dimensional Projection Structural Theory
 ## AK-HPDST v21.01
 

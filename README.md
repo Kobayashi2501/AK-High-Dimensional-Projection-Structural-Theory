@@ -1,1698 +1,1132 @@
-# AK-HPDST v21.0.0
+```markdown
+# AK High-Dimensional Projection Structural Theory
+## AK-HPDST v21.01
 
-## AK High-Dimensional Projection Structural Theory
+**Finite Certificates, Structural Projection, Diagrammatic Globalization, Typed Returns, and Target-Driven Discovery**
 
-> A typed mathematical framework for projecting complex source structures into controlled shadows, turning finite observations into certified evidence, reconstructing actual finite diagrams, globalizing them through effective descent, and returning conclusions to the source domain only at a proved target-relative strength.
-
-**Author:** Atsushi Kobayashi  
-**Theory version:** v21.0.0  
-**Release theme:** Finite Globalization, Unified Bridge Calculus, and Certificate Complexity  
-**Primary mathematical architecture:** `Core-P + Core-DG`  
-**Status:** Canonical v21.0.0 source-controlled research corpus; final Claim Register included  
-**Repository format:** PDF research corpus, with a standalone Kernel Paper for first reading
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21831104.svg)](https://doi.org/10.5281/zenodo.21831104)
+Author: **Atsushi Kobayashi**
 
 ---
 
-## Start here
+## Overview
 
-For the fastest orientation:
+AK High-Dimensional Projection Structural Theory (AK-HPDST) is a mathematical and proof-engineering framework for converting large, high-dimensional, nonlocal, or difficult-to-verify mathematical structures into controlled structural shadows that can be analyzed by finite certificates and then returned to the original problem domain through explicitly proved Return theorems.
 
-1. [Kernel Paper](<AK_HPDST_v21_0_0_Kernel_Paper_Projection_Reaudited(1).pdf>) -- the compact mathematical essence of v21.
-2. [Main Chapters 1--10](<AK_HPDST_v21_0_0_Part1_Main.pdf>) -- the canonical generic theorem layer.
-3. [Final Claim Register](<AK_HPDST_v21_0_0_Appendix_Part12_Claim_Register.pdf>) -- canonical identities, ownership, migration, source binding, and admissible-use governance.
+The central idea is not that a difficult mathematical object is literally reduced to a lower-dimensional object.
 
-The Kernel Paper is the recommended first mathematical read; the Main and appendices remain authoritative for the complete v21 source-controlled statements, proofs, interfaces, validation, and governance.
+Instead, AK asks:
+
+> What finite or structurally simpler information is sufficient for a declared mathematical target, what information is lost by the projection, and what additional theorem is required to return a certified conclusion to the original source problem?
+
+The basic architecture is:
+
+    source object X
+        ->
+    typed structural projection R_AK(X)
+        ->
+    persistence / finite structural shadow
+        ->
+    repaired Collapse analysis
+        ->
+    finite certificate
+        ->
+    finite diagram reconstruction
+        ->
+    effective descent / globalization
+        ->
+    global internal object
+        ->
+    Bridge composition
+        ->
+    typed Return
+        ->
+    source-domain conclusion
+
+Every arrow is a separate mathematical obligation.
+
+Observation is not automatically proof.
+A finite certificate is not automatically a diagram.
+Local agreement is not automatically globalization.
+An internal AK conclusion is not automatically an external theorem.
+A Return is valid only at the exact strength proved by the complete route.
 
 ---
 
-## Contents
+# 1. What is AK-HPDST?
 
-- [1. What is AK-HPDST?](#1-what-is-ak-hpdst)
-- [2. Why v21 is different from v20](#2-why-v21-is-different-from-v20)
-- [3. The shortest entry point: the Kernel Paper](#3-the-shortest-entry-point-the-kernel-paper)
-- [4. The dual-Core architecture](#4-the-dual-core-architecture)
-- [5. The P2DG interface](#5-the-p2dg-interface)
-- [6. Collapse in v21](#6-collapse-in-v21)
-- [7. Finite observation is not finite proof](#7-finite-observation-is-not-finite-proof)
-- [8. Finite proof has exact no-go boundaries](#8-finite-proof-has-exact-no-go-boundaries)
-- [9. Finite-to-infinite reduction](#9-finite-to-infinite-reduction)
-- [10. Record globalization versus object globalization](#10-record-globalization-versus-object-globalization)
-- [12. Unified Bridge and typed Return](#12-unified-bridge-and-typed-return)
-- [16. Mathematically distinguished results](#16-mathematically-distinguished-results-in-the-v21-kernel)
-- [19. Known-Theorem Recovery](#19-known-theorem-recovery)
-- [22. AI, search, and proof engineering](#22-ai-search-and-proof-engineering)
-- [27. What v21 does not claim](#27-what-v21-does-not-claim)
-- [33. Repository guide](#33-repository-guide)
-- [34. Recommended reading paths](#34-recommended-reading-paths)
-- [41. Final interpretation](#41-final-interpretation)
+AK-HPDST is built around the principle of **purpose-faithful structural projection**.
+
+For a source object X, AK considers a structured shadow
+
+    F_X = R_AK(X)
+
+where the projection is required to preserve or reflect a specifically declared target feature.
+
+The projection does not need to be globally faithful, exact, or invertible.
+
+Instead, the theory requires an explicit statement of:
+
+- the source class,
+- the target property or invariant,
+- the direction of inference,
+- the coefficient and parameter regime,
+- the information lost by projection,
+- the required reconstruction or rigidity theorem,
+- and the maximum strength of the permitted Return.
+
+This produces the fundamental asymmetry:
+
+    Projection exposes structure.
+    Return certifies a conclusion.
+
+Projection alone never licenses an external conclusion.
 
 ---
 
-## 1. What is AK-HPDST?
+# 2. The Mathematical Kernel
 
-AK-HPDST asks a structural question that appears in many areas of mathematics:
+AK-HPDST v21 is organized around two interacting but non-identical mathematical cores.
 
-```text
-Can a difficult, high-dimensional, nonlocal, or infinite mathematical object
-be projected to a controlled mathematical shadow,
-certified from finite evidence,
-reconstructed or globalized without inventing structure,
-and then returned to the original problem at exactly the strength that was proved?
-```
+## Core-P: Persistence Certificate Core
 
-The basic v21 route is:
+Core-P studies robust finite information extracted from persistence-type structures.
 
-```text
-high-dimensional source X
+Its principal components include:
+
+- constructible one-parameter persistence,
+- window-first evaluation,
+- repaired hard-threshold deletion,
+- threshold-gap stability,
+- repaired zero transport,
+- finite detector certificates,
+- certificate complexity,
+- higher Ext edges,
+- kernel and cokernel defect diagnostics,
+- terminal and transient Collapse defects,
+- Restart,
+- certificate atlases,
+- and finite-to-infinite reduction.
+
+A simplified Core-P route is:
+
+    source
+      ->
+    persistence profile
+      ->
+    window
+      ->
+    threshold repair
+      ->
+    detector family
+      ->
+    finite certificate
+      ->
+    certified predicate / defect
+
+Core-P is designed to distinguish finite evidence from finite proof.
+
+---
+
+## Core-DG: Finite Diagram and Globalization Core
+
+Core-DG studies exact finite categorical structure.
+
+Its stable regime includes:
+
+- finite categories and finite posets,
+- actual diagram morphisms,
+- bounded finite-dimensional complexes,
+- representable projectives,
+- projective generators,
+- Yoneda reconstruction,
+- cone detection,
+- finite Morita reconstruction,
+- finite Alexandrov realization,
+- strict finite sheaf descent,
+- bounded-complex descent,
+- and global zero / isomorphism certification.
+
+A simplified Core-DG route is:
+
+    finite structural data
+        ->
+    actual finite diagram
+        ->
+    projective probes / generators
+        ->
+    reconstruction
+        ->
+    coherence
+        ->
+    effective descent
+        ->
+    global object
+
+Core-P and Core-DG are connected only through typed interfaces.
+
+A barcode does not automatically define a finite diagram.
+Equal ranks do not automatically define a morphism.
+Objectwise isomorphism does not automatically define a natural isomorphism.
+Pairwise overlap data do not automatically define effective descent.
+
+---
+
+# 3. The Full AK Architecture
+
+The v21.01 repository is organized as follows.
+
+    AK-HPDST v21.01
     |
-    | typed / purpose-faithful structural projection
-    v
-structured shadow F_X = R_AK(X)
+    +-- Canonical v21.0.0 Mathematical Baseline
+    |   |
+    |   +-- Main Chapters 1-10
+    |   |
+    |   +-- Foundation Core-P / Verification
+    |   |   +-- Appendices A-G
+    |   |
+    |   +-- Finite Diagram and Globalization Core
+    |   |   +-- Appendix DG
+    |   |
+    |   +-- Higher Transfer / Return
+    |   |   +-- Appendix HT
+    |   |
+    |   +-- Universal Bridge Components
+    |   |   +-- Appendix UB
+    |   |
+    |   +-- Core Micro-Theorems
+    |   |   +-- Appendix CM
+    |   |
+    |   +-- Toy Bridges / Counterexamples / Regression
+    |   |   +-- Appendix TB
+    |   |
+    |   +-- Technical Extensions
+    |   |   +-- Appendices H-N
+    |   |
+    |   +-- Problem Interfaces
+    |   |   +-- Appendices MS / NS
+    |   |
+    |   +-- Search / Platform Infrastructure
+    |   |   +-- Appendices U-Z
+    |   |
+    |   +-- Companion Documents
+    |   |
+    |   +-- Final Claim Register
+    |       +-- Appendix CR-v21
     |
-    | persistence, filtering, finite observation
-    v
-finite Collapse certificate
+    +-- Mathematical Kernel Paper
     |
-    | P2DG reconstruction
-    v
-actual finite diagram
-    |
-    | coherence + effective descent
-    v
-global mathematical object
-    |
-    | typed Bridge / Return
-    v
-source-domain conclusion E_sigma(X)
-```
+    +-- Post-v21 Research Supplements
+        |
+        +-- Appendix BFA
+        |   Navier-Stokes proof reconstruction,
+        |   adversarial falsification,
+        |   and generic extraction
+        |
+        +-- Appendix SDR
+        |   Separation, Discovery, and Rigidity
+        |
+        +-- Appendix NC
+            Nakai resolution audit,
+            Escape-Collapse boundary,
+            and SC.1 successor research
 
-The word **projection** is structural. It does not mean that AK-HPDST assumes a literal linear projection, a universal reduction of topological dimension, or a globally faithful functor.
-
-A useful AK projection must declare:
-
-```text
-source class
-source feature of interest
-observable / shadow
-variance and coefficients
-direction of use
-information-loss profile
-preservation or reflection theorem
-failure boundary
-```
-
-The projected object is therefore a **controlled shadow**, not automatically a substitute for the source.
-
-The central asymmetry of the theory is:
-
-```text
-Projection exposes a structured shadow.
-Return alone carries a certified statement back to the source.
-```
-
-This projection--Collapse--Return viewpoint is the conceptual core of AK High-Dimensional Projection Structural Theory.
+The post-v21 supplements extend the research program but do not silently rewrite the frozen v21.0.0 theorem graph.
 
 ---
 
-## 2. Why v21 is different from v20
+# 4. Proof Architecture
 
-v20 concentrated on:
+The canonical proof architecture is approximately:
 
-```text
-finite proof compression
-higher obstruction transport
-finite-to-infinite reduction
-typed external Return
-```
+    Source Semantics
+          |
+          v
+    Problem Interface
+          |
+          v
+    Structural Projection
+          |
+          +----------------------+
+          |                      |
+          v                      v
+       Core-P                 Core-DG
+          |                      |
+          +----------+-----------+
+                     |
+                     v
+              Bridge DAG
+                     |
+                     v
+             Globalization
+                     |
+                     v
+              Typed Return
+                     |
+                     v
+              External Target
 
-v21 keeps the complete v20 baseline conservatively, but adds a second mathematical Core and makes finite globalization explicit.
+The proof graph is typed.
 
-The new stable architecture is:
+A successful node cannot compensate for a missing required node.
 
-```text
-Core-P + Core-DG
-```
+In particular:
 
-where `+` means coordinated coexistence through typed interfaces.
+    numerical success != theorem
+    compilation != proof
+    replay != proof
+    AI agreement != proof
+    local agreement != descent
+    readiness != Return
+    observation != reconstruction
 
-It does **not** mean:
-
-```text
-Core-P = Core-DG
-Core-P automatically reconstructs Core-DG
-Core-DG automatically determines Core-P
-a categorical product or equivalence
-```
-
-The main v21 chain is:
-
-```text
-persistent certificate
-    -> finite diagram
-    -> global object
-    -> external Return
-```
-
-Every arrow requires its own theorem.
-
-The major conceptual step is therefore:
-
-```text
-v20:
-finite certified evidence -> external proof transport
-
-v21:
-finite certified evidence
-    -> exact finite mathematical structure
-    -> effective globalization
-    -> target-relative external Return
-```
-
-This removes several hidden shortcuts that are common in informal mathematical arguments.
+AK therefore treats mathematical proof as a typed dependency DAG rather than as an accumulation of favorable evidence.
 
 ---
 
-## 3. The shortest entry point: the Kernel Paper
+# 5. What Can AK-HPDST Do?
 
-The recommended first document is:
+Within explicitly declared hypotheses and source classes, AK-HPDST provides machinery for the following tasks.
 
-```text
-AK_HPDST_v21_0_0_Kernel_Paper_Projection_Reaudited(1).pdf
-```
+## 5.1 Compress large mathematical structures into finite certificates
 
-The Kernel Paper is the compact mathematical entry point to v21.
+AK can identify finite witness families that certify a declared property when a soundness and completeness theorem exists.
 
-It presents the theory as:
+This includes:
 
-```text
-source
--> structured projection
--> repaired finite certificate
--> finite diagram reconstruction
--> finite diagrammatic globalization
--> typed Return
-```
-
-It also isolates the mathematically strongest parts of the current kernel:
-
-- sharp threshold-gap stability for repaired hard deletion;
-- exact zero separation on the reduced persistence image;
-- family-relative finite certificate complexity;
-- exact lower bounds and finite-detection no-go results;
-- finite Mobius reconstruction of endpoint-complete persistence;
-- exact coordinate rank-query complexity in the declared model;
-- finite-state inverse-limit reconstruction and `lim^1` vanishing;
-- generator and cone based detection;
-- finite Morita reconstruction;
-- finite Alexandrov realization and effective descent;
-- target-relative Bridge / Return composition;
-- causal localization of missing or rejected proof obligations.
-
-For readers who want the idea before the full formal architecture:
-
-```text
-README
-  -> Kernel Paper
-  -> Main Chapters 1--10
-  -> Foundation / DG proofs
-  -> HT / UB / application appendices
-```
-
-is the preferred route.
+- detector certificates,
+- finite witness extraction,
+- certificate atlases,
+- minimal or Pareto-minimal certificate analysis,
+- and model-relative certificate complexity.
 
 ---
 
-## 4. The dual-Core architecture
+## 5.2 Separate stable structure from threshold noise
 
-### 4.1 Core-P: Persistence Certificate Core
+The repaired persistence layer distinguishes genuine structural information from features unstable under hard threshold deletion.
 
-Core-P is the conservative continuation of the repaired v20 persistence architecture.
-
-Its default stable scope is:
-
-```text
-constructible one-parameter persistence
-over a field
-with finite-dimensional monitored data
-```
-
-For a filtered object `F`, homological degree `n`, window `W`, and threshold `tau`, the canonical evaluation order is:
-
-```text
-P_n(F)
-  -> Window_W(P_n(F))
-  -> T_bar_tau(Window_W(P_n(F)))
-```
-
-or, schematically:
-
-```text
-B(n,W;F) = Window_W(P_n(F))
-
-Eval(n,W,tau;F) = T_bar_tau(B(n,W;F))
-```
-
-The order is fixed:
-
-```text
-persistence -> window -> hard threshold deletion
-```
-
-Core-P includes:
-
-- constructible persistence and barcode decomposition;
-- hard finite-bar threshold deletion;
-- sharp threshold-gap-safe transport;
-- repaired zero / nonzero certification;
-- finite detector soundness and completeness;
-- certificate complexity and lower bounds;
-- higher obstruction / Ext edges under explicit eligibility;
-- actual-morphism Type IV diagnostics;
-- transient-defect separation;
-- detector atlases, overlap, coverage, and Restart;
-- finite-state, Noetherian, or otherwise certified finite-to-infinite reduction.
-
-#### Important threshold boundary
-
-Hard positive-threshold deletion is **not** treated as:
-
-```text
-a global exact Serre localization
-a globally non-expansive endofunctor
-a universally functorial exact operation
-```
-
-The safe metric statement has the schematic form:
-
-```text
-d_B(B,C) <= epsilon
-
-and no finite bar of B or C has length in
-[tau - epsilon, tau + epsilon]
-
-=> d_B(T_bar_tau(B), T_bar_tau(C)) <= epsilon
-```
-
-The threshold gap is part of the theorem, not an implementation detail.
-
-### 4.2 Core-DG: Finite Diagram and Globalization Core
-
-Core-DG is the major stable mathematical addition in v21.
-
-Its default scope is:
-
-```text
-finite small categories / finite posets
-finite-dimensional diagrams over a field
-bounded complexes
-actual natural transformations
-actual chain maps
-finite projective generators
-finite-dimensional Morita algebras
-finite Alexandrov spaces
-effective finite descent
-```
-
-For a finite category `P` and field `k`:
-
-```text
-Diag_P(k) = Fun(P, Vect_fd(k))
-```
-
-Core-DG develops:
-
-- complete finite category presentations;
-- relations and variance control;
-- abelian finite-diagram categories;
-- representable projectives;
-- finite projective generators;
-- Yoneda reconstruction;
-- derived zero reflection;
-- cone-based morphism-isomorphism detection;
-- finite Morita reconstruction;
-- finite Alexandrov realization;
-- strict finite sheaf descent;
-- strict bounded-complex descent;
-- model-certified derived descent where separately proved;
-- global zero and isomorphism certificates;
-- model-relative global certificate complexity.
-
-A key rule is:
-
-```text
-same objectwise data != same diagram
-equal ranks != actual morphisms
-objectwise isomorphism != natural isomorphism
-pairwise overlap equivalence != cocycle
-descent readiness != effective descent
-```
-
-Core-DG exists to make those distinctions mathematically explicit.
+The theory includes a sharp threshold-gap regime rather than assuming global non-expansiveness.
 
 ---
 
-## 5. The P2DG interface
+## 5.3 Determine when finite observation is insufficient
 
-v21 does not identify persistence data with finite categorical structure.
+AK does not assume that more observations eventually become proof.
 
-The persistence-to-diagram interface, abbreviated here as `P2DG`, is an explicit theorem-bearing handoff.
+It provides explicit no-go mechanisms when:
 
-A valid handoff must record, as required:
+- a finite detector cannot distinguish required source objects,
+- a probe family is blind to a target-relevant distinction,
+- scalar data lose morphism information,
+- finite prefixes fail to determine an infinite target,
+- or local information cannot support the requested global conclusion.
 
-```text
-finite grid / category
-objects
-actual morphisms
-relations
-variance
-coefficients
-endpoint conventions
-exactness profile
-reflection profile
-information-preservation profile
-terminal policy
-supported conclusion strengths
-artifacts
-prohibited stronger readings
-```
-
-For an endpoint-complete finite one-parameter persistence class, the theory can pass from a persistence object to a finite linear-quiver representation.
-
-A complete rank table:
-
-```text
-r(i,j) = rank(V_i -> V_j)
-```
-
-recovers interval multiplicities by finite Mobius inversion.
-
-In the coordinate rank-query model, the complete comparable-pair table is query-minimal for exact reconstruction of the unrestricted interval-multiplicity family.
-
-But:
-
-```text
-rank table != arbitrary enriched diagram
-barcode != natural transformation
-scalar probe != morphism reconstruction
-```
-
-Enriched reconstruction requires enriched probes and the actual category relations.
+Negative results are therefore first-class mathematical outputs.
 
 ---
 
-## 6. Collapse in v21
+## 5.4 Reconstruct finite structures
 
-In AK-HPDST, **Collapse** is not a single universal scalar and not merely the statement that something equals zero.
-
-Different Collapse-type conclusions live at different mathematical stages.
+Under suitable completeness hypotheses, AK can reconstruct finite structures from certified observables.
 
 Examples include:
 
-```text
-repaired persistence zero
-finite detector zero
-higher Ext obstruction zero
-kernel defect zero
-cokernel defect zero
-terminal Type IV zero
-transient defect absence
-diagram-probe zero
-descent-coherence success
-global object zero
-source-domain predicate
-```
-
-These are not automatically interchangeable.
-
-For example:
-
-```text
-repaired persistence zero
-    != automatically Ext zero
-
-terminal Type IV clean
-    != full kernel/cokernel zero
-
-local repaired zero
-    != global object zero
-
-global internal zero
-    != external theorem
-```
-
-A promotion from one level to another needs an explicit theorem.
-
-This is one of the main safety and mathematical design principles of v21.
+- endpoint-complete persistence reconstruction,
+- finite Mobius inversion,
+- finite quiver reconstruction,
+- projective-generator probing,
+- Yoneda-style reconstruction,
+- and finite Morita reconstruction.
 
 ---
 
-## 7. Finite observation is not finite proof
+## 5.5 Detect zero objects and isomorphisms categorically
 
-A central AK rule is:
+Core-DG converts object or morphism questions into finite generator and cone tests.
 
-```text
-finite data != finite certificate
-```
+Typical patterns are:
 
-A finite list of ranks, values, samples, endpoints, bars, local objects, overlap maps, or numerical approximations does not automatically prove a global statement.
+    object E
+      ->
+    finite generator probe
+      ->
+    zero reflection
 
-A finite certificate model records at least the declared:
+and
 
-```text
-information model
-query model
-encoding model
-verification model
-```
+    morphism f
+      ->
+    Cone(f)
+      ->
+    zero detection
+      ->
+    isomorphism verdict
+
+---
+
+## 5.6 Globalize local information
+
+AK explicitly separates:
+
+    local record globalization
+
+from
+
+    global mathematical object construction.
+
+When the required cocycles, coherence data, effectivity theorem, and descent conditions are available, finite local data can be assembled into certified global objects.
+
+---
+
+## 5.7 Reduce controlled infinite problems to finite verification
+
+AK contains several finite-to-infinite mechanisms, including:
+
+- finite-state stabilization,
+- Noetherian reduction,
+- inverse-system control,
+- derived-limit analysis,
+- finite certificate atlases,
+- and separately proved completion principles.
+
+An infinite conclusion is permitted only when an explicit finite-to-infinite theorem closes the route.
+
+---
+
+## 5.8 Compose heterogeneous mathematics through typed Bridges
+
+The HT and UB layers provide a typed Bridge architecture connecting compatible mathematical components.
+
+Bridge composition tracks:
+
+- source and target types,
+- assumptions,
+- variance,
+- coefficient systems,
+- exactness,
+- information loss,
+- descent requirements,
+- rigidity requirements,
+- failure routes,
+- and Return strength.
+
+This allows several mathematical technologies to participate in one proof without treating them as interchangeable.
+
+---
+
+## 5.9 Identify the exact reason a proof route fails
+
+AK failure semantics distinguish:
+
+- missing evidence,
+- ill-typed edges,
+- certified obstructions,
+- source-binding failures,
+- finite-to-infinite failures,
+- coherence failures,
+- descent failures,
+- rigidity failures,
+- and Return failures.
+
+The purpose is not merely to say that a proof failed.
+
+The purpose is to identify the earliest mathematically meaningful obstruction and the exact theorem class required to repair it.
+
+---
+
+# 6. What Has AK-HPDST Already Established?
+
+The current mathematical kernel contains several exact results within their declared models.
+
+## 6.1 Repaired hard-threshold persistence
+
+AK establishes a two-sided threshold-gap stability regime for hard threshold deletion.
+
+It also establishes exact zero separation on the reduced image while explicitly rejecting global non-expansiveness.
+
+---
+
+## 6.2 Finite certificate complexity
+
+For finite family-relative certificate models, AK represents certificate complexity by a Pareto frontier over quantities such as:
+
+    query count
+    bit length
+    verification work
+    artifact size
+
+The framework also includes lower-bound witnesses showing when a smaller certificate cannot exist in the declared information model.
+
+---
+
+## 6.3 Finite exact reconstruction
+
+Endpoint-complete persistence data can be reconstructed by finite Mobius inversion.
+
+Within the coordinate rank-query model, the complete rank table gives an exact query benchmark.
+
+---
+
+## 6.4 Finite-state inverse systems
+
+Typed finite-state inverse towers admit exact stabilization and apex-agreement analysis.
+
+This supplies a controlled finite-to-infinite lane rather than inferring an infinite statement from a finite prefix.
+
+---
+
+## 6.5 Finite diagrammatic reconstruction
+
+Actual finite diagrams admit:
+
+- generator-based zero reflection,
+- cone detection,
+- finite Morita reconstruction,
+- Alexandrov realization,
+- and strict finite descent.
+
+---
+
+## 6.6 Typed Return calculus
+
+The Bridge / Return layer ensures that a proof exports only the target strength actually supported by every required component.
+
+A weaker internal result cannot silently become a stronger source-domain theorem.
+
+---
+
+# 7. Appendix BFA
+## Navier-Stokes Blow-up, Source-Faithful Reconstruction, Adversarial Falsification, and Generic Extraction
+
+Appendix BFA is a post-v21 research supplement developed after the frozen v21.0.0 release.
+
+Its primary purpose is not to claim a new AK solution of the Navier-Stokes Millennium Prize Problem.
+
+Instead, BFA studies how AK can analyze an external high-complexity proof candidate.
+
+The BFA architecture includes:
+
+    external source
+        ->
+    exact source binding
+        ->
+    typed dependency DAG
+        ->
+    source-faithful reconstruction
+        ->
+    critical-cut analysis
+        ->
+    adversarial falsification
+        ->
+    target interpretation
+        ->
+    exact Return ceiling
+
+BFA distinguishes:
+
+- source truth,
+- formalization truth,
+- interpretation truth,
+- route closure,
+- route falsification,
+- and target falsification.
+
+It also separates:
+
+    source-faithful reconstruction
+
+from
+
+    independent recovery.
+
+This distinction prevents an external theorem from being silently reclassified as an AK-generated theorem.
+
+### BFA outcome
+
+At the declared source-interface resolution, BFA found no certified rule-level contradiction in the reconstructed route.
+
+However:
+
+- it does not independently re-prove every external analytic lemma,
+- it does not claim an AK-only Navier-Stokes solution,
+- it does not promote the reconstructed route into Core-P or Core-DG,
+- and it does not promote a new successor Core theorem.
+
+Its major contribution is therefore methodological:
+
+> AK can reconstruct, audit, stress-test, falsify, and precisely type an external proof route without confusing successful reconstruction with independent theorem ownership.
+
+BFA also motivated the next major development: structural discovery.
+
+---
+
+# 8. Appendix SDR
+## Separation, Discovery, and Rigidity
+
+Appendix SDR extends AK from proof verification toward **target-driven mathematical discovery**.
+
+The central SDR research loop is:
+
+    target discrepancy
+        ->
+    indistinguishable source pair
+        ->
+    separation defect
+        ->
+    missing structure
+        ->
+    candidate observable / probe
+        ->
+    information gain
+        ->
+    rigidity / reflection
+        ->
+    completion
+        ->
+    typed Return
+
+The key question is:
+
+> If the current AK projection cannot distinguish two source objects that have different target values, what additional mathematical structure is minimally required to separate them?
+
+SDR therefore treats failed separation as information about what mathematics is missing.
+
+---
+
+## 8.1 Target-relative information
+
+SDR formalizes observables relative to an explicit target.
+
+An observable can be complete for one target while being insufficient for another.
+
+There is therefore no unqualified notion of a universally "complete invariant" inside SDR.
+
+---
+
+## 8.2 Separation defects
+
+If two source objects are indistinguishable under the current observation packet but differ at the target level, SDR records a target-relevant separation defect.
+
+This defect becomes a mathematical object used to drive further discovery.
+
+---
+
+## 8.3 Counterexample-guided discovery
+
+Certified counterexamples are not merely failures.
+
+They can identify the precise structural distinction that the current invariant failed to see.
+
+SDR uses this to construct:
+
+- missing-structure profiles,
+- candidate probes,
+- witness-directed refinements,
+- and explicit generalization ladders.
+
+---
+
+## 8.4 Enriched structural escalation
+
+SDR does not assume that mathematical strength forms one linear hierarchy.
+
+A failure may require additional:
+
+- scalar information,
+- object information,
+- morphism information,
+- exact / Yoneda information,
+- derived information,
+- dg or A-infinity information,
+- tail information,
+- coherence information,
+- or source-semantic information.
+
+The correct escalation is determined by the unresolved target obligation rather than by choosing the most sophisticated formalism available.
+
+---
+
+## 8.5 Rigidity and reconstruction
+
+A discovered probe becomes theorem-bearing only when a rigidity or reflection theorem is proved.
+
+The desired pattern is:
+
+    observed packet I(X)
+        ->
+    target rigidity
+        ->
+    target value Theta(X)
+
+This is distinct from reconstructing the complete source object.
+
+Target reconstruction may be possible even when source reconstruction is impossible.
+
+---
+
+## 8.6 Minimal separating families
+
+SDR models finite separation as a covering problem over residual target conflicts.
+
+This provides a framework for:
+
+- minimal separating families,
+- redundancy detection,
+- private witnesses,
+- family-relative lower bounds,
+- finite exact search,
+- and Pareto-minimal certificate cost.
+
+---
+
+## 8.7 Dynamic defect and completion
+
+SDR distinguishes:
+
+    repeated improvement
+
+from
+
+    mathematical completion.
+
+An infinite sequence of improving probes does not imply that the residual defect vanishes.
+
+Completion requires an explicit theorem such as:
+
+- descending-chain termination,
+- finite-state stabilization,
+- Noetherian reduction,
+- compactness,
+- finite generation,
+- or another independently proved completion principle.
+
+---
+
+## 8.8 SDR Search and Discovery Engine
+
+SDR defines a theorem-first research architecture for candidate generation.
+
+The conceptual loop is:
+
+    defect
+      ->
+    candidate generation
+      ->
+    admissibility filter
+      ->
+    information-gain test
+      ->
+    theorem attempt
+      ->
+    adversarial falsification
+      ->
+    rigidity test
+      ->
+    promotion / rejection / refinement
+
+The search system does not claim algorithmic completeness.
+
+AI generation, numerical ranking, or search success is not theorem evidence.
+
+---
+
+# 9. Appendix NC
+## Nakai Resolution Audit, Escape-Collapse Theory, and SC.1
+
+Appendix NC applies the post-v21 AK research architecture to differential operators and the Nakai problem family.
+
+The unrestricted Nakai resolution itself is classified in NC as **Class III: external theory**.
+
+Accordingly, AK does not claim ownership of the unrestricted negative resolution merely because AK can reconstruct or audit the route.
+
+The independent AK contribution is the structural analysis developed around the resolution boundary.
+
+---
+
+## 9.1 Escape and Collapse
+
+Let
+
+    D = ring of differential operators
+    Delta = algebra generated by functions and derivations
+
+The basic structural alternatives are:
+
+    Escape:
+        D contains genuinely higher-order structure not generated by Delta
+
+    Collapse:
+        D = Delta
+
+NC studies the mathematical boundary separating these regimes.
+
+Under the declared normal finite-type characteristic-zero hypotheses, NC develops a reflexive-hull formulation of the finite-order boundary.
 
 Schematically:
 
-```text
-M = (I, Q, E, V)
-```
+    M_q = Delta intersect D_q
 
-v21 also treats proof cost as multidimensional.
+and the NC boundary theory relates
 
-A typical cost vector is:
+    D_q
 
-```text
-cost(Pi) = (q, b, t, a)
-```
+to the reflexive completion of
 
-where:
+    M_q.
 
-```text
-q = query count
-b = encoding / bit size
-t = verification work
-a = artifact footprint
-```
-
-For finite achievable families, minimal certificates are represented by a finite Pareto frontier rather than by a universal scalar "proof size".
+This shifts the research question from a simple equality test to the geometry and algebra of the defect separating the derivation-generated structure from its reflexive completion.
 
 ---
 
-## 8. Finite proof has exact no-go boundaries
+## 9.2 Escape-Collapse boundary
 
-AK-HPDST does not assume that every infinite problem has a finite certificate.
+The NC program isolates several distinct mechanisms:
 
-If retained bars may be born arbitrarily far to the right, a detector that always stops after finitely many observations can miss a later retained bar.
+- reflexive defect,
+- saturation defect,
+- order compression,
+- Rees / quantization defects,
+- tangent-module projectivity,
+- projectivity defects,
+- differential-core obstructions,
+- determinant components,
+- symmetric trace-free components,
+- and higher-order quantization defects.
 
-Thus:
+This produces a more informative research object than the binary question
 
-```text
-uncontrolled right-unbounded birth family
-    -> no uniform finite exact detector
-```
+    D = Delta ?
 
-A valid finite-to-infinite theorem therefore needs an additional mechanism such as:
+The new question becomes:
 
-```text
-finite-state reduction
-eventual constancy
-Noetherian stabilization
-global support bound
-compactness
-recurrence theorem
-derived-limit theorem
-certified apex agreement
-```
-
-A long stable-looking prefix is not an infinite theorem.
+> Which structural defect allows Escape, which mechanisms force Collapse, and which apparently singular structures remain invisible to the current projection?
 
 ---
 
-## 9. Finite-to-infinite reduction
+## 9.3 SC.1: Silent-Collapse / TFEP successor problem
 
-v21 distinguishes:
+NC exports a stronger successor problem, SC.1.
 
-```text
-finite observation
-finite certificate
-finite pattern
-actual infinite target
-```
+SC.1 studies whether a singular or nonprojective tangent structure can remain hidden while the differential-operator algebra still Collapses.
 
-For a typed finite-state inverse tower, the stable part can be reconstructed from finite transition data.
+The integrated SC.1 research establishes several exact intermediate structures, including projectivity-defect, torsion, Lie-Rinehart, determinant, symmetric, and Hessian-related decompositions.
 
-A representative form is:
+However:
 
-```text
-inverse_limit(V_n) ~= stable_image(T^e)
+    SC.1 remains unresolved.
 
-lim^1(V_n) = 0
-```
+The current research state is HOLD rather than proved or disproved.
 
-under the declared finite-state hypotheses.
+The remaining boundary requires at least one genuinely new mechanism involving:
 
-The route must also identify the actual tower, bonding maps, variance, state/period record, stable-image witness, derived-limit conditions, apex, apex comparison map, and apex-agreement theorem.
+- determinant-to-symmetric coupling,
+- elimination of compression,
+- Hessian / higher-order transgression,
+- stable-to-differential quantization,
+- or an explicit Silent-Collapse counterexample.
 
----
+This is a useful example of AK's intended research behavior:
 
-## 10. Record globalization versus object globalization
+    difficult conjecture
+        ->
+    route decomposition
+        ->
+    exact positive results
+        ->
+    rejected shortcuts
+        ->
+    residual obstruction
+        ->
+    successor problem
 
-v21 distinguishes two different ideas.
-
-### Record globalization
-
-Local certificate records can sometimes be combined to prove a global record-level predicate using covering, overlap, coverage, Restart, and consistency data.
-
-### Object globalization
-
-Constructing an actual global mathematical object requires more:
-
-```text
-actual local objects
-actual transition / overlap maps
-cocycle data
-higher coherence when required
-effectivity theorem
-target equivalence strength
-```
-
-The distinction is:
-
-```text
-glued evidence != descended object
-```
-
-and is one of the defining upgrades from v20 to v21.
+Failure to close the final theorem is therefore converted into a precise next-problem specification.
 
 ---
 
-## 11. Finite Morita and Alexandrov globalization
+# 10. From Verification to Discovery
 
-For finite categories, Core-DG uses the sum of linearized representables as a finite projective generator.
+The development from v21.0.0 to the v21.01 repository can be summarized as follows.
 
-Schematically:
+### v21.0.0
 
-```text
-G_P = direct_sum_{p in P} P_p
-```
+    projection
+      ->
+    finite certificate
+      ->
+    reconstruction
+      ->
+    globalization
+      ->
+    typed Return
 
-This supports zero reflection, cone detection, enriched reconstruction, and finite Morita equivalence in the declared scope.
+### BFA
 
-For finite posets, diagrams are realized on the upper Alexandrov space.
+    external proof
+      ->
+    reconstruction
+      ->
+    adversarial audit
+      ->
+    falsification semantics
 
-With actual overlap maps and a strict cocycle, v21 obtains finite object descent and bounded-complex descent.
+### SDR
 
-The key firewall remains:
+    unresolved target
+      ->
+    separation defect
+      ->
+    missing structure
+      ->
+    candidate discovery
+      ->
+    rigidity
 
-```text
-finite-dimensional category algebra
-    != automatically semisimple
+### NC / SC.1
 
-zero reflection
-    != automatically thick generation
+    external resolution
+      ->
+    structural boundary extraction
+      ->
+    Escape / Collapse geometry
+      ->
+    stronger successor problem
 
-pairwise local isomorphism
-    != descent datum
-```
+Thus AK is evolving from a framework for **finite proof certification** into a broader framework for:
 
----
-
-## 12. Unified Bridge and typed Return
-
-The generic Bridge and Return calculus is owned by Main Chapter 9 and expanded in Appendix HT.
-
-A route is a typed proof DAG whose nodes record, as required:
-
-```text
-input type
-output type
-hypotheses
-variance
-coefficients
-comparison mode
-supported target strengths
-failure route
-artifacts
-```
-
-A complete schematic route is:
-
-```text
-source
-  -> realization
-  -> Core-P
-  -> optional P2DG
-  -> Core-DG
-  -> optional spectral / derived / tower transfer
-  -> descent / rigidity when required
-  -> final target-specific Return
-```
-
-The final Return is valid only at the strength supported by **every necessary component**.
-
-Different Return targets include:
-
-```text
-predicate
-numerical invariant
-barcode / object class
-actual object
-actual morphism
-exact sequence
-quasi-isomorphism
-derived equivalence
-pseudo-isomorphism
-determinant
-ideal
-regularized / partial target
-```
-
-There is no universal rule:
-
-```text
-weaker Return -> stronger Return
-```
-
-A promotion requires a separate rigidity, conservativity, reconstruction, or comparison theorem.
+> certified structural projection, failure localization, target-driven discovery, and theorem-safe problem transformation.
 
 ---
 
-## 13. Return is not inversion
+# 11. What AK Does Not Claim
 
-One of the most important conceptual points is:
+AK-HPDST deliberately separates proved mathematics from research programs.
 
-```text
-Return != automatic inverse of projection
-```
+The current repository does not claim that:
 
-A projection may intentionally lose information while still being sufficient for a particular external predicate.
+- every mathematical problem admits a useful AK projection,
+- every projection admits a finite certificate,
+- every target admits a finite separating family,
+- every finite observation determines the source,
+- persistence data automatically determine a finite diagram,
+- diagram data automatically globalize,
+- local consistency automatically implies descent,
+- a successful numerical experiment is proof,
+- AI-generated mathematics is theorem evidence,
+- formal compilation is mathematical proof,
+- proof-assistant acceptance automatically proves the intended informal statement without an interpretation theorem,
+- a reconstructed external proof becomes an AK-owned theorem,
+- BFA gives an AK-only Navier-Stokes solution,
+- SDR automatically discovers missing invariants,
+- NC gives AK ownership of the unrestricted Nakai resolution,
+- or SC.1 is currently solved.
 
-Therefore AK-HPDST allows a route to prove a source predicate without reconstructing the entire source object.
-
-A successful predicate Return does not imply source-object reconstruction.
-
-A determinant Return does not imply module reconstruction.
-
-A local-system Return does not imply a constant-object Return.
-
-A derived equivalence does not imply a preferred presentation.
-
----
-
-## 14. Failure semantics and non-compensation
-
-The atomic verifier statuses are:
-
-```text
-pass
-reject
-undefined
-not_invoked
-```
-
-Their meanings are different.
-
-```text
-pass
-    every invoked obligation is discharged
-
-reject
-    a well-typed required condition is proved false
-
-undefined
-    required evidence, typing, source identity, or theorem edge is missing
-
-not_invoked
-    the clause is outside the declared route scope
-```
-
-Target-indexed Bridge results are a different type:
-
-```text
-reject
-undefined
-obstructed
-partial_return
-regularized_return
-return
-```
-
-A mathematically proved nonzero obstruction is not relabelled as missing evidence.
-
-Likewise, successful sibling conditions, metric reserve, additional AI agents, search coverage, successful compilation, replay, or manifest closure cannot repair a missing mathematical edge.
-
-This is the **non-compensation principle**.
+The framework is intentionally conservative about theorem strength.
 
 ---
 
-## 15. Proof-DAG sovereignty
+# 12. Repository Layers
 
-Every theorem-bearing v21 route is represented by a dependency-complete target slice.
+## Canonical v21.0.0 baseline
 
-For finite dependencies, the route is an acyclic proof DAG.
+### Main
+Canonical mathematical architecture and theorem ownership.
 
-For countable or infinite dependency systems, the route must additionally have either a well-founded rank or a separately certified finite-to-infinite reduction.
+### Foundation Appendices A-G
+Expanded Core-P proofs, detector theory, higher edges, tower and atlas machinery, verification, and governance.
 
-A mathematical cycle requires an independent theorem supplying semantics, such as induction, coinduction, recursion, fixed-point theory, or mutual recursion.
+### Appendix DG
+Finite diagrams, projective generators, cones, Morita reconstruction, Alexandrov realization, and effective descent.
 
-v21 also localizes earliest required `reject` or `undefined` nodes as causal blockers instead of reporting only an undifferentiated global failure.
+### Appendix HT
+Higher Transfer research spine:
+HC, PE, SS, RL, and IW/Return.
 
----
+### Appendix UB
+Reusable Bridge components and validated Return portfolio.
 
-## 16. Mathematically distinguished results in the v21 kernel
+### Appendix CM
+Compact Core corollaries, implementation lemmas, and consumer contracts.
 
-### 16.1 Sharp threshold-gap repair
+### Appendix TB
+Toy bridges, regression cases, counterexamples, and bounded demonstrations.
 
-Hard threshold deletion is not globally non-expansive. Under the exact two-sided exclusion condition around `tau`, bottleneck stability is recovered.
+### Technical Extension H-N
+Advisory, discretization, measurement, controlled commutation, transfer, quantale, derived, and higher-categorical extensions.
 
-### 16.2 Exact zero separation
+### Problem Interface MS / NS
+Arithmetic and Navier-Stokes source-specific interfaces.
 
-On the `tau`-reduced image, the repaired zero / nonzero predicate has a sharp separation boundary controlled by the threshold and bottleneck error.
+### Search / Platform U-Z
+Agent semantics, search, proof DAGs, proof storage, execution, and reproducibility infrastructure.
 
-### 16.3 Family-relative certificate complexity
+### Companion
+Calibration, execution, reproducibility, and release handoff.
 
-Finite proof complexity is defined relative to an information and verifier model, not as an absolute property of a theorem.
-
-### 16.4 Private-witness lower bounds
-
-For families with independent private witnesses, exact deterministic certification requires querying the corresponding independent information.
-
-### 16.5 Right-unbounded finite-detection no-go
-
-No uniform finite detector exists for the uncontrolled family in which a retained feature can first appear arbitrarily far outside every finite inspection range.
-
-### 16.6 Finite Mobius reconstruction
-
-Endpoint-complete finite persistence can be reconstructed from its complete rank table by finite Mobius inversion.
-
-### 16.7 Exact rank-query count
-
-For a grid with `m + 1` vertices, the coordinate rank-query count is:
-
-```text
-N_m = (m + 1)(m + 2) / 2
-```
-
-and is necessary and sufficient for exact reconstruction in the declared coordinate-query model.
-
-### 16.8 Finite-state inverse-limit reconstruction
-
-A typed finite-state inverse tower admits stable-image reconstruction together with exact `lim^1` vanishing and a finite apex-agreement test.
-
-### 16.9 Generator--cone--Morita package
-
-Actual finite diagrams admit generator-based zero reflection, cone detection of isomorphisms, and finite Morita reconstruction under the declared hypotheses.
-
-### 16.10 Effective finite descent
-
-Actual local objects, maps, cocycles, and effectivity data can produce genuine global objects and bounded complexes on finite Alexandrov models.
-
-### 16.11 Typed end-to-end Return
-
-A source-domain conclusion is returned only after every mathematical node needed by the requested target is proved at the consumed type and strength.
+### Claim Register
+Canonical statement identity, source binding, migration, and release governance.
 
 ---
 
-## 17. Appendix HT: Higher Transfer and Unified Bridge Composition
+## Post-v21 research supplements
 
-Appendix HT is the research spine around Main Chapter 9.
+### Appendix BFA
 
-It integrates five transfer families:
+    Navier-Stokes Blow-up
+    Source-Faithful Reconstruction
+    Adversarial Falsification
+    Generic Extraction
 
-```text
-HC = homological compression
-PE = persistence--Ext / finite reconstruction and enhancement
-SS = spectral-sequence transfer
-RL = inverse/direct systems and derived limits
-IW/Return = target-specific Return architecture
-```
+### Appendix SDR
 
-Its role is:
+    Separation
+    Discovery
+    Rigidity
+    Minimal Certificates
+    Finite-to-Infinite Completion
+    Search / Discovery Engine
+    Failure / No-Go Atlas
 
-```text
-Core-P / Core-DG
-    = what is mathematically certified
+### Appendix NC
 
-HT
-    = how certified information may be transported
-      through larger mathematical constructions
-```
-
-HT includes protected persistence under homological compression, finite persistence / Ext reconstruction, finite-quiver and enhanced morphism Return, spectral-sequence transfer, inverse systems and derived limits, coefficient and base-change routes, regularized Return, target-relative Return strength, unified defect stacks, and composable Bridge DAGs.
-
-HT is a research-spine and proof-expansion artifact. It does not silently promote every internal construction to the stable Core.
-
----
-
-## 18. Appendix UB: reusable components and twelve validation cases
-
-Appendix UB is the reusable component and validated Return portfolio.
-
-It contains executable component schemas, finite-generator and conservative-realization components, coefficient and completion components, Noetherian and finite-state reductions, descent components, Kunneth and duality components, coherence and rigidity components, determinant / Fitting-facing components, and source-specific adapters.
-
-The twelve source-bound validation families cover:
-
-```text
-finite rank reconstruction
-enriched projective-probe reconstruction
-finite and periodic Tachikawa lanes
-Galois--Leopoldt defect reconstruction
-finite Alexandrov descent
-finite-state inverse limits
-Iwasawa / p-adic analytic interfaces
-Serrin compactness and continuation
-certified regulator calculations
-regular one-variable Iwasawa finite layers
-singular / Bockstein Iwasawa finite layers
-```
-
-Successful validation does not enlarge the theorem used in the case.
+    Nakai Resolution Ownership Audit
+    Escape Theory
+    Collapse Mechanisms
+    Reflexive Boundary
+    Rees Transfer
+    SC.1 Silent-Collapse / TFEP Research
 
 ---
 
-## 19. Known-Theorem Recovery
+# 13. Suggested Reading Order
 
-AK-HPDST distinguishes a **Known-Theorem Recovery** from a new theorem.
+For a first reading:
 
-In a recovery track, the external benchmark conclusion is quarantined while the route is built independently. The benchmark is used only after closure to test whether the full chain returns the known statement at the correct strength.
+    1. This README
+    2. Mathematical Kernel Paper
+    3. Main Chapters 1-10
+    4. Appendix DG
+    5. Appendix HT
+    6. Appendix UB
 
-The final v21 Claim Register records two exact-strength recovery tracks.
+For the original v21 verification architecture:
 
-### Iwasawa growth
+    Main
+      ->
+    Foundation A-G
+      ->
+    DG
+      ->
+    HT / UB
+      ->
+    Claim Register
 
-The registered Return is the characteristic-growth clause relative to its declared precursor package.
+For the post-v21 research program:
 
-Schematically:
+    BFA
+      ->
+    SDR
+      ->
+    NC / SC.1
 
-```text
-c_n = mu * p^n + lambda * n + constant
-```
+BFA explains how to reconstruct and adversarially audit a difficult external proof route.
 
-on the certified tail.
+SDR converts unresolved distinctions into a general theory of separation, discovery, rigidity, and completion.
 
-This does **not** prove a general Iwasawa main conjecture.
-
-### Fixed-exponent Serrin criterion
-
-The registered PDE recovery is the one-way strict-subcritical implication at the declared fixed exponent:
-
-```text
-u in L^6_t L^6_x
-    -> interior regularity
-```
-
-for the declared Leray--Hopf regime.
-
-This is a criterion-level recovery, not unconditional three-dimensional Navier--Stokes regularity.
-
----
-
-## 20. v21 Main validation portfolio
-
-Main Chapter 10 validates the architecture through both positive and negative cases.
-
-The v21 validation gates are:
-
-```text
-V1  v20 regression at exact registered strength
-V2  finite persistence reconstruction
-V3  enriched finite-diagram reconstruction
-V4  finite object-level and strict derived descent
-V5  finite-state inverse-limit and apex Return
-V6  complete external Return using Core-P + Core-DG
-V7  model-relative certificate upper and lower bounds
-V8  mandatory negative / no-go boundaries
-V9  artifact, replay, proof-DAG, and manifest consistency
-```
-
-All Main-body gates `V1--V9` pass at the strengths stated in Chapter 10.
-
-This validation does not mean that every possible AK route is complete or that a named open problem has been solved.
+NC demonstrates how this research philosophy can extract a new structural problem from an externally resolved conjectural landscape.
 
 ---
 
-## 21. Negative validation is part of the mathematics
+# 14. Versioning
 
-v21 treats counterexamples and prohibited upgrades as first-class mathematical outputs.
+## v21.0.0
 
-The mandatory negative portfolio includes boundaries such as:
+Canonical frozen release:
 
-```text
-incomplete generator data
-    -> no full reconstruction
+    Finite Globalization
+    Unified Bridge Calculus
+    Certificate Complexity
+    Dual-Core Architecture
 
-pairwise local agreement
-    -> no higher coherence automatically
+## v21.01 Repository Edition
 
-finite prefix agreement
-    -> no infinite-target theorem
+The v21.01 repository retains the frozen v21.0.0 canonical mathematical baseline and adds the post-v21 research supplements:
 
-local zero
-    -> no global zero without retained-feature coverage
+    Appendix BFA
+    Appendix SDR
+    Appendix NC / SC.1
 
-synthetic algebraic duality
-    -> no source-semantic Bridge automatically
+The label v21.01 therefore represents a repository-level research consolidation.
 
-predicate Return
-    -> no source-object or filtered-derived reconstruction
-```
+It does not silently mutate a v21.0.0 theorem, Claim UID, proof obligation, source binding, or Return strength.
 
-AK-HPDST is designed not only to close valid proof routes, but also to identify exactly why a proposed route cannot support a stronger conclusion.
+Any future promotion of BFA, SDR, or NC results into a successor stable Core requires a new theorem identity, ownership audit, dependency audit, source-binding audit, and Claim Register update.
 
 ---
 
-## 22. AI, search, and proof engineering
+# 15. Research Direction
 
-AK-HPDST v21 includes a dedicated Search / Platform layer for human mathematicians, AI systems, proof assistants, theorem search, counterexample search, route search, proof-DAG construction, proof storage, replay, and reproducible execution.
+The current AK research program is moving toward a stronger loop:
 
-The platform may widen the number of supported routes, adapters, targets, fallbacks, and backends.
+    Problem
+      ->
+    Projection
+      ->
+    Certificate
+      ->
+    Failure / Counterexample
+      ->
+    Missing Structure
+      ->
+    New Probe
+      ->
+    Rigidity
+      ->
+    Completion
+      ->
+    Return
+      ->
+    New Problem
 
-But:
+The central research objective is no longer merely:
 
-```text
-pipeline width != theorem strength
-```
+> Can a large proof be compressed?
 
-The canonical AI boundary is:
+It is also:
 
-```text
-generation != verification
-consensus != proof
-search success != theorem
-self-review != independent verification
-formal wiring != source-faithful interpretation
-successful execution != mathematical truth
-replay != mathematical proof
-```
+> When the current projection fails, can the failure itself reveal the mathematical structure required for the next theorem?
 
-An AI-generated object becomes theorem evidence only after it is converted into the exact theorem/verifier-side type and all required mathematical obligations pass.
-
----
-
-## 23. Why the architecture is useful for AI-assisted proof
-
-Modern mathematical AI can generate candidate lemmas, possible realizations, counterexamples, formalization drafts, proof routes, numerical evidence, and source matches.
-
-The difficult question is whether a generated step:
-
-```text
-has the correct source and target type
-uses the right direction
-preserves the required semantics
-is complete for the claimed target
-depends on quarantined benchmark information
-silently upgrades an invariant to an object
-silently upgrades local data to global data
-silently upgrades finite evidence to an infinite theorem
-```
-
-AK-HPDST turns those questions into explicit mathematical and proof-engineering interfaces.
-
-Its intended role is therefore not:
-
-```text
-AI automatically solves mathematics
-```
-
-but:
-
-```text
-AI proposes and searches;
-typed mathematics determines what the evidence proves.
-```
+This is the main research direction represented by BFA, SDR, and NC.
 
 ---
 
-## 24. Status and result sorts
+# 16. Citation
 
-Several status systems coexist in v21 and must not be confused.
+If you use AK-HPDST, please cite the corresponding release artifact and the specific theorem-bearing source used by your argument.
 
-### Atomic verifier status
-
-```text
-pass
-reject
-undefined
-not_invoked
-```
-
-### P2DG readiness
-
-```text
-ready
-incomplete
-inconsistent
-not_invoked
-```
-
-### Handoff readiness
-
-Examples:
-
-```text
-descent_input_ready
-bridge_input_ready
-```
-
-These are domain-membership / handoff states, not theorem conclusions.
-
-### Type IV diagnostic status
-
-```text
-not_invoked
-undefined
-certified_zero
-obstructed
-```
-
-### Target-indexed Bridge result
-
-```text
-reject
-undefined
-obstructed
-partial_return
-regularized_return
-return
-```
-
-Compilation, review, migration, registration, replay, publication, and package release are separate lifecycle fields.
-
-No favorable token is copied from one status type into another.
+Because AK separates canonical theorem ownership, expanded proofs, validation, research supplements, and external source bindings, citations should identify the exact document and theorem or section being consumed.
 
 ---
 
-## 25. Core mathematical non-confusions
+# 17. Author
 
-The following are permanent reading rules for v21:
+**Atsushi Kobayashi**
 
-```text
-registration != proof
-
-finite observation != finite certificate
-
-soundness != completeness
-
-persistence profile != finite diagram
-
-rank data != actual morphism
-
-record globalization != object globalization
-
-objectwise isomorphism != natural isomorphism
-
-pairwise overlap equivalence != cocycle
-
-descent readiness != descent effectivity
-
-finite prefix != infinite reduction
-
-terminal defect zero != full defect zero
-
-determinant / ideal Return != object Return
-
-pseudo-isomorphism != isomorphism
-
-derived equivalence != preferred presentation
-
-realization != Return
-
-validation != theorem premise
-
-AI output != proof
-
-replay != mathematical truth
-
-package integrity != theorem validity
-```
-
-These are not merely software rules. Most correspond to genuine mathematical distinctions or counterexamples retained in the v21 corpus.
+AK High-Dimensional Projection Structural Theory Project
 
 ---
 
-## 26. What AK-HPDST v21 can currently do
-
-Within explicitly declared source classes and hypotheses, v21 can:
-
-- project source structures into typed Core-readable shadows;
-- analyze constructible one-parameter persistence;
-- perform repaired hard-threshold evaluation;
-- certify zero / nonzero behavior through finite detectors;
-- establish model-relative upper and lower certificate bounds;
-- prove nonexistence of uniform finite detectors on uncontrolled families;
-- reconstruct endpoint-complete finite persistence;
-- recover interval multiplicities from rank data;
-- reconstruct actual finite diagrams through enriched probes;
-- detect zero objects using finite projective generators;
-- detect isomorphisms through cones;
-- perform finite Morita reconstruction;
-- realize finite-poset diagrams as Alexandrov sheaves;
-- perform strict finite object and bounded-complex descent;
-- globalize local finite data when actual coherence and effectivity are available;
-- certify selected finite-state inverse limits and derived-limit vanishing;
-- compose homological, spectral, tower, coefficient, descent, and rigidity components through typed Bridge DAGs;
-- return only target-relative conclusions supported by the complete route;
-- localize mathematical failure or missing evidence;
-- validate selected arithmetic, representation-theoretic, PDE, and categorical routes without promoting them to unrestricted universal theorems;
-- integrate AI, search, proof stores, formal tools, and replay without granting them automatic mathematical authority.
-
----
-
-## 27. What v21 does not claim
-
-AK-HPDST v21.0.0 does not, by itself, prove:
-
-- the Riemann hypothesis;
-- the Birch and Swinnerton-Dyer conjecture;
-- the ABC conjecture;
-- a general Iwasawa main conjecture;
-- a general Leopoldt conjecture;
-- a general Tachikawa conjecture;
-- unconditional three-dimensional Navier--Stokes regularity;
-- a Clay-level Navier--Stokes result;
-- a general Langlands correspondence;
-- homological mirror symmetry;
-- a general Fukaya-category equivalence;
-- unrestricted multiparameter persistence classification;
-- arbitrary stack or hypersheaf descent;
-- unrestricted higher-categorical globalization;
-- arbitrary unbounded-derived reconstruction;
-- a universal finite detector for every infinite family;
-- a universal equivalence between persistent homology and Ext groups.
-
-It also does not assert:
-
-```text
-PH_n = 0 <-> Ext^n = 0
-```
-
-without the required realization, eligibility, reflection, and Return theorems.
-
-Likewise, a successful AK internal certificate is not by itself an external theorem.
-
----
-
-## 28. Technical Extension layer
-
-The Technical Extension Appendices H--N explore controlled mathematics around the stable Core, including:
-
-- spectral indicators;
-- discretization and continuum transfer;
-- measurement-level stability;
-- controlled commutation;
-- Mirror / Transfer comparison;
-- quantale and defect-ledger semantics;
-- derived, dg, sheaf, stack, multiparameter, stable, and higher-categorical extension discipline.
-
-Their role is deliberately bounded.
-
-Terms such as `derived`, `stack`, `stable`, `coherent`, `higher-categorical`, or `hypercomplete` do not promote a construction into the stable Core.
-
----
-
-## 29. Problem Interface layer
-
-The Problem Interface appendices connect external mathematical domains to the generic AK architecture.
-
-The v21 route record has the schematic form:
-
-```text
-R_PI =
-(
-  source semantics,
-  realization,
-  Core-facing object or predicate,
-  external target,
-  selected route,
-  assumptions,
-  defects,
-  artifacts
-)
-```
-
-Current source-facing areas include:
-
-- finite abelian p-groups;
-- cyclotomic and Iwasawa structures;
-- congruence and p-adic profiles;
-- Mirror / categorical comparison;
-- Fukaya-facing extensions;
-- normalization / resolution-assisted routes;
-- Navier--Stokes exploration, soundness, and proof-first programs.
-
-A source-specific theorem remains source-specific. Reusing it in another family requires a substitution theorem preserving its full typed contract.
-
----
-
-## 30. Search / Platform layer
-
-Appendices U--Z form the proof-engineering platform.
-
-They cover:
-
-```text
-U  agent semantics
-V  Hunter / Mapper / Lifter search protocols
-W  Bridge-program portfolios
-X  validity maps and target-sliced proof DAGs
-Y  proof store, lineage, and migration
-Z  execution, reproducibility, and semantic replay
-```
-
-The v21 synchronization additionally develops semantic field maps between packets, target-local route slices, route resilience, compatible packet amalgamation, proof-store snapshot safety, deterministic parallel execution, cache admission rules, content-addressed proof closure, semantic replay, and explicit non-compensation between infrastructure and mathematics.
-
----
-
-## 31. Companion layer
-
-The Companion is the operational projection of already-owned mathematics.
-
-It supplies reusable templates for problem-interface calibration, route assembly, execution, storage, replay, audit, and release handoff.
-
-The governing rule is:
-
-```text
-Companion completeness
-    != mathematical completeness
-```
-
-A complete template, packet, or execution does not create a theorem that is absent from the Main / Appendix mathematical owners.
-
----
-
-## 32. Claim Register and canonical authority
-
-The final v21 Claim Register is:
-
-```text
-AK_HPDST_v21_0_0_Appendix_Part12_Claim_Register.pdf
-```
-
-Its job is to control canonical identity, migration, source binding, admissible use, target strength, failure semantics, theorem ownership, and release closure.
-
-It does not strengthen mathematics by registration.
-
-The canonical precedence is approximately:
-
-```text
-Main Chapters 1--10
-    -> canonical generic theorem statements
-
-Foundation A--G
-    -> expanded Core-P proofs and schemas
-
-Appendix DG
-    -> expanded Core-DG / descent proofs
-
-Appendix HT
-    -> higher-transfer and Return research spine
-
-Appendix UB
-    -> reusable components and validated cases
-
-Appendix CM
-    -> compact corollaries and consumer contracts
-
-Appendix TB
-    -> toy theorems, counterexamples, regression cases
-
-Technical Extension H--N
-    -> bounded extension mathematics
-
-Problem Interface MS/NS
-    -> source-specific interfaces and Returns
-
-Search / Platform U--Z
-    -> proof infrastructure
-
-Companion
-    -> operational projections and handoffs
-
-Claim Register
-    -> identity and admissible-use governance
-```
-
-When sources disagree, the weakest source-supported type-correct reading governs until an audited repair is made.
-
----
-
-## 33. Repository guide
-
-The current v21 repository is PDF-based.
-
-```text
-.
-|-- README.md
-|
-|-- AK_HPDST_v21_0_0_Part1_Main.pdf
-|     Canonical Main Chapters 1--10
-|
-|-- AK_HPDST_v21_0_0_appendix_Part2_Foundation_Core_P_Verification_Appendices (1).pdf
-|     Foundation Appendices A--G
-|
-|-- AK_HPDST_v21_0_0_appendix_Part3_appendix_DG.pdf
-|     Finite Diagram and Globalization Foundation
-|
-|-- AK_HPDST_v21_0_0_Appendeix_Part4_appendix_HT.pdf
-|     Higher Transfer, Unified Bridge Composition, and Typed Return
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part5_Appendix_UB.pdf
-|     Universal Bridge Component Library and Validated Return Portfolio
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part6_Appendix_CM.pdf
-|     Core Corollary, Implementation Lemma, and Consumer-Contract Library
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part7_Appendix_TB.pdf
-|     Toy Bridge, Counterexample, and Regression Portfolio
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part8_Technical_Extension_Appendices.pdf
-|     Technical Extension Appendices H--N
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part9_Problem_Interface_Appendices.pdf
-|     Problem Interface Appendices MS / NS
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part10_Search_Platform_Appendices.pdf
-|     Search / Platform Appendices U--Z
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part11_Companion.pdf
-|     Calibration, execution, reproducibility, and release handoff
-|
-|-- AK_HPDST_v21_0_0_Appendix_Part12_Claim_Register.pdf
-|     Final canonical identity and claim-governance register
-|
-`-- AK_HPDST_v21_0_0_Kernel_Paper_Projection_Reaudited(1).pdf
-      Compact standalone mathematical kernel and recommended entry point
-```
-
-File naming reflects the current release package. Canonical theorem identity is controlled by the source documents and Claim Register, not by filename appearance alone.
-
----
-
-## 34. Recommended reading paths
-
-### Fast conceptual route
-
-```text
-1. README
-2. Kernel Paper
-3. Main Chapter 1
-4. Main Chapters 7, 9, 10
-5. Claim Register
-```
-
-### Mathematical kernel route
-
-```text
-1. Kernel Paper
-2. Main Chapters 2--7
-3. Foundation Appendices A--G
-4. Appendix DG
-5. Main Chapter 9
-```
-
-### Bridge / advanced homological route
-
-```text
-1. Kernel Paper
-2. Main Chapters 4--9
-3. Appendix DG
-4. Appendix HT
-5. Appendix UB
-```
-
-### Arithmetic / Iwasawa route
-
-```text
-1. Kernel Paper
-2. Main Chapters 3--5 and 9
-3. Appendix HT
-4. Appendix UB
-5. Problem Interface MS
-6. Chapter 10 validation
-7. Claim Register
-```
-
-### Navier--Stokes route
-
-```text
-1. Main Chapter 9
-2. Problem Interface NS
-3. Appendix UB, relevant validation case
-4. Chapter 10
-5. Claim Register
-```
-
-### AI / proof-platform route
-
-```text
-1. Main Chapters 1 and 8
-2. Main Chapter 9
-3. Search / Platform Appendices U--Z
-4. Companion
-5. Claim Register
-```
-
----
-
-## 35. A small conceptual example
-
-Suppose a program evaluates finitely many points of a persistence profile and returns zero at each point.
-
-AK-HPDST does not conclude that the repaired profile is zero until the route proves that the finite observations form a complete certificate.
-
-The system asks:
-
-```text
-What profile stage was sampled?
-Was the test before or after threshold deletion?
-Are endpoint and right-germ conventions correct?
-Could a retained bar avoid every sampled location?
-Does the source belong to the promised family?
-Is coverage independently proved?
-Does the family admit a uniform finite detector?
-Is the finite certificate being used only at its licensed strength?
-```
-
-If the certificate is used to reconstruct a diagram, AK then asks whether actual maps were reconstructed, whether category relations and variance were fixed, and whether the reconstruction is objectwise or fully faithful.
-
-If the diagram is globalized, AK asks whether overlap maps, cocycles, and effectivity are actually present.
-
-Before returning to the original problem, AK finally asks whether the source realization preserves or reflects the exact target feature and whether rigidity is sufficient for the requested Return strength.
-
-That full sequence is the practical meaning of high-dimensional projection structural analysis in v21.
-
----
-
-## 36. A second example: why Return strength matters
-
-Assume a projection observes only one degree of persistent homology.
-
-Two filtered source objects may have identical observed degree-zero persistence while differing in degree one.
-
-Then a theorem about the observed predicate may still be valid:
-
-```text
-observed predicate Return = valid
-```
-
-but this does not license:
-
-```text
-full source-object reconstruction
-filtered quasi-isomorphism
-derived equivalence
-```
-
-The difference between those conclusions is a mathematical information-loss boundary.
-
-v21 therefore makes the Return target part of the theorem statement.
-
----
-
-## 37. Design philosophy
-
-AK-HPDST is intentionally conservative about theorem promotion.
-
-### Explicit information loss
-
-A projection may be useful even when it is not faithful. What matters is whether it is faithful enough for the declared target.
-
-### Exact local structure before globalization
-
-Local values or object classes do not substitute for actual maps and coherence.
-
-### Finite proof only through a theorem
-
-Finite computation becomes finite proof only after soundness, completeness, or reconstruction is proved.
-
-### No hidden infinite extrapolation
-
-An infinite conclusion needs an actual finite-to-infinite theorem.
-
-### Return is target-relative
-
-A proof returns only what its weakest necessary component supports.
-
-### Counterexamples are structural information
-
-A failed stronger implication identifies a load-bearing hypothesis.
-
-### AI is an agent, not a theorem authority
-
-AI may search, propose, transform, and assist; theorem strength is governed by the mathematical route.
-
----
-
-## 38. Current mathematical scope
-
-The stable v21 kernel is strongest in the following regime:
-
-```text
-one-parameter constructible persistence over a field
-finite certificate models
-finite categories / finite posets
-finite-dimensional diagrams
-bounded complexes
-finite projective generators
-finite Morita reconstruction
-finite Alexandrov descent
-certified finite-state / Noetherian reductions
-typed Bridge and Return composition
-```
-
-Beyond this stable scope, the repository contains controlled research interfaces for:
-
-```text
-non-field coefficients
-spectral sequences
-dg / A_infinity structures
-sheaves and stacks
-multiparameter extraction
-higher coherence
-Iwasawa theory
-p-adic analysis
-Mirror / Fukaya-facing structures
-PDE compactness and continuation
-```
-
-These are not automatically stable-Core theorems.
-
----
-
-## 39. Research direction after v21
-
-v21 closes the finite globalization and typed Return architecture, but it also identifies the next mathematical bottleneck.
-
-The deepest remaining problem is no longer merely:
-
-```text
-How do we certify a shadow?
-```
-
-It is:
-
-```text
-Which projections preserve enough information for a target,
-what information is lost,
-what additional probes restore the missing information,
-and at what strength can the result be returned?
-```
-
-Current successor directions recorded in the v21 corpus include:
-
-- finite-state certificate compilers;
-- machine-checkable homotopy-coherent descent;
-- finite Morita over controlled Noetherian bases;
-- uniform calculus for compatible partial Returns;
-- determinant and Fitting-ideal Return;
-- higher Bockstein reconstruction;
-- source-specific rigidity;
-- Iwasawa information-preservation;
-- p-adic L-function Return;
-- wider analytic and categorical applications.
-
-These are research programs, not completed v21 claims.
-
----
-
-## 40. Citation and source discipline
-
-When citing a theorem from AK-HPDST v21.0.0, record as much of the following as relevant:
-
-```text
-theory version
-source PDF
-chapter / appendix
-theorem or definition number
-Claim UID when registered
-complete hypotheses
-source and target types
-comparison mode
-detector stage
-Return target and strength
-source bindings
-required artifacts
-```
-
-A README, summary, diagram, generated explanation, or later implementation does not replace the canonical theorem statement.
-
-The final Claim Register governs identity and admissible use, but:
-
-```text
-registration != proof
-```
-
-The mathematical source and proof remain controlling.
-
----
-
-## 41. Final interpretation
-
-AK-HPDST v21.0.0 can be summarized by one question:
-
-```text
-How can a difficult mathematical object be projected to a controlled shadow,
-compressed into finite certified evidence,
-reconstructed into actual mathematical structure,
-globalized without inventing coherence,
-and returned to its original domain without overstating what was proved?
-```
-
-The v21 answer is a dual-Core architecture:
-
-```text
-Core-P
-    robust finite persistence certification
-
-        +
-
-Core-DG
-    exact finite diagram reconstruction and globalization
-```
-
-connected through explicit interfaces and completed by:
-
-```text
-finite-to-infinite reduction
-higher transfer
-coherence
-rigidity
-typed Bridge composition
-target-relative Return
-proof-DAG verification
-source and claim governance
-```
-
-The resulting research system is best described as:
-
-```text
-A high-dimensional structural projection and finite-proof architecture
-that separates shadows from sources,
-evidence from mathematical structure,
-local data from global objects,
-and internal certification from source-domain truth.
-```
-
-Its central rule remains:
-
-```text
-A projected shadow may reveal the structure.
-
-Only a proved Return carries the theorem home.
+## Short Summary
+
+AK-HPDST is a framework for turning difficult mathematical structures into finite, typed, auditable proof objects without confusing projection with proof.
+
+Its core philosophy is:
+
+    Project only what is needed.
+    Record what is lost.
+    Certify what is finite.
+    Reconstruct only when justified.
+    Globalize only with coherence.
+    Return only at proved strength.
+    Treat counterexamples as information.
+    Let failure identify the next mathematics.
 ```
